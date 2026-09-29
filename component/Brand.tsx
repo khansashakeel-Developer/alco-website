@@ -1,6 +1,7 @@
 import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { BrandTitle } from "@/type/brandTypes";
+import BrandCarousel from "@/component/brand-carousel/brandCarousel";
 // DECISIONS v2 P1: one combined group of the 12 brochure organisations. Only Bank Alfalah has a
 // logo file in the repo today (brand_slide3). SSGC, SBT Global Car Exporter, Mondelez International
 // and Junaid Jamshed are removed (files deleted).
@@ -41,19 +42,23 @@ const media: LogoItem[] = [
 
 const brandTitle: BrandTitle = "A Ripple, Not a Headcount";
 
+// Every tile is a visible card (border, soft shadow, gold top edge) so text-only tiles read as intentional
+// and a logo can drop in later without changing the layout: just add `image` to the item above.
 function LogoTile({ item }: { item: LogoItem }) {
   return (
-    <li className="relative h-[80px] flex items-center justify-center rounded-md bg-white px-3">
+    <li className="relative h-[88px] flex items-center justify-center rounded-lg bg-white border border-primary/15 border-t-4 border-t-secondary shadow-sm px-4 transition-shadow hover:shadow-md">
       {item.image ? (
         <Image
           src={item.image}
           alt={`${item.name} logo`}
           fill
           sizes="(max-width: 768px) 50vw, 200px"
-          className="object-contain p-2"
+          className="object-contain p-3"
         />
       ) : (
-        <span className="text-center font-outfit font-medium text-black/80 text-sm md:text-base">{item.name}</span>
+        <span className="text-center font-outfit font-semibold text-primary text-[15px] md:text-[16px] leading-snug">
+          {item.name}
+        </span>
       )}
     </li>
   );
@@ -69,17 +74,14 @@ export default function Brand() {
       </p>
 
       <h3 className="h4 text-center mb-2">Organisations We Have Worked With</h3>
-      <p className="custom-text1 font-light text-center mb-6">
+      <p className="custom-text1 font-light text-center mb-8 max-w-3xl mx-auto">
         AL&amp;CO’s own clients, and organisations our founders have trained and coached for, before and alongside AL&amp;CO.
       </p>
-      <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-        {organisations.map((o) => (
-          <LogoTile key={o.name} item={o} />
-        ))}
-      </ul>
+      <BrandCarousel items={organisations} />
 
+      {/* Featured In: stays inside this white section, directly under the logo strip. */}
       <h3 className="h4 text-center mt-12 mb-6">Featured In</h3>
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4 max-w-4xl mx-auto">
         {media.map((m) => (
           <LogoTile key={m.name} item={m} />
         ))}

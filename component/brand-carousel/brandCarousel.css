@@ -1,6 +1,8 @@
 .brand_embla {
   overflow: hidden;
   width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
 .brand_embla__viewport {
@@ -69,4 +71,3 @@
     flex: 0 0 14.28%; 
   }
 }
-
