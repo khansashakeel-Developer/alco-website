@@ -1,0 +1,89 @@
+import React from "react";
+import Image, { StaticImageData } from "next/image";
+import { BrandTitle } from "@/type/brandTypes";
+// DECISIONS v2 P1: one combined group of the 12 brochure organisations. Only Bank Alfalah has a
+// logo file in the repo today (brand_slide3). SSGC, SBT Global Car Exporter, Mondelez International
+// and Junaid Jamshed are removed (files deleted).
+import bankAlfalah from "@/assets/brand/brand_slide3.webp";
+// "Featured In": media only, a separate group.
+import aajNews from "@/assets/about-us/featured/Aaj-News.webp";
+import bolNews from "@/assets/about-us/featured/Bol-News.webp";
+import dawnNews from "@/assets/about-us/featured/Dawn-News.webp";
+import samaaNews from "@/assets/about-us/featured/Samaa-News.webp";
+
+type LogoItem = { name: string; image?: StaticImageData };
+
+// Exactly these 12, in this order (B 01 row A11). No other organisation may be added.
+// LOGO files: Khansa to source the approved logos as assets/brand/<slug>.webp (under 100KB each).
+// Until a logo exists, the organisation's name is shown in its tile. Once all 12 files exist,
+// this grid can switch back to <BrandCarousel images={...} />.
+const organisations: LogoItem[] = [
+  { name: "K-Electric" }, // LOGO: K-Electric - Khansa to supply approved artwork
+  { name: "Tameer Microfinance Bank" }, // LOGO: Tameer Microfinance Bank - Khansa to supply approved artwork
+  { name: "Emaar Pakistan" }, // LOGO: Emaar Pakistan - Khansa to supply approved artwork
+  { name: "Hamdard Pakistan" }, // LOGO: Hamdard Pakistan - Khansa to supply approved artwork
+  { name: "AlRahim Textile Mills" }, // LOGO: AlRahim Textile Mills - Khansa to supply approved artwork
+  { name: "Bank Alfalah", image: bankAlfalah },
+  { name: "Faysal Bank" }, // LOGO: Faysal Bank - Khansa to supply approved artwork
+  { name: "Bayer" }, // LOGO: Bayer - Khansa to supply approved artwork
+  { name: "GlaxoSmithKline" }, // LOGO: GlaxoSmithKline - Khansa to supply approved artwork
+  { name: "Pakistan State Oil" }, // LOGO: Pakistan State Oil - Khansa to supply approved artwork
+  { name: "PEL" }, // LOGO: PEL - Khansa to supply approved artwork
+  { name: "Feroze1888" }, // LOGO: Feroze1888 - Khansa to supply approved artwork
+];
+
+const media: LogoItem[] = [
+  { name: "Aaj News", image: aajNews },
+  { name: "Bol News", image: bolNews },
+  { name: "Dawn News", image: dawnNews },
+  { name: "Samaa News", image: samaaNews },
+];
+
+const brandTitle: BrandTitle = "A Ripple, Not a Headcount";
+
+function LogoTile({ item }: { item: LogoItem }) {
+  return (
+    <li className="relative h-[80px] flex items-center justify-center rounded-md bg-white px-3">
+      {item.image ? (
+        <Image
+          src={item.image}
+          alt={`${item.name} logo`}
+          fill
+          sizes="(max-width: 768px) 50vw, 200px"
+          className="object-contain p-2"
+        />
+      ) : (
+        <span className="text-center font-outfit font-medium text-black/80 text-sm md:text-base">{item.name}</span>
+      )}
+    </li>
+  );
+}
+
+export default function Brand() {
+  return (
+    <section className="relative container mx-auto py-6 md:py-8 lg:py-12 xl:py-16 px-4">
+      <h2 className="h2 text-center mb-6">{brandTitle}</h2>
+      {/* Canon §2.3 ripple block, verbatim. */}
+      <p className="custom-text1 max-w-4xl mx-auto text-center mb-10">
+        More than two thousand certified graduates, across more than twenty countries, is only the visible part. Behind AL&amp;CO stand founders who spent years training and coaching across hundreds of organisations, and behind every graduate is a coaching practice, a workplace, a classroom, a family. Empowerment does not stop at the person in the room; it travels outward through everyone they touch.
+      </p>
+
+      <h3 className="h4 text-center mb-2">Organisations We Have Worked With</h3>
+      <p className="custom-text1 font-light text-center mb-6">
+        AL&amp;CO’s own clients, and organisations our founders have trained and coached for, before and alongside AL&amp;CO.
+      </p>
+      <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        {organisations.map((o) => (
+          <LogoTile key={o.name} item={o} />
+        ))}
+      </ul>
+
+      <h3 className="h4 text-center mt-12 mb-6">Featured In</h3>
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        {media.map((m) => (
+          <LogoTile key={m.name} item={m} />
+        ))}
+      </ul>
+    </section>
+  );
+}

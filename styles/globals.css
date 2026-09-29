@@ -1,0 +1,435 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  
+
+/* Header Menu Font */
+
+@screen sm {
+  .header-menu-font {
+    @apply text-[14px] font-outfit tracking-wider font-medium hover:text-primary  ;
+  }
+}
+
+@screen md {
+  .header-menu-font {
+    @apply text-[14px] ;
+  }
+}
+
+@screen lg {
+  .header-menu-font {
+    @apply text-[14px] ;
+  }
+}
+
+@screen xl {
+  .header-menu-font {
+    @apply text-[16px] ;
+  }
+}
+
+@screen 2xl {
+  .header-menu-font {
+    @apply text-[17px] ;
+  }
+}
+
+
+/* Header Submenu Font */
+
+@screen sm {
+  .header-submenu-font {
+    @apply text-[13px] font-outfit tracking-wider font-medium ;
+  }
+}
+
+@screen md {
+  .header-submenu-font {
+    @apply text-[13px] ;
+  }
+}
+
+@screen lg {
+  .header-submenu-font {
+    @apply text-[13px] ;
+  }
+}
+
+@screen xl {
+  .header-submenu-font {
+    @apply text-[15px] ;
+  }
+}
+
+@screen 2xl {
+  .header-submenu-font {
+    @apply text-[15px] ;
+  }
+}
+
+/* Header Menu Button Font */
+
+@screen sm {
+  .header-menu-button {
+    @apply text-[12px] font-outfit tracking-wider font-medium   ;
+  }
+}
+
+@screen md {
+  .header-menu-button {
+    @apply text-[12px] ;
+  }
+}
+
+@screen lg {
+  .header-menu-button {
+    @apply text-[12px] ;
+  }
+}
+
+@screen xl {
+  .header-menu-button {
+    @apply text-[14px] ;
+  }
+}
+
+@screen 2xl {
+  .header-menu-button {
+    @apply text-[14px] ;
+  }
+}
+
+/* Footer Heading Font */
+
+@screen sm {
+  .footer-heading-font {
+    @apply text-[14px] font-outfit tracking-wider font-semibold ;
+  }
+}
+
+@screen md {
+  .footer-heading-font {
+    @apply text-[14px] ;
+  }
+}
+
+@screen lg {
+  .footer-heading-font {
+    @apply text-[14px] ;
+  }
+}
+
+@screen xl {
+  .footer-heading-font {
+    @apply text-[16px] ;
+  }
+}
+
+@screen 2xl {
+  .footer-heading-font {
+    @apply text-[18px] ;
+  }
+}
+
+/* Footer Menu Font */
+
+@screen sm {
+  .footer-menu-font {
+    @apply text-[12px] font-outfit tracking-wide font-extralight ;
+  }
+}
+
+@screen md {
+  .footer-menu-font {
+    @apply text-[12px] ;
+  }
+}
+
+@screen lg {
+  .footer-menu-font {
+    @apply text-[12px] ;
+  }
+}
+
+@screen xl {
+  .footer-menu-font {
+    @apply text-[14px] ;
+  }
+}
+
+@screen 2xl {
+  .footer-menu-font {
+    @apply text-[15px] ;
+  }
+}
+
+
+  /* heading */
+  .h1 {
+    @apply font-outfit font-semibold text-[40px] leading-[50px];
+  }
+
+  @screen sm {
+    .h1 {
+      @apply text-[40px] leading-[50px];
+    }
+  }
+
+  @screen md {
+    .h1 {
+      @apply text-[45px] leading-[55px];
+    }
+  }
+
+  @screen lg {
+    .h1 {
+      @apply text-[50px] leading-[60px];
+    }
+  }
+
+  @screen xl {
+  .h1 {
+    @apply text-[60px] leading-[70px]; 
+  }
+}
+
+  @screen 2xl {
+    .h1 {
+      @apply text-[60px] leading-[65px];
+    }
+  }
+
+  .h2 {
+    @apply font-outfit font-semibold text-[24px] leading-[32px] ;
+    /* default mobile */
+  }
+
+  @screen sm {
+    .h2 {
+      @apply text-[26px] leading-[34px];
+      /* small screens */
+    }
+  }
+
+  @screen md {
+    .h2 {
+      @apply text-[28px] leading-[36px];
+      /* medium screens */
+    }
+  }
+
+  @screen lg {
+    .h2 {
+      @apply text-[30px] leading-[40px];
+      /* large screens */
+    }
+  }
+
+  @screen xl {
+    .h2 {
+      @apply text-[30px] leading-[40px];
+      /* xl screen (same as lg or adjust if needed) */
+    }
+  }
+
+  .h3 {
+    @apply font-outfit font-medium text-[30px] leading-[45px] ;
+    /* default mobile */
+  }
+
+  @screen sm {
+    .h3 {
+      @apply text-[32px] leading-[48px];
+      /* small screens */
+    }
+  }
+
+  @screen md {
+    .h3 {
+      @apply text-[36px] leading-[54px];
+      /* medium screens */
+    }
+  }
+
+  @screen lg {
+    .h3 {
+      @apply text-[40px] leading-[60px];
+      /* large screens */
+    }
+  }
+
+  @screen xl {
+    .h3 {
+      @apply text-[40px] leading-[60px];
+      /* XL screens, same as lg or increase if needed */
+    }
+  }
+
+  /* H4 */
+  .h4{
+    @apply font-outfit text-[28px] leading-[40px];
+  }
+
+  @screen md{
+    .h4{
+      @apply text-[34px] leading-[50px];
+    }
+  }
+
+  @screen xl{
+    .h4{
+      @apply text-[40px] leading-[60px];
+    }
+  }
+
+
+  /* H5 */
+  .h5{
+    @apply font-outfit text-[22px] leading-[34px];
+  }
+
+  @screen md{
+    .h5{
+      @apply text-[26px] leading-[44px];
+    }
+  }
+
+  @screen xl{
+    .h5{
+      @apply text-[30px] leading-[50px];
+    }
+  }
+
+   .h6{
+    @apply font-outfit font-medium text-[20px] leading-[32px];
+  }
+
+  
+  @screen md{
+    .h6{
+      @apply text-[24px] leading-[36px];
+    }
+  }
+
+  @screen xl{
+    .h6{
+      @apply text-[28px] leading-[40px];
+    }
+  }
+
+
+  /* text */
+  .custom-text1 {
+    @apply font-outfit text-[18px] leading-[32px];
+  }
+
+  /* Small screens (sm) */
+  @screen sm {
+    .custom-text1 {
+      @apply text-[16px] leading-[30px];
+      /* slightly smaller for small screens */
+    }
+  }
+
+  /* Medium screens (md) */
+  @screen md {
+    .custom-text1 {
+      @apply text-[18px] leading-[32px];
+      /* default size restored for medium screens */
+    }
+  }
+
+  /* Large screens (lg) */
+  @screen lg {
+    .custom-text1 {
+      @apply text-[18px] leading-[32px];
+      /* slightly bigger for large screens */
+    }
+  }
+
+  /* Extra large screens (xl) */
+  @screen xl {
+    .custom-text1 {
+      @apply text-[18px] leading-[32px];
+      /* largest for xl screens */
+    }
+  }
+
+  .custom-text2 {
+  @apply font-outfit text-[14px] leading-[26px] md:text-[16px] md:leading-[28px];
+}
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out forwards;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0072b1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #25507D;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #868686;
+}
+
+.scrollHeader ::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+.scrollHeader ::-webkit-scrollbar-track {
+  background: #25507D;
+}
+
+/* Handle */
+.scrollHeader ::-webkit-scrollbar-thumb {
+  background: #0072b1;
+}
+
+/* Handle on hover */
+.scrollHeader ::-webkit-scrollbar-thumb:hover {
+  background: #868686;
+}
+
+/* global.css */
+.mini-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mini-scroll::-webkit-scrollbar-thumb {
+  background-color: #868686; /* blue */
+  border-radius: 25px;
+}
+
+.mini-scroll::-webkit-scrollbar-track {
+  background: #e5e7eb; /* gray */
+}

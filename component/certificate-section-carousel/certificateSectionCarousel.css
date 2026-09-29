@@ -1,0 +1,329 @@
+/* ─── certificateSection.css ─────────────────────────────────── */
+
+/* ── Tab row wrapper ── */
+.cert_tab_row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 6px;
+  margin-bottom: 2rem;
+}
+
+/* ── Tab arrow buttons ── */
+.cert_tab_arrow {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.cert_tab_arrow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.cert_tab_arrow.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Tab viewport + track ── */
+.cert_tabs_viewport {
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+.cert_tabs_track {
+  display: flex;
+  gap: 6px;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Individual tab buttons ── */
+.cert_tab_btn {
+  white-space: nowrap;
+  padding: 7px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.cert_tab_btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.85);
+}
+.cert_tab_btn.active {
+  background: #1B3A6B;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── Certificate card ── */
+.cert_card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: opacity 0.3s ease;
+}
+.cert_card.updating {
+  opacity: 0.4;
+}
+
+/* ── Certificate image/preview box ── */
+.cert_img_box {
+  background: rgba(27, 58, 107, 0.3);
+  border: 1px solid rgba(27, 58, 107, 0.5);
+  border-radius: 12px;
+  aspect-ratio: 4 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.cert_img_box svg {
+  width: 52px;
+  height: 52px;
+  color: #4A8CC7;
+  opacity: 0.8;
+}
+.cert_img_placeholder_text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.5px;
+}
+
+/* ── Certificate body ── */
+.cert_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.cert_body_top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Tag pill ── */
+.cert_tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: rgba(74, 140, 199, 0.2);
+  color: #7AB8E8;
+  border: 1px solid rgba(74, 140, 199, 0.3);
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Title ── */
+.cert_title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+/* ── Org ── */
+.cert_org {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Description ── */
+.cert_desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+}
+
+/* ── Meta row ── */
+.cert_meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+.cert_meta_item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.cert_meta_item svg {
+  width: 15px;
+  height: 15px;
+  color: #4A8CC7;
+  flex-shrink: 0;
+}
+
+/* ── Badge ── */
+/* ── Badge ── */
+.cert_badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  background: rgba(62, 207, 142, 0.12);
+  color: #3ECF8E;
+  border: 1px solid rgba(62, 207, 142, 0.25);
+  width: fit-content;
+}
+.cert_badge svg {
+  width: 14px;
+  height: 14px;
+}
+ 
+/* ── Accredited By Panel ─────────────────────────────────────── */
+.cert_accredited_panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  /* no min/max-width — let it grow naturally */
+}
+ 
+.cert_accredited_badges {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;       /* desktop: wrap onto next line if needed */
+  align-items: center;
+  gap: 10px;
+}
+ 
+.cert_accredited_badge {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  flex-shrink: 0;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  filter: grayscale(20%);
+}
+ 
+.cert_accredited_badge:hover {
+  opacity: 1;
+  transform: scale(1.08);
+  filter: grayscale(0%);
+}
+
+
+/* ─── Responsive ─── */
+@media (max-width: 1023px) {
+  .cert_card {
+    grid-template-columns: 220px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .cert_title {
+    font-size: 18px;
+  }
+  .cert_accredited_badge {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cert_tab_row {
+    padding: 5px;
+    margin-bottom: 1.25rem;
+  }
+  .cert_tab_btn {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+  .cert_card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+  .cert_img_box {
+    aspect-ratio: 16 / 7;
+  }
+  .cert_title {
+    font-size: 16px;
+  }
+  .cert_desc {
+    font-size: 13px;
+  }
+  .cert_accredited_panel {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    /* hide scrollbar but keep scrollability */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .cert_accredited_panel::-webkit-scrollbar {
+    display: none;
+  }
+ 
+  .cert_accredited_badges {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+ 
+  .cert_accredited_badge {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 399px) {
+  .cert_tab_arrow {
+    width: 28px;
+    height: 28px;
+  }
+  .cert_tab_btn {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+  .cert_card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  .cert_card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  .cert_accredited_badge {
+    width: 44px;
+    height: 44px;
+  }
+}

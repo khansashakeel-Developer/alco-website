@@ -1,0 +1,97 @@
+.student_review_embla {
+  margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 25px;
+  --slide-size: 33.33%;
+}
+
+.student_review_embla__viewport {
+    overflow: hidden;
+}
+
+.student_review_embla__container {
+    display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.student_review_embla__slide {
+    flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+
+.student_review_embla__controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+.student_review_embla__controls {
+  display: flex;
+  justify-content: start;
+}
+
+.student_review_embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+}
+.student_review_embla__button {
+  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border: 0.2rem solid var(--detail-medium-contrast);
+  width: 3.6rem;
+  height: 3.6rem;
+  z-index: 1;
+  border-radius: 50%;
+  color: var(--text-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(0deg);
+}
+
+.student_review_embla__button--disabled {
+  color: var(--detail-high-contrast);
+}
+.student_review_embla__button__svg {
+  width: 35%;
+  height: 35%;
+}
+
+/* Mobile / Tablet: <= 768px */
+@media (max-width: 768px) {
+  .student_review_embla {
+    --slide-size: 80%;   /* single slide visible */
+    --slide-spacing: 1rem;
+    --slide-height: 16rem;
+  }
+
+  .student_review_embla__container {
+    flex-direction: row;
+    gap: var(--slide-spacing);
+    margin-left: 0;
+  }
+
+  .student_review_embla__slide {
+    flex: 0 0 var(--slide-size);
+    min-width: 0;
+    padding-left: 0; /* remove left padding */
+  }
+
+  .student_review_embla__controls {
+    justify-content: space-between; /* arrows left and right top/bottom center */
+  }
+}

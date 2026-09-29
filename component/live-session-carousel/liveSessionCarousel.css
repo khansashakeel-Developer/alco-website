@@ -1,0 +1,271 @@
+/* ─── liveSessionCarousel.css ─────────────────────────────────── */
+
+.ls_carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ── Track: the stacking container ── */
+.ls_track {
+  position: relative;
+  width: 58%;
+  height: 380px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* ── Every slide: absolute, centered ── */
+.ls_slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transition:
+    transform  0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity    0.55s ease,
+    z-index    0s;
+  cursor: pointer;
+}
+
+/* ── Image inner wrapper ── */
+.ls_slide__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* ── Gradient ── */
+.ls_slide__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.88) 0%,
+    rgba(0,0,0,0.15) 50%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Attendees badge ── */
+.ls_slide__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(255,215,0,0.4);
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #FFD700;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Info block ── */
+.ls_slide__info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1rem 1.2rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ── Tag pills ── */
+.ls_tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  width: fit-content;
+  background: #FFD700;
+  color: #0d0d0d;
+}
+.ls_tag--workshop     { background: #3B9EFF; color: #fff; }
+.ls_tag--announcement { background: #3ECF8E; color: #0d0d0d; }
+
+.ls_slide__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+}
+
+.ls_slide__date {
+  font-size: 11px;
+  color: #bbb;
+}
+
+/* ── Controls row ── */
+.ls_controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.ls_arrow {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.ls_arrow:hover { color: #FFD700; }
+
+/* ── Dots ── */
+.ls_dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ls_dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s, width 0.25s, border-radius 0.25s;
+}
+
+.ls_dot--active {
+  background: #FFD700;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════ */
+
+/* ── Large desktop (1280px+) ── */
+@media (min-width: 1280px) {
+  .ls_track {
+    width: 52%;
+    height: 400px;
+  }
+}
+
+/* ── Medium desktop (1024px–1279px) ── */
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .ls_track {
+    width: 52%;
+    height: 360px;
+  }
+}
+
+/* ── Small desktop / large tablet (768px–1023px) ── */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .ls_track {
+    width: 52%;
+    height: 320px;
+  }
+
+  .ls_slide__title {
+    font-size: 13px;
+  }
+}
+
+/* ════════════════════════════════════════════════
+   MOBILE — simple single-slide (< 768px)
+   Side cards (offset ±1, ±2) are hidden.
+   Only the active slide is shown full-width.
+   ════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .ls_carousel {
+    gap: 1.25rem;
+  }
+
+  .ls_track {
+    width: 88%;
+    height: 280px;
+    /* clip side slides so they don't bleed out */
+    overflow: hidden;
+  }
+
+  /* Force all non-active slides invisible & non-interactive */
+  .ls_slide {
+    pointer-events: none;
+    transition:
+      transform  0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity    0.45s ease;
+  }
+
+  /* Active slide — fill the track, centered, no peek */
+  .ls_slide[data-offset="0"] {
+    pointer-events: auto;
+    transform: translateX(0%) translateY(0%) scale(1) !important;
+    opacity: 1 !important;
+    z-index: 10 !important;
+  }
+
+  /* Side slides slide in/out from the sides during transition */
+  .ls_slide[data-offset="1"] {
+    transform: translateX(105%) translateY(0%) scale(1) !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+  }
+  .ls_slide[data-offset="-1"] {
+    transform: translateX(-105%) translateY(0%) scale(1) !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+  }
+  .ls_slide[data-offset="2"],
+  .ls_slide[data-offset="-2"] {
+    opacity: 0 !important;
+    z-index: 0 !important;
+  }
+
+  .ls_slide__title {
+    font-size: 14px;
+  }
+
+  .ls_slide__badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  /* Slightly larger touch targets for arrows */
+  .ls_arrow {
+    padding: 8px;
+  }
+}
+
+/* ── Very small phones (< 400px) ── */
+@media (max-width: 399px) {
+  .ls_track {
+    width: 92%;
+    height: 240px;
+  }
+
+  .ls_slide__title {
+    font-size: 13px;
+  }
+
+  .ls_slide__info {
+    padding: 0.75rem 1rem;
+  }
+}

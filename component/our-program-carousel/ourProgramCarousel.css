@@ -1,0 +1,118 @@
+.our_program_embla {
+    /* margin: auto;
+    --slide-height: 19rem;
+    --slide-spacing: 50px;
+    --slide-size: 45%; */
+    margin: auto;
+    --slide-spacing: 5px;
+    --slide-size: 90%;
+    --slide-height: 18rem;
+}
+
+.our_program_embla__viewport {
+    overflow: hidden;
+}
+
+.our_program_embla__container {
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.our_program_embla__slide {
+    flex: 0 0 var(--slide-size);
+    min-width: 0;
+    padding-left: var(--slide-spacing);
+    transition: transform 0.4s ease;
+}
+
+.our_program_embla__slide__box {
+    padding: 25px;
+    height: 100%;
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+}
+
+.our_program_embla__slide__number {
+    /* border: 0.2rem solid var(--detail-medium-contrast); */
+    border-radius: 1.8rem;
+    font-size: 4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--slide-height);
+    user-select: none;
+}
+
+.our_program_embla__controls {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-content: space-between;
+    gap: 0.1rem;
+    /* margin-top: 2rem; */
+}
+
+.our_program_embla__controls {
+    display: flex;
+    justify-content: center;
+    /* margin-top: 1rem; */
+}
+
+.our_program_embla__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.our_program_embla__dot--selected {
+    background-color: #ffffff;
+    /* white for selected */
+}
+
+/* Small devices >= 640px */
+@media (min-width: 640px) {
+    .our_program_embla {
+        --slide-spacing: 15px;
+        --slide-size: 80%;
+    }
+}
+
+/* Medium devices >= 768px */
+@media (min-width: 768px) {
+    .our_program_embla {
+        --slide-spacing: 15px;
+        --slide-size: 60%;
+    }
+}
+
+/* Large devices >= 1024px */
+@media (min-width: 1024px) {
+    .our_program_embla {
+        --slide-spacing: 20px;
+        --slide-size: 45%;
+    }
+}
+
+/* Extra Large devices >= 1280px */
+@media (min-width: 1280px) {
+    .our_program_embla {
+        --slide-spacing: 20px;
+        --slide-size: 45%;
+    }
+}
+
+/* 2XL devices >= 1536px */
+@media (min-width: 1536px) {
+    .our_program_embla {
+        --slide-height: 24rem;
+        --slide-spacing: 40px;
+        --slide-size: 45%;
+    }
+}
