@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import Banner from "@/component/banner";
 import HowToEnrol from "@/component/HowToEnrol";
 import programLevel1 from "@/assets/background/program-level-1.webp";
@@ -12,6 +13,8 @@ import SealABNLPCoaching from "@/assets/level-certificate/badges/cdab.webp";
 import SealABH from "@/assets/level-certificate/badges/abh.webp";
 import SealNGH from "@/assets/level-certificate/badges/ngh.webp";
 import SealANLP from "@/assets/level-certificate/badges/cpd.webp";
+// LOGO: AL&CO seal - existing repo file, Khansa to confirm it is the current approved artwork.
+import SealALCO from "@/assets/level-certificate/badges/alco.webp";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/utils/buildMetadata";
 import { CTA, ctaDataAttrs, whatsappHref } from "@/component/cta";
 
@@ -160,6 +163,69 @@ const LEVELS: Level[] = [
       "By application, an interview with Bismillah Pervez and Board evaluation. Arranged directly with Arslan Larik and Bismillah Pervez.",
   },
 ];
+
+// Certification shown as a checklist. Wording is the same as `certification` above, split at the semicolons and
+// commas so each credential is its own line (connectors such as ";" and ", and" are dropped, first letter capitalised).
+// A seal is shown only where the repo has approved artwork. TLTA has none yet (its file prints an expiry date, F6),
+// so that line gets a check mark instead. LOGO: TLTA - add `seal` here once Khansa supplies the undated artwork.
+type CertItem = { text: string; seal?: StaticImageData };
+type CertBlock = { lead?: string; items: CertItem[]; note?: CertItem };
+
+const CERTS: Record<string, CertBlock> = {
+  "nlp-practitioner": {
+    lead: "Quad certification:",
+    items: [
+      { text: "Certified Practitioner of NLP (ABNLP)", seal: SealABNLP },
+      { text: "Practitioner of Time Line Therapy® Techniques (TLTA)" },
+      { text: "Certified NLP Coach (ABNLP Coaching Division)", seal: SealABNLPCoaching },
+      { text: "AL&CO Certified Practitioner of Behavioral Reengineering", seal: SealALCO },
+    ],
+    note: { text: "Plus a UK ANLP CPD certificate.", seal: SealANLP },
+  },
+  "nlp-master-practitioner": {
+    lead: "Quad certification at master level:",
+    items: [
+      { text: "Certified Master Practitioner of NLP (ABNLP)", seal: SealABNLP },
+      { text: "Master Practitioner of Time Line Therapy® Techniques (TLTA)" },
+      { text: "Certified NLP Master Coach (ABNLP Coaching Division)", seal: SealABNLPCoaching },
+      { text: "AL&CO Certified Practitioner of Behavioral Reengineering at master level", seal: SealALCO },
+    ],
+    note: { text: "Plus a second ANLP CPD certificate and a dedicated coach for your breakthrough.", seal: SealANLP },
+  },
+  "advanced-hypnotherapy-interventionist": {
+    items: [
+      { text: "Certified Practitioner and Master Practitioner of Hypnosis (ABH)", seal: SealABH },
+      { text: "NGH hypnosis certification with one year of NGH membership", seal: SealNGH },
+      { text: "The AL&CO Quintuple Certification, the Testament to the Graduate", seal: SealALCO },
+    ],
+  },
+  "nlp-trainers-training-program": {
+    items: [{ text: "Certified Trainer of NLP (ABNLP)", seal: SealABNLP }],
+  },
+  "hypnosis-trainers-training-program": {
+    items: [{ text: "Certified Hypnosis Trainer (ABH)", seal: SealABH }],
+  },
+  "nlp-master-trainer-program": {
+    items: [{ text: "Certified Master Trainer of NLP (ABNLP)", seal: SealABNLP }],
+    note: { text: "By AL&CO's own standard, two Master Trainers in good standing sign off your certification." },
+  },
+};
+
+function CertIcon({ seal }: { seal?: StaticImageData }) {
+  return (
+    <span className="shrink-0 w-10 h-10 flex items-center justify-center" aria-hidden="true">
+      {seal ? (
+        <Image src={seal} alt="" width={40} height={40} className="object-contain" />
+      ) : (
+        <span className="w-6 h-6 rounded-full bg-secondary text-black flex items-center justify-center">
+             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+     <path d="M5 12.5l4.5 4.5L19 7.5" />
+   </svg>
+        </span>
+      )}
+    </span>
+  );
+}
 
 const levelUrl = (slug: string) => `/program/${slug}`;
 
@@ -373,28 +439,53 @@ export default function ProgrammesHubPage() {
                   Level {l.level}: {l.name}
                 </h3>
                 <p className="text-primary-light mt-2">{l.summary}</p>
-                <dl className="mt-4 space-y-3 text-gray-700 text-base">
+                <dl className="mt-5 text-gray-700 text-base space-y-4">
                   <div>
                     <dt className="font-semibold text-primary">Duration</dt>
-                    <dd>{l.duration}</dd>
+                    <dd className="mt-1">{l.duration}</dd>
                   </div>
-                  <div>
+                  <div className="border-t border-primary/10 pt-4">
                     <dt className="font-semibold text-primary">Prerequisite</dt>
-                    <dd>{l.prerequisite}</dd>
+                    <dd className="mt-1">{l.prerequisite}</dd>
                   </div>
-                  <div>
+                  {/* Certification: the focal point of the card, as a checklist with the board seals. */}
+                  <div className="rounded-lg bg-white border-l-4 border-secondary p-4 shadow-sm">
                     <dt className="font-semibold text-primary">Certification</dt>
-                    <dd>{l.certification}</dd>
+                    <dd className="mt-2">
+                      {CERTS[l.slug] ? (
+                        <>
+                          {CERTS[l.slug].lead && (
+                            <p className="text-gray-600 mb-2">{CERTS[l.slug].lead}</p>
+                          )}
+                          <ul className="space-y-2">
+                            {CERTS[l.slug].items.map((c) => (
+                              <li key={c.text} className="flex items-center gap-3">
+                                <CertIcon seal={c.seal} />
+                                <span className="text-gray-800 leading-snug">{c.text}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          {CERTS[l.slug].note && (
+                            <div className="flex items-center gap-3 mt-3 pt-3 border-t border-primary/10">
+                              <CertIcon seal={CERTS[l.slug].note!.seal} />
+                              <span className="text-gray-800 leading-snug">{CERTS[l.slug].note!.text}</span>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        l.certification
+                      )}
+                    </dd>
                   </div>
                   <div>
                     <dt className="font-semibold text-primary">Entry and arrangement</dt>
-                    <dd>{l.entry}</dd>
+                    <dd className="mt-1">{l.entry}</dd>
                   </div>
                 </dl>
                 <div className="mt-auto pt-6">
                   <Link
                     href={levelUrl(l.slug)}
-                    className="inline-flex items-center justify-center rounded-md font-medium transition bg-primary hover:bg-primary-600 text-white px-4 py-2"
+                    className="flex w-full items-center justify-center text-center rounded-md font-medium transition bg-primary hover:bg-primary-600 text-white px-4 py-2"
                   >
                     Explore Level {l.level}: {l.name}
                   </Link>
