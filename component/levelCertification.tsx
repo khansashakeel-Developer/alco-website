@@ -7,7 +7,13 @@ type Props = {
   data: LevelCertificationType
 }
 
+// Layout: every credential is the same compact card (seal + title + description) in a two-column grid, so the
+// section is short and even. Sample certificates are shown once, as a row of thumbnails underneath, instead of
+// beside only some of the cards. Works for every level: 5 credentials (Levels 1 to 3) or a single one (Levels 4 to 6).
 export default function LevelCertification({ data }: Props) {
+  const points = data?.points ?? [];
+  const credentials = points.filter((p) => p?.title);
+  const samples = points.filter((p) => p?.imageCerficate?.src);
 
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-dark-primary bg-cover bg-top-left w-full">
@@ -22,126 +28,65 @@ export default function LevelCertification({ data }: Props) {
             {data?.title?.line2}
           </span>
         </h2>
-        {/* <div className="grid grid-cols-1 gap-8 2xl:gap-12 py-2 md:py-4 lg:py-8 xl:py-12">
-          {data.points.map((point, index) => (
-            <div className="grid grid-cols-12 gap-8 2xl:gap-12" key={index}>
-              {point?.title && (
-                <div className="flex items-center col-span-12 lg:col-span-7 xl:col-span-8 2xl:col-span-9 bg-white px-4 py-6 gap-4 rounded-md border shadow-2xl">
-                  <div className="hidden xl:block">
-                    <img
-                      src={point?.imageBrand?.src}
-                      alt={point?.imageBrand?.alt ?? "Arslan Larik"}
-                      className=""
-                      width="200px"
-                    />
-                  </div>
-                  <div className="w-full xl:max-w-[70%]">
-                    <div className="flex items-center gap-2">
-                      <img
-                        src={point?.imageBrand?.src}
-                        alt={point?.imageBrand?.alt ?? "Arslan Larik"}
-                        className="w-[70px] sm:w-[100px] bloack xl:hidden"
-                      />
-                      <h3 className="text-lg sm:text-xl xl:text-2xl text-primary text-start font-outfit font-semibold mb-2">
-                        {point?.title}
-                      </h3>
-                    </div>
-                    <p className="custom-text1 font-light text-black/60 text-start ">
-                      {point.description}
-                    </p>
-                  </div>
-                </div>
-              )}
-              <div className={`${point?.title ? "col-span-12 lg:col-span-5 xl:col-span-4 2xl:col-span-3 justify-center" : "col-span-12 justify-end"} flex items-center `}>
-                <img
-                  src={point?.imageCerficate?.src}
-                  alt={point?.imageCerficate?.alt ?? "Arslan Larik"}
-                  className={`${point?.title ? "w-full max-w-md" : "w-full lg:w-[41.666%] xl:w-[33.333%] 2xl:w-[22.5%]"} object-cover rounded-md`}
-                />
-              </div>
-            </div> */}
-        <div className="grid grid-cols-1 gap-8 2xl:gap-12 py-2 md:py-4 lg:py-8 xl:py-12">
-          {data.points.map((point, index) => {
-            const hasCertificate = !!point?.imageCerficate?.src;
+
+        {/* Credentials: equal cards; an odd last card spans the full row so the grid never ends lopsided. */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-6 lg:mt-8">
+          {credentials.map((point, index) => {
+            const isLastOdd = credentials.length % 2 === 1 && index === credentials.length - 1;
             return (
-              <div className="grid grid-cols-12 gap-8 2xl:gap-12" key={index}>
-
-                {/* LEFT CONTENT: full width when there is no certificate image */}
-                {point?.title && (
-                  <div
-                    className={`flex items-center col-span-12 ${
-                      hasCertificate ? "lg:col-span-7 xl:col-span-8 2xl:col-span-8" : "lg:col-span-12"
-                    } bg-white px-4 py-6 gap-4 rounded-md border shadow-2xl`}
-                  >
-                    {/* Desktop Brand Image */}
-                    <div className="hidden xl:block">
-                      {point?.imageBrand?.src && (
-                        <Image
-                          src={point.imageBrand.src}
-                          alt={point.imageBrand.alt || "Brand"}
-                          width={200}
-                          height={80}
-                          className="object-contain"
-                        />
-                      )}
-                    </div>
-
-                    <div className="w-full xl:max-w-[70%]">
-                      <div className="flex items-center gap-2">
-                        {/* Mobile Brand Image */}
-                        <div className="xl:hidden">
-                          {point?.imageBrand?.src && (
-                            <Image
-                              src={point.imageBrand.src}
-                              alt={point.imageBrand.alt || "Brand"}
-                              width={200}
-                              height={80}
-                              className="object-contain"
-                            />
-                          )}
-                        </div>
-
-                        <h3 className="text-lg sm:text-xl xl:text-2xl text-primary text-start font-outfit font-semibold mb-2">
-                          {point?.title}
-                        </h3>
-                      </div>
-
-                      <p className="custom-text1 font-light text-black/60 text-start">
-                        {point.description}
-                      </p>
-                    </div>
-                  </div>
+              <div
+                key={index}
+                className={`flex items-center gap-4 bg-white rounded-lg shadow-lg border-l-4 border-secondary p-4 lg:p-5 ${
+                  isLastOdd ? "lg:col-span-2" : ""
+                }`}
+              >
+                {point?.imageBrand?.src && (
+                  <Image
+                    src={point.imageBrand.src}
+                    alt={point.imageBrand.alt || "Brand"}
+                    width={64}
+                    height={64}
+                    className="shrink-0 object-contain"
+                  />
                 )}
-
-                {/* RIGHT CERTIFICATE IMAGE: only when one is supplied */}
-                {hasCertificate && (
-                  <div
-                    className={`${point?.title
-                      ? "col-span-12 lg:col-span-5 xl:col-span-4 2xl:col-span-4 justify-center"
-                      : "col-span-12 justify-end"
-                      } flex items-center`}
-                  >
-                    <div
-                      className={`relative ${point?.title
-                        ? "w-full max-w-md h-[250px] sm:h-[300px] lg:h-[350px]"
-                        : "w-full lg:w-[41.666%] xl:w-[33.333%] 2xl:w-[22.5%] h-[200px] sm:h-[250px]"
-                        } rounded-md overflow-hidden`}
-                    >
-                      <Image
-                        src={point.imageCerficate!.src}
-                        alt={point.imageCerficate!.alt || "Certificate"}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-center rounded-md "
-                      />
-                    </div>
-                  </div>
-                )}
-
+                <div>
+                  <h3 className="text-lg xl:text-xl text-primary text-start font-outfit font-semibold mb-1">
+                    {point.title}
+                  </h3>
+                  <p className="custom-text1 font-light text-black/70 text-start">
+                    {point.description}
+                  </p>
+                </div>
               </div>
             );
           })}
         </div>
+
+        {/* Sample certificates: one even row of thumbnails. Click opens the full-size image in a new tab. */}
+        {samples.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-4 lg:gap-6 mt-6 lg:mt-8">
+            {samples.map((point, index) => (
+              <figure key={index} className="w-[calc(50%-0.5rem)] sm:w-[220px]">
+                <a
+                  href={point.imageCerficate!.src.src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-md overflow-hidden bg-white ring-1 ring-white/20 hover:ring-secondary transition"
+                >
+                  <Image
+                    src={point.imageCerficate!.src}
+                    alt={point.imageCerficate!.alt || "Certificate"}
+                    sizes="220px"
+                    className="w-full h-auto"
+                  />
+                </a>
+                <figcaption aria-hidden="true" className="text-white/80 text-sm leading-snug text-center mt-2">
+                  {point.imageCerficate!.alt}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
