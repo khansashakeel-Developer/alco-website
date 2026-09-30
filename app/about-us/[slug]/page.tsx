@@ -5,13 +5,14 @@ import LevelBenefitsTable from "@/component/levelBenefitsTable";
 import Gallery from "@/component/gallery";
 import ContentSection from "@/component/contentSection";
 import OurFaqs from "@/component/faqs";
+import ReasonsGrid from "@/component/reasonsGrid";
 import CertificatesSection from "@/component/certificateSection";
 import CtaBand from "@/component/CtaBand";
 import { waLine } from "@/component/cta";
 
 // CTA plan: Who is Arslan, Who is Bismillah, Why Train are MoFu. Closing band C1 + C2.
-const ABOUT_CTA: Record<string, { title: string; about: string }> = {
-  "who-is-arslan-larik": { title: "Learn Directly from Arslan Larik", about: "training with Arslan Larik" },
+const ABOUT_CTA: Record<string, { title: string; about: string; text?: string }> = {
+  "who-is-arslan-larik": { title: "Learn Directly from Arslan Larik", about: "training with Arslan Larik", text: "Ask about the next batch, or see the free webinar first." },
   "who-is-bismillah-pervez": { title: "Learn Directly from Bismillah Pervez", about: "training with Bismillah Pervez" },
   "why-train-with-alco": { title: "Your Transformation Starts with One Conversation", about: "training with AL&CO" },
 };
@@ -50,13 +51,16 @@ export default async function About({
     )}
       <LevelBenefitsTable data={LevelBenefitsTableData} />
       <Gallery data={galleryData} />
-      <OurFaqs data={FaqsData} title={FaqsHeading} />
+      {slug === "why-train-with-alco"
+        ? <ReasonsGrid items={FaqsData} title={FaqsHeading} />
+        : <OurFaqs data={FaqsData} title={FaqsHeading} />}
       <ContentSection data={ContentSectionData2} />
       <ContentSection data={ContentSectionData3} />
       <ContentSection data={ContentSectionData4} />
       <ContentSection data={ContentSectionDataFeatureImage} />
       <CtaBand
         title={ABOUT_CTA[slug]?.title ?? "Your Transformation Starts with One Conversation"}
+        text={ABOUT_CTA[slug]?.text}
         primary={{ id: "C1", message: waLine(ABOUT_CTA[slug]?.about ?? "training with AL&CO") }}
         secondary={{ id: "C2" }}
       />

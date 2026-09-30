@@ -1,4 +1,5 @@
 // Type
+import NextStepCards from "@/component/NextStepCards";
 import { BannerType } from "@/type/bannerType";
 import { whatsappHref, waLine } from "@/component/cta";
 import { LevelIntroWithVideoType } from "@/type/levelIntroWithVideo";
@@ -186,6 +187,7 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
     line1: "This Programme Includes",
     line2: "NLP Practitioner Training"
   },
+  layout: "split",
   description: (
     <>
       <p className="my-4">
@@ -285,26 +287,15 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
   textAlign: "text-start",
   // No prices, fees or payment plans anywhere (ruling 25 Sep 2026). US number is plain text, never a link.
   detailContent: (
-    <div className="text-gray-600">
-      <p className="mb-2"><strong>What You Will Walk Away With</strong></p>
-      <p className="mb-4">
-        Upon completing this certification, you will be equipped to identify and shift limiting beliefs, communicate with precision and influence, facilitate powerful change conversations, and apply NLP methodologies within your professional practice.
-      </p>
-      <p className="mb-2"><strong>Who This Programme Is For</strong></p>
-      <p className="mb-4">
-        Everyone, including the complete beginner. You leave able to coach professionally and change your own life.
-      </p>
-      <p className="mb-2"><strong>Prerequisite</strong></p>
-      <p className="mb-4">None. Level 1 is built for the complete beginner.</p>
-      <p className="mb-2"><strong>How to Join</strong></p>
-      <p className="mb-4">
-        Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. US and Canada: +1 (206) 614 0234.
-      </p>
-      <p className="mb-2"><strong>Why You Will Not Find a Number Here</strong></p>
-      <p className="mb-4">
-        This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.
-      </p>
-    </div>
+    <NextStepCards
+      cards={[
+      { title: "What You Will Walk Away With", body: <>Upon completing this certification, you will be equipped to identify and shift limiting beliefs, communicate with precision and influence, facilitate powerful change conversations, and apply NLP methodologies within your professional practice.</> },
+      { title: "Who This Programme Is For", body: <>Everyone, including the complete beginner. You leave able to coach professionally and change your own life.</> },
+      { title: "Prerequisite", body: <>None. Level 1 is built for the complete beginner.</> },
+      { title: "How to Join", body: <>Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. US and Canada: +1 (206) 614 0234.</> },
+      { title: "Why You Will Not Find a Number Here", body: <>This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.</> },
+      ]}
+    />
   ),
 };
 
@@ -1200,13 +1191,13 @@ const ContentSectionDataLevel4: ContentSectionType = {
   title: "Your next step: board membership",
   TagType: "h2",
   description: (
-    <div className="text-gray-600 max-w-4xl mx-auto">
-      <p className="my-4">Certification is the first half of the journey. To train and certify under the ABNLP, you must then enrol as a member of the board, both as an organisation, registering your Approved NLP Training Institute in your organisation’s name, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. It is a straightforward process, and guiding you through the application is part of our job. This is what makes “Approved NLP Training Institute” real and recognised.</p>
-      <h3 className="h5 text-primary font-semibold mt-6">A note on revisiting</h3>
-      <p className="my-4">The free five-year revisit that comes with Levels 1 to 3 does not apply to the Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant. For a trainer who wants to keep returning to the room and deepening the craft, that is one more reason to take the final step to Master Trainer.</p>
-      <h3 className="h5 text-primary font-semibold mt-6">Where it leads</h3>
-      <p className="my-4">Trainer produces practitioners; the final rung, <Link href="/program/nlp-master-trainer-program" className="underline">Master Trainer</Link>, produces trainers.</p>
-    </div>
+    <NextStepCards
+      intro={<>Certification is the first half of the journey. To train and certify under the ABNLP, you must then enrol as a member of the board, both as an organisation, registering your Approved NLP Training Institute in your organisation’s name, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. It is a straightforward process, and guiding you through the application is part of our job. This is what makes “Approved NLP Training Institute” real and recognised.</>}
+      cards={[
+        { title: "A note on revisiting", body: <>The free five-year revisit that comes with Levels 1 to 3 does not apply to the Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant. For a trainer who wants to keep returning to the room and deepening the craft, that is one more reason to take the final step to Master Trainer.</> },
+        { title: "Where it leads", body: <>Trainer produces practitioners; the final rung, <Link href="/program/nlp-master-trainer-program" className="underline">Master Trainer</Link>, produces trainers.</> },
+      ]}
+    />
   ),
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
   textAlign: "text-start",
@@ -1263,7 +1254,7 @@ const CurriculumDataLevel4: ContentSectionType = {
   TagType: "h2",
   textAlign: "text-start",
   description: (
-    <ul className="list-disc pl-5 space-y-2 max-w-4xl mx-auto text-gray-700">
+    <ul className="list-disc pl-5 space-y-2 text-gray-700">
       <li>Platform mastery and the Trainer’s State (Uptime)</li>
       <li>Calibrating a whole room, and leading the unconscious room leaders</li>
       <li>Stage anchoring: spaces for content, metaphor, debrief and humour</li>
@@ -1356,13 +1347,13 @@ const ContentSectionDataLevel5: ContentSectionType = {
   title: "Your next step: board membership",
   TagType: "h2",
   description: (
-    <div className="text-gray-600 max-w-4xl mx-auto">
-      <p className="my-4">Certification is the first half of the journey. To train and certify under the ABH, you must then enrol as a member of the board, both as an organisation, registering your Approved School of Hypnosis, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. It is a straightforward process, and guiding you through the application is part of our job. This is what makes “Approved School of Hypnosis” real and recognised.</p>
-      <h3 className="h5 text-primary font-semibold mt-6">A note on revisiting</h3>
-      <p className="my-4">The free five-year revisit that comes with Levels 1 to 3 does not apply to the Hypnosis Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant. For a trainer who wants to keep returning to the room and deepening the craft, that is one more reason to take the final step to <Link href="/program/nlp-master-trainer-program" className="underline">Master Trainer</Link>.</p>
-      <h3 className="h5 text-primary font-semibold mt-6">Where it leads</h3>
-      <p className="my-4">With both trainer paths in hand, NLP and hypnosis, you are running an institution of your own.</p>
-    </div>
+    <NextStepCards
+      intro={<>Certification is the first half of the journey. To train and certify under the ABH, you must then enrol as a member of the board, both as an organisation, registering your Approved School of Hypnosis, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. It is a straightforward process, and guiding you through the application is part of our job. This is what makes “Approved School of Hypnosis” real and recognised.</>}
+      cards={[
+        { title: "A note on revisiting", body: <>The free five-year revisit that comes with Levels 1 to 3 does not apply to the Hypnosis Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant. For a trainer who wants to keep returning to the room and deepening the craft, that is one more reason to take the final step to <Link href="/program/nlp-master-trainer-program" className="underline">Master Trainer</Link>.</> },
+        { title: "Where it leads", body: <>With both trainer paths in hand, NLP and hypnosis, you are running an institution of your own.</> },
+      ]}
+    />
   ),
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
   textAlign: "text-start",
@@ -1419,7 +1410,7 @@ const CurriculumDataLevel5: ContentSectionType = {
   TagType: "h2",
   textAlign: "text-start",
   description: (
-    <ul className="list-disc pl-5 space-y-2 max-w-4xl mx-auto text-gray-700">
+    <ul className="list-disc pl-5 space-y-2 text-gray-700">
       <li>The lineage and pedagogy of hypnosis: Mesmer, Braid, Elman, Erickson, Krasner</li>
       <li>Teaching the full spectrum, from direct-authoritarian to indirect-permissive</li>
       <li>Teaching progressive, rapid and instant inductions</li>
@@ -1506,7 +1497,7 @@ const ContentSectionDataLevel6: ContentSectionType = {
   title: "Who may apply",
   TagType: "h2",
   description: (
-    <div className="text-gray-600 max-w-4xl mx-auto">
+    <div className="text-gray-600 max-w-4xl">
       <p className="my-4">You must already be a Certified Trainer of NLP in good standing, having completed the Trainer’s Training and holding current ABNLP Trainer membership. Once you do, you may apply to enrol. Entry is not automatic. Every candidate has an interview with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and a direct conversation with the Board, and their standing is verified before admission. Even a trainer certified through the ABNLP is checked first, and a trainer arriving from another board is scrutinised more closely still. This is the highest level we offer, and the gate is set accordingly.</p>
       <p className="my-4">Throughout the programme you keep your Trainer membership current, renewing it each year and remaining an accredited Trainer of good standing. You apply for Master Trainer membership itself only once the programme is complete.</p>
     </div>
@@ -1518,6 +1509,7 @@ const ContentSectionDataLevel6: ContentSectionType = {
 
 const LevelProgramIncludesDataLevel6: LevelProgramIncludesType = {
   title: { line1: "The standard you meet: four pillars", line2: "" },
+  layout: "rows",
   description: (<p>The ABNLP Master Trainer grade rests on four pillars, and at AL&amp;CO we hold you to a full and demanding version of each, provided with evidence.</p>),
   points: [
     {
@@ -1603,7 +1595,7 @@ const SignOffDataLevel6: ContentSectionType = {
   TagType: "h2",
   textAlign: "text-start",
   description: (
-    <div className="text-gray-600 max-w-4xl mx-auto">
+    <div className="text-gray-600 max-w-4xl">
       <p className="my-4">On completion you apply to the Board for Master Trainer level membership, submitting your evidence across all four pillars. Every AL&amp;CO Master Trainer is signed off by two Master Trainers in good standing: Arslan Larik signs as one, and the second is another certified Master Trainer appointed at our discretion. Two recognised Master Trainer signatures on the certificate is a firm rule at AL&amp;CO, a standard we hold ourselves to without exception, and that double, independent sign-off is exactly what makes the grade worth holding.</p>
       <h3 className="h5 text-primary font-semibold mt-6">A point of clarity on revisiting</h3>
       <p className="my-4">The free five-year revisit that comes with Levels 1 to 3 does not extend to the Trainer’s Trainings. Nobody re-attends the NLP Trainer’s Training or the Hypnosis Trainer’s Training simply to revise. The only people who return to those rooms are Master Trainer candidates, who attend as coaching assistants as part of this programme. That is by design: the trainer levels are earned once, and revisited only by those climbing to Master Trainer.</p>

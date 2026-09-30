@@ -21,7 +21,7 @@ export default function LevelProgramIncludes({ data }: Props) {
   const threeAcross = count > 0 && count % 3 === 0;
   const gridClass = data?.pointsClass
     ? data.pointsClass
-    : `grid grid-cols-1 md:grid-cols-2 ${threeAcross ? "xl:grid-cols-3" : ""} md:auto-rows-fr gap-4 lg:gap-6 2xl:gap-8 py-4 lg:py-8 xl:py-10`;
+    : `grid grid-cols-1 md:grid-cols-2 ${threeAcross ? "xl:grid-cols-3" : ""} gap-4 lg:gap-6 2xl:gap-8 py-4 lg:py-8 xl:py-10`;
 
   return (
     data &&
@@ -40,6 +40,56 @@ export default function LevelProgramIncludes({ data }: Props) {
           </div>
         )}
 
+        {data?.layout === "split" ? (
+          // Split layout: heading and intro sit on top as usual; below, one white panel of evenly spaced rows.
+          // Each row is label (icon + title) on the left and text on the right, so the text lines up down the panel.
+          <div className="mt-4 lg:mt-6 mb-4 lg:mb-8 xl:mb-10 bg-white rounded-xl shadow-lg divide-y divide-slate-200">
+            {data.points.map((point, index) => (
+              <div key={index} className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] gap-3 md:gap-8 p-5 lg:p-6">
+                <div className="flex items-center gap-4 self-start">
+                  <div className="w-12 h-12 shrink-0 p-2.5 bg-primary rounded-lg">
+                    {point?.image?.src && (
+                      <Image src={point.image.src} alt={point.image.alt || "image"} width={100} height={100} className="object-cover" />
+                    )}
+                  </div>
+                  <h3 className="text-lg xl:text-xl text-start font-outfit font-semibold text-primary">
+                    {point.title}
+                  </h3>
+                </div>
+                <div className="font-outfit text-base leading-relaxed text-gray-700 text-start [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_p+ul]:mt-2">
+                  {point.description}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : data?.layout === "rows" ? (
+          // Rows layout: one full-width row per point, a dark label panel (number, icon, title) beside the text.
+          // Every row has the same anatomy, so nothing depends on card heights matching.
+          <div className="flex flex-col gap-4 lg:gap-6 py-4 lg:py-8 xl:py-10">
+            {data.points.map((point, index) => (
+              <div key={index} className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] overflow-hidden rounded-xl shadow-lg bg-white">
+                <div className="flex items-center gap-4 bg-primary-darkest p-5 lg:p-6">
+                  <div className="w-14 h-14 shrink-0 p-3 bg-primary rounded-lg">
+                    {point?.image?.src && (
+                      <Image src={point.image.src} alt={point.image.alt || "image"} width={100} height={100} className="object-cover" />
+                    )}
+                  </div>
+                  <div>
+                    <div className="font-outfit text-sm font-semibold tracking-widest text-white/60">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+                    <h3 className="text-lg xl:text-xl text-start font-outfit font-semibold text-secondary">
+                      {point.title}
+                    </h3>
+                  </div>
+                </div>
+                <div className="p-5 lg:p-6 border-l-4 border-secondary font-outfit text-base leading-relaxed text-gray-800 text-start [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1">
+                  {point.description}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
         <div className={gridClass}>
           {data?.points.map((point, index) => {
             const isLastOdd = !threeAcross && count % 2 === 1 && index === count - 1;
@@ -80,6 +130,7 @@ export default function LevelProgramIncludes({ data }: Props) {
             );
           })}
         </div>
+        )}
 
         {/* Deatil Content */}
         {data?.detailContent && (

@@ -195,7 +195,7 @@ const ContentSectionContentListDataRE: ContentSectionType = {
 
 // D 05: Four Clouds Model copy from the long brochure p.6.
 const bannerDataFCM: BannerType = {
-  title: { line1: "The Four Clouds Model", align: "text-center mx-auto" },
+  title: { line1: "The Four Clouds Model", align: "text-center mx-auto sr-only" },
   image: FourCloudsModel.src,
   className: "bg-center bg-cover bg-no-repeat bg-primary ",
 };

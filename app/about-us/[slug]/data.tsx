@@ -1,4 +1,7 @@
 // Type
+import { Brain, Mountain, Target, Compass, Users, Award, Handshake, Quote } from "lucide-react";
+import Button from "@/component/button";
+import CtaButton from "@/component/CtaButton";
 import { BannerType } from "@/type/bannerType";
 
 
@@ -441,14 +444,45 @@ const ContentSectionData2AL: ContentSectionType = {
       <p className="my-4">
         As the <strong>Master Trainer and Managing Director of AL&CO,</strong> Arslan has set new standards in coaching, training, and personal development. His dynamic, results-driven programs equip participants with the tools to:
       </p>
-      <ul className="list-disc pl-5 space-y-1">
-        <li>Master their Minds and Emotions.</li>
-        <li>Overcome Personal and Professional Limitations.</li>
-        <li>Achieve extraordinary goals.</li>
-        <li>Lead with purpose and authenticity.</li>
+      {/* Four outcomes as tiles. Hover: tile lifts, border turns yellow, icon box turns yellow. */}
+      <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 my-6">
+        {[
+          { Icon: Brain, text: "Master their Minds and Emotions." },
+          { Icon: Mountain, text: "Overcome Personal and Professional Limitations." },
+          { Icon: Target, text: "Achieve extraordinary goals." },
+          { Icon: Compass, text: "Lead with purpose and authenticity." },
+        ].map(({ Icon, text }) => (
+          <li
+            key={text}
+            className="group flex flex-col gap-4 rounded-xl bg-white p-5 border border-slate-200 border-b-4 border-b-primary/20 shadow-sm transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1.5 hover:shadow-xl hover:border-b-secondary"
+          >
+            <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white transition-all duration-300 group-hover:bg-secondary group-hover:text-primary-darkest group-hover:scale-110 group-hover:-rotate-6">
+              <Icon className="h-6 w-6" strokeWidth={1.75} />
+            </span>
+            <span className="font-outfit text-lg font-semibold text-primary leading-snug">{text}</span>
+          </li>
+        ))}
       </ul>
-      <p className="mt-4">
-        He teaches personally, live on Zoom, from 8:00pm to 2:00am Pakistan time. Together with Bismillah Pervez he has taught 2,000+ graduates across 20+ countries, nearing 100 batches delivered, and counting. See the <Link href="/programs" className="underline">six levels</Link>.
+      <p className="mt-6 mb-4">
+        He teaches personally, live on Zoom, from 8:00pm to 2:00am Pakistan time. Together with Bismillah Pervez he has taught:
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          { value: "2,000+", label: "graduates" },
+          { value: "20+", label: "countries" },
+          { value: "Nearly 100", label: "batches delivered, and counting" },
+        ].map((s) => (
+          <div
+            key={s.label}
+            className="rounded-xl bg-primary-darkest px-6 py-5 text-white shadow-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1.5 hover:shadow-xl"
+          >
+            <div className="font-outfit text-3xl lg:text-4xl font-bold text-secondary">{s.value}</div>
+            <div className="mt-1 text-white/90">{s.label}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-6">
+        See the <Link href="/programs" className="underline">six levels</Link>.
       </p>
     </>
   ),
@@ -464,21 +498,48 @@ const ContentSectionData3AL: ContentSectionType = {
       <p className="my-4">
         Your certificates are worth exactly as much as the bodies behind them. AL&CO trains and certifies through:
       </p>
-      <ul className="space-y-4 my-6">
-        {approvedBodies.map((b) => (
-          <li key={b.board} className="flex items-center gap-4">
-            {b.seal ? (
-              <Image src={b.seal} alt={`${b.board} seal`} width={64} height={64} className="shrink-0 object-contain" />
-            ) : (
-              <span className="shrink-0 w-16 h-16 rounded-full border border-primary/30" aria-hidden="true" />
-            )}
-            <span>{b.text}</span>
-          </li>
-        ))}
+      {/* One card per board. AL&CO's own credential closes the grid as a full-width dark card. */}
+      <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6 my-6">
+        {approvedBodies.map((b) => {
+          const own = b.board === "AL&CO";
+          return (
+            <li
+              key={b.board}
+              className={`group relative overflow-hidden flex items-center gap-5 rounded-xl p-5 lg:p-6 shadow-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1.5 hover:shadow-2xl ${
+                own ? "md:col-span-2 xl:col-span-3 bg-primary-darkest text-white" : "bg-white border border-slate-200"
+              }`}
+            >
+              <span className="absolute left-0 top-0 h-full w-1.5 bg-secondary origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100 motion-reduce:transition-none" />
+              {b.seal ? (
+                <span className="shrink-0 flex h-20 w-20 items-center justify-center rounded-full bg-white p-2 ring-1 ring-slate-200 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none">
+                  <Image src={b.seal} alt={`${b.board} seal`} width={64} height={64} className="object-contain" />
+                </span>
+              ) : (
+                <span
+                  className="shrink-0 flex h-20 w-20 items-center justify-center rounded-full bg-white ring-1 ring-primary/30 font-outfit text-sm font-bold text-primary transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none"
+                  aria-hidden="true"
+                >
+                  {b.board}
+                </span>
+              )}
+              <div>
+                <div className={`font-outfit text-xs font-semibold uppercase tracking-widest ${own ? "text-secondary" : "text-secondary-darkest"}`}>
+                  {b.board}
+                </div>
+                <p className={`mt-1 ${own ? "text-white/90" : "text-gray-700"}`}>{b.text}</p>
+              </div>
+            </li>
+          );
+        })}
       </ul>
-      <p className="mt-4">
+      <div className="mt-6 flex items-center gap-4 rounded-xl border border-secondary/40 bg-secondary/10 p-5">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary-darkest">
+          <Users className="h-6 w-6" strokeWidth={1.75} />
+        </span>
+        <p className="font-medium text-primary">
         At AL&CO you join a global community of 2,000+ graduates, with free revisits of Levels 1 to 3 for five years.
-      </p>
+        </p>
+      </div>
     </>
   ),
   padding: "pb-6 md:pb-8 lg:pb-12 xl:pb-16 ",
@@ -501,7 +562,7 @@ const ContentSectionData4AL: ContentSectionType = {
     link: "/about-us/who-is-bismillah-pervez"
   },
   fullBg: "bg-neutral-100 ",
-  padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
+  padding: "pt-6 md:pt-8 lg:pt-12 xl:pt-16 pb-2 md:pb-4 lg:pb-6",
 }
 
 // who-is-bismillah-pervez
@@ -532,15 +593,65 @@ const ContentSectionData1BP: ContentSectionType = {
   TagType: "h2",
   description: (
     <>
-      <p className="my-4">
-        Bismillah Pervez is the Chief Executive of AL&CO and an established trainer at the front of the room. She is an ICF Master Certified Coach (MCC), the highest coaching designation the International Coaching Federation awards, and she holds its Advanced Certification in Team Coaching (ACTC). She is a Certified NLP Trainer and Master NLP Coach through the ABNLP, an Accredited Master Trainer with ANLP in the United Kingdom, a Master Practitioner of Time Line Therapy® Techniques, a Master Practitioner of Hypnosis through the ABH, and a Hypnotherapist through the NGH. She holds a bachelor’s degree in psychology and a master’s degree in education, so she brings academic depth as well as professional credentials.
+      <p className="my-4 text-lg lg:text-xl font-light text-primary">
+        Bismillah Pervez is the Chief Executive of AL&CO and an established trainer at the front of the room.
       </p>
+
+      {/* Credentials as cards. Hover: card lifts and a yellow bar grows down the left edge. */}
+      <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 my-6">
+        {[
+          { org: "ICF", title: "Master Certified Coach (MCC)", note: "The highest coaching designation the International Coaching Federation awards" },
+          { org: "ICF", title: "Advanced Certification in Team Coaching (ACTC)" },
+          { org: "ABNLP", title: "Certified NLP Trainer and Master NLP Coach" },
+          { org: "ANLP (UK)", title: "Accredited Master Trainer" },
+          { org: "TLTA", title: "Master Practitioner of Time Line Therapy® Techniques" },
+          { org: "ABH", title: "Master Practitioner of Hypnosis" },
+          { org: "NGH", title: "Hypnotherapist" },
+          { org: "Academic", title: "Bachelor’s degree in psychology" },
+          { org: "Academic", title: "Master’s degree in education" },
+        ].map((c) => (
+          <li
+            key={c.org + c.title}
+            className="group relative overflow-hidden rounded-xl bg-white border border-slate-200 p-5 shadow-sm transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1.5 hover:shadow-xl"
+          >
+            <span className="absolute left-0 top-0 h-full w-1.5 bg-secondary origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100 motion-reduce:transition-none" />
+            <div className="font-outfit text-xs font-semibold uppercase tracking-widest text-secondary-darkest">{c.org}</div>
+            <div className="mt-1 font-outfit text-lg font-semibold leading-snug text-primary">{c.title}</div>
+            {c.note && <p className="mt-2 text-sm text-gray-600">{c.note}</p>}
+          </li>
+        ))}
+      </ul>
       <p className="my-4">
-        She is the first woman in Pakistan to hold the ICF Master Certified Coach designation, its Advanced Certification in Team Coaching, and her ANLP accredited trainer standing, all three together. Her belief is simple and demanding: empowerment begins with modelling the very best.
+        So she brings academic depth as well as professional credentials.
       </p>
-      <p className="my-4">
-        Every applicant to our Trainer levels, <Link href="/program/nlp-trainers-training-program" className="underline">NLP Train the Trainer</Link> and <Link href="/program/hypnosis-trainers-training-program" className="underline">Hypnosis Train the Trainer</Link>, meets Bismillah in person before a place is offered, and Levels 3 and above are arranged directly with her and Arslan Larik.
-      </p>
+
+      {/* Highlight card */}
+      <div className="group relative overflow-hidden my-8 rounded-xl bg-primary-darkest p-6 lg:p-8 text-white shadow-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:shadow-2xl">
+        <span className="absolute left-0 top-0 h-full w-1.5 bg-secondary origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100 motion-reduce:transition-none" />
+        <div className="flex items-start gap-4">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary-darkest transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+            <Award className="h-6 w-6" strokeWidth={1.75} />
+          </span>
+          <div>
+            <p className="text-white/90">
+              She is the first woman in Pakistan to hold the ICF Master Certified Coach designation, its Advanced Certification in Team Coaching, and her ANLP accredited trainer standing, all three together.
+            </p>
+            <p className="mt-3 font-outfit text-lg font-semibold text-secondary">
+              Her belief is simple and demanding: empowerment begins with modelling the very best.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Applicant note */}
+      <div className="flex items-start gap-4 rounded-xl border border-secondary/40 bg-secondary/10 p-5 lg:p-6">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+          <Handshake className="h-6 w-6" strokeWidth={1.75} />
+        </span>
+        <p>
+          Every applicant to our Trainer levels, <Link href="/program/nlp-trainers-training-program" className="underline">NLP Train the Trainer</Link> and <Link href="/program/hypnosis-trainers-training-program" className="underline">Hypnosis Train the Trainer</Link>, meets Bismillah in person before a place is offered, and Levels 3 and above are arranged directly with her and Arslan Larik.
+        </p>
+      </div>
     </>
   ),
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
@@ -924,14 +1035,20 @@ const LevelBenefitsTableDataBP: LevelBenefitsTableType = {
 // B 04 rows A15 and A16 (duplicate slides 9 to 11 removed).
 const galleryDataBP: GalleryItem = {
   title: "A Proven Leader with a Personal Touch",
+  underline: false,
   description: (
-    <div className="max-w-6xl mx-auto">
-      <p className="mb-4">
+    <div className="max-w-4xl mx-auto text-base lg:text-lg">
+      <p className="mb-5">
         Bismillah’s career is built on the belief that true leadership comes from empowering others. Whether she is leading a live training, supervising practice in the room, or coaching one person through a breakthrough, her focus is always on meaningful and measurable change.
       </p>
-      <p>
-        She has also brought this work to organisations including Emaar Pakistan, Hamdard Pakistan and AlRahim Textile Mills.
-      </p>
+      <p className="mb-3">She has also brought this work to organisations including:</p>
+      <ul className="flex flex-wrap justify-center gap-3">
+        {["Emaar Pakistan", "Hamdard Pakistan", "AlRahim Textile Mills"].map((n) => (
+          <li key={n} className="rounded-full border border-slate-200 bg-white px-5 py-2 font-outfit font-semibold text-primary shadow-sm transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:border-secondary hover:shadow-md">
+            {n}
+          </li>
+        ))}
+      </ul>
     </div>
   ),
   image: [
@@ -949,36 +1066,48 @@ const ContentSectionData2BP: ContentSectionType = {
   title: "The Philosophy of Empowerment",
   TagType: "h2",
   description: (
-    <div className="max-w-6xl mx-auto">
-      <p className="mb-4">
-        At the heart of Bismillah’s work is a belief that is simple and demanding: empowerment begins with modelling the very best. It is the foundation of how she leads, trains and coaches, and it is why she holds herself to the highest credential in coaching.
-      </p>
-      <p>
-        For Bismillah, success is not about following trends. It is about creating meaningful impact, one person at a time.
-      </p>
+    <div className="group relative overflow-hidden mt-4 rounded-xl bg-white border border-slate-200 p-6 lg:p-8 shadow-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:shadow-xl">
+      <span className="absolute left-0 top-0 h-full w-1.5 bg-secondary origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100 motion-reduce:transition-none" />
+      <div className="flex items-start gap-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-white transition-all duration-300 group-hover:bg-secondary group-hover:text-primary-darkest group-hover:scale-110 group-hover:-rotate-6">
+          <Quote className="h-6 w-6" strokeWidth={1.75} />
+        </span>
+        <div>
+          <p className="font-outfit text-lg lg:text-xl font-semibold leading-snug text-primary">
+            At the heart of Bismillah’s work is a belief that is simple and demanding: empowerment begins with modelling the very best.
+          </p>
+          <p className="mt-3">
+            It is the foundation of how she leads, trains and coaches, and it is why she holds herself to the highest credential in coaching.
+          </p>
+          <p className="mt-3">
+            For Bismillah, success is not about following trends. It is about creating meaningful impact, one person at a time.
+          </p>
+        </div>
+      </div>
     </div>
   ),
-  underline: true
+  textAlign: "text-start",
+  padding: "pt-6 md:pt-8 lg:pt-12 xl:pt-16 pb-4 md:pb-6",
 }
 
 const ContentSectionData3BP: ContentSectionType = {
   title: "Your Partner in Transformation",
   TagType: "h2",
   description: (
-    <div className="max-w-6xl mx-auto">
-      <p className="mb-4">
+    <div className="mt-4 rounded-xl bg-primary-darkest p-6 lg:p-8 text-white shadow-md">
+      <p className="text-white/90">
         If you are ready to unlock your potential, and perhaps one day to teach this work yourself, you can learn directly from Bismillah Pervez at AL&CO.
       </p>
-      <p>
+      <p className="mt-3 text-white/90">
         She teaches alongside Arslan Larik, live on Zoom, and every applicant to our Trainer levels meets her in person before a place is offered.
       </p>
+      <div className="mt-6">
+        <CtaButton id="C3" variant="secondary" />
+      </div>
     </div>
   ),
-  button: {
-    text: "See all six levels",
-    cta: { id: "C3" }
-  },
-  underline: true
+  textAlign: "text-start",
+  padding: "pt-2 md:pt-4 pb-6 md:pb-8 lg:pb-12 xl:pb-16",
 }
 
 // B 04 row A19: "The First of Our Own" (brochure p.27, a real quote).
@@ -986,19 +1115,20 @@ const ContentSectionData4BP: ContentSectionType = {
   title: "The First of Our Own",
   TagType: "h2",
   description: (
-    <blockquote className="border-l-4 border-secondary pl-6 italic max-w-4xl mx-auto text-start">
-      <p>
+    <figure className="relative overflow-hidden mt-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-secondary p-6 lg:p-8 shadow-md">
+      <Quote className="absolute right-6 top-4 h-16 w-16 text-primary/10" strokeWidth={1.5} aria-hidden="true" />
+      <blockquote className="relative font-outfit text-lg lg:text-xl font-light italic leading-relaxed text-primary">
         “I can vouch for every word of this personally, because I have lived it. I completed every programme at Arslan Larik & Company, from Practitioner all the way through, and I did my Trainer’s Training with The Tad James Company, under the mentorship of Dr Adriana James. My standing as a Master Trainer was accredited through ANLP in the United Kingdom. I am proud to be the first Master Trainer this institution has produced, and prouder still of what that means: AL&CO now grows its own.”
-      </p>
-      <footer className="not-italic mt-4 font-semibold">
-        Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). Karachi, Pakistan
-      </footer>
-    </blockquote>
+      </blockquote>
+      <figcaption className="relative mt-5 border-t border-slate-200 pt-4">
+        <div className="font-outfit text-lg font-semibold text-primary">Bismillah Pervez</div>
+        <div className="text-gray-600">CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). Karachi, Pakistan</div>
+      </figcaption>
+      <div className="relative mt-6">
+        <Button variant="primary" size="medium" text="Meet Arslan Larik" href="/about-us/who-is-arslan-larik" iconRight={true} newTab={false} />
+      </div>
+    </figure>
   ),
-  button: {
-    text: "Meet Arslan Larik",
-    link: "/about-us/who-is-arslan-larik"
-  },
   textAlign: "text-start",
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
 }
@@ -1026,7 +1156,7 @@ const ContentSectionDataFeatureImage: ContentSectionType = {
     },
   ],
   fullBg: "bg-neutral-100",
-  padding: "py-6 md:py-8 lg:py-12 xl:py-16 "
+  padding: "pt-2 md:pt-4 lg:pt-6 pb-6 md:pb-8 lg:pb-12 xl:pb-16"
 };
 
 // why-train-with-alco
@@ -1042,17 +1172,30 @@ const bannerDataWTALCO: BannerType = {
 
 // B 05 row A2.
 const ContentSectionData1WTALCO: ContentSectionType = {
+  textAlign: "text-start",
   description: (
     <>
-      <p className="mb-4">
+      <p className="mb-4 text-lg lg:text-xl font-light text-primary max-w-4xl">
         Choosing where to train is a decision about the rest of your life. Here is what sets <strong>Arslan Larik & Company (AL&CO)</strong> apart.
       </p>
-      <p>
+      <p className="max-w-4xl">
         AL&CO is the Center for Human Brilliance and Behavioral Reengineering: an institution led by two master trainers, Arslan Larik and Bismillah Pervez, with 2,000+ graduates across 20+ countries and nearing 100 batches delivered.
       </p>
+      <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { value: "2", label: "master trainers" },
+          { value: "2,000+", label: "graduates" },
+          { value: "20+", label: "countries" },
+          { value: "Nearing 100", label: "batches delivered" },
+        ].map((x) => (
+          <div key={x.label} className="rounded-xl bg-primary-darkest px-5 py-5 text-white shadow-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1.5 hover:shadow-xl">
+            <div className="font-outfit text-2xl lg:text-3xl font-bold text-secondary">{x.value}</div>
+            <div className="mt-1 text-white/90">{x.label}</div>
+          </div>
+        ))}
+      </div>
     </>
   ),
-  underline: true,
   padding: "pt-6 md:pt-8 lg:pt-12 xl:pt-16 "
 }
 
@@ -1165,26 +1308,47 @@ const ContentSectionData2WTALCO: ContentSectionType = {
   textAlign: "text-start",
   description: (
     <>
-      <p className="mb-4">Everything on this page is delivered by a person. Our relationship managers walk beside you from your very first question to the day you graduate and long after, available around the clock, turning a programme into a journey and a stranger into part of the AL&CO family. And here is something rare: most of them come from psychology themselves, so they understand your journey from the inside. Listed alphabetically, because every one of them matters equally.</p>
-      <ul className="list-none space-y-2">
-        <li><strong>Afshan Ahmed</strong>, Relationship Manager, trained in Clinical Psychology</li>
-        <li><strong>Aqsa Anwar</strong>, Relationship Manager, background in Psychology</li>
-        <li><strong>Ateeqa Mehmood</strong>, Relationship Manager, background in Psychology and Social Sciences</li>
-        <li><strong>Farheen Noor Mughal</strong>, Relationship Manager, background in Psychology and Social Sciences</li>
-        <li><strong>Nashmeen Mufti</strong>, Relationship Manager, background in Psychology</li>
-        <li><strong>Syeda Ruquaiyah Shahab</strong>, Relationship Manager, background in Psychology and Social Sciences</li>
-        <li><strong>Taniya Sikander Baksh</strong>, Relationship Manager, background in Sales and Marketing</li>
-        <li><strong>Asia Erum</strong>, Customer Service Manager, background in Commerce and Administration</li>
+      <p className="my-4 max-w-4xl">
+        Everything on this page is delivered by a person. Our relationship managers walk beside you from your very first question to the day you graduate and long after, available around the clock, turning a programme into a journey and a stranger into part of the AL&CO family. And here is something rare: most of them come from psychology themselves, so they understand your journey from the inside. Listed alphabetically, because every one of them matters equally.
+      </p>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 my-6">
+        {[
+          { name: "Afshan Ahmed", role: "Relationship Manager", bg: "Trained in Clinical Psychology" },
+          { name: "Aqsa Anwar", role: "Relationship Manager", bg: "Background in Psychology" },
+          { name: "Ateeqa Mehmood", role: "Relationship Manager", bg: "Background in Psychology and Social Sciences" },
+          { name: "Farheen Noor Mughal", role: "Relationship Manager", bg: "Background in Psychology and Social Sciences" },
+          { name: "Nashmeen Mufti", role: "Relationship Manager", bg: "Background in Psychology" },
+          { name: "Syeda Ruquaiyah Shahab", role: "Relationship Manager", bg: "Background in Psychology and Social Sciences" },
+          { name: "Taniya Sikander Baksh", role: "Relationship Manager", bg: "Background in Sales and Marketing" },
+          { name: "Asia Erum", role: "Customer Service Manager", bg: "Background in Commerce and Administration" },
+        ].map((p) => {
+          const w = p.name.split(" ");
+          return (
+            <li
+              key={p.name}
+              className="group relative overflow-hidden flex flex-col items-center text-center rounded-xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1.5 hover:shadow-xl"
+            >
+              <span className="absolute left-0 top-0 h-1.5 w-full bg-secondary origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100 motion-reduce:transition-none" />
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary font-outfit text-xl font-bold text-white ring-4 ring-secondary/30 transition-all duration-300 group-hover:bg-secondary group-hover:text-primary-darkest group-hover:scale-110 motion-reduce:transition-none">
+                {w[0][0]}{w[w.length - 1][0]}
+              </span>
+              <div className="mt-4 font-outfit text-lg font-semibold leading-snug text-primary">{p.name}</div>
+              <div className="mt-1 font-outfit text-xs font-semibold uppercase tracking-widest text-secondary-darkest">{p.role}</div>
+              <p className="mt-2 text-sm text-gray-600">{p.bg}</p>
+            </li>
+          );
+        })}
       </ul>
-      <p className="mt-4">Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are arranged directly with Bismillah Pervez and Arslan Larik.</p>
+      <div className="rounded-xl bg-primary-darkest p-6 lg:p-8 text-white shadow-md sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <p className="text-white/90 max-w-3xl">
+          Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are arranged directly with Bismillah Pervez and Arslan Larik.
+        </p>
+        <div className="mt-5 sm:mt-0 shrink-0">
+          <CtaButton id="C1" message="Hi, I would like to speak to a relationship manager (Why Train with AL&CO page)" variant="secondary" />
+        </div>
+      </div>
     </>
   ),
-  underline: true,
-  // CTA plan: C1 (WhatsApp, prefilled), not /contact.
-  button: {
-    text: "Speak to a relationship manager",
-    cta: { id: "C1", message: "Hi, I would like to speak to a relationship manager (Why Train with AL&CO page)" }
-  }
 }
 
 // B 05 row A7: Proof and Recognition. Ripple block and stats strip verbatim (canon §2.3, F3);
@@ -1195,10 +1359,47 @@ const ContentSectionData3WTALCO: ContentSectionType = {
   textAlign: "text-start",
   description: (
     <>
-      <p className="mb-4"><strong>A ripple, not a headcount.</strong> More than two thousand certified graduates, across more than twenty countries, is only the visible part. Behind AL&CO stand founders who spent years training and coaching across hundreds of organisations, and behind every graduate is a coaching practice, a workplace, a classroom, a family. Empowerment does not stop at the person in the room; it travels outward through everyone they touch.</p>
-      <p className="mb-4"><strong>2,000+ graduates across 20+ countries. Nearing 100 batches delivered, and counting. Our work has inspired over a million lives, across the nation and around the world.</strong></p>
-      <p className="mb-4"><strong>Organisations we have worked with.</strong> AL&CO’s own clients, and organisations our founders have trained and coached for, before and alongside AL&CO: K-Electric, Tameer Microfinance Bank, Emaar Pakistan, Hamdard Pakistan, AlRahim Textile Mills, Bank Alfalah, Faysal Bank, Bayer, GlaxoSmithKline, Pakistan State Oil, PEL and Feroze1888.</p>
-      <p><strong>Proven across the professions.</strong> We have taught medical doctors, psychologists, psychotherapists and psychiatrists alongside entrepreneurs, senior leaders, educators and homemakers.</p>
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        {[
+          { value: "2,000+", label: "graduates across 20+ countries" },
+          { value: "Nearing 100", label: "batches delivered, and counting" },
+          { value: "Over a million", label: "lives inspired by our work, across the nation and around the world" },
+        ].map((x, i) => (
+          <div key={x.label} className={`rounded-xl bg-primary-darkest px-6 py-5 text-white shadow-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1.5 hover:shadow-xl ${i === 2 ? "sm:col-span-2 xl:col-span-2" : ""}`}>
+            <div className="font-outfit text-3xl font-bold text-secondary">{x.value}</div>
+            <div className="mt-1 text-white/90">{x.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="group relative overflow-hidden my-6 rounded-xl bg-white border border-slate-200 p-6 lg:p-8 shadow-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:shadow-xl">
+        <span className="absolute left-0 top-0 h-full w-1.5 bg-secondary origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100 motion-reduce:transition-none" />
+        <p className="font-outfit text-lg lg:text-xl font-semibold text-primary">A ripple, not a headcount.</p>
+        <p className="mt-2 max-w-4xl">
+          More than two thousand certified graduates, across more than twenty countries, is only the visible part. Behind AL&CO stand founders who spent years training and coaching across hundreds of organisations, and behind every graduate is a coaching practice, a workplace, a classroom, a family. Empowerment does not stop at the person in the room; it travels outward through everyone they touch.
+        </p>
+      </div>
+
+      <div className="rounded-xl bg-white border border-slate-200 p-6 lg:p-8 shadow-md">
+        <p className="font-outfit text-lg lg:text-xl font-semibold text-primary">Organisations we have worked with.</p>
+        <p className="mt-2 mb-4 max-w-4xl">
+          AL&CO’s own clients, and organisations our founders have trained and coached for, before and alongside AL&CO:
+        </p>
+        <ul className="flex flex-wrap gap-3">
+          {["K-Electric", "Tameer Microfinance Bank", "Emaar Pakistan", "Hamdard Pakistan", "AlRahim Textile Mills", "Bank Alfalah", "Faysal Bank", "Bayer", "GlaxoSmithKline", "Pakistan State Oil", "PEL", "Feroze1888"].map((o) => (
+            <li key={o} className="rounded-full border border-slate-200 bg-slate-50 px-5 py-2 font-outfit font-semibold text-primary transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:border-secondary hover:bg-white hover:shadow-md">
+              {o}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-6 rounded-xl border border-secondary/40 bg-secondary/10 p-6 lg:p-8">
+        <p className="font-outfit text-lg lg:text-xl font-semibold text-primary">Proven across the professions.</p>
+        <p className="mt-2 max-w-4xl">
+          We have taught medical doctors, psychologists, psychotherapists and psychiatrists alongside entrepreneurs, senior leaders, educators and homemakers.
+        </p>
+      </div>
     </>
   ),
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
