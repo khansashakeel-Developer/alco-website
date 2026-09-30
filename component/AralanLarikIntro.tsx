@@ -53,53 +53,70 @@ const trainers: TrainerCard[] = [
   },
 ];
 
+// SEO heading: one plain <h2>. Change the size here only (swap "h3" for "h2" or "h4", or add e.g. "text-[34px]").
+const HEADING_CLASS = "h3 text-black text-center mb-8 lg:mb-10";
+
 export default function AralanLarikIntro() {
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-light-neutral bg-cover bg-top-left w-full">
       <div className="container mx-auto px-4">
-        <h2 className="h3 text-black text-start my-8">{title}</h2>
+        <h2 className={HEADING_CLASS}>{title}</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           {trainers.map((t) => (
-            <div key={t.name} className="flex flex-col h-full">
-              <div className="relative w-full max-w-md aspect-[1884/2288] rounded-xl overflow-hidden mb-6">
+            <article
+              key={t.name}
+              className="flex flex-col bg-white rounded-lg shadow-lg border border-primary/10 overflow-hidden"
+            >
+              {/* Photo: same navy backdrop and same crop for both, so the two cards match. Name sits on a navy fade. */}
+              <div className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-primary-darkest">
                 <Image
                   src={t.image}
                   alt={t.imageAlt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 448px"
+                  sizes="(max-width: 1024px) 100vw, 600px"
                   className="object-cover"
                   style={{ objectPosition: t.objectPosition }}
                 />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary-darkest/90 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 lg:p-6">
+                  <h3 className="h4 font-semibold text-white text-start">{t.name}</h3>
+                  <div className="w-10 h-1 bg-secondary mt-2" />
+                </div>
               </div>
-              <h3 className="h4 font-semibold text-primary text-start">{t.name}</h3>
-              <div className="flex items-center gap-3 mb-4">
-                {t.seal && (
-                  <Image src={t.seal.image} alt={t.seal.alt} width={56} height={56} className="shrink-0" />
-                )}
-                <p className="h5 font-medium text-black text-start">{t.role}</p>
-              </div>
-              <div
-                className="custom-text1 font-light text-black space-y-4 flex-1"
-                dangerouslySetInnerHTML={{ __html: t.specification }}
-              />
-              <div className="mt-6">
-                <Button
-                  iconRight={true}
-                  variant="primary"
-                  size="medium"
-                  text={t.button.text}
-                  href={t.button.link}
-                  className="my-auto"
+
+              <div className="flex flex-col flex-1 p-6 lg:p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  {t.seal && (
+                    <Image src={t.seal.image} alt={t.seal.alt} width={56} height={56} className="shrink-0" />
+                  )}
+                  <p className="h5 font-semibold text-primary text-start">{t.role}</p>
+                </div>
+                <div
+                  className="custom-text1 font-light text-black/80 space-y-4 flex-1"
+                  dangerouslySetInnerHTML={{ __html: t.specification }}
                 />
+                <div className="mt-6">
+                  <Button
+                    iconRight={true}
+                    variant="primary"
+                    size="medium"
+                    text={t.button.text}
+                    href={t.button.link}
+                    className="my-auto"
+                  />
+                </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
-        <p className="custom-text1 font-light text-black text-start mt-10 max-w-4xl">
-          When you train at AL&amp;CO you learn inside an institution led by two certified trainers, which is what makes it a school and not one person with a following.
-        </p>
+        {/* Closing line: its own navy band with the gold accent, so it no longer floats under one card. */}
+        <div className="mt-6 lg:mt-8 rounded-lg bg-primary-darkest border-l-4 border-secondary px-6 py-5 lg:px-8">
+          <p className="custom-text1 font-light text-white text-start max-w-4xl">
+            When you train at AL&amp;CO you learn inside an institution led by two certified trainers, which is what makes it a school and not one person with a following.
+          </p>
+        </div>
       </div>
     </section>
   );
