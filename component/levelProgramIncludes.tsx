@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { LevelProgramIncludesType } from "@/type/levelProgramIncludes";
-import Button from "./button";
 import Image from "next/image";
 
 type Props = {
@@ -14,7 +13,15 @@ const themeClasses: any = {
   yellow: "bg-secondary-darkest",
 };
 
+// Layout: every card is the same shape (icon + title on one row, text underneath) and every row is the same
+// height on tablet/desktop, so the section reads as an even grid. Six cards run 3 across on xl; any other count
+// (Levels 4 to 6 have four) runs 2 across, so the grid never ends with a lone card. An odd last card spans the row.
 export default function LevelProgramIncludes({ data }: Props) {
+  const count = data?.points?.length ?? 0;
+  const threeAcross = count > 0 && count % 3 === 0;
+  const gridClass = data?.pointsClass
+    ? data.pointsClass
+    : `grid grid-cols-1 md:grid-cols-2 ${threeAcross ? "xl:grid-cols-3" : ""} md:auto-rows-fr gap-4 lg:gap-6 2xl:gap-8 py-4 lg:py-8 xl:py-10`;
 
   return (
     data &&
@@ -26,54 +33,52 @@ export default function LevelProgramIncludes({ data }: Props) {
               {data?.title?.line1}
             </span>
           </h2>
-          
-          {/* <div className="my-2">
-            <Button
-              iconRight={true} variant="primary" size="medium" text="Learn More" href="#" className='my-auto' />
-          </div> */}
         </div>
         {data.description && (
-            <div className="custom-text1 font-light text-gray-600 text-start ">
-              {data.description}
-            </div>
-          )}
+          <div className="custom-text1 font-light text-gray-600 text-start ">
+            {data.description}
+          </div>
+        )}
 
-        <div className={data?.pointsClass ? data?.pointsClass : "grid grid-col-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8 2xl:gap-12 py-2 md:py-4 lg:py-8 xl:py-12"}>
-          {data?.points.map((point, index) => (
-            <div key={index} className={`flex flex-col px-4 py-6 lg:px-8 lg:py-6 xl:px-8 xl:py-6 2xl:px-10 2xl:py-8 rounded-xl shadow-lg ${themeClasses[point?.theme]}`}>
-              <div className="w-[70px] h-[70px] p-3 bg-primary rounded-lg">
-                {/* <img
-                  src={point?.image?.src}
-                  alt={point?.image?.alt}
-                  className="object-cover"
-                /> */}
-                {point?.image?.src && (
-                  <div className="relative ">
-                    <Image
-                      src={point.image.src}
-                      alt={point.image.alt || "image"}
-                      width={100}
-                      height={100}
-                      className="object-cover"
-                    />
+        <div className={gridClass}>
+          {data?.points.map((point, index) => {
+            const isLastOdd = !threeAcross && count % 2 === 1 && index === count - 1;
+            return (
+              <div
+                key={index}
+                className={`flex flex-col h-full p-5 lg:p-6 2xl:p-8 rounded-xl shadow-lg ${themeClasses[point?.theme]} ${isLastOdd ? "md:col-span-2" : ""}`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 shrink-0 p-3 bg-primary rounded-lg">
+                    {point?.image?.src && (
+                      <div className="relative">
+                        <Image
+                          src={point.image.src}
+                          alt={point.image.alt || "image"}
+                          width={100}
+                          height={100}
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
                   </div>
-                )}
+                  <h3 className={`
+                    text-lg sm:text-xl
+                    text-start
+                    font-outfit font-semibold
+                    ${point.theme === "dark" ? "text-secondary" : point.theme === "light" ? "text-primary" : "text-gray-800"}
+                    `}>
+                    {point.title}
+                  </h3>
+                </div>
+                <div className={`mt-4 text-base leading-relaxed font-outfit text-start
+                    [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
+                    ${point.theme === "dark" ? "text-white" : "text-gray-800"}`}>
+                  {point.description}
+                </div>
               </div>
-              <h3 className={`
-                text-lg sm:text-xl 
-                text-start
-                font-outfit font-semibold my-3
-                ${point.theme === "dark" ? "text-secondary" : point.theme === "light" ? "text-primary" : "text-gray-800"}
-                `}>
-                {point.title}
-              </h3>
-              <div className={`text-md font-outfit text-start
-                  ${point.theme === "dark" ? "text-white" : "text-gray-800"}`}>
-                {point.description}
-              </div>
-            </div>
-          ))}
-
+            );
+          })}
         </div>
 
         {/* Deatil Content */}
