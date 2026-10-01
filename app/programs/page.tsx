@@ -9,7 +9,7 @@ import programLevel1 from "@/assets/background/program-level-1.webp";
 // LOGO markers below: Khansa to confirm or replace with the current approved artwork.
 import SealABNLP from "@/assets/level-certificate/badges/abnlp.webp";
 import SealABNLPCoaching from "@/assets/level-certificate/badges/cdab.webp";
-// tlta.webp not imported: that seal prints an expiry date (F6). LOGO: TLTA - Khansa to supply approved artwork.
+import SealTLTA from "@/assets/level-certificate/badges/tlta.webp";
 import SealABH from "@/assets/level-certificate/badges/abh.webp";
 import SealNGH from "@/assets/level-certificate/badges/ngh.webp";
 import SealANLP from "@/assets/level-certificate/badges/cpd.webp";
@@ -164,10 +164,8 @@ const LEVELS: Level[] = [
   },
 ];
 
-// Certification shown as a checklist. Wording is the same as `certification` above, split at the semicolons and
-// commas so each credential is its own line (connectors such as ";" and ", and" are dropped, first letter capitalised).
-// A seal is shown only where the repo has approved artwork. TLTA has none yet (its file prints an expiry date, F6),
-// so that line gets a check mark instead. LOGO: TLTA - add `seal` here once Khansa supplies the undated artwork.
+// Certification shown as a checklist. ... split at the semicolons and
+// commas so each credential is its own line ...
 type CertItem = { text: string; seal?: StaticImageData };
 type CertBlock = { lead?: string; items: CertItem[]; note?: CertItem };
 
@@ -176,7 +174,7 @@ const CERTS: Record<string, CertBlock> = {
     lead: "Quad certification:",
     items: [
       { text: "Certified Practitioner of NLP (ABNLP)", seal: SealABNLP },
-      { text: "Practitioner of Time Line Therapy® Techniques (TLTA)" },
+      { text: "Practitioner of Time Line Therapy® Techniques (TLTA)", seal: SealTLTA },
       { text: "Certified NLP Coach (ABNLP Coaching Division)", seal: SealABNLPCoaching },
       { text: "AL&CO Certified Practitioner of Behavioral Reengineering", seal: SealALCO },
     ],
@@ -186,7 +184,7 @@ const CERTS: Record<string, CertBlock> = {
     lead: "Quad certification at master level:",
     items: [
       { text: "Certified Master Practitioner of NLP (ABNLP)", seal: SealABNLP },
-      { text: "Master Practitioner of Time Line Therapy® Techniques (TLTA)" },
+      { text: "Master Practitioner of Time Line Therapy® Techniques (TLTA)", seal: SealTLTA },
       { text: "Certified NLP Master Coach (ABNLP Coaching Division)", seal: SealABNLPCoaching },
       { text: "AL&CO Certified Practitioner of Behavioral Reengineering at master level", seal: SealALCO },
     ],
@@ -234,7 +232,7 @@ const levelUrl = (slug: string) => `/program/${slug}`;
 const BOARD_SEALS = [
   { src: SealABNLP, alt: "ABNLP seal" },                                   // LOGO: ABNLP - Khansa to supply approved artwork
   { src: SealABNLPCoaching, alt: "ABNLP Coaching Division seal" },         // LOGO: ABNLP Coaching Division - Khansa to supply approved artwork
-  // LOGO: TLTA - Khansa to supply approved artwork without an expiry date, then add it back here.
+  { src: SealTLTA, alt: "Time Line Therapy Association (TLTA) seal" },
   { src: SealABH, alt: "American Board of Hypnotherapy (ABH) seal" },      // LOGO: ABH - Khansa to supply approved artwork
   { src: SealNGH, alt: "National Guild of Hypnotists (NGH) seal" },        // LOGO: NGH - Khansa to supply approved artwork
   { src: SealANLP, alt: "ANLP (UK) CPD accreditation seal" },              // LOGO: ANLP (UK) - Khansa to supply approved artwork

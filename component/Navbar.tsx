@@ -39,8 +39,13 @@ const menuData = [
   },
 
   { name: "Four Clouds Model", link: "/services/four-clouds-model" },
-  { name: "Blogs", link: "/blogs" },
-  { name: "Resource", link: "/services/resources" },
+    {
+    name: "Resources",
+    submenu: [
+      { name: "All Resources", link: "/services/resources" },
+      { name: "Blogs", link: "/blogs" },
+    ],
+  },
   { name: "Contact", link: "/contact" },
 ];
 

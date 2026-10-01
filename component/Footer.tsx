@@ -37,8 +37,13 @@ const usefulLinks = [
 // display-only for US and Canada callers: never a tel: or wa.me link.
 type ContactItem = { icon?: React.ReactNode; name: string; href?: string; className?: string };
 const ContactDetails: ContactItem[] = [
-  { icon: <FiPhone />, name: "+92 336 008 2222", href: "tel:+923360082222" },
-  { name: "US and Canada: +1 (206) 614 0234", className: "-mt-1" },
+  // Phone item: change name only
+{ icon: <FiPhone />, name: "Pakistan: +92 336 008 2222", href: "tel:+923360082222" },
+
+// US item: leave as is
+{ name: "US and Canada: +1 (206) 614 0234" },
+
+// WhatsApp item: change name only
   { icon: <FaWhatsapp />, name: "WhatsApp: +92 336 008 2222", href: "https://wa.me/923360082222" },
   { icon: <FiMail />, name: "connect@arslanlarik.com", href: "mailto:connect@arslanlarik.com" },
   { icon: <FiMapPin />, name: "D86/1, Gulshan-e-Iqbal, Block 7, Karachi, 75300, Sindh, Pakistan" },

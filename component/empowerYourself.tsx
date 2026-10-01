@@ -11,7 +11,7 @@ import Image from "next/image";
 
 // B 02 rows A2 to A6. This page carries the site's only use of "mind-sciences" (A3).
 const artWeTeachRest =
-  " welcome you. We begin with clarity, because clarity is where real choice starts. We begin with agency, because mastery always starts from within. We begin with alignment, because that is where genuine change takes root. What we teach is not a science, and it does not pretend to be one, because a human being is not a laboratory. Human experience is subjective, and that is exactly what makes this an art: the art of understanding how people work, and of modeling how those who already thrive actually do it, so that it can be learned by anyone willing to practise. NLP draws on behavioural psychology; it is a synthesis and a modelling technique, and in the hands of a practitioner it becomes a craft. Neuro-Linguistic Programming, Time Line Therapy® Techniques, Hypnosis and Coaching are the tools of that art. You need no background in psychology to begin. You need a reason, and the willingness to practise. We do not see anyone who comes to us as broken, and we are not here to fix what was never broken. We journey with you, into the areas you choose, so you can ground yourself there with more precision and more freedom.";
+  ". We begin with clarity, because clarity is where real choice starts. We begin with agency, because mastery always starts from within. We begin with alignment, because that is where genuine change takes root. What we teach is not a science, and it does not pretend to be one, because a human being is not a laboratory. Human experience is subjective, and that is exactly what makes this an art: the art of understanding how people work, and of modeling how those who already thrive actually do it, so that it can be learned by anyone willing to practise. NLP draws on behavioural psychology; it is a synthesis and a modelling technique, and in the hands of a practitioner it becomes a craft. Neuro-Linguistic Programming, Time Line Therapy® Techniques, Hypnosis and Coaching are the tools of that art. You need no background in psychology to begin. You need a reason, and the willingness to practise. We do not see anyone who comes to us as broken, and we are not here to fix what was never broken. We journey with you, into the areas you choose, so you can ground yourself there with more precision and more freedom.";
 
 const empowerYourself: EmpowerYourselfData = {
   title: "The Institution",
@@ -37,7 +37,7 @@ const empowerYourself: EmpowerYourselfData = {
     },
     {
       title: "The Art We Practise",
-      description: "Assalam-o-Alaikum. Arslan and Bismillah" + artWeTeachRest,
+      description: "Greetings from Arslan and Bismillah" + artWeTeachRest,
       image: {
         src: About3.src,
         alt: "Arslan Larik and Bismillah Pervez teaching live"
@@ -50,7 +50,7 @@ const empowerYourself: EmpowerYourselfData = {
 const richDescriptions: Record<number, React.ReactNode> = {
   2: (
     <>
-      Assalam-o-Alaikum.{" "}
+      Greetings from {" "}
       <Link href="/about-us/who-is-arslan-larik" className="underline">Arslan</Link> and{" "}
       <Link href="/about-us/who-is-bismillah-pervez" className="underline">Bismillah</Link>
       {artWeTeachRest}

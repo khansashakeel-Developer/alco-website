@@ -7,6 +7,7 @@ import sealABNLP from "@/assets/level-certificate/badges/abnlp.webp";
 import sealABNLPCoaching from "@/assets/level-certificate/badges/cdab.webp";
 import sealABH from "@/assets/level-certificate/badges/abh.webp";
 import sealNGH from "@/assets/level-certificate/badges/ngh.webp";
+import sealTLTA from "@/assets/level-certificate/badges/tlta.webp";
 import sealANLP from "@/assets/level-certificate/badges/cpd.webp";
 import sealALCO from "@/assets/level-certificate/badges/alco.webp";
 
@@ -26,9 +27,8 @@ const seals: SealLine[] = [
   { board: "ABNLP Coaching Division", seal: sealABNLPCoaching, text: "ABNLP Coaching Division: AL&CO is an Approved Institute of NLP Coaching." },
   // LOGO: ABH - Khansa to supply approved artwork
   { board: "ABH", seal: sealABH, text: "ABH: AL&CO is an ABH Approved School of Hypnosis." },
-  // LOGO: TLTA - Khansa to supply approved artwork. The repo's tlta.webp badge prints an expiry
-  // date ("Exp: 11/30/2020"), which DECISIONS v2 F6 forbids, so it is not used here.
-  { board: "TLTA", text: "TLTA: the Time Line Therapy Association, for your Time Line Therapy® Techniques credentials." },
+  
+  { board: "TLTA", seal: sealTLTA, text: "TLTA: the Time Line Therapy Association, for your Time Line Therapy® Techniques credentials." },
   // LOGO: NGH - Khansa to supply approved artwork
   { board: "NGH", seal: sealNGH, text: "NGH: the National Guild of Hypnotists (USA)." },
   // LOGO: ANLP (UK) - Khansa to supply approved artwork (the ANLP CPD badge is used until then)

@@ -53,7 +53,7 @@ import cert3Level3 from "@/assets/level-certificate/certificate-3-level-3.webp"
 import cert4Level3 from "@/assets/level-certificate/certificate-4-level-3.webp"
 import cert5Level3 from "@/assets/level-certificate/certificate-5-level-3.webp"
 import badgeABNLP from "@/assets/level-certificate/badges/abnlp.webp"
-// badgeTLTA not used: the tlta.webp seal prints an expiry date (F6). LOGO: TLTA - Khansa to supply approved artwork.
+import badgeTLTA from "@/assets/level-certificate/badges/tlta.webp"
 import badgeCDAB from "@/assets/level-certificate/badges/cdab.webp"
 import badgeABH from "@/assets/level-certificate/badges/abh.webp"
 import badgeNGH from "@/assets/level-certificate/badges/ngh.webp"
@@ -94,8 +94,8 @@ const approvedBodies: { board: string; seal?: StaticImageData; text: string }[] 
   { board: "ABNLP Coaching Division", seal: badgeCDAB, text: "ABNLP Coaching Division. AL&CO is an Approved Institute of NLP Coaching." },
   // LOGO: ABH - Khansa to supply approved artwork
   { board: "ABH", seal: badgeABH, text: "ABH, the American Board of Hypnotherapy. AL&CO is an ABH Approved School of Hypnosis." },
-  // LOGO: TLTA - Khansa to supply approved artwork (the repo's tlta.webp prints an expiry date, F6)
-  { board: "TLTA", text: "TLTA, the Time Line Therapy Association, for your Time Line Therapy® Techniques credentials." },
+  
+  { board: "TLTA", seal: badgeTLTA, text: "TLTA, the Time Line Therapy Association, for your Time Line Therapy® Techniques credentials." },
   // LOGO: NGH - Khansa to supply approved artwork
   { board: "NGH", seal: badgeNGH, text: "NGH, the National Guild of Hypnotists (USA)." },
   // LOGO: ANLP (UK) - Khansa to supply approved artwork (ANLP CPD badge until then)
@@ -316,9 +316,7 @@ const certificateDataAL: CertificateItem[] = [
     level: "therapy",
     image: CertTrainerMasterTLT,
     badgeImage: CertTrainerMasterTLTBadge,
-    // LOGO: TLTA - Khansa to supply approved artwork. The repo's tlta.webp seal prints
-    // "Exp: 11/30/2020" (DECISIONS v2 F6), so no seal is shown until then.
-    accreditedBadges: [],
+    accreditedBadges: [badgeTLTA],
   },
   {
     id: "11",
@@ -797,8 +795,7 @@ export const certificateDataBP: CertificateItem[] = [
   },
 
   // Time Line Therapy Certificates (TLTA)
-  // LOGO: TLTA - Khansa to supply approved artwork. The repo's tlta.webp seal prints an expiry
-  // date (F6), so only the AL&CO seal is shown on these two cards until then.
+
   {
     id: "10",
     tabLabel: "TLT Practitioner",
@@ -813,7 +810,7 @@ export const certificateDataBP: CertificateItem[] = [
     badgeText: "TLTA Certified Practitioner of Time Line Therapy® Techniques",
     level: "therapy",
     image: cert2Level1,
-    accreditedBadges: [badgeALCO],
+    accreditedBadges: [badgeTLTA, badgeALCO],
   },
   {
     id: "11",
@@ -829,7 +826,7 @@ export const certificateDataBP: CertificateItem[] = [
     badgeText: "TLTA Certified Master Practitioner of Time Line Therapy® Techniques",
     level: "therapy",
     image: cert2Level2,
-    accreditedBadges: [badgeALCO],
+    accreditedBadges: [badgeTLTA, badgeALCO],
   },
   {
     id: "12",
@@ -897,10 +894,10 @@ export const certificateDataBP: CertificateItem[] = [
     badgeText: "AL&CO Quintuple Certified, AH&I Graduate",
     level: "advanced",
     image: cert3Level3,
-    // LOGO: TLTA - omitted until approved artwork without an expiry date is supplied (F6).
     accreditedBadges: [
       badgeABNLP,
       badgeCDAB,
+      badgeTLTA,
       badgeABH,
       badgeNGH,
       badgeALCO,

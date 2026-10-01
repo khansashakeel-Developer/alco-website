@@ -25,7 +25,7 @@ import programLevel1 from "@/assets/background/program-level-1.webp"
 import programLevel2 from "@/assets/background/program-level-2.webp"
 import { LevelCertificationType } from "@/type/levelCertification";
 import AccreditedBrand1 from "@/assets/accredited/accredited-1.webp"
-import AccreditedBrand2 from "@/assets/accredited/accredited-2.webp"
+import AccreditedBrand2 from "@/assets/level-certificate/badges/tlta.webp";
 import AccreditedBrand3 from "@/assets/accredited/accredited-3.webp"
 import AccreditedBrand4 from "@/assets/accredited/accredited-4.webp"
 import AccreditedBrand5 from "@/assets/accredited/accredited-5.webp"
@@ -98,7 +98,6 @@ const LevelCertificationDataLevel1: LevelCertificationType = {
       imageCerficate: { src: Certificate1Level1, alt: "Sample ABNLP Certified Practitioner of NLP certificate" },
     },
     {
-      // LOGO: TLTA - Khansa to supply approved artwork (accredited-2.webp is a placeholder until confirmed)
       title: "Certified Practitioner of Time Line Therapy® Techniques, Time Line Therapy Association (TLTA)",
       description: "The trademarked technique set acknowledged as the fastest way to release negative emotions, limiting beliefs and anxiety, at the unconscious level.",
       imageBrand: { src: AccreditedBrand2, alt: "Time Line Therapy Association (TLTA) seal" },
@@ -467,7 +466,6 @@ const LevelCertificationDataLevel2: LevelCertificationType = {
       imageCerficate: { src: Certificate1Level2, alt: "Sample ABNLP Certified Master Practitioner of NLP certificate" },
     },
     {
-      // LOGO: TLTA - Khansa to supply approved artwork (accredited-2.webp is a placeholder until confirmed)
       title: "Master Practitioner of Time Line Therapy® Techniques, Time Line Therapy Association (TLTA)",
       description: "Mastery of the technique set, not familiarity with it.",
       imageBrand: { src: AccreditedBrand2, alt: "Time Line Therapy Association (TLTA) seal" },
