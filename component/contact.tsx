@@ -168,7 +168,7 @@ const ContactUS = () => {
                                 >
                                     WhatsApp: +92 336 008 2222
                                 </Link>
-                                <span className="text-white">US and Canada: +1 (206) 614 0234</span>
+                                <span className="text-white">International: +1 (206) 614 0234</span>
                             </div>
                         </div>
                     </div>

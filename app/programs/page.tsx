@@ -594,7 +594,7 @@ export default function ProgrammesHubPage() {
               <a href="tel:+923360082222" className="underline" data-cta-id="C6" data-gtm-event="phone_click">+92 336 008 2222</a>{" "}
               (<a href="https://wa.me/923360082222" target="_blank" rel="noopener noreferrer" className="underline" data-cta-id="C1" data-gtm-event="whatsapp_click">WhatsApp</a>)
             </li>
-            <li>US and Canada: +1 (206) 614 0234</li>
+            <li>International: +1 (206) 614 0234</li>
             <li>
               <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>
             </li>

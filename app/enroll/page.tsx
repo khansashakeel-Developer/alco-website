@@ -158,7 +158,7 @@ export default function EnrollPage() {
   return (
     <div>
       {/* Banner */}
-      <section className="relative w-full h-[250px] sm:h-[320px] md:h-[500px] bg-primary">
+      <section className="relative w-full h-[160px] sm:h-[220px] md:h-[280px] bg-primary">
         <Image
           src={EnrollBannerImage}
           alt="Enroll at AL&CO"
@@ -177,16 +177,16 @@ export default function EnrollPage() {
       </section>
 
       {/* Form */}
-      <section className="max-w-5xl mx-auto px-4 py-10 sm:py-16">
+      <section className="max-w-5xl mx-auto px-4 py-6 sm:py-10">
         <h1 className="h3 text-primary text-center">Enrol in an AL&CO Programme</h1>
         <p className="custom-text1 text-primary-light text-center mt-2 mb-8">
           Prefer to talk first? Call{" "}
           <a href="tel:+923360082222" className="underline" {...ctaDataAttrs("C6")}>+92 336 008 2222</a>{" "}
           or{" "}
           <a href={whatsappHref(ENROL_WA)} target="_blank" rel="noopener noreferrer" className="underline" {...ctaDataAttrs("C1")}>speak to a relationship manager</a>{" "}
-          on WhatsApp. US and Canada: +1 (206) 614 0234.
+          on WhatsApp. International: +1 (206) 614 0234.
         </p>
-        <form onSubmit={handleSubmit(onSubmit, onError)}>
+        <form onSubmit={handleSubmit(onSubmit, onError)} className="bg-white rounded-2xl border-2 border-primary/20 shadow-xl p-5 sm:p-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-4">
               <Controller
@@ -353,7 +353,7 @@ export default function EnrollPage() {
                 <Link href="/terms" className="underline text-primary ms-2">Terms and Conditions</Link>
               </div>
             </div>
-            <div className="w-full sm:max-w-[150px] mt-4 sm:mt-0">
+            <div className="w-full sm:max-w-[220px] mt-4 sm:mt-0">
               <Button
                 text={isSubmitting ? "Submitting..." : "Submit"}
                 type="submit"

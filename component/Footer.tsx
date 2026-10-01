@@ -18,8 +18,7 @@ const quickLinks = [
   { name: "Service Policy", link: "/service-policy" },
   { name: "Privacy Policy", link: "/privacy-policy" },
   { name: "Terms & Conditions", link: "/terms" },
-  // E 01 C.3: uncomment only when /safeguarding-and-ethics goes live (DSL named, legal review done).
-  // { name: "Safeguarding & Ethics", link: "/safeguarding-and-ethics" },
+  { name: "Safeguarding & Ethics", link: "/safeguarding-and-ethics" },
 ];
 
 const usefulLinks = [
@@ -41,7 +40,7 @@ const ContactDetails: ContactItem[] = [
 { icon: <FiPhone />, name: "Pakistan: +92 336 008 2222", href: "tel:+923360082222" },
 
 // US item: leave as is
-{ name: "US and Canada: +1 (206) 614 0234" },
+{ name: "International: +1 (206) 614 0234" },
 
 // WhatsApp item: change name only
   { icon: <FaWhatsapp />, name: "WhatsApp: +92 336 008 2222", href: "https://wa.me/923360082222" },

@@ -218,9 +218,12 @@ export default function FreeWebinarForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
       {webinar ? (
-        <p className="custom-text1 text-primary-light text-center">
-          Next session: <strong>{formatPkt(webinar.date)}</strong>. Sessions are on Karachi time.
-        </p>
+        <div className="text-center">
+          <p className="h4 text-primary">{webinar.title}</p>
+          <p className="custom-text1 text-primary-light mt-1">
+            Next session: <strong>{formatPkt(webinar.date)}</strong>. Sessions are on Karachi time.
+          </p>
+        </div>
       ) : (
         <p className="custom-text1 text-primary-light text-center">
           The next session is being scheduled. Leave your details and your relationship manager will send you

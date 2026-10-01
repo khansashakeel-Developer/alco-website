@@ -104,7 +104,7 @@ export default function ThankYouPage() {
           .
         </p>
 
-        <p className="text-gray-500 text-sm mt-4">US and Canada: +1 (206) 614 0234</p>
+        <p className="text-gray-500 text-sm mt-4">International: +1 (206) 614 0234</p>
 
         <p className="text-gray-500 mt-6">
           <Link href="/" className="text-primary underline">

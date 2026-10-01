@@ -58,7 +58,7 @@ export default function PolicyContent({ data }: Props) {
                             <Link href="tel:+923360082222" className="text-secondary underline">+92 336 008 2222</Link>
                             {" "}(<Link href="https://wa.me/923360082222" className="text-secondary underline">WhatsApp</Link>)
                         </p>
-                        <p className="text-neutral-500 custom-text1 mb-1">US and Canada: +1 (206) 614 0234</p>
+                        <p className="text-neutral-500 custom-text1 mb-1">International: +1 (206) 614 0234</p>
                         <p className="text-neutral-500 custom-text1">{data.contactCard.address}</p>
                     </div>
 

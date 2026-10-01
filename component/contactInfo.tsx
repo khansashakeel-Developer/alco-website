@@ -63,7 +63,7 @@ export default function ContactInfo({ primary = { id: "C1" }, secondary, descrip
                     WhatsApp: +92 336 008 2222
                   </Link>
                 </p>
-                <p className="custom-text1 font-light text-white/80 text-start">US and Canada: +1 (206) 614 0234</p>
+                <p className="custom-text1 font-light text-white/80 text-start">International: +1 (206) 614 0234</p>
               </div>
             </div>
             <div className="col-span-12 xl:col-span-5 2xl:col-span-6 md:order-last xl:order-none">

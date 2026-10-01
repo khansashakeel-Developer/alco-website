@@ -7,7 +7,6 @@ import Button from "./button";
 import { IoChevronDown } from "react-icons/io5";
 import Logo from "@/assets/logo.webp";
 import Image from "next/image";
-import { usePopup } from "@/context/enrollPopupContext";
 import { CTA, ctaDataAttrs } from "./cta";
 
 // Spec A 02: brochure level names ("Level N: Name"), hub first. URLs unchanged.
@@ -52,7 +51,7 @@ const menuData = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const { openPopup } = usePopup();
+  
 
   const toggleDropdown = (name: string) => {
     setOpenDropdown(openDropdown === name ? null : name);
@@ -133,7 +132,8 @@ export default function Navbar() {
               text={CTA.C4.label}
               className="header-menu-button px-[12px]"
               iconRight={true}
-              onClick={openPopup}
+              href="/enroll"
+              newTab={false}
               dataAttrs={ctaDataAttrs("C4")}
             />
             <Button
@@ -199,7 +199,8 @@ export default function Navbar() {
                 text={CTA.C4.label}
                 className="header-menu-button px-[12px]"
                 iconRight={true}
-                onClick={openPopup}
+                href="/enroll"
+                newTab={false}
                 dataAttrs={ctaDataAttrs("C4")}
               />
               <Button

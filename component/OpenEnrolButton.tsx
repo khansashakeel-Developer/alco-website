@@ -2,7 +2,6 @@
 
 import React from "react";
 import Button from "@/component/button";
-import { usePopup } from "@/context/enrollPopupContext";
 import { CTA, ctaDataAttrs } from "@/component/cta";
 
 type Props = {
@@ -21,14 +20,15 @@ export default function OpenEnrolButton({
   className = "",
   fullWidth = false,
 }: Props) {
-  const { openPopup } = usePopup();
+  
   return (
     <Button
       text={text}
       variant={variant}
       size={size}
       iconRight
-      onClick={openPopup}
+      href={CTA.C4.href}
+      newTab={false}
       className={className}
       fullWidth={fullWidth}
       dataAttrs={ctaDataAttrs("C4")}
