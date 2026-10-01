@@ -171,7 +171,7 @@ async function getSeoData() {
     try {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/api/v1/seo/page/one-on-one-coaching-sessions`,
-            { next: { revalidate: 3600 } }
+            { next: { revalidate: 3600 }, signal: AbortSignal.timeout(5000) }
         );
         if (!res.ok) return null;
         const { data } = await res.json();

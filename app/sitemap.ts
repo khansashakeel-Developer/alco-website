@@ -17,13 +17,7 @@ const CONTENT_UPDATED = new Date("2026-09-30");
 // A sitemap URL must equal that page's canonical and be indexable.
 
 async function fetchWithTimeout(url: string, ms = 5000) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), ms);
-  try {
-    return await fetch(url, { next: { revalidate: 3600 }, signal: controller.signal });
-  } finally {
-    clearTimeout(timeout);
-  }
+  return fetch(url, { next: { revalidate: 3600 }, signal: AbortSignal.timeout(ms) });
 }
 
 // Programs: the LOCAL array decides which URLs exist; the CRM only supplies updatedAt.
