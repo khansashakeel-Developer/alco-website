@@ -10,7 +10,8 @@ type VideoPlayerProps = {
   videoClass?: string;
   className?: string;
   hoverPlay?: boolean;
-  autoPlayOnVisible?: boolean; // 👈 new prop
+  autoPlayOnVisible?: boolean; // muted, looping, no controls (used by the Benefits card video)
+  autoPlayMuted?: boolean; // muted autoplay when visible, keeps controls so visitors can unmute
 };
 
 const VideoPlayer = ({
@@ -19,33 +20,43 @@ const VideoPlayer = ({
   videoClass,
   className,
   hoverPlay = false,
-  autoPlayOnVisible = false, // 👈 default false
+  autoPlayOnVisible = false,
+  autoPlayMuted = false,
 }: VideoPlayerProps) => {
   const [play, setPlay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const autoOnView = autoPlayOnVisible || autoPlayMuted;
 
-  // 👇 AutoPlay on visible
+  // Start or stop when the player scrolls into or out of view
   useEffect(() => {
-    if (!autoPlayOnVisible) return;
+    if (!autoOnView) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setPlay(true);
-          setTimeout(() => videoRef.current?.play(), 50);
         } else {
           videoRef.current?.pause();
           if (videoRef.current) videoRef.current.currentTime = 0;
           setPlay(false);
         }
       },
-      { threshold: 0.5 } // 👈 50% visible hone pe play hoga
+      { threshold: 0.3 }
     );
 
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, [autoPlayOnVisible]);
+  }, [autoOnView]);
+
+  // Once the <video> exists, mute it in code and play (browsers only allow muted autoplay)
+  useEffect(() => {
+    if (!play || !autoOnView) return;
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.play().catch(() => {});
+  }, [play, autoOnView]);
 
   const handleMouseEnter = () => {
     if (hoverPlay) {
@@ -64,7 +75,7 @@ const VideoPlayer = ({
 
   return (
     <div
-      ref={containerRef} // 👈 observe karne ke liye
+      ref={containerRef}
       className={className}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -75,15 +86,10 @@ const VideoPlayer = ({
           className="absolute inset-0 cursor-pointer group"
           onClick={() => !hoverPlay && !autoPlayOnVisible && setPlay(true)}
         >
-          {/* <img
-            src={thumbnail}
-            alt="video thumbnail"
-            className="w-full h-full object-top"
-          /> */}
           {thumbnail && (
             <div className="relative w-full h-full">
               <Image
-                src={thumbnail} // works for string URLs or StaticImageData
+                src={thumbnail}
                 alt="video thumbnail"
                 fill
                 sizes="(max-width: 768px) 100vw, 600px"
@@ -93,12 +99,6 @@ const VideoPlayer = ({
           )}
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition" />
           {!hoverPlay && !autoPlayOnVisible && (
-            // <div className="absolute inset-0 flex items-center justify-center">
-            //   <div className="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-            //     <FaPlay className="text-white" />
-            //   </div>
-            // </div>
-
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="relative w-16 h-16 flex items-center justify-center">
                 <div className="absolute w-16 h-16 bg-white/30 rounded-full animate-ping" />
@@ -125,7 +125,8 @@ const VideoPlayer = ({
           ref={videoRef}
           controls={!hoverPlay && !autoPlayOnVisible}
           preload="metadata"
-          muted={hoverPlay || autoPlayOnVisible}
+          muted={hoverPlay || autoOnView}
+          playsInline
           loop={hoverPlay || autoPlayOnVisible}
           autoPlay={!hoverPlay}
           className={videoClass}

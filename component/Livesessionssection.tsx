@@ -122,7 +122,7 @@ export default function LiveSessionsSection() {
         {/* Carousel */}
         <LiveSessionCarousel
           slides={liveSessions}
-          autoplayDelay={6500}          
+          autoplayDelay={1500}          
         />
 
       </div>

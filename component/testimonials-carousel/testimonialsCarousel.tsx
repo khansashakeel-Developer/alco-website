@@ -18,20 +18,20 @@ type PropType = {
 
 const TestimonialsCarousel = ({ slides, padding, options, onEditSlide }: PropType) => {
 
-  const autoplay = Autoplay(
-    {
-      delay: 3000,
+  const autoplay = useRef(
+    Autoplay({
+      delay: 1000,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
-    }
+    })
   );
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       ...options,
       loop: true,
-    }
-    // [autoplay]
+      },
+    [autoplay.current]
   );
 
   return (

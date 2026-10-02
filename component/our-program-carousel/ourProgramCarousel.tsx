@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import Autoplay from 'embla-carousel-autoplay'
 import { EmblaOptionsType } from 'embla-carousel'
 import { DotButton, useDotButton } from "../emblaCarouselDot"
 import Level1 from "@/assets/our-program/level1_image_1.webp";
@@ -15,17 +16,37 @@ type PropType = {
 }
 
 const OurProgramCarousel = ({ slides, options }: PropType) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
+    const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
-    // loop: true
   })
+
+  const [paused, setPaused] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!emblaApi) return
+    let id: ReturnType<typeof setTimeout>
+    const tick = (wait: number) => {
+      id = setTimeout(() => {
+        if (emblaApi.canScrollNext()) emblaApi.scrollNext()
+        else emblaApi.scrollTo(0)
+        tick(8000)
+      }, wait)
+    }
+    tick(3000) // first move after 3 seconds, then every 8 seconds
+    return () => clearTimeout(id)
+  }, [emblaApi])
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi)
 
   return (
     <section className="our_program_embla">
-      <div className="our_program_embla__viewport" ref={emblaRef}>
+  <div
+      className="our_program_embla__viewport"
+      ref={emblaRef}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
         <div className="our_program_embla__container">
           {slides.map((slide, index) => (
             <div
