@@ -35,7 +35,7 @@ export default function ContactInfo({ primary = { id: "C1" }, secondary, descrip
       <div className="container mx-auto px-4">
         <div className="px-6 md:px-8 lg:px-12 xl:px-16 py-4 md:py-6 lg:py-10 xl:py-14  bg-cover bg-top-left w-full rounded-xl" style={{ backgroundImage: `url(${ContactBg.src})` }}>
           <div className="grid grid-cols-12 gap-2 my-8">
-            <div className="col-span-12 md:col-span-8 lg:col-span-9 xl:col-span-5 2xl:col-span-4 flex flex-col sm:flex-row sm:space-x-4 sm:items-center">
+            <div className="col-span-12 md:col-span-8 lg:col-span-9 xl:col-span-5 2xl:col-span-4 flex flex-col items-center sm:flex-row sm:space-x-4 sm:items-center">
               <Link
                 href="tel:+923360082222"
                 aria-label="Call AL&CO on +92 336 008 2222"
@@ -46,13 +46,13 @@ export default function ContactInfo({ primary = { id: "C1" }, secondary, descrip
               </Link>
 
               <div className="flex flex-col justify-start ">
-                <p className="custom-text1 font-light text-white text-start ">{data.title}</p>
-                <div className="cta-phone h3 text-white text-start ">
+                <p className="custom-text1 font-light text-white text-center sm:text-start ">{data.title}</p>
+                <div className="cta-phone h3 text-white text-center sm:text-start ">
                   <Link href="tel:+923360082222" onClick={() => track("Contact", { contentName: "call" })} className="hover:underline">
                     {data.number}
                   </Link>
                 </div>
-                <p className="custom-text1 font-light text-white/80 text-start">
+                <p className="custom-text1 font-light text-white/80 text-center sm:text-start">
                   <Link
                     href="https://wa.me/923360082222"
                     target="_blank"
@@ -63,11 +63,11 @@ export default function ContactInfo({ primary = { id: "C1" }, secondary, descrip
                     WhatsApp: +92 336 008 2222
                   </Link>
                 </p>
-                <p className="custom-text1 font-light text-white/80 text-start">International: +1 (206) 614 0234</p>
+                <p className="custom-text1 font-light text-white/80 text-center sm:text-start">International: +1 (206) 614 0234</p>
               </div>
             </div>
             <div className="col-span-12 xl:col-span-5 2xl:col-span-6 md:order-last xl:order-none">
-              <p className="custom-text1 font-light text-white text-start my-4">{data.description}</p>
+              <p className="custom-text1 font-light text-white text-center sm:text-start my-4">{data.description}</p>
             </div>
             <div className="col-span-12 md:col-span-4 lg:col-span-3 xl:col-span-2 2xl:col-span-2 flex flex-col justify-end ">
               <div className="flex flex-col gap-3 my-auto md:ml-auto">

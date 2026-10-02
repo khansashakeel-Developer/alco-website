@@ -70,19 +70,19 @@ export default function HowToEnrol({ showEnrolButton = false }: { showEnrolButto
             lands where you are, so you can plan around it.
           </p>
           <div className="overflow-x-auto rounded-xl shadow-lg mt-8">
-            <table className="w-full border-collapse min-w-[560px]">
+            <table className="w-full border-collapse text-sm sm:text-base">
               <caption className="sr-only">When the 8:00pm to 2:00am PKT session runs in your region</caption>
               <thead>
                 <tr className="bg-primary text-white text-left">
-                  <th scope="col" className="px-6 py-4 h6">Your region</th>
-                  <th scope="col" className="px-6 py-4 h6">When our session runs for you</th>
+                  <th scope="col" className="px-3 py-3 h6">Your region</th>
+                  <th scope="col" className="px-3 py- h6">When our session runs for you</th>
                 </tr>
               </thead>
               <tbody>
                 {TIMES.map(([region, time], index) => (
                   <tr key={region} className={index % 2 === 0 ? "bg-white" : "bg-blue-50 border-y border-primary"}>
-                    <th scope="row" className="px-6 py-4 text-left font-medium text-gray-800">{region}</th>
-                    <td className="px-6 py-4 text-gray-700">{time}</td>
+                    <th scope="row" className="px-3 py-3 text-left font-medium text-gray-800">{region}</th>
+                    <td className="px-3 py-3 text-gray-700">{time}</td>
                   </tr>
                 ))}
               </tbody>

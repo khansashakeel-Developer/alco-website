@@ -99,7 +99,7 @@ export default function LevelBenefitsTable({ data }: Props) {
 
           {/* Table */}
           <div className="grid grid-cols-1 gap-8 2xl:gap-12 py-2 md:py-4 lg:py-8 xl:py-12">
-            <div className="overflow-x-auto rounded-xl shadow-lg">
+            <div className="hidden md:block overflow-x-auto rounded-xl shadow-lg">
               <table className="w-full border-collapse">
 
                 {/* Header */}
@@ -141,7 +141,26 @@ export default function LevelBenefitsTable({ data }: Props) {
                   ))}
                 </tbody>
 
-              </table>
+                            </table>
+            </div>
+
+            {/* Phone: stacked cards */}
+            <div className="md:hidden space-y-4">
+              {currentRows?.map((point, index) => (
+                <div key={index} className="rounded-xl bg-white p-5 shadow-lg">
+                  <p className="font-semibold text-gray-800">{point.content}</p>
+                  <dl className="mt-3 space-y-3">
+                    {point.values.map((val, i) => (
+                      <div key={i}>
+                        <dt className="text-xs font-semibold uppercase tracking-wide text-primary">
+                          {data?.headers[i + 1]}
+                        </dt>
+                        <dd className="text-sm text-gray-600">{val}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
             </div>
 
             {/* ✅ Pagination */}

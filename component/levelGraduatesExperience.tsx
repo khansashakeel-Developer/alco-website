@@ -25,10 +25,10 @@ export default function LevelGraduatesExperience({ data, primary = { id: "C1" } 
             <br />
             <span className="text-white">{data?.title?.line2}</span>
           </h2>
-          <div className="mt-4 flex gap-4">
-            <CtaButton id={primary.id} message={primary.message} href={primary.href} label={primary.label} variant="white" className="my-auto" />
+          <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <CtaButton id={primary.id} message={primary.message} href={primary.href} label={primary.label} variant="white" className="my-auto w-full sm:w-auto" />
             {/* Decision (0 Shared/01): graduate proof sits next to a graduate video; the hub is linked by LevelNav and the breadcrumb. */}
-            <CtaButton id="C10" variant="secondary" className="my-auto" />
+            <CtaButton id="C10" variant="secondary" className="my-auto w-full sm:w-auto" />
           </div>
         </div>
         <div className="my-8">

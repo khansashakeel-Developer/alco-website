@@ -62,7 +62,7 @@ export default function LevelContent({ data }: Props) {
               >
                 {/* Image banner, fading softly into the card */}
                 <div
-                  className="relative h-28 lg:h-32 bg-cover bg-center"
+                  className={`relative ${point.items.length === 0 ? "h-14 sm:h-28" : "h-28"} lg:h-32 bg-cover bg-center`}
                   style={{ backgroundImage: `url(${point?.image?.src})` }}
                   role="img"
                   aria-label={point?.image?.alt || point.title}
@@ -71,8 +71,8 @@ export default function LevelContent({ data }: Props) {
                 </div>
 
                 {/* Content, always top-aligned */}
-                <div className="flex flex-col flex-1 px-5 pb-6 pt-1 lg:px-6 2xl:px-8">
-                  <h3 className="text-lg sm:text-xl font-outfit font-semibold text-secondary mb-3">
+                  <div className={`flex flex-col flex-1 px-5 ${point.items.length === 0 ? "pb-3 sm:pb-6" : "pb-6"} pt-1 lg:px-6 2xl:px-8`}>
+                  <h3 className={`text-lg sm:text-xl font-outfit font-semibold text-secondary ${point.items.length === 0 ? "mb-0 sm:mb-3" : "mb-3"}`}>
                     {point.title}
                   </h3>
 

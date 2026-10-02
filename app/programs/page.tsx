@@ -377,14 +377,16 @@ export default function ProgrammesHubPage() {
         </div>
       </section>
 
-      {/* At a glance table */}
+            {/* At a glance table */}
       <section className={`${SECTION} bg-dark-primary bg-cover bg-top-left`}>
         <div className="container mx-auto px-4">
           <h2 className="h3 text-start">
             <span className="text-secondary mr-2">The Six Levels</span>
             <span className="text-white">at a Glance</span>
           </h2>
-          <div className="overflow-x-auto rounded-xl shadow-lg mt-8">
+
+          {/* Tablet and desktop: table */}
+          <div className="hidden md:block overflow-x-auto rounded-xl shadow-lg mt-8">
             <table className="w-full border-collapse min-w-[760px]">
               <caption className="sr-only">
                 The six AL&CO levels: days, what you earn, who it is for and what you leave able to do
@@ -418,77 +420,21 @@ export default function ProgrammesHubPage() {
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
 
-      {/* Level cards */}
-      <section className={SECTION}>
-        <div className="container mx-auto px-4">
-          <h2 className="h3 text-primary text-center">Explore Each Level</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
+          {/* Phone: stacked cards */}
+          <div className="md:hidden mt-8 space-y-4">
             {LEVELS.map((l) => (
-              <article key={l.slug} className="flex flex-col rounded-xl bg-slate-200/60 drop-shadow-sm px-6 py-8">
-                <div className="flex mb-4">
-                  <span className="bg-gradient-secondary-to-light-secondary bg-cover text-black px-4 py-1">
-                    Level {l.level}
-                  </span>
-                </div>
-                <h3 className="h5 font-semibold text-primary">
-                  Level {l.level}: {l.name}
-                </h3>
-                <p className="text-primary-light mt-2">{l.summary}</p>
-                <dl className="mt-5 text-gray-700 text-base space-y-4">
-                  <div>
-                    <dt className="font-semibold text-primary">Duration</dt>
-                    <dd className="mt-1">{l.duration}</dd>
-                  </div>
-                  <div className="border-t border-primary/10 pt-4">
-                    <dt className="font-semibold text-primary">Prerequisite</dt>
-                    <dd className="mt-1">{l.prerequisite}</dd>
-                  </div>
-                  {/* Certification: the focal point of the card, as a checklist with the board seals. */}
-                  <div className="rounded-lg bg-white border-l-4 border-secondary p-4 shadow-sm">
-                    <dt className="font-semibold text-primary">Certification</dt>
-                    <dd className="mt-2">
-                      {CERTS[l.slug] ? (
-                        <>
-                          {CERTS[l.slug].lead && (
-                            <p className="text-gray-600 mb-2">{CERTS[l.slug].lead}</p>
-                          )}
-                          <ul className="space-y-2">
-                            {CERTS[l.slug].items.map((c) => (
-                              <li key={c.text} className="flex items-center gap-3">
-                                <CertIcon seal={c.seal} />
-                                <span className="text-gray-800 leading-snug">{c.text}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          {CERTS[l.slug].note && (
-                            <div className="flex items-center gap-3 mt-3 pt-3 border-t border-primary/10">
-                              <CertIcon seal={CERTS[l.slug].note!.seal} />
-                              <span className="text-gray-800 leading-snug">{CERTS[l.slug].note!.text}</span>
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        l.certification
-                      )}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="font-semibold text-primary">Entry and arrangement</dt>
-                    <dd className="mt-1">{l.entry}</dd>
-                  </div>
+              <div key={l.slug} className="rounded-xl bg-white p-5 shadow-lg">
+                <Link href={levelUrl(l.slug)} className="font-semibold text-primary text-lg hover:underline">
+                  {l.level}. {l.name}
+                </Link>
+                <dl className="mt-3 space-y-2 text-sm text-gray-700">
+                  <div><dt className="font-semibold text-primary">Days</dt><dd>{l.days}</dd></div>
+                  <div><dt className="font-semibold text-primary">You earn</dt><dd>{l.earn}</dd></div>
+                  <div><dt className="font-semibold text-primary">For whom</dt><dd>{l.forWhom}</dd></div>
+                  <div><dt className="font-semibold text-primary">You leave able to</dt><dd>{l.leaveAble}</dd></div>
                 </dl>
-                <div className="mt-auto pt-6">
-                  <Link
-                    href={levelUrl(l.slug)}
-                    className="flex w-full items-center justify-center text-center rounded-md font-medium transition bg-primary hover:bg-primary-600 text-white px-4 py-2"
-                  >
-                    Explore Level {l.level}: {l.name}
-                  </Link>
-                </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>
