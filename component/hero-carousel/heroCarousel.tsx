@@ -61,22 +61,42 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
         />
       )}
 
-      {/* Layer 2 — incoming image (fades in on top) */}
-      <Image
-        key={`bg-curr-${displayedIndex}`}
-        src={slides[displayedIndex]?.image}
-        alt=""
-        aria-hidden="true"
-        priority
-        fill
-        sizes="100vw"
-        className="object-cover object-center"
-        style={{
-          zIndex: 1,
-          opacity: isFading ? 0 : 1,
-          transition: "opacity 0.6s ease-in-out",
-        }}
-      />
+            {/* Layer 2: incoming layer (fades in on top). A video if the slide has one, otherwise the image */}
+      {slides[displayedIndex]?.video ? (
+        <video
+          key={`bg-video-${displayedIndex}`}
+          src={slides[displayedIndex].video}
+          poster={slides[displayedIndex].image.src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          style={{
+            zIndex: 1,
+            opacity: isFading ? 0 : 1,
+            transition: "opacity 0.6s ease-in-out",
+          }}
+        />
+      ) : (
+        <Image
+          key={`bg-curr-${displayedIndex}`}
+          src={slides[displayedIndex]?.image}
+          alt=""
+          aria-hidden="true"
+          priority
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{
+            zIndex: 1,
+            opacity: isFading ? 0 : 1,
+            transition: "opacity 0.6s ease-in-out",
+          }}
+        />
+      )}
 
       {/* Gradient Overlay */}
       <div

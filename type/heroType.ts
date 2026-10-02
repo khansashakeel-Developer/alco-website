@@ -19,6 +19,7 @@ export type HeroItem = {
     cta?: CtaRef
   }
   image: StaticImageData
+  video?: string
 }
 
 export type HeroData = HeroItem[]
