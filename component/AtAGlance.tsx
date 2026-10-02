@@ -3,7 +3,7 @@
 // Compact layout: slim stats strip + one tabbed card. All panels stay in the DOM (hidden, not removed) so the text is crawlable.
 // Styling follows the existing homepage sections: bg-dark-primary, two-tone h2 (as WhatWeDo), white rounded-lg shadow-lg card,
 // navy/gold accents, and the original gold left-bar bullets.
-import { useState, type KeyboardEvent } from "react";
+import { useState, useEffect, useRef, type KeyboardEvent } from "react";
 import { Landmark, Users, GraduationCap, DoorOpen } from "lucide-react";
 
 type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[] };
@@ -59,6 +59,56 @@ const HEADING_CLASS = "h3 text-white text-start mb-4 lg:mb-6";
 // Figures are styled, the sentences are unchanged.
 const num = "font-outfit font-semibold text-secondary text-[26px] md:text-[30px] leading-none";
 
+// Counts up once when scrolled into view. The final number is always in the page text (the invisible
+// sizer), so crawlers and screen readers read it, and the layout never jumps while counting.
+function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [value, setValue] = useState(to);
+  const final = `${to.toLocaleString("en-US")}${suffix}`;
+
+    useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        cancelAnimationFrame(raf);
+        if (entry.isIntersecting) {
+          const start = performance.now();
+          const duration = 1600;
+          const tick = (now: number) => {
+            const p = Math.min((now - start) / duration, 1);
+            setValue(Math.round(to * (1 - Math.pow(1 - p, 3))));
+            if (p < 1) raf = requestAnimationFrame(tick);
+          };
+          setValue(0);
+          raf = requestAnimationFrame(tick);
+        } else {
+          setValue(0);
+        }
+      },
+      { threshold: 0.6 }
+    );
+    observer.observe(el);
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+    };
+  }, [to]);
+
+  return (
+    <span ref={ref} className={`inline-grid ${className ?? ""}`}>
+      <span className="invisible col-start-1 row-start-1">{final}</span>
+      <span className="col-start-1 row-start-1" aria-hidden="true">
+        {value.toLocaleString("en-US")}
+        {suffix}
+      </span>
+    </span>
+  );
+}
+
 export default function AtAGlance() {
   const [active, setActive] = useState(0);
 
@@ -78,8 +128,8 @@ export default function AtAGlance() {
         {/* Canon stats strip */}
         <div className="grid grid-cols-1 md:grid-cols-2 rounded-lg border border-white/20 bg-white/10 mb-4 lg:mb-6">
           <p className="custom-text1 font-light text-white p-4 lg:p-5">
-            <span className={num}>2,000+</span> graduates across <span className={num}>20+</span> countries. Nearing{" "}
-            <span className={num}>100</span> batches delivered, and counting.
+            <CountUp to={2000} suffix="+" className={num} /> graduates across <CountUp to={20} suffix="+" className={num} /> countries. Nearing{" "}
+            <CountUp to={100} className={num} /> batches delivered, and counting.
           </p>
           <p className="custom-text1 font-light text-white p-4 lg:p-5 border-t border-white/20 md:border-t-0 md:border-l">
             Our work has inspired <span className={num}>over a million lives</span>, across the nation and around the
@@ -110,7 +160,7 @@ export default function AtAGlance() {
                   className={`flex items-center justify-center gap-2 px-3 py-3 font-outfit font-medium text-[15px] md:text-[16px] border-b-4 transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary ${
                     selected
                       ? "bg-primary text-white border-secondary"
-                      : "text-primary border-transparent hover:bg-secondary/20"
+                      : "text-primary border-transparent hover:bg-secondary/30 hover:border-secondary/60 hover:-translate-y-px"
                   }`}
                 >
                   <span className={selected ? "text-secondary" : "text-primary"} aria-hidden="true">

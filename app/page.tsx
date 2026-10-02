@@ -14,6 +14,8 @@ import LiveSessionsSection from "@/component/Livesessionssection";
 import { Metadata } from "next";
 import CtaBand from "@/component/CtaBand";
 import { buildMetadata, fallbackMetadata } from "@/utils/buildMetadata";
+import Reveal from "@/component/Reveal";
+import StickyEnrolBar from "@/component/StickyEnrolBar";
 
 const HOME_TITLE = "NLP Training in Pakistan, Certification Taught Live | AL&CO";
 const HOME_DESCRIPTION =
@@ -63,17 +65,17 @@ export default async function Home() {
       />
       <div>
         <Hero data={home.hero} />
-        <AtAGlance />
-        <Brand />
-        <WhatIsNlp />
-        <AralanLarikIntro />
-        <OurProgram />
-        <Benefits />
-        <Accredited />
-        <WhyTrainWithAL />
-        <ALCOCenter />
-        <LiveSessionsSection />
-        <Testimonials />
+        <Reveal><AtAGlance /></Reveal>
+        <Reveal><Brand /></Reveal>
+        <Reveal><WhatIsNlp /></Reveal>
+        <Reveal><AralanLarikIntro /></Reveal>
+        <Reveal><OurProgram /></Reveal>
+        <Reveal><Benefits /></Reveal>
+        <Reveal><Accredited /></Reveal>
+        <Reveal><WhyTrainWithAL /></Reveal>
+        <Reveal><ALCOCenter /></Reveal>
+        <Reveal><LiveSessionsSection /></Reveal>
+        <Reveal><Testimonials /></Reveal>
         {/* Closing band (CTA plan rule 2): Home primary C1, secondary C2. */}
         <CtaBand
           title="Your Transformation Starts with One Conversation"
@@ -81,6 +83,7 @@ export default async function Home() {
           primary={{ id: "C1", message: "Hi, I would like to know about AL&CO's NLP training (home page)" }}
           secondary={{ id: "C2" }}
         />
+        <StickyEnrolBar />
       </div>
     </>
   );

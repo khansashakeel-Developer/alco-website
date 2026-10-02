@@ -1,5 +1,6 @@
 import React from "react";
 import OpenEnrolButton from "@/component/OpenEnrolButton";
+import SessionTimeConverter from "@/component/SessionTimeConverter";
 
 const STEPS = [
   { title: "Book a conversation.", text: "A short call to understand what you want and which level fits." },
@@ -86,8 +87,11 @@ export default function HowToEnrol({ showEnrolButton = false }: { showEnrolButto
                   </tr>
                 ))}
               </tbody>
-            </table>
+                        </table>
           </div>
+
+          <SessionTimeConverter />
+
           <p className="text-sm text-gray-600 mt-4">
             A note: a few regions move their clocks for daylight saving, which can shift these by
             an hour for part of the year. Pakistan does not, so our start time never changes. Your
