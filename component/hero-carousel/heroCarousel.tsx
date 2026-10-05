@@ -82,9 +82,10 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
           playsInline
           preload="metadata"
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-[center_8%]"
-          style={{
+          className="absolute inset-0 h-full w-full object-cover"
+            style={{
             zIndex: 1,
+            objectPosition: slides[displayedIndex].videoPosition ?? "center 8%",
             opacity: isFading ? 0 : 1,
             transition: "opacity 0.6s ease-in-out",
           }}
