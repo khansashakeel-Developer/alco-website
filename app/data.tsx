@@ -42,7 +42,8 @@ const heroData: HeroData = [
       "text": "Join the free webinar",
       "cta": { id: "C2" }
     },
-    "image": heroSlide2
+    "image": heroSlide2,
+    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/q_auto:good,w_1280,ac_none,vc_h264/v1791198532/Brain_network_pulsing_with_light_20261002131425_yps1ew.mp4"
   },
   {
     "title": {
