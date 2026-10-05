@@ -82,7 +82,7 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
           playsInline
           preload="metadata"
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-[center_8%]"
           style={{
             zIndex: 1,
             opacity: isFading ? 0 : 1,
