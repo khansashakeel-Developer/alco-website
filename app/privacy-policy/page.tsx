@@ -210,8 +210,7 @@ const privacyData: PolicyContentType = {
                         ))}
                     </ul>
                     <p className="text-neutral-500 custom-text1">
-                        {/* PLEASE CHECK (E 02 row 7): no cookie consent tool exists in the code. Add one, or change this sentence to
-                            "You may manage or disable non-essential cookies through your browser settings at any time." */}
+                        
                         You may manage or disable non-essential cookies through your browser settings or our cookie consent tool at any time.
                     </p>
                 </>

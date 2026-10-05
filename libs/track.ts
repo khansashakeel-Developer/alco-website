@@ -1,3 +1,4 @@
+import { hasMarketingConsent } from "@/libs/consent";
 function getCookie(name: string): string | undefined {
   const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
   return match?.[2];
@@ -22,6 +23,8 @@ export async function track(eventName: string, data: TrackData = {}) {
     if (data.contentName) { params.content_name = data.contentName; }
     window.fbq("track", eventName, params, { eventID: eventId });
   }
+
+    if (!hasMarketingConsent()) return;
 
   // 2. Server CAPI - MUST use same eventId for dedupe
   try {

@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-// import { GoogleAnalytics } from '@next/third-parties/google';
-import { GoogleTagManager } from "@next/third-parties/google";
 import ConditionalLayout from "./conditional-layout/conditionalLayout";
 import { Lexend, Outfit } from "next/font/google";
 import "@/styles/globals.css";
-import { Suspense } from "react";
-import FacebookPixel from "@/component/FacebookPixel";
-import FbclidCookie from "@/component/FbclidCookie";
+import Trackers from "@/component/Trackers";
+import CookieConsent from "@/component/CookieConsent";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
@@ -183,10 +180,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: orgJsonLd }}
         />
 
-        <Suspense fallback={null}>
-          <FacebookPixel />
-          <FbclidCookie />
-        </Suspense>
+                <Trackers />
         <ConditionalLayout>
           <main className="pt-[72px]">{children}</main>
         </ConditionalLayout>
@@ -199,12 +193,12 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
 
+                <CookieConsent />
         <SpeedInsights />
         <Analytics />
       </body>
       {/* <GoogleAnalytics gaId="G-G4W2XBWFX5" /> */}
-      {/* T3: GTM stays afterInteractive (the @next/third-parties component already loads it that way). */}
-      <GoogleTagManager gtmId="GTM-5CND486G" />
+      
     </html>
   );
 }
