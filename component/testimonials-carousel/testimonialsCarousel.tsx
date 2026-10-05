@@ -76,7 +76,7 @@ const TestimonialsCarousel = ({ slides, padding, options, onEditSlide }: PropTyp
                         </div>
                         <Button
                           iconRight={true}
-                          text="Read More"
+                          text={`Read ${slide.name}'s story`}
                           variant="primary"
                           size="medium"
                           href="/testimonial"

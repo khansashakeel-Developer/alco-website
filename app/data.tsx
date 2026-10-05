@@ -25,7 +25,7 @@ const heroData: HeroData = [
       "cta": { id: "C2" }
     },
     "image": heroSlide1,
-    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1790941406/1002_1_m19o9a.mp4"
+    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/q_auto:good,w_1280,ac_none,vc_h264/v1790941406/1002_1_m19o9a.mp4"
   },
   {
     "title": {

@@ -29,6 +29,15 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
   const [isFading, setIsFading] = useState(false)
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  // Video only on larger screens, with no data-saver or reduced-motion preference. Phones show the poster image.
+  const [canPlayVideo, setCanPlayVideo] = useState(false)
+  useEffect(() => {
+    const wide = window.matchMedia("(min-width: 768px)").matches
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const saveData = (navigator as any).connection?.saveData === true
+    setCanPlayVideo(wide && !reduce && !saveData)
+  }, [])
+
   useEffect(() => {
     if (selectedIndex === displayedIndex) return
 
@@ -62,7 +71,7 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
       )}
 
             {/* Layer 2: incoming layer (fades in on top). A video if the slide has one, otherwise the image */}
-      {slides[displayedIndex]?.video ? (
+        {slides[displayedIndex]?.video && canPlayVideo ? (
         <video
           key={`bg-video-${displayedIndex}`}
           src={slides[displayedIndex].video}
