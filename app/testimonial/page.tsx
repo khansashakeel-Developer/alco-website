@@ -15,7 +15,7 @@ import Thumbnail4 from "@/assets/testimonial/thumbnail_4.webp"
 import Thumbnail5 from "@/assets/testimonial/thumbnail_5.webp"
 import Thumbnail6 from "@/assets/testimonial/thumbnail_6.webp"
 import StudentReviewCarousel from "@/component/student-review-carousel/studentReviewCarousel";
-
+import VideoJsonLd from "@/component/VideoJsonLd";
 const TESTIMONIAL_WA = waLine("AL&CO's training (I have been reading the graduate stories)");
 
 // B 06: server page with its own metadata (canonical was inherited from the homepage).
@@ -229,6 +229,17 @@ export default function TestimonialPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
             />
+                        {testimonialsData
+              .filter((t) => t.videoUrl)
+              .map((t) => (
+            <VideoJsonLd
+                  key={t._id}
+                  name={`${t.name}: AL&CO graduate testimonial`}
+                  description={t.description.slice(0, 300)}
+                  videoUrl={t.videoUrl!}
+                  thumbnail={t.thumbnail?.src}
+                />
+              ))}
             <Banner data={bannerData} />
 
             <div className="max-w-6xl mx-auto px-4">

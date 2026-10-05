@@ -6,6 +6,7 @@ import { WhatIsNlpData } from "@/type/whatIsNlp";
 import VideoPlayer from "./videoPlayer";
 // import NlpVideo from "/videos/What-is-NLP.mp4";
 import whatIsNLPThumbnail from "@/assets/whatIsNLP/What-is-NLP-Thumbnail.webp";
+import VideoJsonLd from "@/component/VideoJsonLd";
 
 const whatIsNlpData: WhatIsNlpData = {
   title: "What Is Neuro-Linguistic Programming?",
@@ -41,6 +42,12 @@ export default function WhatIsNlp() {
             Your browser does not support the video tag.
           </video>
         </div> */}
+      <VideoJsonLd
+        name="What Is Neuro-Linguistic Programming (NLP)?"
+        description={data.description.slice(0, 300)}
+        videoUrl={data.video ?? ""}
+        thumbnail={data.thumbnail?.src}
+      />
 
         <div className="my-8">
           <VideoPlayer
