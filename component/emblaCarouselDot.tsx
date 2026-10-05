@@ -56,7 +56,7 @@ type PropType = ComponentPropsWithRef<'button'>
 export const DotButton = (props: PropType) => {
   const { children, ...restProps } = props
   return (
-    <button type="button" {...restProps}>
+    <button type="button" aria-label="Go to slide" {...restProps}>
       {children}
     </button>
   )

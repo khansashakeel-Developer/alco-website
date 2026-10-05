@@ -99,7 +99,7 @@ const OurProgramCarousel = ({ slides, options }: PropType) => {
                         iconRight={true}
                     variant="white"
                     size="small"
-                    text="Find out more"
+                    text={`View Level ${index + 1} details`}
                     href={slide.href}
                     newTab={false}
                     className='px-4 py-2'

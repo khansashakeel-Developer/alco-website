@@ -71,7 +71,7 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover object-center"
           style={{

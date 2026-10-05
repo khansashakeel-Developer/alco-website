@@ -92,6 +92,16 @@ const TestimonialsCarousel = ({ slides, padding, options, onEditSlide }: PropTyp
         </div>
         <div className="testimonials_embla__controls absolute right-2 bottom-0">
           <div className="testimonials_embla__buttons">
+              <button
+              onClick={() => emblaApi?.scrollPrev()}
+              aria-label="Previous testimonial"
+              className="bg-primary text-white px-3 py-1 rounded"
+            ></button>
+                        <button
+              onClick={() => emblaApi?.scrollNext()}
+              aria-label="Next testimonial"
+              className="bg-primary text-white px-3 py-1 rounded"
+            ></button>
             <button
               onClick={() => emblaApi?.scrollPrev()}
               className="bg-primary text-white px-3 py-1 rounded"
