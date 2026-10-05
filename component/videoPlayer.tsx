@@ -6,6 +6,7 @@ import { FaPlay } from "react-icons/fa";
 
 type VideoPlayerProps = {
   videoUrl?: string;
+  title?: string;
   thumbnail?: StaticImageData;
   videoClass?: string;
   className?: string;
@@ -16,6 +17,7 @@ type VideoPlayerProps = {
 
 const VideoPlayer = ({
   videoUrl,
+  title,
   thumbnail,
   videoClass,
   className,
@@ -61,7 +63,7 @@ const VideoPlayer = ({
   const handleMouseEnter = () => {
     if (hoverPlay) {
       setPlay(true);
-      setTimeout(() => videoRef.current?.play(), 50);
+      setTimeout(() => videoRef.current?.play()?.catch(() => {}), 50);
     }
   };
 
@@ -90,7 +92,7 @@ const VideoPlayer = ({
             <div className="relative w-full h-full">
               <Image
                 src={thumbnail}
-                alt="video thumbnail"
+                alt={title ? `${title} (video thumbnail)` : "Video thumbnail"}
                 fill
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-contain object-top rounded-lg"
