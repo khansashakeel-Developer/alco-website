@@ -172,6 +172,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={outfit.variable}>
+      <head>
+        {/* Videos come from Cloudinary: open that connection early so they start faster. */}
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+      </head>
       <body className={lexend.className}>
         {/* Plain <script>, not next/script: this puts the JSON-LD in the server HTML. */}
         <script
