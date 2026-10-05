@@ -96,6 +96,7 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
           alt=""
           aria-hidden="true"
           priority
+          fetchPriority="high"
           fill
           sizes="100vw"
           className="object-cover object-center"
