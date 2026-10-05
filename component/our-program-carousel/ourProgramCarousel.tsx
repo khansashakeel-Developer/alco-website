@@ -8,6 +8,7 @@ import { OurProgramSlideType } from '@/type/ourProgram'
 import Button from '../button'
 import "./ourProgramCarousel.css"
 import Image from 'next/image';
+import Link from 'next/link'
 
 
 type PropType = {
@@ -63,6 +64,14 @@ const OurProgramCarousel = ({ slides, options }: PropType) => {
                   <p className="custom-text1 font-light text-white text-start ">
                     {slide.description}
                   </p>
+                  {slide.href && (
+                    <Link
+                      href={slide.href}
+                      className="inline-block mt-3 font-outfit font-semibold text-secondary hover:underline"
+                    >
+                      Learn more about Level {index + 1}: {slide.title} →
+                    </Link>
+                  )}
                 </div>
                 {/* <div className="flex xl:flex-col xl:justify-center col-span-12 xl:col-span-4 2xl:col-span-3">
                   <Button
