@@ -29,7 +29,7 @@ const tabs: Tab[] = [
     label: "Our leadership",
     icon: <Users size={18} />,
     facts: [
-      "The first in Pakistan: the first to hold Master Trainer of NLP (ABNLP) and Master Trainer of Hypnosis (ABH), an ANLP Accredited Master Trainer (UK), and a Master Trainer of NLP University (NLPU) under Robert Dilts. He holds the ANLP International Ambassadorship for Pakistan.",
+      "The first in Pakistan: the first to hold Master Trainer of NLP (ABNLP) and Master Trainer of Hypnosis (ABH), an ANLP Accredited Master Trainer (UK), and a Master Trainer under Robert Dilts at NLP University. He holds the ANLP International Ambassadorship for Pakistan.",
       "Led alongside Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), who teaches beside Arslan as co-trainer. She is the first woman in Pakistan to hold the MCC, the ACTC and her ANLP credential together, a documented first. Learning from a male and a female Master Coach means the work lands for everyone in the room.",
     ],
   },
@@ -66,7 +66,7 @@ const bigNum = "font-outfit font-bold text-[44px] md:text-[56px] leading-none bg
 const STATS = [
   { to: 2000, suffix: "+", label: "graduates" },
   { to: 20, suffix: "+", label: "countries" },
-  { to: 100, suffix: "", label: "batches delivered" },
+  { to: 100, suffix: "", label: "batches delivered, and counting", pre: "Nearing" },
 ];
 
 // Splits each fact into separate points (one per sentence, wording untouched). A leading "Label:" becomes a bold lead-in.
@@ -152,9 +152,11 @@ export default function AtAGlance() {
           </p>
         </div>
 
-        <dl className="grid grid-cols-3 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center">
+        <p className="sr-only">2,000+ graduates across 20+ countries. Nearing 100 batches delivered, and counting.</p>
+        <dl aria-hidden="true" className="grid grid-cols-3 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center">
           {STATS.map((st, i) => (
             <div key={st.label} className="glance-stat flex flex-col items-center" style={{ animationDelay: `${i * 120}ms` }}>
+              <span className="order-0 mb-1 h-5 font-outfit text-sm font-light uppercase tracking-widest text-white/80">{st.pre ?? ""}</span>
               <dt className="order-2 mt-2 font-outfit text-sm sm:text-base md:text-lg font-light text-white">{st.label}</dt>
               <dd className="order-1">
                 <CountUp to={st.to} suffix={st.suffix} className={bigNum} />
