@@ -28,8 +28,11 @@ const SKIP_PREFIXES = ["/enroll", "/thank-you", "/maintenance", "/free-webinar",
 // Works on localhost; on a deployed site only when NEXT_PUBLIC_ANNOUNCEMENT_PREVIEW=true is set. Remove that variable for launch.
 const PREVIEW_ALLOWED = process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ANNOUNCEMENT_PREVIEW === "true";
 const inDays = (d: number, h: number) => { const t = new Date(); t.setUTCDate(t.getUTCDate() + d); t.setUTCHours(h, 0, 0, 0); return t.toISOString(); };
+const SAMPLE_FLYER = "data:image/svg+xml;utf8," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#09263D"/><stop offset="1" stop-color="#1B507C"/></linearGradient></defs><rect width="800" height="1000" fill="url(#g)"/><rect x="60" y="80" width="90" height="10" rx="5" fill="#F9B81E"/><text x="60" y="200" fill="#F9B81E" font-family="Arial" font-size="34" letter-spacing="6">FREE LIVE WEBINAR</text><text x="60" y="320" fill="#fff" font-family="Arial" font-weight="700" font-size="84">Is NLP</text><text x="60" y="420" fill="#fff" font-family="Arial" font-weight="700" font-size="84">Right for You?</text><text x="60" y="560" fill="#fff" font-family="Arial" font-size="40" opacity=".85">Sunday, 8:00 pm PKT, on Zoom</text><rect x="60" y="860" width="320" height="64" rx="32" fill="#F9B81E"/><text x="100" y="903" fill="#09263D" font-family="Arial" font-weight="700" font-size="30">Reserve your place</text></svg>'
+);
 const SAMPLE: AnnouncementItem[] = [
-  { id: "s-w", kind: "webinar", title: "Is NLP Right for You?", startsAt: inDays(5, 15) },
+  { id: "s-w", kind: "webinar", title: "Is NLP Right for You?", startsAt: inDays(5, 15), image: SAMPLE_FLYER },
   { id: "s-1", kind: "training", title: "NLP Practitioner, Batch 98", startsAt: inDays(21, 15), href: "/program/nlp-practitioner" },
   { id: "s-2", kind: "training", title: "NLP Master Practitioner, Batch 41", startsAt: inDays(35, 15), href: "/program/nlp-master-practitioner" },
   { id: "s-3", kind: "training", title: "NLP Train the Trainer, Batch 12", startsAt: inDays(60, 15) },
@@ -163,6 +166,17 @@ export default function AnnouncementModal({ items: liveItems, version: liveVersi
               </ul>
               <div className="mt-7 sm:mt-10 flex items-center gap-6">
                 <CtaButton id="C4" variant="primary" />
+                <button type="button" data-announce-dismiss onClick={dismiss} className="text-sm sm:text-base text-gray-500 hover:text-primary">Not now</button>
+              </div>
+            </>
+          ) : webinar!.image ? (
+            <>
+              {/* The marketing team uploads only the flyer: it is the whole announcement, the title is its text alternative. */}
+              <h2 id="announce-title" className="sr-only">Free webinar: {webinar!.title}, {longDateTime(webinar!.startsAt)}</h2>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={webinar!.image} alt={`Free webinar flyer: ${webinar!.title}`} className="mt-5 sm:mt-6 mx-auto block max-h-[60vh] w-auto max-w-full rounded-xl shadow-md" />
+              <div className="mt-6 sm:mt-8 flex items-center gap-6">
+                <CtaButton id="C2" variant="secondary" />
                 <button type="button" data-announce-dismiss onClick={dismiss} className="text-sm sm:text-base text-gray-500 hover:text-primary">Not now</button>
               </div>
             </>

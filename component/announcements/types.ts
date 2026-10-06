@@ -8,4 +8,8 @@ export type AnnouncementItem = {
   startsAt: string;
   /** Internal link only (starts with "/"). Trainings without one fall back to the Enrol now button. */
   href?: string;
+  /** Webinar only: the flyer the marketing team uploads. When present, the webinar window shows only this image. */
+  image?: string;
+  /** Training only: show this training in the scrolling strip under the menu. */
+  inStrip?: boolean;
 };

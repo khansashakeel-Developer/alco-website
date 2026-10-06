@@ -9,6 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/utils/buildMetadata";
 import AnnouncementLoader from "@/component/announcements/AnnouncementLoader";
+import AnnouncementStripLoader from "@/component/announcements/AnnouncementStripLoader";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -189,7 +190,11 @@ export default function RootLayout({
         <ConditionalLayout>
           {/* Announcement window: webinar and upcoming trainings from the CMS. Renders nothing when there is nothing to announce. */}
           <AnnouncementLoader />
-          <main className="pt-[72px]">{children}</main>
+          <main className="pt-[72px]">
+            {/* Scrolling strip for the flagged upcoming training (CMS). Renders nothing when none is flagged. */}
+            <AnnouncementStripLoader />
+            {children}
+          </main>
         </ConditionalLayout>
 
         {/* T3: the chat widget waits until the browser is idle, so it never competes with hydration (INP). */}
