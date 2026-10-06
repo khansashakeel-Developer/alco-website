@@ -8,6 +8,7 @@ import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/utils/buildMetadata";
+import AnnouncementLoader from "@/component/announcements/AnnouncementLoader";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -186,6 +187,8 @@ export default function RootLayout({
 
                 <Trackers />
         <ConditionalLayout>
+          {/* Announcement window: webinar and upcoming trainings from the CMS. Renders nothing when there is nothing to announce. */}
+          <AnnouncementLoader />
           <main className="pt-[72px]">{children}</main>
         </ConditionalLayout>
 
