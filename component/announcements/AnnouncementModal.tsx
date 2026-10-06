@@ -129,7 +129,7 @@ export default function AnnouncementModal({ items: liveItems, version: liveVersi
         aria-labelledby="announce-title"
         // A click on a link or CTA inside means the visitor acted: end the sequence. (The X and "Not now" call dismiss themselves.)
         onClick={(e) => { const el = (e.target as HTMLElement).closest("a,button"); if (el && !el.hasAttribute("data-announce-dismiss")) finish(); }}
-        className="announce-panel relative w-full max-w-md max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white shadow-2xl font-outfit"
+        className="announce-panel relative w-full max-w-md sm:max-w-2xl max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white shadow-2xl font-outfit"
       >
         <style>{`
           @keyframes announceIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
@@ -141,39 +141,39 @@ export default function AnnouncementModal({ items: liveItems, version: liveVersi
         `}</style>
 
         <button ref={closeRef} type="button" data-announce-dismiss onClick={dismiss} aria-label="Close"
-          className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full text-primary/60 hover:bg-primary/10 hover:text-primary focus-visible:ring-2 focus-visible:ring-primary">
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 flex h-9 w-9 items-center justify-center rounded-full text-primary/60 hover:bg-primary/10 hover:text-primary focus-visible:ring-2 focus-visible:ring-primary">
           <X size={20} aria-hidden="true" />
         </button>
 
-        <div className="px-7 pt-9 pb-20 sm:pb-8 sm:px-9">
-          <span aria-hidden="true" className="block h-1 w-10 rounded-full bg-secondary" />
+        <div className="px-7 pt-9 pb-20 sm:px-14 sm:pt-14 sm:pb-12">
+          <span aria-hidden="true" className="block h-1 w-10 sm:h-1.5 sm:w-14 rounded-full bg-secondary" />
 
           {current === "trainings" ? (
             <>
-              <h2 id="announce-title" className="mt-5 text-2xl font-semibold text-primary">Upcoming trainings</h2>
-              <ul className="mt-5 divide-y divide-primary/10">
+              <h2 id="announce-title" className="mt-5 text-2xl sm:mt-6 sm:text-4xl font-semibold text-primary">Upcoming trainings</h2>
+              <ul className="mt-5 sm:mt-8 divide-y divide-primary/10">
                 {trainings.map((t) => (
-                  <li key={t.id} className="flex items-baseline justify-between gap-4 py-3.5">
-                    <span className="font-medium text-primary">
+                  <li key={t.id} className="flex items-baseline justify-between gap-4 py-3.5 sm:py-5">
+                    <span className="font-medium text-primary sm:text-xl">
                       {t.href ? <a href={t.href} className="hover:underline underline-offset-4">{t.title}</a> : t.title}
                     </span>
-                    <span className="shrink-0 text-sm text-gray-500">{shortDate(t.startsAt)}</span>
+                    <span className="shrink-0 text-sm sm:text-base text-gray-500">{shortDate(t.startsAt)}</span>
                   </li>
                 ))}
               </ul>
-              <div className="mt-7 flex items-center gap-6">
+              <div className="mt-7 sm:mt-10 flex items-center gap-6">
                 <CtaButton id="C4" variant="primary" />
-                <button type="button" data-announce-dismiss onClick={dismiss} className="text-sm text-gray-500 hover:text-primary">Not now</button>
+                <button type="button" data-announce-dismiss onClick={dismiss} className="text-sm sm:text-base text-gray-500 hover:text-primary">Not now</button>
               </div>
             </>
           ) : (
             <>
-              <p className="mt-5 text-sm font-medium uppercase tracking-widest text-primary/60">Free webinar</p>
-              <h2 id="announce-title" className="mt-1 text-2xl font-semibold text-primary">{webinar!.title}</h2>
-              <p className="mt-2 text-gray-600">{longDateTime(webinar!.startsAt)}</p>
-              <div className="mt-7 flex items-center gap-6">
+              <p className="mt-5 sm:mt-6 text-sm sm:text-base font-medium uppercase tracking-widest text-primary/60">Free webinar</p>
+              <h2 id="announce-title" className="mt-1 sm:mt-2 text-2xl sm:text-4xl font-semibold text-primary">{webinar!.title}</h2>
+              <p className="mt-2 sm:mt-3 text-gray-600 sm:text-xl">{longDateTime(webinar!.startsAt)}</p>
+              <div className="mt-7 sm:mt-10 flex items-center gap-6">
                 <CtaButton id="C2" variant="secondary" />
-                <button type="button" data-announce-dismiss onClick={dismiss} className="text-sm text-gray-500 hover:text-primary">Not now</button>
+                <button type="button" data-announce-dismiss onClick={dismiss} className="text-sm sm:text-base text-gray-500 hover:text-primary">Not now</button>
               </div>
             </>
           )}
