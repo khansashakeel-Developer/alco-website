@@ -4,9 +4,9 @@
 // Styling follows the existing homepage sections: bg-dark-primary, two-tone h2 (as WhatWeDo), white rounded-lg shadow-lg card,
 // navy/gold accents, and the original gold left-bar bullets.
 import { useState, useEffect, useRef } from "react";
-import { Landmark, Users, GraduationCap, DoorOpen, ChevronDown } from "lucide-react";
+import { Landmark, Users, GraduationCap, DoorOpen, ChevronDown, Check } from "lucide-react";
 
-// color = brand accent for this heading, ink = readable text colour on that accent.
+// color = brand accent (only tailwind.config.js brand colours: secondary gold/orange, neutral cream, primary blue) for this heading, ink = readable text colour on that accent.
 type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[]; color: string; ink: string };
 
 const tabs: Tab[] = [
@@ -35,7 +35,7 @@ const tabs: Tab[] = [
   },
   {
     id: "learn",
-    color: "#C6CA8D",
+    color: "#FCF9EF",
     ink: "#09263D",
     label: "How you learn",
     icon: <GraduationCap size={18} />,
@@ -47,8 +47,8 @@ const tabs: Tab[] = [
   },
   {
     id: "after",
-    color: "#5B94C2",
-    ink: "#09263D",
+    color: "#1B507C",
+    ink: "#FFFFFF",
     label: "After you graduate",
     icon: <DoorOpen size={18} />,
     facts: [
@@ -69,6 +69,16 @@ const STATS = [
   { to: 100, suffix: "", label: "batches delivered" },
   { to: 1, suffix: "M+", label: "lives inspired" },
 ];
+
+// Splits each fact into separate points (one per sentence, wording untouched). A leading "Label:" becomes a bold lead-in.
+function toPoints(facts: string[]) {
+  return facts.flatMap((f) =>
+    f.split(/(?<=\.)\s+(?=[A-Z])/).map((text, i) => {
+      const m = i === 0 ? text.match(/^([^:]{3,40}):\s+(.*)$/s) : null;
+      return m ? { lead: m[1] + ":", text: m[2] } : { lead: "", text };
+    })
+  );
+}
 
 // Counts up once when scrolled into view. The final number is always in the page text (the invisible
 // sizer), so crawlers and screen readers read it, and the layout never jumps while counting.
@@ -150,7 +160,7 @@ export default function AtAGlance() {
         </dl>
 
         {/* Bar 2: vertical headings. Click a heading to open its details (all panels stay in the DOM, hidden, so the text is crawlable). */}
-        <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-x-10 lg:gap-y-5 lg:items-start">
+        <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-x-10 lg:gap-y-5 lg:items-stretch">
           {tabs.map((t, i) => {
             const open = i === active;
             return (
@@ -186,12 +196,32 @@ export default function AtAGlance() {
                   aria-labelledby={`glance-tab-${t.id}`}
                   hidden={!open}
                   style={{ borderTopColor: t.color }}
-                  className="glance-panel mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10"
+                  className="glance-panel flex flex-col justify-center mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10"
                 >
-                  <ul className="grid grid-cols-1 gap-7">
-                    {t.facts.map((f, n) => (
-                      <li key={f} style={{ borderLeftColor: t.color, animationDelay: `${150 + n * 140}ms` }} className="glance-fact custom-text1 font-light text-black/80 border-l-4 pl-5">
-                        {f}
+                  <div className="flex items-center gap-4 mb-6 lg:mb-8">
+                    <span
+                      aria-hidden="true"
+                      style={{ backgroundColor: t.color, color: t.ink }}
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-md ring-2 ring-primary/20 [&>svg]:h-7 [&>svg]:w-7"
+                    >
+                      {t.icon}
+                    </span>
+                    <p aria-hidden="true" className="font-outfit text-xl md:text-2xl font-semibold text-primary">{t.label}</p>
+                  </div>
+                  <ul className="grid grid-cols-1 gap-5 lg:gap-6">
+                    {toPoints(t.facts).map((pt, n) => (
+                      <li key={pt.text} style={{ animationDelay: `${150 + n * 140}ms` }} className="glance-fact flex items-start gap-3 custom-text1 font-light text-black/80">
+                        <span
+                          aria-hidden="true"
+                          style={{ backgroundColor: t.color, color: t.ink }}
+                          className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ring-1 ring-primary/20"
+                        >
+                          <Check size={14} strokeWidth={3} />
+                        </span>
+                        <span>
+                          {pt.lead && <strong className="font-semibold text-primary">{pt.lead} </strong>}
+                          {pt.text}
+                        </span>
                       </li>
                     ))}
                   </ul>
