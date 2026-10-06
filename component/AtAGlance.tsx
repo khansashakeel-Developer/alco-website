@@ -3,8 +3,8 @@
 // Compact layout: slim stats strip + one tabbed card. All panels stay in the DOM (hidden, not removed) so the text is crawlable.
 // Styling follows the existing homepage sections: bg-dark-primary, two-tone h2 (as WhatWeDo), white rounded-lg shadow-lg card,
 // navy/gold accents, and the original gold left-bar bullets.
-import { useState, useEffect, useRef, type KeyboardEvent } from "react";
-import { Landmark, Users, GraduationCap, DoorOpen } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Landmark, Users, GraduationCap, DoorOpen, ChevronDown } from "lucide-react";
 
 type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[] };
 
@@ -48,16 +48,18 @@ const tabs: Tab[] = [
   },
 ];
 
-// Static class names so Tailwind keeps them.
-const cols: Record<number, string> = { 1: "lg:grid-cols-1", 2: "lg:grid-cols-2", 3: "lg:grid-cols-3" };
-
 // SEO heading: one plain <h2> text node. Change the size here only (swap "h3" for "h2" or "h4", or add e.g. "text-[34px]").
 // Keep it an <h2>: the page's single <h1> lives in the Hero.
 const HEADING_TEXT = "AL&CO at a Glance";
 const HEADING_CLASS = "h3 text-white text-start mb-4 lg:mb-6";
 
-// Figures are styled, the sentences are unchanged.
-const num = "font-outfit font-semibold text-secondary text-[26px] md:text-[30px] leading-none";
+const bigNum = "font-outfit font-bold text-[44px] md:text-[56px] leading-none bg-gradient-to-b from-secondary to-white bg-clip-text text-transparent";
+const STATS = [
+  { to: 2000, suffix: "+", label: "graduates" },
+  { to: 20, suffix: "+", label: "countries" },
+  { to: 100, suffix: "", label: "batches delivered" },
+  { to: 1, suffix: "M+", label: "lives inspired" },
+];
 
 // Counts up once when scrolled into view. The final number is always in the page text (the invisible
 // sizer), so crawlers and screen readers read it, and the layout never jumps while counting.
@@ -112,84 +114,65 @@ function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; 
 export default function AtAGlance() {
   const [active, setActive] = useState(0);
 
-  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    e.preventDefault();
-    const next = (active + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
-    setActive(next);
-    document.getElementById(`glance-tab-${tabs[next].id}`)?.focus();
-  };
-
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary-darkest bg-dark-primary bg-cover bg-top-left w-full">
       <div className="container mx-auto px-4">
         <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
 
-        {/* Canon stats strip */}
-        <div className="grid grid-cols-1 md:grid-cols-2 rounded-lg border border-white/20 bg-white/10 mb-4 lg:mb-6">
-          <p className="custom-text1 font-light text-white p-4 lg:p-5">
-            <CountUp to={2000} suffix="+" className={num} /> graduates across <CountUp to={20} suffix="+" className={num} /> countries. Nearing{" "}
-            <CountUp to={100} className={num} /> batches delivered, and counting.
-          </p>
-          <p className="custom-text1 font-light text-white p-4 lg:p-5 border-t border-white/20 md:border-t-0 md:border-l">
-            Our work has inspired <span className={num}>over a million lives</span>, across the nation and around the
-            world.
-          </p>
-        </div>
-
-        {/* Tabbed card */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div
-            role="tablist"
-            aria-label="AL&CO at a Glance"
-            onKeyDown={onKeyDown}
-            className="grid grid-cols-2 sm:grid-cols-4 bg-neutral-light"
-          >
-            {tabs.map((t, i) => {
-              const selected = i === active;
-              return (
-                <button
-                  key={t.id}
-                  id={`glance-tab-${t.id}`}
-                  role="tab"
-                  type="button"
-                  aria-selected={selected}
-                  aria-controls={`glance-panel-${t.id}`}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => setActive(i)}
-                  className={`flex items-center justify-center gap-2 px-3 py-3 font-outfit font-medium text-[15px] md:text-[16px] border-b-4 transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary ${
-                    selected
-                      ? "bg-primary text-white border-secondary"
-                      : "text-primary border-transparent hover:bg-secondary/30 hover:border-secondary/60 hover:-translate-y-px"
-                  }`}
-                >
-                  <span className={selected ? "text-secondary" : "text-primary"} aria-hidden="true">
-                    {t.icon}
-                  </span>
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {tabs.map((t, i) => (
-            <div
-              key={t.id}
-              id={`glance-panel-${t.id}`}
-              role="tabpanel"
-              aria-labelledby={`glance-tab-${t.id}`}
-              hidden={i !== active}
-              className="p-6 lg:p-8"
-            >
-              <ul className={`grid grid-cols-1 gap-5 lg:gap-8 ${cols[t.facts.length]}`}>
-                {t.facts.map((f) => (
-                  <li key={f} className="custom-text1 font-light text-black/80 border-l-4 border-secondary pl-4">
-                    {f}
-                  </li>
-                ))}
-              </ul>
+        {/* Bar 1: figures only, label underneath */}
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-8 lg:py-10 mb-8 lg:mb-10 text-center">
+          {STATS.map((st) => (
+            <div key={st.label} className="flex flex-col items-center">
+              <dt className="order-2 mt-2 font-outfit text-base md:text-lg font-light text-white">{st.label}</dt>
+              <dd className="order-1">
+                <CountUp to={st.to} suffix={st.suffix} className={bigNum} />
+              </dd>
             </div>
           ))}
+        </dl>
+
+        {/* Bar 2: vertical headings. Click a heading to open its details (all panels stay in the DOM, hidden, so the text is crawlable). */}
+        <div className="lg:grid lg:grid-cols-[minmax(260px,340px)_1fr] lg:gap-x-8 lg:items-start">
+          {tabs.map((t, i) => {
+            const open = i === active;
+            return (
+              <div key={t.id} className="mb-3 lg:mb-3 lg:contents">
+                <h3 className="lg:col-start-1">
+                  <button
+                    type="button"
+                    id={`glance-tab-${t.id}`}
+                    aria-expanded={open}
+                    aria-controls={`glance-panel-${t.id}`}
+                    onClick={() => setActive(i)}
+                    className={`w-full flex items-center gap-3 rounded-full px-5 py-4 text-start font-outfit font-medium text-[16px] md:text-[18px] border transition-colors focus-visible:ring-2 focus-visible:ring-secondary ${
+                      open
+                        ? "bg-secondary text-primary-darkest border-secondary"
+                        : "bg-white/10 text-white border-white/30 hover:bg-white/20"
+                    }`}
+                  >
+                    <span aria-hidden="true">{t.icon}</span>
+                    <span className="flex-1">{t.label}</span>
+                    <ChevronDown size={18} aria-hidden="true" className={`transition-transform lg:-rotate-90 ${open ? "rotate-180 lg:rotate-0" : ""}`} />
+                  </button>
+                </h3>
+                <div
+                  id={`glance-panel-${t.id}`}
+                  role="region"
+                  aria-labelledby={`glance-tab-${t.id}`}
+                  hidden={!open}
+                  className="mt-3 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-lg shadow-lg p-6 lg:p-8"
+                >
+                  <ul className="grid grid-cols-1 gap-5">
+                    {t.facts.map((f) => (
+                      <li key={f} className="custom-text1 font-light text-black/80 border-l-4 border-secondary pl-4">
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
