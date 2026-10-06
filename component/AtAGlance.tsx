@@ -147,7 +147,7 @@ export default function AtAGlance() {
         {/* Heading on the left, the "million lives" line on the same row at the right */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-8 mb-5 lg:mb-6">
           <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
-          <p className="glance-stat custom-text1 font-light text-white md:text-end md:max-w-xl">
+          <p className="glance-stat custom-text1 font-light text-white md:text-end md:max-w-xl lg:max-w-none lg:whitespace-nowrap">
             Our work has inspired <strong className="font-semibold">over a million lives</strong>, across the nation and around the world.
           </p>
         </div>
