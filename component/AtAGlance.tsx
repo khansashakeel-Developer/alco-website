@@ -3,14 +3,17 @@
 // Compact layout: slim stats strip + one tabbed card. All panels stay in the DOM (hidden, not removed) so the text is crawlable.
 // Styling follows the existing homepage sections: bg-dark-primary, two-tone h2 (as WhatWeDo), white rounded-lg shadow-lg card,
 // navy/gold accents, and the original gold left-bar bullets.
-import { useState, useEffect, useRef, type KeyboardEvent } from "react";
-import { Landmark, Users, GraduationCap, DoorOpen } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Landmark, Users, GraduationCap, DoorOpen, ChevronDown, Check } from "lucide-react";
 
-type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[] };
+// color = brand accent (brand palette only: gold #F9B81E, light gold #FFE29D and blue #346B96 from tailwind.config.js, plus white) for this heading, ink = readable text colour on that accent.
+type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[]; color: string; ink: string };
 
 const tabs: Tab[] = [
   {
     id: "who",
+    color: "#F9B81E",
+    ink: "#09263D",
     label: "Who we are",
     icon: <Landmark size={18} />,
     facts: [
@@ -21,15 +24,19 @@ const tabs: Tab[] = [
   },
   {
     id: "leadership",
+    color: "#FFE29D",
+    ink: "#09263D",
     label: "Our leadership",
     icon: <Users size={18} />,
     facts: [
-      "The first in Pakistan: the first to hold Master Trainer of NLP (ABNLP) and Master Trainer of Hypnosis (ABH), an ANLP Accredited Master Trainer (UK), and a Master Trainer of NLP University (NLPU) under Robert Dilts. He holds the ANLP International Ambassadorship for Pakistan.",
+      "The first in Pakistan: the first to hold Master Trainer of NLP (ABNLP) and Master Trainer of Hypnosis (ABH), an ANLP Accredited Master Trainer (UK), and a Master Trainer under Robert Dilts at NLP University. He holds the ANLP International Ambassadorship for Pakistan.",
       "Led alongside Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), who teaches beside Arslan as co-trainer. She is the first woman in Pakistan to hold the MCC, the ACTC and her ANLP credential together, a documented first. Learning from a male and a female Master Coach means the work lands for everyone in the room.",
     ],
   },
   {
     id: "learn",
+    color: "#FFFFFF",
+    ink: "#09263D",
     label: "How you learn",
     icon: <GraduationCap size={18} />,
     facts: [
@@ -40,6 +47,8 @@ const tabs: Tab[] = [
   },
   {
     id: "after",
+    color: "#346B96",
+    ink: "#FFFFFF",
     label: "After you graduate",
     icon: <DoorOpen size={18} />,
     facts: [
@@ -48,16 +57,27 @@ const tabs: Tab[] = [
   },
 ];
 
-// Static class names so Tailwind keeps them.
-const cols: Record<number, string> = { 1: "lg:grid-cols-1", 2: "lg:grid-cols-2", 3: "lg:grid-cols-3" };
-
 // SEO heading: one plain <h2> text node. Change the size here only (swap "h3" for "h2" or "h4", or add e.g. "text-[34px]").
 // Keep it an <h2>: the page's single <h1> lives in the Hero.
 const HEADING_TEXT = "AL&CO at a Glance";
-const HEADING_CLASS = "h3 text-white text-start mb-4 lg:mb-6";
+const HEADING_CLASS = "h3 text-white text-start";
 
-// Figures are styled, the sentences are unchanged.
-const num = "font-outfit font-semibold text-secondary text-[26px] md:text-[30px] leading-none";
+const bigNum = "font-outfit font-bold text-[44px] md:text-[56px] leading-none bg-gradient-to-b from-secondary to-white bg-clip-text text-transparent";
+const STATS = [
+  { to: 2000, suffix: "+", label: "graduates" },
+  { to: 20, suffix: "+", label: "countries" },
+  { to: 100, suffix: "", label: "batches delivered, and counting", pre: "Nearing" },
+];
+
+// Splits each fact into separate points (one per sentence, wording untouched). A leading "Label:" becomes a bold lead-in.
+function toPoints(facts: string[]) {
+  return facts.flatMap((f) =>
+    f.split(/(?<=\.)\s+(?=[A-Z])/).map((text, i) => {
+      const m = i === 0 ? text.match(/^([^:]{3,40}):\s+([\s\S]*)$/) : null;
+      return m ? { lead: m[1] + ":", text: m[2] } : { lead: "", text };
+    })
+  );
+}
 
 // Counts up once when scrolled into view. The final number is always in the page text (the invisible
 // sizer), so crawlers and screen readers read it, and the layout never jumps while counting.
@@ -112,84 +132,115 @@ function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; 
 export default function AtAGlance() {
   const [active, setActive] = useState(0);
 
-  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    e.preventDefault();
-    const next = (active + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
-    setActive(next);
-    document.getElementById(`glance-tab-${tabs[next].id}`)?.focus();
-  };
-
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary-darkest bg-dark-primary bg-cover bg-top-left w-full">
       <div className="container mx-auto px-4">
-        <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
-
-        {/* Canon stats strip */}
-        <div className="grid grid-cols-1 md:grid-cols-2 rounded-lg border border-white/20 bg-white/10 mb-4 lg:mb-6">
-          <p className="custom-text1 font-light text-white p-4 lg:p-5">
-            <CountUp to={2000} suffix="+" className={num} /> graduates across <CountUp to={20} suffix="+" className={num} /> countries. Nearing{" "}
-            <CountUp to={100} className={num} /> batches delivered, and counting.
-          </p>
-          <p className="custom-text1 font-light text-white p-4 lg:p-5 border-t border-white/20 md:border-t-0 md:border-l">
-            Our work has inspired <span className={num}>over a million lives</span>, across the nation and around the
-            world.
+        <style>{`
+          @keyframes glanceUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+          @keyframes glancePanel{from{opacity:0;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}
+          @media (prefers-reduced-motion:no-preference){
+            .glance-stat{animation:glanceUp .7s ease-out both}
+            .glance-panel:not([hidden]){animation:glancePanel .45s cubic-bezier(.2,.8,.2,1) both}
+            .glance-fact{animation:glanceUp .55s ease-out both}
+          }
+        `}</style>
+        {/* Heading on the left, the "million lives" line on the same row at the right */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-8 mb-5 lg:mb-6">
+          <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
+          <p className="glance-stat custom-text1 font-light text-white md:text-end md:max-w-xl lg:max-w-none lg:whitespace-nowrap">
+            Our work has inspired <strong className="font-semibold">over a million lives</strong>, across the nation and around the world.
           </p>
         </div>
 
-        {/* Tabbed card */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div
-            role="tablist"
-            aria-label="AL&CO at a Glance"
-            onKeyDown={onKeyDown}
-            className="grid grid-cols-2 sm:grid-cols-4 bg-neutral-light"
-          >
-            {tabs.map((t, i) => {
-              const selected = i === active;
-              return (
-                <button
-                  key={t.id}
-                  id={`glance-tab-${t.id}`}
-                  role="tab"
-                  type="button"
-                  aria-selected={selected}
-                  aria-controls={`glance-panel-${t.id}`}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => setActive(i)}
-                  className={`flex items-center justify-center gap-2 px-3 py-3 font-outfit font-medium text-[15px] md:text-[16px] border-b-4 transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-secondary ${
-                    selected
-                      ? "bg-primary text-white border-secondary"
-                      : "text-primary border-transparent hover:bg-secondary/30 hover:border-secondary/60 hover:-translate-y-px"
-                  }`}
-                >
-                  <span className={selected ? "text-secondary" : "text-primary"} aria-hidden="true">
-                    {t.icon}
-                  </span>
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {tabs.map((t, i) => (
-            <div
-              key={t.id}
-              id={`glance-panel-${t.id}`}
-              role="tabpanel"
-              aria-labelledby={`glance-tab-${t.id}`}
-              hidden={i !== active}
-              className="p-6 lg:p-8"
-            >
-              <ul className={`grid grid-cols-1 gap-5 lg:gap-8 ${cols[t.facts.length]}`}>
-                {t.facts.map((f) => (
-                  <li key={f} className="custom-text1 font-light text-black/80 border-l-4 border-secondary pl-4">
-                    {f}
-                  </li>
-                ))}
-              </ul>
+        <p className="sr-only">2,000+ graduates across 20+ countries. Nearing 100 batches delivered, and counting.</p>
+        <dl aria-hidden="true" className="grid grid-cols-3 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center">
+          {STATS.map((st, i) => (
+            <div key={st.label} className="glance-stat flex flex-col items-center" style={{ animationDelay: `${i * 120}ms` }}>
+              <span className="order-0 mb-1 h-5 font-outfit text-sm font-light uppercase tracking-widest text-white/80">{st.pre ?? ""}</span>
+              <dt className="order-2 mt-2 font-outfit text-sm sm:text-base md:text-lg font-light text-white">{st.label}</dt>
+              <dd className="order-1">
+                <CountUp to={st.to} suffix={st.suffix} className={bigNum} />
+              </dd>
             </div>
           ))}
+        </dl>
+
+        {/* Bar 2: vertical headings. Click a heading to open its details (all panels stay in the DOM, hidden, so the text is crawlable). */}
+        <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-x-10 lg:gap-y-5 lg:items-stretch">
+          {tabs.map((t, i) => {
+            const open = i === active;
+            return (
+              <div key={t.id} className="mb-5 lg:mb-0 lg:contents">
+                <h3 className="lg:col-start-1">
+                  <button
+                    type="button"
+                    id={`glance-tab-${t.id}`}
+                    aria-expanded={open}
+                    aria-controls={`glance-panel-${t.id}`}
+                    onClick={() => setActive(i)}
+                    style={open ? { backgroundColor: t.color, color: t.ink, borderColor: t.color } : { borderColor: `${t.color}99` }}
+                    className={`group w-full flex items-center gap-4 rounded-full px-4 py-4 lg:py-5 text-start font-outfit font-semibold text-[16px] md:text-[18px] border-2 transition-all duration-300 ease-out focus-visible:ring-2 focus-visible:ring-white ${
+                      open
+                        ? "shadow-lg lg:translate-x-2 scale-[1.02]"
+                        : "bg-white/5 text-white hover:bg-white/15 hover:lg:translate-x-1"
+                    }`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={open ? { backgroundColor: t.ink, color: t.color } : { backgroundColor: t.color, color: t.ink }}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-12"
+                    >
+                      {t.icon}
+                    </span>
+                    <span className="flex-1">{t.label}</span>
+                    <ChevronDown size={18} aria-hidden="true" className={`transition-transform lg:-rotate-90 ${open ? "rotate-180 lg:rotate-0" : ""}`} />
+                  </button>
+                </h3>
+                <div
+                  id={`glance-panel-${t.id}`}
+                  role="region"
+                  aria-labelledby={`glance-tab-${t.id}`}
+                  hidden={!open}
+                  style={{ borderTopColor: t.color }}
+                  className={`glance-panel ${open ? "flex" : "hidden"} flex-col justify-center mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10`}
+                >
+                  <div className="flex items-center gap-4 mb-6 lg:mb-8">
+                    <span
+                      aria-hidden="true"
+                      style={{ backgroundColor: t.color, color: t.ink }}
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-md ring-2 ring-primary/20 [&>svg]:h-7 [&>svg]:w-7"
+                    >
+                      {t.icon}
+                    </span>
+                    <p aria-hidden="true" className="font-outfit text-xl md:text-2xl font-semibold text-primary">{t.label}</p>
+                  </div>
+                  {t.id === "who" ? (
+                    <p style={{ animationDelay: "150ms" }} className="glance-fact custom-text1 font-light text-black/80 leading-relaxed">
+                      {t.facts.join(" ")}
+                    </p>
+                  ) : (
+                    <ul className="grid grid-cols-1 gap-5 lg:gap-6">
+                      {toPoints(t.facts).map((pt, n) => (
+                        <li key={pt.text} style={{ animationDelay: `${150 + n * 140}ms` }} className="glance-fact flex items-start gap-3 custom-text1 font-light text-black/80">
+                          <span
+                            aria-hidden="true"
+                            style={{ backgroundColor: t.color, color: t.ink }}
+                            className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ring-1 ring-primary/20"
+                          >
+                            <Check size={14} strokeWidth={3} />
+                          </span>
+                          <span>
+                            {pt.lead && <strong className="font-semibold text-primary">{pt.lead} </strong>}
+                            {pt.text}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
