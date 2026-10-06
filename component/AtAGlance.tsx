@@ -146,24 +146,20 @@ export default function AtAGlance() {
         `}</style>
         <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
 
-        {/* Bar 1: figures on the left, the "million lives" line on the right */}
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] rounded-lg border border-white/20 bg-white/10 mb-12 lg:mb-16">
-          <dl className="grid grid-cols-3 gap-x-4 px-4 py-10 lg:py-14 text-center">
-            {STATS.map((st, i) => (
-              <div key={st.label} className="glance-stat flex flex-col items-center" style={{ animationDelay: `${i * 120}ms` }}>
-                <dt className="order-2 mt-2 font-outfit text-sm sm:text-base md:text-lg font-light text-white">{st.label}</dt>
-                <dd className="order-1">
-                  <CountUp to={st.to} suffix={st.suffix} className={bigNum} />
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <p className="glance-stat flex items-center border-t border-white/20 lg:border-t-0 lg:border-l px-6 py-8 lg:px-8 text-center lg:text-start custom-text1 font-light text-white" style={{ animationDelay: "360ms" }}>
-            <span>
-              Our work has inspired <strong className="font-outfit font-semibold text-secondary">over a million lives</strong>, across the nation and around the world.
-            </span>
-          </p>
-        </div>
+        {/* Line above the figures, then Bar 1: figures only */}
+        <p className="glance-stat custom-text1 font-light text-white mb-5 lg:mb-6">
+          Our work has inspired <strong className="font-semibold">over a million lives</strong>, across the nation and around the world.
+        </p>
+        <dl className="grid grid-cols-3 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center">
+          {STATS.map((st, i) => (
+            <div key={st.label} className="glance-stat flex flex-col items-center" style={{ animationDelay: `${i * 120}ms` }}>
+              <dt className="order-2 mt-2 font-outfit text-sm sm:text-base md:text-lg font-light text-white">{st.label}</dt>
+              <dd className="order-1">
+                <CountUp to={st.to} suffix={st.suffix} className={bigNum} />
+              </dd>
+            </div>
+          ))}
+        </dl>
 
         {/* Bar 2: vertical headings. Click a heading to open its details (all panels stay in the DOM, hidden, so the text is crawlable). */}
         <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-x-10 lg:gap-y-5 lg:items-stretch">
