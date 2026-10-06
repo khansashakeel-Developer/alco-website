@@ -4,8 +4,6 @@ export type AnnouncementItem = {
   kind: "webinar" | "training";
   /** Plain text typed by the marketing team in the CMS. Never HTML. */
   title: string;
-  /** Optional one short line under the title, plain text. */
-  note?: string;
   /** ISO date-time. For a training this is the first session; for a webinar the session itself. */
   startsAt: string;
   /** Internal link only (starts with "/"). Trainings without one fall back to the Enrol now button. */

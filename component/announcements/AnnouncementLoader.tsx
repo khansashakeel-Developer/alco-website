@@ -54,7 +54,6 @@ export default async function AnnouncementLoader() {
         id: `${kind}-${String(r?._id ?? title)}`,
         kind,
         title,
-        note: text(r?.note, 140) || undefined,
         startsAt: r.startsAt as string,
         href: internalHref(r?.href),
       });

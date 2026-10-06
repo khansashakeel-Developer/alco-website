@@ -1,6 +1,6 @@
 # Announcement window: what the CRM (website CMS) must provide
 
-The website shows an announcement window to visitors: the next free webinar and the upcoming trainings.
+The website shows two small announcement windows, one after the other: first the upcoming trainings, then (after "Not now") the free webinar.
 The website only READS. Marketing edits titles and dates in the CRM; the site picks them up within about 5 minutes.
 
 ## 1. Free webinar (already built in the CRM)
@@ -18,7 +18,6 @@ Used as is. The same endpoint feeds the free-webinar form. No change needed. If 
       "type": "training",
       "title": "NLP Practitioner, Batch 98",
       "startsAt": "2026-11-02T15:00:00.000Z",
-      "note": "Live on Zoom, 8:00pm to 2:00am PKT",
       "href": "/program/nlp-practitioner"
     }
   ]
@@ -30,10 +29,9 @@ Used as is. The same endpoint feeds the free-webinar form. No change needed. If 
 | `type` | `"training"` or `"webinar"`. Only one webinar line is shown (the free-weekly endpoint wins). |
 | `title` | Required. Plain text, up to 120 characters. Shown as text, never as HTML. |
 | `startsAt` | Required. ISO date-time in UTC. Shown to visitors in Pakistan time (PKT). Items in the past are hidden automatically. |
-| `note` | Optional. One short plain line, up to 140 characters. |
 | `href` | Optional. Internal link only, must start with `/` (for example `/program/nlp-practitioner`). Anything else is ignored. |
 
-CMS admin screen: a simple list (title, type, start date and time, note, link, Active on/off). The endpoint returns only Active items.
+CMS admin screen: a simple list (title, type, start date and time, link, Active on/off). The endpoint returns only Active items.
 The site shows the next 4 trainings, soonest first.
 
 ## Website copy rules for whoever edits these in the CMS
