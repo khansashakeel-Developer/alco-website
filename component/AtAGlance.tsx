@@ -73,7 +73,7 @@ const STATS = [
 function toPoints(facts: string[]) {
   return facts.flatMap((f) =>
     f.split(/(?<=\.)\s+(?=[A-Z])/).map((text, i) => {
-      const m = i === 0 ? text.match(/^([^:]{3,40}):\s+(.*)$/s) : null;
+      const m = i === 0 ? text.match(/^([^:]{3,40}):\s+([\s\S]*)$/) : null;
       return m ? { lead: m[1] + ":", text: m[2] } : { lead: "", text };
     })
   );
