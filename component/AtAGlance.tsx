@@ -60,7 +60,7 @@ const tabs: Tab[] = [
 // SEO heading: one plain <h2> text node. Change the size here only (swap "h3" for "h2" or "h4", or add e.g. "text-[34px]").
 // Keep it an <h2>: the page's single <h1> lives in the Hero.
 const HEADING_TEXT = "AL&CO at a Glance";
-const HEADING_CLASS = "h3 text-white text-start mb-4 lg:mb-6";
+const HEADING_CLASS = "h3 text-white text-start";
 
 const bigNum = "font-outfit font-bold text-[44px] md:text-[56px] leading-none bg-gradient-to-b from-secondary to-white bg-clip-text text-transparent";
 const STATS = [
@@ -144,12 +144,14 @@ export default function AtAGlance() {
             .glance-fact{animation:glanceUp .55s ease-out both}
           }
         `}</style>
-        <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
+        {/* Heading on the left, the "million lives" line on the same row at the right */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-8 mb-5 lg:mb-6">
+          <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
+          <p className="glance-stat custom-text1 font-light text-white md:text-end md:max-w-xl">
+            Our work has inspired <strong className="font-semibold">over a million lives</strong>, across the nation and around the world.
+          </p>
+        </div>
 
-        {/* Line above the figures, then Bar 1: figures only */}
-        <p className="glance-stat custom-text1 font-light text-white mb-5 lg:mb-6">
-          Our work has inspired <strong className="font-semibold">over a million lives</strong>, across the nation and around the world.
-        </p>
         <dl className="grid grid-cols-3 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center">
           {STATS.map((st, i) => (
             <div key={st.label} className="glance-stat flex flex-col items-center" style={{ animationDelay: `${i * 120}ms` }}>
