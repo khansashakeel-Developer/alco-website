@@ -6,11 +6,14 @@
 import { useState, useEffect, useRef } from "react";
 import { Landmark, Users, GraduationCap, DoorOpen, ChevronDown } from "lucide-react";
 
-type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[] };
+// color = brand accent for this heading, ink = readable text colour on that accent.
+type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[]; color: string; ink: string };
 
 const tabs: Tab[] = [
   {
     id: "who",
+    color: "#F9B81E",
+    ink: "#09263D",
     label: "Who we are",
     icon: <Landmark size={18} />,
     facts: [
@@ -21,6 +24,8 @@ const tabs: Tab[] = [
   },
   {
     id: "leadership",
+    color: "#FB8B21",
+    ink: "#09263D",
     label: "Our leadership",
     icon: <Users size={18} />,
     facts: [
@@ -30,6 +35,8 @@ const tabs: Tab[] = [
   },
   {
     id: "learn",
+    color: "#C6CA8D",
+    ink: "#09263D",
     label: "How you learn",
     icon: <GraduationCap size={18} />,
     facts: [
@@ -40,6 +47,8 @@ const tabs: Tab[] = [
   },
   {
     id: "after",
+    color: "#5B94C2",
+    ink: "#09263D",
     label: "After you graduate",
     icon: <DoorOpen size={18} />,
     facts: [
@@ -117,12 +126,21 @@ export default function AtAGlance() {
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary-darkest bg-dark-primary bg-cover bg-top-left w-full">
       <div className="container mx-auto px-4">
+        <style>{`
+          @keyframes glanceUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+          @keyframes glancePanel{from{opacity:0;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}
+          @media (prefers-reduced-motion:no-preference){
+            .glance-stat{animation:glanceUp .7s ease-out both}
+            .glance-panel:not([hidden]){animation:glancePanel .45s cubic-bezier(.2,.8,.2,1) both}
+            .glance-fact{animation:glanceUp .55s ease-out both}
+          }
+        `}</style>
         <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
 
         {/* Bar 1: figures only, label underneath */}
-        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-8 lg:py-10 mb-8 lg:mb-10 text-center">
-          {STATS.map((st) => (
-            <div key={st.label} className="flex flex-col items-center">
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center">
+          {STATS.map((st, i) => (
+            <div key={st.label} className="glance-stat flex flex-col items-center" style={{ animationDelay: `${i * 120}ms` }}>
               <dt className="order-2 mt-2 font-outfit text-base md:text-lg font-light text-white">{st.label}</dt>
               <dd className="order-1">
                 <CountUp to={st.to} suffix={st.suffix} className={bigNum} />
@@ -132,11 +150,11 @@ export default function AtAGlance() {
         </dl>
 
         {/* Bar 2: vertical headings. Click a heading to open its details (all panels stay in the DOM, hidden, so the text is crawlable). */}
-        <div className="lg:grid lg:grid-cols-[minmax(260px,340px)_1fr] lg:gap-x-8 lg:items-start">
+        <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-x-10 lg:gap-y-5 lg:items-start">
           {tabs.map((t, i) => {
             const open = i === active;
             return (
-              <div key={t.id} className="mb-3 lg:mb-3 lg:contents">
+              <div key={t.id} className="mb-5 lg:mb-0 lg:contents">
                 <h3 className="lg:col-start-1">
                   <button
                     type="button"
@@ -144,13 +162,20 @@ export default function AtAGlance() {
                     aria-expanded={open}
                     aria-controls={`glance-panel-${t.id}`}
                     onClick={() => setActive(i)}
-                    className={`w-full flex items-center gap-3 rounded-full px-5 py-4 text-start font-outfit font-medium text-[16px] md:text-[18px] border transition-colors focus-visible:ring-2 focus-visible:ring-secondary ${
+                    style={open ? { backgroundColor: t.color, color: t.ink, borderColor: t.color } : { borderColor: `${t.color}99` }}
+                    className={`group w-full flex items-center gap-4 rounded-full px-4 py-4 lg:py-5 text-start font-outfit font-semibold text-[16px] md:text-[18px] border-2 transition-all duration-300 ease-out focus-visible:ring-2 focus-visible:ring-white ${
                       open
-                        ? "bg-secondary text-primary-darkest border-secondary"
-                        : "bg-white/10 text-white border-white/30 hover:bg-white/20"
+                        ? "shadow-lg lg:translate-x-2 scale-[1.02]"
+                        : "bg-white/5 text-white hover:bg-white/15 hover:lg:translate-x-1"
                     }`}
                   >
-                    <span aria-hidden="true">{t.icon}</span>
+                    <span
+                      aria-hidden="true"
+                      style={open ? { backgroundColor: t.ink, color: t.color } : { backgroundColor: t.color, color: t.ink }}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-12"
+                    >
+                      {t.icon}
+                    </span>
                     <span className="flex-1">{t.label}</span>
                     <ChevronDown size={18} aria-hidden="true" className={`transition-transform lg:-rotate-90 ${open ? "rotate-180 lg:rotate-0" : ""}`} />
                   </button>
@@ -160,11 +185,12 @@ export default function AtAGlance() {
                   role="region"
                   aria-labelledby={`glance-tab-${t.id}`}
                   hidden={!open}
-                  className="mt-3 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-lg shadow-lg p-6 lg:p-8"
+                  style={{ borderTopColor: t.color }}
+                  className="glance-panel mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10"
                 >
-                  <ul className="grid grid-cols-1 gap-5">
-                    {t.facts.map((f) => (
-                      <li key={f} className="custom-text1 font-light text-black/80 border-l-4 border-secondary pl-4">
+                  <ul className="grid grid-cols-1 gap-7">
+                    {t.facts.map((f, n) => (
+                      <li key={f} style={{ borderLeftColor: t.color, animationDelay: `${150 + n * 140}ms` }} className="glance-fact custom-text1 font-light text-black/80 border-l-4 pl-5">
                         {f}
                       </li>
                     ))}
