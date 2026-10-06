@@ -52,6 +52,7 @@ export default function WhatIsNlp() {
         <div className="my-8">
           <VideoPlayer
             videoUrl={data.video}
+            title={data.title}
             thumbnail={data.thumbnail}
             autoPlayMuted
             className="aspect-video relative rounded-xl overflow-hidden lg:h-[70dvh] w-full bg-black"

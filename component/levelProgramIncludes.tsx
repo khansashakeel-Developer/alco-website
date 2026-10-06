@@ -49,7 +49,7 @@ export default function LevelProgramIncludes({ data }: Props) {
                 <div className="flex items-center gap-4 self-start">
                   <div className="w-12 h-12 shrink-0 p-2.5 bg-primary rounded-lg">
                     {point?.image?.src && (
-                      <Image src={point.image.src} alt={point.image.alt || "image"} width={100} height={100} className="object-cover" />
+                      <Image src={point.image.src} alt={point.image.alt || ""} width={100} height={100} className="object-cover" />
                     )}
                   </div>
                   <h3 className="text-lg xl:text-xl text-start font-outfit font-semibold text-primary">

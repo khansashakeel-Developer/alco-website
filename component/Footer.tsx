@@ -130,7 +130,7 @@ export default function Footer() {
           <span className="footer-menu-font text-white sm:text-center">
             © {new Date().getFullYear()} Arslan Larik & Company (AL&CO). All rights reserved.
           </span>
-                    <CookieSettingsLink className="footer-menu-font text-white underline mt-2 sm:mt-0" />
+                    <CookieSettingsLink className="text-sm text-white/80 underline hover:text-white mt-2 sm:mt-0" />
           <div className="flex mt-4 sm:mt-0 sm:justify-center gap-3">
             {socialLinks.map((item, index) => (
               <Link

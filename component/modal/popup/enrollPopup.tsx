@@ -208,7 +208,7 @@ export default function EnrollPopup({
           <div className="col-span-12 xl:col-span-4">
             {EnrollPopupImage && (
               <div className="relative w-full h-[180px] sm:h-[200px] md:h-[300px] xl:h-[200px]">
-                <Image src={EnrollPopupImage} alt="Enroll popup" fill className="object-cover rounded-md" />
+                <Image src={EnrollPopupImage} alt="Arslan Larik, Certified Master Trainer of NLP, with the AL&CO board seals" fill className="object-cover rounded-md" />
               </div>
             )}
             <div className="mt-4">

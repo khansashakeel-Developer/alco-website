@@ -56,7 +56,7 @@ const ContentSection = ({ data, onItemClick }: Props) => {
                                         <Image
                                             key={index}
                                             src={content.src}
-                                            alt={content.alt || "image"}
+                                            alt={content.alt ?? ""}
                                             fill
                                             sizes="(max-width: 768px) 100vw, 600px"
                                             className={`rounded-lg ${content.position ? content.position : "object-cover"} ${(content as any)?.is_available === false ? "opacity-70" : "opacity-100"} `}
