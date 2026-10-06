@@ -26,6 +26,12 @@ const when = (iso: string, withTime: boolean) =>
     ...(withTime ? { hour: "numeric", minute: "2-digit", hour12: true } : {}),
   }) + (withTime ? " PKT" : "");
 
+const parts = (iso: string) => {
+  const d = new Date(iso);
+  const f = (o: Intl.DateTimeFormatOptions) => d.toLocaleString("en-GB", { timeZone: "Asia/Karachi", ...o });
+  return { day: f({ day: "numeric" }), month: f({ month: "short" }).toUpperCase(), weekday: f({ weekday: "short" }) };
+};
+
 function wasDismissed(version: string) {
   try {
     const raw = window.localStorage.getItem(STORE_KEY);
@@ -38,16 +44,35 @@ function remember(version: string) {
   try { window.localStorage.setItem(STORE_KEY, JSON.stringify({ v: version, t: Date.now() })); } catch {}
 }
 
-export default function AnnouncementModal({ items, version }: { items: AnnouncementItem[]; version: string }) {
+// Design preview: open any page with ?announce-preview=1 to see the window with sample content (dates are always in the future).
+// Works on localhost; on a deployed site only when NEXT_PUBLIC_ANNOUNCEMENT_PREVIEW=true is set. Remove the env var for launch.
+const PREVIEW_ALLOWED = process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ANNOUNCEMENT_PREVIEW === "true";
+const inDays = (d: number, h: number) => { const t = new Date(); t.setUTCDate(t.getUTCDate() + d); t.setUTCHours(h, 0, 0, 0); return t.toISOString(); };
+const SAMPLE: AnnouncementItem[] = [
+  { id: "s-w", kind: "webinar", title: "Free Weekly Webinar: Is NLP Right for You?", startsAt: inDays(5, 15) },
+  { id: "s-1", kind: "training", title: "NLP Practitioner, Batch 98", note: "Live on Zoom, 8:00pm to 2:00am PKT", startsAt: inDays(21, 15), href: "/program/nlp-practitioner" },
+  { id: "s-2", kind: "training", title: "NLP Master Practitioner, Batch 41", note: "Live on Zoom, taught personally", startsAt: inDays(35, 15), href: "/program/nlp-master-practitioner" },
+  { id: "s-3", kind: "training", title: "Advanced Hypnotherapy and Interventionist, Batch 12", startsAt: inDays(60, 15) },
+];
+
+export default function AnnouncementModal({ items: liveItems, version: liveVersion }: { items: AnnouncementItem[]; version: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [preview, setPreview] = useState(false);
+  const items = preview ? SAMPLE : liveItems;
+  const version = preview ? "preview" : liveVersion;
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const skip = SKIP_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 
+  // Design preview: skip the cookie wait, the pause and the "already dismissed" memory.
+  useEffect(() => {
+    if (PREVIEW_ALLOWED && new URLSearchParams(window.location.search).has("announce-preview")) { setPreview(true); setOpen(true); }
+  }, []);
+
   // Wait for the cookie choice, then a short pause, then show (unless already seen).
   useEffect(() => {
-    if (skip || wasDismissed(version)) return;
+    if (preview || skip || liveItems.length === 0 || wasDismissed(version)) return;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const arm = () => {
       if (!getConsent() || timer) return;
@@ -56,9 +81,9 @@ export default function AnnouncementModal({ items, version }: { items: Announcem
     arm();
     window.addEventListener(CONSENT_EVENT, arm);
     return () => { window.removeEventListener(CONSENT_EVENT, arm); if (timer) clearTimeout(timer); };
-  }, [skip, version]);
+  }, [skip, version, preview, liveItems.length]);
 
-  const close = useCallback(() => { setOpen(false); remember(version); }, [version]);
+  const close = useCallback(() => { setOpen(false); if (!preview) remember(version); }, [version, preview]);
 
   // Focus, Esc, simple focus trap, and page scroll lock while open.
   useEffect(() => {
@@ -80,7 +105,7 @@ export default function AnnouncementModal({ items, version }: { items: Announcem
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = overflow; previous?.focus?.(); };
   }, [open, close]);
 
-  if (!open || skip) return null;
+  if (!open || (skip && !preview) || items.length === 0) return null;
 
   const webinar = items.find((i) => i.kind === "webinar");
   const trainings = items.filter((i) => i.kind === "training");
@@ -109,20 +134,30 @@ export default function AnnouncementModal({ items, version }: { items: Announcem
           <X size={18} aria-hidden="true" />
         </button>
 
-        <div className="p-6 sm:p-8 font-outfit">
+        <div className="p-6 pb-24 sm:p-8 sm:pb-8 font-outfit">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary/70">What’s coming up</p>
           <h2 id="announce-title" className="mt-1 text-2xl sm:text-3xl font-semibold text-primary">Join us live</h2>
 
           {webinar && (
-            <section className="mt-6 rounded-xl bg-primary-darkest p-5 text-white">
-              <div className="flex items-center gap-2 text-secondary text-sm font-semibold uppercase tracking-wide">
-                <Video size={16} aria-hidden="true" /> Free webinar
+            <section className="mt-6 relative overflow-hidden rounded-2xl bg-primary-darkest p-5 sm:p-6 text-white">
+              <span aria-hidden="true" className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-secondary/15" />
+              <div className="relative flex items-start gap-4">
+                <div aria-hidden="true" className="flex w-16 shrink-0 flex-col items-center rounded-xl bg-secondary py-2 text-primary-darkest shadow-md">
+                  <span className="text-[11px] font-semibold tracking-widest">{parts(webinar.startsAt).month}</span>
+                  <span className="text-3xl font-bold leading-none">{parts(webinar.startsAt).day}</span>
+                  <span className="text-[11px] font-medium">{parts(webinar.startsAt).weekday}</span>
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 text-secondary text-xs font-semibold uppercase tracking-widest">
+                    <Video size={14} aria-hidden="true" /> Free webinar
+                  </div>
+                  <h3 className="mt-1 text-lg sm:text-xl font-semibold leading-snug">{webinar.title}</h3>
+                  <p className="mt-1 flex items-center gap-2 text-white/85 text-sm">
+                    <CalendarDays size={15} aria-hidden="true" className="shrink-0" /> {when(webinar.startsAt, true)}
+                  </p>
+                </div>
               </div>
-              <h3 className="mt-2 text-lg sm:text-xl font-semibold">{webinar.title}</h3>
-              <p className="mt-1 flex items-center gap-2 text-white/85 text-sm sm:text-base">
-                <CalendarDays size={16} aria-hidden="true" className="shrink-0" /> {when(webinar.startsAt, true)}
-              </p>
-              <div className="mt-4"><CtaButton id="C2" variant="secondary" /></div>
+              <div className="relative mt-5"><CtaButton id="C2" variant="secondary" /></div>
             </section>
           )}
 
@@ -132,26 +167,32 @@ export default function AnnouncementModal({ items, version }: { items: Announcem
                 <GraduationCap size={16} aria-hidden="true" /> Upcoming trainings
               </h3>
               <ul className="mt-3 space-y-3">
-                {trainings.map((t) => (
-                  <li key={t.id} className="flex items-start gap-3 rounded-xl border border-primary/15 bg-neutral-light p-4">
-                    <span aria-hidden="true" className="mt-1 h-3 w-3 shrink-0 rounded-full bg-secondary" />
-                    <div className="min-w-0">
-                      <p className="font-semibold text-primary">
-                        {t.href ? <a href={t.href} className="underline decoration-secondary decoration-2 underline-offset-4">{t.title}</a> : t.title}
-                      </p>
-                      <p className="text-sm text-gray-700">Starts {when(t.startsAt, false)}</p>
-                      {t.note && <p className="text-sm text-gray-600 mt-0.5">{t.note}</p>}
-                    </div>
-                  </li>
-                ))}
+                {trainings.map((t) => {
+                  const d = parts(t.startsAt);
+                  return (
+                    <li key={t.id} className="flex items-center gap-4 rounded-xl border border-primary/15 bg-neutral-light p-3 sm:p-4 transition-shadow hover:shadow-md">
+                      <div aria-hidden="true" className="flex w-14 shrink-0 flex-col items-center rounded-lg bg-primary py-1.5 text-white">
+                        <span className="text-[10px] font-semibold tracking-widest text-secondary">{d.month}</span>
+                        <span className="text-2xl font-bold leading-none">{d.day}</span>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-primary leading-snug">
+                          {t.href ? <a href={t.href} className="underline decoration-secondary decoration-2 underline-offset-4">{t.title}</a> : t.title}
+                        </p>
+                        <p className="text-sm text-gray-700">Starts {when(t.startsAt, false)}</p>
+                        {t.note && <p className="text-sm text-gray-600">{t.note}</p>}
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
-              <div className="mt-4"><CtaButton id="C4" variant="primary" /></div>
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3"><CtaButton id="C4" variant="primary" /><button type="button" onClick={close} className="text-sm text-primary/70 underline underline-offset-4 hover:text-primary">Not now</button></div>
             </section>
           )}
 
-          <button type="button" onClick={close} className="mt-6 text-sm text-primary/70 underline underline-offset-4 hover:text-primary">
-            Not now
-          </button>
+          {trainings.length === 0 && (
+            <button type="button" onClick={close} className="mt-5 text-sm text-primary/70 underline underline-offset-4 hover:text-primary">Not now</button>
+          )}
         </div>
       </div>
     </div>

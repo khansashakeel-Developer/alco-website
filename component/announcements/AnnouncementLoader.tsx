@@ -68,9 +68,8 @@ export default async function AnnouncementLoader() {
     .slice(0, MAX_TRAININGS);
 
   const shown = [...(webinar ? [webinar] : []), ...trainings];
-  if (shown.length === 0) return null;
-
   // Changes whenever the list changes, so a returning visitor sees the popup again when something new is announced.
   const version = shown.map((i) => `${i.id}@${i.startsAt}@${i.title}`).join("|");
+  // Rendered even when the list is empty: the popup itself shows nothing then, except in design-preview mode (?announce-preview=1).
   return <AnnouncementModal items={shown} version={version} />;
 }
