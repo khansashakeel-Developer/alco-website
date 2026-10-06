@@ -6,7 +6,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Landmark, Users, GraduationCap, DoorOpen, ChevronDown, Check } from "lucide-react";
 
-// color = brand accent (only tailwind.config.js brand colours: secondary gold/orange, neutral cream, primary blue) for this heading, ink = readable text colour on that accent.
+// color = brand accent (brand palette only: gold #F9B81E, light gold #FFE29D and blue #346B96 from tailwind.config.js, plus white) for this heading, ink = readable text colour on that accent.
 type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[]; color: string; ink: string };
 
 const tabs: Tab[] = [
@@ -24,7 +24,7 @@ const tabs: Tab[] = [
   },
   {
     id: "leadership",
-    color: "#FB8B21",
+    color: "#FFE29D",
     ink: "#09263D",
     label: "Our leadership",
     icon: <Users size={18} />,
@@ -35,7 +35,7 @@ const tabs: Tab[] = [
   },
   {
     id: "learn",
-    color: "#FCF9EF",
+    color: "#FFFFFF",
     ink: "#09263D",
     label: "How you learn",
     icon: <GraduationCap size={18} />,
@@ -47,7 +47,7 @@ const tabs: Tab[] = [
   },
   {
     id: "after",
-    color: "#1B507C",
+    color: "#346B96",
     ink: "#FFFFFF",
     label: "After you graduate",
     icon: <DoorOpen size={18} />,
@@ -196,7 +196,7 @@ export default function AtAGlance() {
                   aria-labelledby={`glance-tab-${t.id}`}
                   hidden={!open}
                   style={{ borderTopColor: t.color }}
-                  className="glance-panel flex flex-col justify-center mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10"
+                  className={`glance-panel ${open ? "flex" : "hidden"} flex-col justify-center mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10`}
                 >
                   <div className="flex items-center gap-4 mb-6 lg:mb-8">
                     <span
