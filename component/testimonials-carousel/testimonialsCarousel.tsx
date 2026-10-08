@@ -8,6 +8,7 @@ import "@/component/testimonials-carousel/testimonialsCarousel.css"
 import { TestimonialsPost } from "@/type/testimonialsTypes"
 import { HiStar } from "react-icons/hi2";
 import VideoPlayer from "../videoPlayer"
+import { usePathname } from "next/navigation"
 
 type PropType = {
   slides: TestimonialsPost[]
@@ -17,10 +18,12 @@ type PropType = {
 }
 
 const TestimonialsCarousel = ({ slides, padding, options, onEditSlide }: PropType) => {
+  const pathname = usePathname()
+  const onTestimonialPage = pathname === "/testimonial"
 
   const autoplay = useRef(
     Autoplay({
-      delay: 1000,
+      delay: 3000,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
     })
@@ -74,6 +77,7 @@ const TestimonialsCarousel = ({ slides, padding, options, onEditSlide }: PropTyp
                             </span>
                           ))}
                         </div>
+                        {!onTestimonialPage && (
                         <Button
                           iconRight={true}
                           text={`Read ${slide.name}'s story`}
@@ -81,7 +85,7 @@ const TestimonialsCarousel = ({ slides, padding, options, onEditSlide }: PropTyp
                           size="medium"
                           href="/testimonial"
                           className="mt-3"
-                        />
+                        />)}
                       </div>
                     </div>
                   </div>

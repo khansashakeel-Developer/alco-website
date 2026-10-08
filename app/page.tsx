@@ -15,7 +15,9 @@ import { Metadata } from "next";
 import CtaBand from "@/component/CtaBand";
 import { buildMetadata, fallbackMetadata } from "@/utils/buildMetadata";
 import Reveal from "@/component/Reveal";
+/*import StickyEnrolBar from "@/component/StickyEnrolBar";*/
 import StickyEnrolBar from "@/component/StickyEnrolBar";
+import Link from "next/link";
 
 const HOME_TITLE = "NLP Training in Pakistan, Certification Taught Live | AL&CO";
 const HOME_DESCRIPTION =
@@ -69,7 +71,30 @@ export default async function Home() {
         <Reveal><Brand /></Reveal>
         <Reveal><WhatIsNlp /></Reveal>
         <Reveal><AralanLarikIntro /></Reveal>
-        <Reveal><OurProgram /></Reveal>
+                <Reveal><OurProgram /></Reveal>
+        <Reveal>
+          <section
+            aria-labelledby="find-your-level"
+            className="bg-[#09263D] px-4 py-8 md:py-10"
+          >
+            <div className="container mx-auto flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+              <div>
+                <h2 id="find-your-level" className="h3 text-white">
+                  Not sure which level fits you?
+                </h2>
+                <p className="mt-1 text-white/80">
+                  Answer a few quick questions and see where to start.
+                </p>
+              </div>
+              <Link
+                href="/start"
+                className="inline-flex items-center justify-center rounded-md bg-secondary px-6 py-3 font-semibold text-[#09263D] transition hover:brightness-110"
+              >
+                Find my level
+              </Link>
+            </div>
+          </section>
+        </Reveal>*/ 
         <Reveal><Benefits /></Reveal>
         <Reveal><Accredited /></Reveal>
         <Reveal><WhyTrainWithAL /></Reveal>

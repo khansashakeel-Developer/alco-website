@@ -11,7 +11,7 @@ const HOME_WA = "Hi, I would like to know about AL&CO's NLP training (home page)
 const heroData: HeroData = [
   {
     "title": {
-      "line1": "World-Class NLP Training in Pakistan, ",
+      "line1": "World-Class NLP Training in Pakistan ",
       "line2": "Taught Live by AL&CO"
     },
     "description": "Arslan Larik & Company (AL&CO), the Center for Human Brilliance and Behavioral Reengineering. World-class NLP, hypnosis and coaching certification, taught live. <br/> Transform your own life, and learn to transform the lives of others.",
@@ -25,7 +25,7 @@ const heroData: HeroData = [
       "cta": { id: "C2" }
     },
     "image": heroSlide1,
-    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/q_auto:good,w_1280,ac_none,vc_h264/v1791197799/2_b_kpdzp1.mp4"
+    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1791444589/2_uubsbi.mp4"
   },
   {
     "title": {
@@ -62,9 +62,12 @@ const heroData: HeroData = [
       "text": "Join the free webinar",
       "cta": { id: "C2" }
     },
-    "image": heroSlide3
+    "image": heroSlide3,
+    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/q_auto:good,w_1280,ac_none,vc_h264/v1791445377/ttt_website_xsprxw.mp4"
   }
 ]
+  
+
 
 export const home: HeroType = {
   hero: heroData,

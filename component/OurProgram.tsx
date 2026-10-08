@@ -26,6 +26,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
+      video: "/videos/programs/level-1.mp4",
       image: {
         src: Level1,
         alt: "Level 1: NLP Practitioner"
@@ -38,6 +39,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
+      poster: { src: "/images/programs/level-2.jpg", alt: "Level 2: NLP Master Practitioner" },
       image: {
         src: Level2,
         alt: "Level 2: NLP Master Practitioner"
@@ -50,6 +52,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
+      poster: { src: "/images/programs/level-3.jpg", alt: "Level 3: Advanced Hypnotherapy and Interventionist" },
       image: {
         src: Level3,
         alt: "Level 3: Advanced Hypnotherapy and Interventionist"
@@ -62,6 +65,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
+      poster: { src: "/images/programs/level-4.jpg", alt: "Level 4: NLP Train the Trainer" },
       image: {
         src: Level4,
         alt: "Level 4: NLP Train the Trainer"
@@ -74,6 +78,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
+      poster: { src: "/images/programs/level-5.jpg", alt: "Level 5: Hypnosis Train the Trainer" },
       image: {
         src: Level5,
         alt: "Level 5: Hypnosis Train the Trainer"
@@ -86,6 +91,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
+      poster: { src: "/images/programs/level-6.jpg", alt: "Level 6: NLP Master Trainer" },
       image: {
         src: Level6,
         alt: "Level 6: NLP Master Trainer"

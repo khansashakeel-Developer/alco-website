@@ -62,7 +62,7 @@ const tabs: Tab[] = [
 const HEADING_TEXT = "AL&CO at a Glance";
 const HEADING_CLASS = "h3 text-white text-start";
 
-const bigNum = "font-outfit font-bold text-[44px] md:text-[56px] leading-none bg-gradient-to-b from-secondary to-white bg-clip-text text-transparent";
+const bigNum = "font-outfit font-bold text-[28px] min-[400px]:text-[36px] sm:text-[44px] md:text-[56px] leading-none bg-gradient-to-b from-secondary to-white bg-clip-text text-transparent";
 const STATS = [
   { to: 2000, suffix: "+", label: "graduates" },
   { to: 20, suffix: "+", label: "countries" },
@@ -133,7 +133,11 @@ export default function AtAGlance() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary-darkest bg-dark-primary bg-cover bg-top-left w-full">
+     
+     /* <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary bg-medium-primary bg-cover bg-top-left w-full">*/
+    /* <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary bg-medium-primary bg-[length:100%_auto] bg-no-repeat bg-right-top w-full">*/
+      <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary-darkest bg-dark-primary bg-cover bg-top-left w-full">
+    
       <div className="container mx-auto px-4">
         <style>{`
           @keyframes glanceUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
@@ -182,7 +186,7 @@ export default function AtAGlance() {
                     className={`group w-full flex items-center gap-4 rounded-full px-4 py-4 lg:py-5 text-start font-outfit font-semibold text-[16px] md:text-[18px] border-2 transition-all duration-300 ease-out focus-visible:ring-2 focus-visible:ring-white ${
                       open
                         ? "shadow-lg lg:translate-x-2 scale-[1.02]"
-                        : "bg-white/5 text-white hover:bg-white/15 hover:lg:translate-x-1"
+                        : "bg-white/10 text-white hover:bg-white/20 hover:lg:translate-x-1"
                     }`}
                   >
                     <span
@@ -192,7 +196,7 @@ export default function AtAGlance() {
                     >
                       {t.icon}
                     </span>
-                    <span className="flex-1">{t.label}</span>
+                    <span className="flex-1 uppercase tracking-wide text-sm sm:text-[15px]">{t.label}</span>
                     <ChevronDown size={18} aria-hidden="true" className={`transition-transform lg:-rotate-90 ${open ? "rotate-180 lg:rotate-0" : ""}`} />
                   </button>
                 </h3>
@@ -212,7 +216,7 @@ export default function AtAGlance() {
                     >
                       {t.icon}
                     </span>
-                    <p aria-hidden="true" className="font-outfit text-xl md:text-2xl font-semibold text-primary">{t.label}</p>
+                    <p aria-hidden="true" className="font-outfit text-xl md:text-2xl font-semibold text-primary uppercase tracking-wide">{t.label}</p>
                   </div>
                   {t.id === "who" ? (
                     <p style={{ animationDelay: "150ms" }} className="glance-fact custom-text1 font-light text-black/80 leading-relaxed">

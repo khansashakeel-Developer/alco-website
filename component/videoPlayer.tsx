@@ -3,6 +3,8 @@
 import Image, { StaticImageData } from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import { FaPlay } from "react-icons/fa";
+import { createPortal } from "react-dom";
+import { usePathname } from "next/navigation";
 
 type VideoPlayerProps = {
   videoUrl?: string;
@@ -11,6 +13,7 @@ type VideoPlayerProps = {
   videoClass?: string;
   className?: string;
   hoverPlay?: boolean;
+  allowSound?: boolean; // click on a hover-preview plays the video with sound
   autoPlayOnVisible?: boolean; // muted, looping, no controls (used by the Benefits card video)
   autoPlayMuted?: boolean; // muted autoplay when visible, keeps controls so visitors can unmute
 };
@@ -22,10 +25,15 @@ const VideoPlayer = ({
   videoClass,
   className,
   hoverPlay = false,
+  allowSound: allowSoundProp = false,
   autoPlayOnVisible = false,
   autoPlayMuted = false,
 }: VideoPlayerProps) => {
   const [play, setPlay] = useState(false);
+  const [withSound, setWithSound] = useState(false);
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const allowSound = allowSoundProp || !!pathname?.startsWith("/testimonial");
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoOnView = autoPlayOnVisible || autoPlayMuted;
@@ -44,7 +52,7 @@ const VideoPlayer = ({
           setPlay(false);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (containerRef.current) observer.observe(containerRef.current);
@@ -60,15 +68,27 @@ const VideoPlayer = ({
     v.play().catch(() => {});
   }, [play, autoOnView]);
 
+    useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   const handleMouseEnter = () => {
-    if (hoverPlay) {
+    if (hoverPlay && !withSound) {
       setPlay(true);
       setTimeout(() => videoRef.current?.play()?.catch(() => {}), 50);
     }
   };
 
   const handleMouseLeave = () => {
-    if (hoverPlay) {
+    if (hoverPlay && !withSound) {
       videoRef.current?.pause();
       if (videoRef.current) videoRef.current.currentTime = 0;
       setPlay(false);
@@ -86,7 +106,11 @@ const VideoPlayer = ({
       {!play && (
         <div
           className="absolute inset-0 cursor-pointer group"
-          onClick={() => !hoverPlay && !autoPlayOnVisible && setPlay(true)}
+          onClick={() => {
+            if (hoverPlay) {
+                   if (allowSound) setOpen(true);
+            } else if (!autoPlayOnVisible) setPlay(true);
+          }}
         >
           {thumbnail && (
             <div className="relative w-full h-full">
@@ -114,7 +138,11 @@ const VideoPlayer = ({
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="flex items-center gap-3 bg-primary/60 backdrop-blur-sm px-5 py-3 rounded-full transition">
                 <FaPlay className="text-white text-sm" />
-                <span className="text-white text-sm font-outfit font-medium tracking-wide">Hover to Watch</span>
+                <span className="text-white text-sm font-outfit font-medium tracking-wide">
+                  {allowSound
+                    ? "Watch with sound"
+                    : "Hover to Watch"}
+                </span>
               </div>
             </div>
           )}
@@ -125,17 +153,55 @@ const VideoPlayer = ({
       {play && (
         <video
           ref={videoRef}
-          controls={!hoverPlay && !autoPlayOnVisible}
+          controls={(!hoverPlay && !autoPlayOnVisible) || withSound}
           preload="metadata"
-          muted={hoverPlay || autoOnView}
+          muted={(hoverPlay && !withSound) || autoOnView}
           playsInline
-          loop={hoverPlay || autoPlayOnVisible}
-          autoPlay={!hoverPlay}
+          loop={(hoverPlay && !withSound) || autoPlayOnVisible}
+          autoPlay={!hoverPlay || withSound}
+          onClick={() => {
+            if (hoverPlay && allowSound) {
+              videoRef.current?.pause();
+              setOpen(true);
+            }
+          }}
+          onEnded={() => {
+            if (withSound) {
+              setWithSound(false);
+              setPlay(false);
+            }
+          }}
           className={videoClass}
         >
-          <source src={videoUrl} type="video/mp4" />
+                    <source src={videoUrl} type="video/mp4" />
         </video>
       )}
+
+      {open &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4"
+            onClick={() => setOpen(false)}
+          >
+            <button
+              type="button"
+              aria-label="Close video"
+              className="absolute top-4 right-5 text-white text-4xl leading-none"
+              onClick={() => setOpen(false)}
+            >
+              ×
+            </button>
+            <video
+              src={videoUrl}
+              controls
+              autoPlay
+              playsInline
+              className="max-h-[90vh] max-w-[95vw] rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>,
+          document.body,
+        )}
     </div>
   );
 };

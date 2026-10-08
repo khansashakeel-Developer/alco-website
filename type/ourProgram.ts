@@ -12,6 +12,13 @@ export type OurProgramSlideType = {
     src: StaticImageData
     alt: string
   }
+  // Optional portrait picture (2:3) shown on the card. When missing, the image above is used.
+  poster?: {
+    src: StaticImageData | string
+    alt: string
+  }
+  // Optional short video that plays muted on hover, e.g. "/videos/programs/level-1.mp4" (file in /public) or a full https URL.
+  video?: string
 }
 
 export type OurProgramData = {

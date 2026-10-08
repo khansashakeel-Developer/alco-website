@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/utils/buildMetadata";
 import AnnouncementLoader from "@/component/announcements/AnnouncementLoader";
 import AnnouncementStripLoader from "@/component/announcements/AnnouncementStripLoader";
+import QuizPopup from "@/component/QuizPopup";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -194,6 +195,7 @@ export default function RootLayout({
             {/* Scrolling strip for the flagged upcoming training (CMS). Renders nothing when none is flagged. */}
             <AnnouncementStripLoader />
             {children}
+            <QuizPopup />
           </main>
         </ConditionalLayout>
 

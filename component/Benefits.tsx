@@ -30,7 +30,7 @@ const benefitsData: BenefitsData = {
       title: "Career Advancement",
       description: "Identify clear career goals, develop leadership skills, and accelerate your professional growth.",
       image: {
-        src: Benefit2.src,
+        src: Benefit3.src,
         alt: "Career Advancement"
       }
     },
@@ -38,7 +38,7 @@ const benefitsData: BenefitsData = {
       title: "Communication Mastery",
       description: "Express yourself clearly and connect deeply with others while influencing confidently and positively.",
       image: {
-        src: Benefit3.src,
+        src: Benefit5.src,
         alt: "Communication Mastery"
       }
     },
@@ -46,7 +46,7 @@ const benefitsData: BenefitsData = {
       title: "Relationship Management",
       description: "Build meaningful connections, resolve conflicts, and strengthen personal and professional relationships.",
       image: {
-        src: Benefit4.src,
+        src: Benefit2.src,
         alt: "Relationship Management"
       }
     },
@@ -54,7 +54,7 @@ const benefitsData: BenefitsData = {
       title: "Decision Making",
       description: "Master the art of making confident, effective decisions that align with your goals and values.",
       image: {
-        src: Benefit5.src,
+        src: Benefit4.src,
         alt: "Decision Making"
       }
     },

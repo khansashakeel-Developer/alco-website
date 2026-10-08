@@ -17,6 +17,7 @@ const SAMPLE: AnnouncementItem = (() => {
 })();
 
 const date = (iso: string) => new Date(iso).toLocaleString("en-GB", { timeZone: "Asia/Karachi", day: "numeric", month: "long", year: "numeric" });
+const NAV_RESERVED = 72; // must match the pt-[72px] on <main> in app/layout.tsx
 const REPEATS = 4; // enough copies in each half to fill a wide screen
 
 export default function AnnouncementStrip({ item: liveItem }: { item: AnnouncementItem | null }) {
@@ -24,6 +25,19 @@ export default function AnnouncementStrip({ item: liveItem }: { item: Announceme
   const [preview, setPreview] = useState(false);
   useEffect(() => {
     if (PREVIEW_ALLOWED && new URLSearchParams(window.location.search).has("announce-preview")) setPreview(true);
+  }, []);
+
+  // The menu bar is fixed and a little taller than the 72px the page reserves for it, so the top of the strip would sit
+  // underneath it. Measure the real bar height and push the strip down by the difference so it shows completely.
+  const [navExtra, setNavExtra] = useState(0);
+  useEffect(() => {
+    const bar = document.querySelector("nav.fixed")?.firstElementChild as HTMLElement | null;
+    if (!bar) return;
+    const update = () => setNavExtra(Math.max(0, Math.ceil(bar.getBoundingClientRect().height) + 1 - NAV_RESERVED));
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(bar);
+    return () => ro.disconnect();
   }, []);
 
   const item = preview ? SAMPLE : liveItem;
@@ -52,7 +66,7 @@ export default function AnnouncementStrip({ item: liveItem }: { item: Announceme
   );
 
   return (
-    <aside aria-label="Upcoming training" className="announce-strip overflow-hidden bg-gradient-to-r from-primary-darkest via-primary to-primary-light text-white font-outfit text-sm sm:text-base">
+    <aside aria-label="Upcoming training" style={{ marginTop: navExtra }} className="announce-strip overflow-hidden bg-primary-darkest text-white font-outfit text-sm sm:text-base">
       <style>{`
         @keyframes announceScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
         .announce-strip-track{display:flex;width:max-content}

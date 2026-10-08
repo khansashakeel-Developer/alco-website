@@ -5,7 +5,7 @@
     --slide-size: 45%; */
     margin: auto;
     --slide-spacing: 5px;
-    --slide-size: 90%;
+    --slide-size: 78%;
     --slide-height: 18rem;
 }
 
@@ -76,43 +76,38 @@
     /* white for selected */
 }
 
-/* Small devices >= 640px */
+/* Portrait cards: one and a bit on phones, up to four on wide screens */
 @media (min-width: 640px) {
-    .our_program_embla {
-        --slide-spacing: 15px;
-        --slide-size: 80%;
-    }
-}
-
-/* Medium devices >= 768px */
-@media (min-width: 768px) {
     .our_program_embla {
         --slide-spacing: 15px;
         --slide-size: 60%;
     }
 }
 
-/* Large devices >= 1024px */
+@media (min-width: 768px) {
+    .our_program_embla {
+        --slide-spacing: 15px;
+        --slide-size: 45%;
+    }
+}
+
 @media (min-width: 1024px) {
     .our_program_embla {
         --slide-spacing: 20px;
-        --slide-size: 45%;
+        --slide-size: 33%;
     }
 }
 
-/* Extra Large devices >= 1280px */
 @media (min-width: 1280px) {
     .our_program_embla {
         --slide-spacing: 20px;
-        --slide-size: 45%;
+        --slide-size: 26%;
     }
 }
 
-/* 2XL devices >= 1536px */
 @media (min-width: 1536px) {
     .our_program_embla {
-        --slide-height: 24rem;
-        --slide-spacing: 40px;
-        --slide-size: 45%;
+        --slide-spacing: 24px;
+        --slide-size: 24%;
     }
 }

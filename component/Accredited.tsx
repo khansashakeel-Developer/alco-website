@@ -22,19 +22,47 @@ const title = "Certified Through International Boards";
 
 const seals: SealLine[] = [
   // LOGO: ABNLP - Khansa to supply approved artwork
-  { board: "ABNLP", seal: sealABNLP, text: "ABNLP: AL&CO is an ABNLP Approved Institute of NLP." },
+  {
+    board: "ABNLP",
+    seal: sealABNLP,
+    text: "ABNLP: AL&CO is an ABNLP Approved Institute of NLP.",
+  },
   // LOGO: ABNLP Coaching Division - Khansa to supply approved artwork
-  { board: "ABNLP Coaching Division", seal: sealABNLPCoaching, text: "ABNLP Coaching Division: AL&CO is an Approved Institute of NLP Coaching." },
+  {
+    board: "ABNLP Coaching Division",
+    seal: sealABNLPCoaching,
+    text: "ABNLP Coaching Division: AL&CO is an Approved Institute of NLP Coaching.",
+  },
   // LOGO: ABH - Khansa to supply approved artwork
-  { board: "ABH", seal: sealABH, text: "ABH: AL&CO is an ABH Approved School of Hypnosis." },
-  
-  { board: "TLTA", seal: sealTLTA, text: "TLTA: the Time Line Therapy Association, for your Time Line Therapy® Techniques credentials." },
+  {
+    board: "ABH",
+    seal: sealABH,
+    text: "ABH: AL&CO is an ABH Approved School of Hypnosis.",
+  },
+
+  {
+    board: "TLTA",
+    seal: sealTLTA,
+    text: "TLTA: the Time Line Therapy Association, for your Time Line Therapy® Techniques credentials.",
+  },
   // LOGO: NGH - Khansa to supply approved artwork
-  { board: "NGH", seal: sealNGH, text: "NGH: the National Guild of Hypnotists (USA)." },
+  {
+    board: "NGH",
+    seal: sealNGH,
+    text: "NGH: the National Guild of Hypnotists (USA).",
+  },
   // LOGO: ANLP (UK) - Khansa to supply approved artwork (the ANLP CPD badge is used until then)
-  { board: "ANLP (UK)", seal: sealANLP, text: "ANLP (UK): accredits Arslan as a trainer, provides your CPD accreditation, and named Arslan its International Ambassador for Pakistan." },
+  {
+    board: "ANLP (UK)",
+    seal: sealANLP,
+    text: "ANLP (UK): accredits Arslan as a trainer, provides your CPD accreditation, and named Arslan its International Ambassador for Pakistan.",
+  },
   // LOGO: AL&CO - Khansa to supply approved artwork
-  { board: "AL&CO", seal: sealALCO, text: "AL&CO: our own Certified Practitioner of Behavioral Reengineering." },
+  {
+    board: "AL&CO",
+    seal: sealALCO,
+    text: "AL&CO: our own Certified Practitioner of Behavioral Reengineering.",
+  },
 ];
 
 export default function Accredited() {
@@ -47,15 +75,20 @@ export default function Accredited() {
           {seals.map((s) => (
             <li key={s.board} className="flex items-center gap-4">
               {s.seal ? (
-                <Image
-                  src={s.seal}
-                  alt={`${s.board} seal`}
-                  width={64}
-                  height={64}
-                  className="shrink-0 rounded-full bg-white object-contain"
-                />
+                <span className="h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white">
+                  <Image
+                    src={s.seal}
+                    alt={`${s.board} seal`}
+                    width={64}
+                    height={64}
+                    className={`h-full w-full object-contain ${s.board === "AL&CO" ? "scale-[1.3]" : ""}`}
+                  />
+                </span>
               ) : (
-                <span className="shrink-0 w-16 h-16 rounded-full border border-white/40" aria-hidden="true" />
+                <span
+                  className="shrink-0 w-16 h-16 rounded-full border border-white/40"
+                  aria-hidden="true"
+                />
               )}
               <span>{s.text}</span>
             </li>
