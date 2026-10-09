@@ -229,7 +229,7 @@ function NextSteps({
               </div>
             </article>
           ) : (
-                        <div
+            <div
               className="fy-in group relative rounded-3xl bg-gradient-to-br from-secondary via-secondary/50 to-primary-light p-[2px] shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
               style={{ animationDelay: "120ms" }}
             >
@@ -295,7 +295,8 @@ function NextSteps({
                 A free gift to start with
               </p>
               <p className="mt-1 text-sm font-light text-white/75">
-                Based on what you&apos;d like to change, we think you&apos;ll love this:
+                Based on what you&apos;d like to change, we think you&apos;ll
+                love this:
               </p>
               <h3 className="mt-1 font-outfit text-lg font-semibold leading-snug text-white sm:text-xl">
                 {book.title}
@@ -332,6 +333,8 @@ function NextSteps({
                       style={{ filter: "contrast(1.08) saturate(1.1)" }}
                       src={b.thumbnail}
                       alt=""
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                   ) : (
@@ -420,30 +423,56 @@ function TryThisNow({ focus }: { focus: QuizAnswers["focus"] }) {
 
       <div className="fy-in grid overflow-hidden rounded-3xl bg-primary-darkest shadow-xl lg:grid-cols-5">
         {/* Left: what it is, and the timer */}
-<div className="relative flex flex-col justify-between overflow-hidden p-7 sm:p-9 lg:col-span-2">
-  {/* eslint-disable-next-line @next/next/no-img-element */}
-  <img src="/images/programs/try-this.jpg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover object-bottom" />
-  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#09263D]/90 via-[#09263D]/40 to-[#09263D]/10" />
-  <div className="relative z-10">
-    <span className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-darkest">{ex.minutes}</span>
-    <h3 className="mt-4 font-outfit text-3xl font-semibold leading-tight text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">{ex.title}</h3>
-    <p className="mt-3 font-normal text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">{total} small steps. Read one, do it, then tap Next.</p>
-  </div>
-  <div className="relative z-10 mt-8">
-    {left === null ? (
-      <button type="button" onClick={() => setLeft(mins * 60)} className="rounded-full border border-white/60 bg-black/30 px-5 py-2.5 font-outfit text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-primary-darkest">
-        Start a {mins} minute timer
-      </button>
-    ) : (
-      <div className="flex items-center gap-4">
-        <span className="font-outfit text-4xl font-semibold tabular-nums text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">{mmss(left)}</span>
-        <button type="button" onClick={() => setLeft(null)} className="text-sm text-white underline underline-offset-4 hover:text-white/80">
-          {left === 0 ? "Time is up. Reset" : "Reset"}
-        </button>
-      </div>
-    )}
-  </div>
-</div>
+        <div className="relative flex flex-col justify-between overflow-hidden p-7 sm:p-9 lg:col-span-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/programs/try-this.jpg"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover object-bottom"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-b from-[#09263D]/90 via-[#09263D]/40 to-[#09263D]/10"
+          />
+          <div className="relative z-10">
+            <span className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-darkest">
+              {ex.minutes}
+            </span>
+            <h3 className="mt-4 font-outfit text-3xl font-semibold leading-tight text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">
+              {ex.title}
+            </h3>
+            <p className="mt-3 font-normal text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">
+              {total} small steps. Read one, do it, then tap Next.
+            </p>
+          </div>
+          <div className="relative z-10 mt-8">
+            {left === null ? (
+              <button
+                type="button"
+                onClick={() => setLeft(mins * 60)}
+                className="rounded-full border border-white/60 bg-black/30 px-5 py-2.5 font-outfit text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-primary-darkest"
+              >
+                Start a {mins} minute timer
+              </button>
+            ) : (
+              <div className="flex items-center gap-4">
+                <span className="font-outfit text-4xl font-semibold tabular-nums text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">
+                  {mmss(left)}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setLeft(null)}
+                  className="text-sm text-white underline underline-offset-4 hover:text-white/80"
+                >
+                  {left === 0 ? "Time is up. Reset" : "Reset"}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* Right: one step at a time */}
         <div className="bg-white p-7 sm:p-9 lg:col-span-3">
@@ -578,7 +607,8 @@ export default function ForYou() {
   const { answers, firstName } = saved;
   const graduate = answers.journey === "graduate";
   const route = routeFor(answers);
-  const next = LEVELS.find((l) => l.level === nextLevelFor(answers)) ?? LEVELS[0];
+  const next =
+    LEVELS.find((l) => l.level === nextLevelFor(answers)) ?? LEVELS[0];
   const headline = graduate
     ? `Your next step is Level ${next.level}: ${next.name}`
     : `Your journey begins with Level ${next.level}: ${next.name}`;
@@ -614,7 +644,13 @@ export default function ForYou() {
       case "exploring":
         // Graduates are never sent to the free webinar.
         return graduate ? (
-          <CtaButton id="C1" message={waMessage} variant="secondary" label={GRADUATE_REVISIT_LABEL} className="px-6" />
+          <CtaButton
+            id="C1"
+            message={waMessage}
+            variant="secondary"
+            label={GRADUATE_REVISIT_LABEL}
+            className="px-6"
+          />
         ) : (
           <CtaButton id="C2" variant="secondary" className="px-6" />
         );
