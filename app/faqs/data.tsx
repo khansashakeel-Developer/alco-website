@@ -311,8 +311,8 @@ const gettingStarted: Faq[] = [
     schemaText:
       enrolSteps.map(([step, detail], i) => `${i + 1}. ${step} ${detail}`).join(" ") +
       " Book your conversation at /contact#form.",
+  },
 ];
-
 /* ============================== EXPORTS ============================== */
 export const faqGroups: FaqGroup[] = [
   { id: "the-basics", title: "The basics", items: basics },

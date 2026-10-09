@@ -2,8 +2,9 @@ import { HeroData } from "@/type/heroType";
 import { HeroType } from "@/type/homeType";
 import heroSlide1 from "@/assets/hero/hero_slide1.webp";
 import heroSlide2 from "@/assets/hero/hero_slide2.webp";
-// A 09 C2: slide 3 served as .webp (the 1.5 MB .jpg is no longer imported).
-import heroSlide3 from "@/assets/hero/hero_slide3.webp";
+import heroSlide3 from "@/public/images/hero-slide-3.jpeg";
+
+
 
 const HOME_WA = "Hi, I would like to know about AL&CO's NLP training (home page)";
 
@@ -62,7 +63,7 @@ const heroData: HeroData = [
       "text": "Join the free webinar",
       "cta": { id: "C2" }
     },
-    "image": "/images/hero-slide-3.jpg",
+    "image": heroSlide3,
     "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/q_auto:good,w_1280,ac_none,vc_h264/v1791525892/Video_Project_3_olsxoj.mp4",
   }
 ]
