@@ -69,26 +69,19 @@ function PathPanel({ answers, step }: { answers: QuizAnswers; step: Step }) {
                   lit ? "border-white/40 shadow-lg" : "border-white/10"
                 } ${lit && hasGoal && !first ? "qz-pop" : ""}`}
               >
-                {lit ? (
-  <video
-    src={`/videos/quiz/level-${lv.level}.mp4`}
-    poster={`/images/programs/level-${lv.level}.jpg`}
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="metadata"
-    aria-hidden="true"
-    className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110 transition-all duration-700 group-hover:scale-110 motion-reduce:hidden"
-  />
-) : (
-  // eslint-disable-next-line @next/next/no-img-element
-  <img
-    src={`/images/programs/level-${lv.level}.jpg`}
-    alt=""
-    className="absolute inset-0 h-full w-full object-cover grayscale opacity-40 transition-all duration-700 group-hover:scale-110"
-  />
-)}
+                      <video
+                  key={lit ? "on" : "off"}
+                  src={`/videos/programs/level-${lv.level}.mp4#t=0.1`}
+                  autoPlay={lit}
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                  className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-110 motion-reduce:hidden ${
+                    lit ? "brightness-110 contrast-105 saturate-110" : "grayscale opacity-40"
+                  }`}
+                />
                 <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#000A12]/90 via-[#000A12]/15 to-transparent" />
                 {first && step !== 0 && <span aria-hidden="true" className="qz-pulse pointer-events-none absolute inset-0 rounded-2xl" />}
                 {first ? (

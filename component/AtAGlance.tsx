@@ -40,7 +40,8 @@ const tabs: Tab[] = [
     label: "How you learn",
     icon: <GraduationCap size={18} />,
     facts: [
-      "Delivery: live on Zoom, taught personally, most evenings of the year. Sessions run 8:00pm to 2:00am Pakistan time (PKT).",
+            "Delivery: live on Zoom, taught personally, most evenings of the year.",
+      "Sessions: 8:00pm to 2:00am Pakistan time (PKT).",
       "The ladder: six levels, NLP Practitioner to NLP Master Trainer.",
       "Certifications you earn: through international boards, ABNLP, its NLP Coaching Division, ABH, TLTA and NGH (USA), plus a UK ANLP CPD accreditation, and AL&CO’s own credential.",
     ],

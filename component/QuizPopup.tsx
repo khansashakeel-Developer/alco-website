@@ -16,7 +16,7 @@ export default function QuizPopup() {
       setShow(false);
       return;
     }
-    const t = setTimeout(() => setShow(true), 15000);
+    const t = setTimeout(() => setShow(true), 20000);
     return () => clearTimeout(t);
   }, [pathname]);
 
