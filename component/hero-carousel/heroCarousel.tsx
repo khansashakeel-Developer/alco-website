@@ -39,14 +39,21 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
     setCanPlayVideo(!reduce && !saveData);
     setIsMobile(window.matchMedia("(max-width: 767px)").matches);
   }, []);
-  useEffect(() => {
-    slides.forEach((s) => {
-      if (!s.video) return;
-      const v = document.createElement("video");
-      v.preload = "auto";
-      v.muted = true;
-      v.src = s.video;
-    });
+    useEffect(() => {
+    // Warm slides 2 and 3 only after the page has loaded and the browser is idle
+    const warm = () => {
+      slides.slice(1).forEach((s) => {
+        if (!s.video) return;
+        const v = document.createElement("video");
+        v.preload = "metadata";
+        v.muted = true;
+        v.src = s.video;
+      });
+    };
+    const w = window as any;
+    const start = () => (w.requestIdleCallback ? w.requestIdleCallback(warm, { timeout: 4000 }) : setTimeout(warm, 3000));
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
   }, [slides]);
 
   useEffect(() => {
@@ -79,6 +86,20 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
           style={{ zIndex: 0 }}
         />
       )}
+            {/* Poster layer: paints immediately so the hero is never black while the video loads */}
+      {displayedIndex === 0 && (
+        <Image
+          src={slides[0].image}
+          alt=""
+          aria-hidden="true"
+          priority
+          fetchPriority="high"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{ zIndex: 0 }}
+        />
+      )}
 
       {/* Layer 2: incoming layer (fades in on top). A video if the slide has one, otherwise the image */}
       {slides[displayedIndex]?.video && canPlayVideo !== false ? (
@@ -94,6 +115,7 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
           loop
           playsInline
           preload="metadata"
+          poster={slides[displayedIndex].image.src}
           aria-hidden="true"
           className={`absolute inset-0 h-full w-full object-cover ${
             displayedIndex === 1
