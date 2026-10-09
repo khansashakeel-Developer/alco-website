@@ -62,8 +62,8 @@ const heroData: HeroData = [
       "text": "Join the free webinar",
       "cta": { id: "C2" }
     },
-    "image": heroSlide3,
-    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/q_auto:good,w_1280,ac_none,vc_h264/v1791445377/ttt_website_xsprxw.mp4"
+    "image": "/images/hero-slide-3.jpg",
+    "video": "https://res.cloudinary.com/dmbpjv9e8/video/upload/q_auto:good,w_1280,ac_none,vc_h264/v1791525892/Video_Project_3_olsxoj.mp4",
   }
 ]
   

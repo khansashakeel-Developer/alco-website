@@ -303,15 +303,14 @@ const gettingStarted: Faq[] = [
           ))}
         </ol>
         <p>
-          Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are arranged directly with Bismillah Pervez and Arslan Larik.{" "}
+          
           <Link href="/contact#form" className={linkClass} data-cta-id="C5" data-gtm-event="cta_click">Book your conversation</Link>.
         </p>
       </>
     ),
     schemaText:
       enrolSteps.map(([step, detail], i) => `${i + 1}. ${step} ${detail}`).join(" ") +
-      " Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are arranged directly with Bismillah Pervez and Arslan Larik.",
-  },
+      " Book your conversation at /contact#form.",
 ];
 
 /* ============================== EXPORTS ============================== */

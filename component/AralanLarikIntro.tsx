@@ -76,7 +76,6 @@ const trainers: TrainerCard[] = [
       link: "/about-us/who-is-bismillah-pervez",
     },
     logos: [
-      { image: badgeABNLP, alt: "ABNLP Master Trainer of NLP" },
       { image: badgeABNLPColor, alt: "ABNLP Approved Training (colored logo)" },
       { image: badgeANLP, alt: "ANLP Accredited Trainer (UK)" },
       { image: badgeNGHColor, alt: "National Guild of Hypnotists (NGH)" },
@@ -210,7 +209,11 @@ export default function AralanLarikIntro() {
                       title={l.alt}
                       width={80}
                       height={80}
-                      className="relative h-auto w-full max-w-[80px] shrink-0 scale-105 object-contain transition-transform duration-300 hover:z-10 hover:scale-110"
+                      className={`relative h-auto w-full max-w-[80px] shrink-0 object-contain transition-transform duration-300 hover:z-10 ${
+                        l.image === badgeNLPU
+                          ? "scale-[1.3] hover:scale-[1.4]"
+                          : "scale-105 hover:scale-110"
+                      }`}
                     />
                   ))}
                   <p className="sr-only">{t.credentials}</p>

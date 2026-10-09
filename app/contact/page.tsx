@@ -57,7 +57,7 @@ const ContentSectionData: ContentSectionType = {
   description: (
     <>
       <p className="text-gray-600 mb-4">
-        Your transformation starts with one conversation. Tell us where you are and where you want to go next, and we will help you find <Link href="/programs" className="underline">the level that fits</Link>, and show you where it can lead. Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are arranged directly with Bismillah Pervez and Arslan Larik.
+        Your transformation starts with one conversation. Tell us where you are and where you want to go next, and we will help you find <Link href="/programs" className="underline">the level that fits</Link>, and show you where it can lead.
       </p>
     </>
   ),

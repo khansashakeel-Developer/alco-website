@@ -16,7 +16,7 @@ export default function QuizPopup() {
       setShow(false);
       return;
     }
-    const t = setTimeout(() => setShow(true), 1000);
+    const t = setTimeout(() => setShow(true), 15000);
     return () => clearTimeout(t);
   }, [pathname]);
 
@@ -29,7 +29,7 @@ export default function QuizPopup() {
   return (
     <aside
       aria-label="Find your level quiz"
-      className="fixed bottom-24 left-4 z-[2147483000] w-[200px] rounded-3xl bg-white p-4 text-center shadow-xl sm:w-[230px]"
+      className="fixed bottom-24 left-4 z-[2147483000] w-[170px] rounded-3xl bg-white p-3 sm:p-4 text-center shadow-xl sm:w-[230px]"
     >
       <button
         type="button"
@@ -42,8 +42,8 @@ export default function QuizPopup() {
       <h2 className="text-lg font-bold leading-tight text-[#09263D]">
         Find Your Level
       </h2>
-      <FaBrain className="mx-auto my-3 text-5xl text-primary" aria-hidden="true" />
-      <p className="mb-3 text-sm text-gray-600">
+      <FaBrain className="mx-auto my-3 hidden text-5xl text-primary sm:block" aria-hidden="true" />
+      <p className="mb-3 hidden text-sm text-gray-600 sm:block">
         Take the 2 minute quiz and see where to start.
       </p>
       <Link

@@ -39,7 +39,8 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
-      poster: { src: "/images/programs/level-2.jpg", alt: "Level 2: NLP Master Practitioner" },
+      
+      video: "/videos/programs/level-2.mp4",
       image: {
         src: Level2,
         alt: "Level 2: NLP Master Practitioner"
@@ -52,7 +53,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
-      poster: { src: "/images/programs/level-3.jpg", alt: "Level 3: Advanced Hypnotherapy and Interventionist" },
+      video: "/videos/programs/level-3.mp4",
       image: {
         src: Level3,
         alt: "Level 3: Advanced Hypnotherapy and Interventionist"
@@ -65,7 +66,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
-      poster: { src: "/images/programs/level-4.jpg", alt: "Level 4: NLP Train the Trainer" },
+      video: "/videos/programs/level-4.mp4",
       image: {
         src: Level4,
         alt: "Level 4: NLP Train the Trainer"
@@ -78,7 +79,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
-      poster: { src: "/images/programs/level-5.jpg", alt: "Level 5: Hypnosis Train the Trainer" },
+      video: "/videos/programs/level-5.mp4",
       image: {
         src: Level5,
         alt: "Level 5: Hypnosis Train the Trainer"
@@ -91,7 +92,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
-      poster: { src: "/images/programs/level-6.jpg", alt: "Level 6: NLP Master Trainer" },
+      video: "/videos/programs/level-6.mp4",
       image: {
         src: Level6,
         alt: "Level 6: NLP Master Trainer"
@@ -124,7 +125,7 @@ export default function OurProgram() {
       </div>
       {/* B 01 row A26: link to the /programs hub */}
       <div className="container mx-auto px-4 mt-8">
-        <p className="custom-text2 font-light text-white mb-4">Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are arranged directly with Bismillah Pervez and Arslan Larik.</p>
+        <p className="custom-text2 font-light text-white mb-4"></p>
         <CtaButton id="C3" variant="secondary" />
       </div>
     </section>

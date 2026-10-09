@@ -17,8 +17,20 @@ export default function ALCOCenter() {
   const data = aLCOCenterData;
 
   return (
-    <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-image-alco-center bg-cover bg-top-left w-full">
-      <div className="container mx-auto px-4">
+    <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-image-alco-center bg-cover bg-top-left w-full relative overflow-hidden">
+  <video
+    className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+    src="/videos/alco-center.mp4"
+    poster="/videos/alco-center.jpg"
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="metadata"
+    aria-hidden="true"
+  />
+  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#04121F]/85 via-[#04121F]/55 to-[#04121F]/20" />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 my-8">
           <div className="flex flex-col justify-start ">
             <h2 className="h3 text-white text-start ">{data.title}</h2>

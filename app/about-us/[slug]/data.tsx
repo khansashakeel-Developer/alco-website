@@ -1337,9 +1337,7 @@ const ContentSectionData2WTALCO: ContentSectionType = {
         })}
       </ul>
       <div className="rounded-xl bg-primary-darkest p-6 lg:p-8 text-white shadow-md sm:flex sm:items-center sm:justify-between sm:gap-6">
-        <p className="text-white/90 max-w-3xl">
-          Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are arranged directly with Bismillah Pervez and Arslan Larik.
-        </p>
+       
         <div className="mt-5 sm:mt-0 shrink-0">
           <CtaButton id="C1" message="Hi, I would like to speak to a relationship manager (Why Train with AL&CO page)" variant="secondary" />
         </div>
