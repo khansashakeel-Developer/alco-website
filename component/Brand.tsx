@@ -103,10 +103,25 @@ export default function Brand() {
 
       {/* Organisations: one even grid of tiles (mixed text and logo tiles looked uneven in a moving strip). */}
             <div className="mt-12 lg:mt-16">
-        <h3 className="h4 text-center mb-2">Organisations We Have Worked With</h3>
-        <p className="custom-text1 font-light text-center mb-8 max-w-3xl mx-auto">
-          AL&amp;CO’s own clients, and organisations our founders have trained and coached for, before and alongside AL&amp;CO.
-        </p>
+                <div className="mx-auto mb-10 max-w-4xl text-center">
+          <span className="inline-block rounded-full bg-primary-darkest px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-secondary">
+            Trusted by
+          </span>
+          <h3 className="mt-4 font-outfit text-3xl font-semibold leading-tight text-primary-darkest sm:text-4xl lg:text-5xl">
+            Organisations We Have{" "}
+            <span className="relative inline-block text-primary">
+              Worked With
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-secondary"
+              />
+            </span>
+          </h3>
+          <p className="mx-auto mt-5 max-w-3xl custom-text1 font-light text-gray-700">
+            AL&amp;CO’s own clients, and organisations our founders have trained and coached for, before and alongside AL&amp;CO.
+          </p>
+          <span aria-hidden="true" className="mx-auto mt-6 block h-px w-24 bg-gradient-to-r from-transparent via-secondary to-transparent" />
+        </div>
                 <BrandCarousel items={organisations} />
       </div>
 
