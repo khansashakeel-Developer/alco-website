@@ -11,21 +11,25 @@ import Book3 from "@/assets/services/resources/book-3.webp";
 import Book4 from "@/assets/services/resources/book-4.webp";
 import Book5 from "@/assets/services/resources/book-5.webp";
 import Book6 from "@/assets/services/resources/book-6.webp";
+import Book7 from "@/assets/services/resources/book-7.webp";
 import {
   GRADUATE_WA_MESSAGE,
   GRADUATE_REVISIT_LABEL,
   waLine,
 } from "@/component/cta";
 import {
+  BROCHURE_HREF,
   EXERCISES,
   FOCUS_KEYWORDS,
-  FOCUS_HEADLINE,
   FOCUS_OPTIONS,
   GOAL_OPTIONS,
   JOURNEY_OPTIONS,
   LEVELS,
   QuizAnswers,
+  RESULT_LINE,
   STORAGE_KEY,
+  bookKeyFor,
+  nextLevelFor,
   routeFor,
 } from "./quizData";
 
@@ -42,30 +46,20 @@ type Blog = {
 };
 type NextWebinar = { _id: string; title: string; date: string };
 
-// Books that already live on /services/resources. One is picked from the visitor's goal, then their focus.
+// The seven books on /services/resources. The quiz brief decides which one: first pick on page 2, then page 3.
+// Check that book-7 is "Financial Freedom Through NLP"; swap the cover import if not.
 const BOOKS = {
-  future: { title: "Create Your Own Future With NLP", cover: Book1 },
+  future: { title: "Create Your Own Future with NLP", cover: Book1 },
   relationships: { title: "Relationship Mastery Through NLP", cover: Book2 },
-  emotions: { title: "Emotional Mastery With NLP", cover: Book3 },
+  emotions: { title: "Emotional Mastery with NLP", cover: Book3 },
   enough: { title: "I Am Not Good Enough", cover: Book4 },
   questions: { title: "101 Powerful Coaching Questions", cover: Book5 },
-  client: { title: "How To Get Your First Coaching Client", cover: Book6 },
+  client: { title: "How to Get Your First Coaching Client", cover: Book6 },
+  financial: { title: "Financial Freedom Through NLP", cover: Book7 },
 };
 
 function pickBook(a: QuizAnswers) {
-  if (a.goal === "trainer") return BOOKS.client;
-  if (a.goal === "certified" || a.goal === "work") return BOOKS.questions;
-  switch (a.focus[0]) {
-    case "confidence":
-    case "past":
-      return BOOKS.enough;
-    case "calm":
-      return BOOKS.emotions;
-    case "relationships":
-      return BOOKS.relationships;
-    default:
-      return BOOKS.future;
-  }
+  return BOOKS[bookKeyFor(a)];
 }
 
 const formatPkt = (d: string) =>
@@ -92,6 +86,8 @@ function NextSteps({
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [webinar, setWebinar] = useState<NextWebinar | null>(null);
   const book = pickBook(answers);
+  // Level 1 for everyone new; the level after theirs for a graduate.
+  const lv = LEVELS.find((l) => l.level === nextLevelFor(answers)) ?? LEVELS[0];
 
   useEffect(() => {
     let alive = true;
@@ -137,37 +133,43 @@ function NextSteps({
         <article className="fy-in group relative overflow-hidden rounded-3xl border border-white/20 bg-[#0B2236] shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl lg:col-span-3">
           <div className="grid h-full grid-cols-1 sm:grid-cols-5">
             <div className="relative min-h-[260px] overflow-hidden sm:col-span-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                style={{ filter: "contrast(1.08) saturate(1.1)" }}
-                src="/images/programs/level-1-start.jpg"
-                alt="Level 1: NLP Practitioner"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              <video
+                key={lv.level}
+                src={`/videos/programs/level-${lv.level}.mp4#t=0.1`}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110 transition-transform duration-700 group-hover:scale-110 motion-reduce:hidden"
               />
-              <span className="absolute left-3 top-3 rounded-full bg-secondary px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-darkest">
-                {graduate ? "Revisit free" : "Start here"}
-              </span>
+              {lv.level === 1 && (
+                <span className="absolute left-3 top-3 rounded-full bg-secondary px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-darkest">
+                  {graduate ? "Revisit free" : "Start here"}
+                </span>
+              )}
             </div>
             <div className="flex flex-col justify-between p-6 sm:col-span-3 sm:p-8">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
-                  Your first step
+                  {graduate ? "Your next step" : "Your first step"}
                 </p>
                 <h3 className="mt-2 font-outfit text-2xl font-semibold leading-snug text-white sm:text-3xl">
-                  Level 1: NLP Practitioner
+                  Level {lv.level}: {lv.name}
                 </h3>
                 <p className="mt-3 font-light leading-relaxed text-white/75">
-                  Everyone starts here, including complete beginners. Ten days,
-                  130 hours, taught live on Zoom, with quad certification and a
-                  UK ANLP CPD certificate.
+                  {lv.level === 1
+                    ? "Everyone starts here, including complete beginners. Ten days, 130 hours, taught live on Zoom, with quad certification and a UK ANLP CPD certificate."
+                    : lv.line}
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
-                  href="/program/nlp-practitioner"
+                  href={`/program/${lv.slug}`}
                   className="rounded-full bg-secondary px-6 py-3 font-outfit text-base font-semibold text-primary-darkest transition-all hover:-translate-y-0.5 hover:bg-secondary-darkest"
                 >
-                  See Level 1
+                  See Level {lv.level}
                 </Link>
                 <CtaButton
                   id="C1"
@@ -212,11 +214,11 @@ function NextSteps({
                   Free, live on Zoom
                 </span>
                 <h3 className="mt-4 font-outfit text-2xl font-semibold leading-snug text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)] sm:text-3xl">
-                  Join the next free webinar
+                  Join our free weekly webinar
                 </h3>
                 <p className="mt-3 text-lg font-normal leading-relaxed text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">
-                  Meet the AL&amp;CO team, see how NLP works, and ask your
-                  questions before you decide anything.
+                  Meet the AL&amp;CO team, ask questions, and experience NLP
+                  live.
                 </p>
                 <p className="mt-5 font-outfit text-lg font-semibold text-secondary [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">
                   {webinar ? formatPkt(webinar.date) : "Every week, live"}
@@ -227,15 +229,54 @@ function NextSteps({
               </div>
             </article>
           ) : (
-            <article className="fy-in flex flex-col justify-center rounded-3xl border border-white/10 bg-white/[0.06] p-6 sm:p-8">
-              <h3 className="font-outfit text-2xl font-semibold text-white">
-                Welcome back
-              </h3>
-              <p className="mt-3 font-light text-white/75">
-                Graduates revisit free for five years on Levels 1 to 3. Message
-                us and we will arrange your seat.
-              </p>
-            </article>
+                        <div
+              className="fy-in group relative rounded-3xl bg-gradient-to-br from-secondary via-secondary/50 to-primary-light p-[2px] shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              style={{ animationDelay: "120ms" }}
+            >
+              <article className="relative flex h-full flex-col justify-between overflow-hidden rounded-[22px] bg-gradient-to-br from-white via-[#FFF9E8] to-[#E3ECF5] p-6 sm:p-8">
+                {/* soft gold glow */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 animate-pulse rounded-full bg-secondary/30 blur-3xl"
+                />
+                <div className="relative z-10">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-primary-darkest px-3 py-1 text-xs font-bold uppercase tracking-wide text-secondary">
+                    ★ Graduate perk
+                  </span>
+                  <h3 className="mt-4 font-outfit text-2xl font-semibold leading-snug text-primary-darkest sm:text-3xl">
+                    Welcome back
+                  </h3>
+                  <p className="mt-4 font-outfit text-5xl font-bold leading-none text-primary sm:text-6xl">
+                    5 years
+                  </p>
+                  <p className="mt-2 text-lg font-medium text-primary-darkest">
+                    of free revisits on Levels 1 to 3.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {["Level 1", "Level 2", "Level 3"].map((l) => (
+                      <span
+                        key={l}
+                        className="rounded-full border border-primary/30 bg-white px-3 py-1 text-sm font-medium text-primary"
+                      >
+                        {l}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="mt-4 font-normal text-gray-700">
+                    Message us and we will arrange your seat.
+                  </p>
+                </div>
+                <div className="relative z-10 mt-6">
+                  <CtaButton
+                    id="C1"
+                    message={waMessage}
+                    variant="secondary"
+                    label={GRADUATE_REVISIT_LABEL}
+                    className="px-6"
+                  />
+                </div>
+              </article>
+            </div>
           )}
           {/* BOOK */}
           <article
@@ -251,7 +292,10 @@ function NextSteps({
             />
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
-                A book for you
+                A free gift to start with
+              </p>
+              <p className="mt-1 text-sm font-light text-white/75">
+                Based on what you&apos;d like to change, we think you&apos;ll love this:
               </p>
               <h3 className="mt-1 font-outfit text-lg font-semibold leading-snug text-white sm:text-xl">
                 {book.title}
@@ -260,7 +304,7 @@ function NextSteps({
                 href="/services/resources"
                 className="mt-3 inline-block font-outfit text-base font-semibold text-secondary transition-all group-hover:translate-x-1"
               >
-                Get the book →
+                Download free →
               </Link>
             </div>
           </article>
@@ -486,7 +530,9 @@ export default function ForYou() {
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(STORAGE_KEY);
-      if (raw) setSaved(JSON.parse(raw) as Saved);
+      // Ignore answers saved by the older quiz (no "goals" list): they cannot be read by this page.
+      const parsed = raw ? (JSON.parse(raw) as Saved) : null;
+      if (parsed && Array.isArray(parsed.answers?.goals)) setSaved(parsed);
     } catch {
       /* blocked storage: fall through to the "take the quiz" state */
     }
@@ -532,22 +578,59 @@ export default function ForYou() {
   const { answers, firstName } = saved;
   const graduate = answers.journey === "graduate";
   const route = routeFor(answers);
-  const firstFocus = answers.focus[0];
+  const next = LEVELS.find((l) => l.level === nextLevelFor(answers)) ?? LEVELS[0];
   const headline = graduate
-    ? "Welcome back. Here is where you can go next."
-    : firstFocus
-      ? FOCUS_HEADLINE[firstFocus]
-      : "Here is where to begin.";
+    ? `Your next step is Level ${next.level}: ${next.name}`
+    : `Your journey begins with Level ${next.level}: ${next.name}`;
+  const subline = graduate ? next.line : RESULT_LINE;
 
   const chips = [
     ...answers.focus.map((id) => FOCUS_OPTIONS.find((o) => o.id === id)?.label),
-    GOAL_OPTIONS.find((o) => o.id === answers.goal)?.label,
+    ...answers.goals.map((id) => GOAL_OPTIONS.find((o) => o.id === id)?.label),
     JOURNEY_OPTIONS.find((o) => o.id === answers.journey)?.label,
   ].filter(Boolean) as string[];
 
   const waMessage = graduate
     ? GRADUATE_WA_MESSAGE
     : waLine(`my path. I took the quiz: ${chips.join(", ")}`);
+
+  // Main button comes from the answer to "When would you like to begin?"
+  const mainAction = (() => {
+    const pill =
+      "inline-flex items-center rounded-full bg-secondary px-6 py-3 font-outfit text-base font-semibold text-primary-darkest transition-all hover:-translate-y-0.5 hover:bg-secondary-darkest";
+    switch (answers.when) {
+      case "now":
+        return (
+          <Link href={`/program/${next.slug}`} className={pill}>
+            See batch dates
+          </Link>
+        );
+      case "months":
+        return (
+          <Link href={BROCHURE_HREF} className={pill}>
+            Get the brochure
+          </Link>
+        );
+      case "exploring":
+        // Graduates are never sent to the free webinar.
+        return graduate ? (
+          <CtaButton id="C1" message={waMessage} variant="secondary" label={GRADUATE_REVISIT_LABEL} className="px-6" />
+        ) : (
+          <CtaButton id="C2" variant="secondary" className="px-6" />
+        );
+      case "talk":
+      default:
+        return (
+          <CtaButton
+            id="C1"
+            message={waMessage}
+            variant="secondary"
+            label={graduate ? GRADUATE_REVISIT_LABEL : undefined}
+            className="px-6"
+          />
+        );
+    }
+  })();
 
   return (
     <div className="bg-white">
@@ -558,7 +641,7 @@ export default function ForYou() {
         <div className="relative mx-auto max-w-6xl">
           <div className="flex items-start justify-between gap-4">
             <p className="fy-in text-sm font-semibold uppercase tracking-[0.18em] text-secondary">
-              Your AL&amp;CO path
+              Your path is ready
             </p>
             <Link
               href="/start"
@@ -574,6 +657,12 @@ export default function ForYou() {
             Hi {firstName},
             <span className="block text-secondary">{headline}</span>
           </h1>
+          <p
+            className="fy-in mt-4 max-w-2xl text-lg font-light text-white/80"
+            style={{ animationDelay: "120ms" }}
+          >
+            {subline}
+          </p>
           <div
             className="fy-in mt-6 flex flex-wrap gap-2"
             style={{ animationDelay: "160ms" }}
@@ -591,16 +680,7 @@ export default function ForYou() {
             className="fy-in mt-8 flex flex-wrap gap-3"
             style={{ animationDelay: "240ms" }}
           >
-            <CtaButton
-              id="C1"
-              message={waMessage}
-              variant="secondary"
-              label={graduate ? GRADUATE_REVISIT_LABEL : undefined}
-              className="px-6"
-            />
-            {!graduate && (
-              <CtaButton id="C2" variant="outlineWhite" className="px-6" />
-            )}
+            {mainAction}
           </div>
         </div>
       </section>

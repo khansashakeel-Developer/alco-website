@@ -4,10 +4,24 @@
 // Styling follows the existing homepage sections: bg-dark-primary, two-tone h2 (as WhatWeDo), white rounded-lg shadow-lg card,
 // navy/gold accents, and the original gold left-bar bullets.
 import { useState, useEffect, useRef } from "react";
-import { Landmark, Users, GraduationCap, DoorOpen, ChevronDown, Check } from "lucide-react";
+import {
+  Landmark,
+  Users,
+  GraduationCap,
+  DoorOpen,
+  ChevronDown,
+  Check,
+} from "lucide-react";
 
 // color = brand accent (brand palette only: gold #F9B81E, light gold #FFE29D and blue #346B96 from tailwind.config.js, plus white) for this heading, ink = readable text colour on that accent.
-type Tab = { id: string; label: string; icon: React.ReactNode; facts: string[]; color: string; ink: string };
+type Tab = {
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  facts: string[];
+  color: string;
+  ink: string;
+};
 
 const tabs: Tab[] = [
   {
@@ -40,7 +54,7 @@ const tabs: Tab[] = [
     label: "How you learn",
     icon: <GraduationCap size={18} />,
     facts: [
-            "Delivery: live on Zoom, taught personally, most evenings of the year.",
+      "Delivery: live on Zoom, taught personally, most evenings of the year.",
       "Sessions: 8:00pm to 2:00am Pakistan time (PKT).",
       "The ladder: six levels, NLP Practitioner to NLP Master Trainer.",
       "Certifications you earn: through international boards, ABNLP, its NLP Coaching Division, ABH, TLTA and NGH (USA), plus a UK ANLP CPD accreditation, and AL&CO’s own credential.",
@@ -63,11 +77,17 @@ const tabs: Tab[] = [
 const HEADING_TEXT = "AL&CO at a Glance";
 const HEADING_CLASS = "h3 text-white text-start";
 
-const bigNum = "font-outfit font-bold text-[28px] min-[400px]:text-[36px] sm:text-[44px] md:text-[56px] leading-none bg-gradient-to-b from-secondary to-white bg-clip-text text-transparent";
+const bigNum =
+  "font-outfit font-bold text-[28px] min-[400px]:text-[36px] sm:text-[44px] md:text-[56px] leading-none bg-gradient-to-b from-secondary to-white bg-clip-text text-transparent";
 const STATS = [
   { to: 2000, suffix: "+", label: "graduates" },
   { to: 20, suffix: "+", label: "countries" },
-  { to: 100, suffix: "", label: "batches delivered, and counting", pre: "Nearing" },
+  {
+    to: 100,
+    suffix: "",
+    label: "batches delivered, and counting",
+    pre: "Nearing",
+  },
 ];
 
 // Splits each fact into separate points (one per sentence, wording untouched). A leading "Label:" becomes a bold lead-in.
@@ -76,18 +96,26 @@ function toPoints(facts: string[]) {
     f.split(/(?<=\.)\s+(?=[A-Z])/).map((text, i) => {
       const m = i === 0 ? text.match(/^([^:]{3,40}):\s+([\s\S]*)$/) : null;
       return m ? { lead: m[1] + ":", text: m[2] } : { lead: "", text };
-    })
+    }),
   );
 }
 
 // Counts up once when scrolled into view. The final number is always in the page text (the invisible
 // sizer), so crawlers and screen readers read it, and the layout never jumps while counting.
-function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; className?: string }) {
+function CountUp({
+  to,
+  suffix = "",
+  className,
+}: {
+  to: number;
+  suffix?: string;
+  className?: string;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const [value, setValue] = useState(to);
   const final = `${to.toLocaleString("en-US")}${suffix}`;
 
-    useEffect(() => {
+  useEffect(() => {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -110,7 +138,7 @@ function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; 
           setValue(0);
         }
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
     observer.observe(el);
     return () => {
@@ -134,11 +162,9 @@ export default function AtAGlance() {
   const [active, setActive] = useState(0);
 
   return (
-     
-     /* <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary bg-medium-primary bg-cover bg-top-left w-full">*/
+    /* <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary bg-medium-primary bg-cover bg-top-left w-full">*/
     /* <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary bg-medium-primary bg-[length:100%_auto] bg-no-repeat bg-right-top w-full">*/
-      <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary-darkest bg-dark-primary bg-cover bg-top-left w-full">
-    
+    <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-primary-darkest bg-dark-primary bg-cover bg-top-left w-full">
       <div className="container mx-auto px-4">
         <style>{`
           @keyframes glanceUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
@@ -153,16 +179,32 @@ export default function AtAGlance() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-8 mb-5 lg:mb-6">
           <h2 className={HEADING_CLASS}>{HEADING_TEXT}</h2>
           <p className="glance-stat custom-text1 font-light text-white md:text-end md:max-w-xl lg:max-w-none lg:whitespace-nowrap">
-            Our work has inspired <strong className="font-semibold">over a million lives</strong>, across the nation and around the world.
+            Our work has inspired{" "}
+            <strong className="font-semibold">over a million lives</strong>,
+            across the nation and around the world.
           </p>
         </div>
 
-        <p className="sr-only">2,000+ graduates across 20+ countries. Nearing 100 batches delivered, and counting.</p>
-        <dl aria-hidden="true" className="grid grid-cols-3 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center">
+        <p className="sr-only">
+          2,000+ graduates across 20+ countries. Nearing 100 batches delivered,
+          and counting.
+        </p>
+        <dl
+          aria-hidden="true"
+          className="grid grid-cols-3 gap-x-4 rounded-lg border border-white/20 bg-white/10 px-4 py-10 lg:py-14 mb-12 lg:mb-16 text-center"
+        >
           {STATS.map((st, i) => (
-            <div key={st.label} className="glance-stat flex flex-col items-center" style={{ animationDelay: `${i * 120}ms` }}>
-              <span className="order-0 mb-1 h-5 font-outfit text-sm font-light uppercase tracking-widest text-white/80">{st.pre ?? ""}</span>
-              <dt className="order-2 mt-2 font-outfit text-sm sm:text-base md:text-lg font-light text-white">{st.label}</dt>
+            <div
+              key={st.label}
+              className="glance-stat flex flex-col items-center"
+              style={{ animationDelay: `${i * 120}ms` }}
+            >
+              <span className="order-0 mb-1 h-5 font-outfit text-sm font-light uppercase tracking-widest text-white/80">
+                {st.pre ?? ""}
+              </span>
+              <dt className="order-2 mt-2 font-outfit text-sm sm:text-base md:text-lg font-light text-white">
+                {st.label}
+              </dt>
               <dd className="order-1">
                 <CountUp to={st.to} suffix={st.suffix} className={bigNum} />
               </dd>
@@ -183,7 +225,15 @@ export default function AtAGlance() {
                     aria-expanded={open}
                     aria-controls={`glance-panel-${t.id}`}
                     onClick={() => setActive(i)}
-                    style={open ? { backgroundColor: t.color, color: t.ink, borderColor: t.color } : { borderColor: `${t.color}99` }}
+                    style={
+                      open
+                        ? {
+                            backgroundColor: t.color,
+                            color: t.ink,
+                            borderColor: t.color,
+                          }
+                        : { borderColor: `${t.color}99` }
+                    }
                     className={`group w-full flex items-center gap-4 rounded-full px-4 py-4 lg:py-5 text-start font-outfit font-semibold text-[16px] md:text-[18px] border-2 transition-all duration-300 ease-out focus-visible:ring-2 focus-visible:ring-white ${
                       open
                         ? "shadow-lg lg:translate-x-2 scale-[1.02]"
@@ -192,13 +242,23 @@ export default function AtAGlance() {
                   >
                     <span
                       aria-hidden="true"
-                      style={open ? { backgroundColor: t.ink, color: t.color } : { backgroundColor: t.color, color: t.ink }}
+                      style={
+                        open
+                          ? { backgroundColor: t.ink, color: t.color }
+                          : { backgroundColor: t.color, color: t.ink }
+                      }
                       className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-12"
                     >
                       {t.icon}
                     </span>
-                    <span className="flex-1 uppercase tracking-wide text-sm sm:text-[15px]">{t.label}</span>
-                    <ChevronDown size={18} aria-hidden="true" className={`transition-transform lg:-rotate-90 ${open ? "rotate-180 lg:rotate-0" : ""}`} />
+                    <span className="flex-1 uppercase tracking-wide text-sm sm:text-[15px]">
+                      {t.label}
+                    </span>
+                    <ChevronDown
+                      size={18}
+                      aria-hidden="true"
+                      className={`transition-transform lg:-rotate-90 ${open ? "rotate-180 lg:rotate-0" : ""}`}
+                    />
                   </button>
                 </h3>
                 <div
@@ -217,16 +277,28 @@ export default function AtAGlance() {
                     >
                       {t.icon}
                     </span>
-                    <p aria-hidden="true" className="font-outfit text-xl md:text-2xl font-semibold text-primary uppercase tracking-wide">{t.label}</p>
+                    <p
+                      aria-hidden="true"
+                      className="font-outfit text-xl md:text-2xl font-semibold text-primary uppercase tracking-wide"
+                    >
+                      {t.label}
+                    </p>
                   </div>
                   {t.id === "who" ? (
-                    <p style={{ animationDelay: "150ms" }} className="glance-fact custom-text1 font-light text-black/80 leading-relaxed">
+                    <p
+                      style={{ animationDelay: "150ms" }}
+                      className="glance-fact custom-text1 font-light text-black/80 leading-relaxed"
+                    >
                       {t.facts.join(" ")}
                     </p>
                   ) : (
                     <ul className="grid grid-cols-1 gap-5 lg:gap-6">
                       {toPoints(t.facts).map((pt, n) => (
-                        <li key={pt.text} style={{ animationDelay: `${150 + n * 140}ms` }} className="glance-fact flex items-start gap-3 custom-text1 font-light text-black/80">
+                        <li
+                          key={pt.text}
+                          style={{ animationDelay: `${150 + n * 140}ms` }}
+                          className="glance-fact flex items-start gap-3 custom-text1 font-light text-black/80"
+                        >
                           <span
                             aria-hidden="true"
                             style={{ backgroundColor: t.color, color: t.ink }}
@@ -235,7 +307,11 @@ export default function AtAGlance() {
                             <Check size={14} strokeWidth={3} />
                           </span>
                           <span>
-                            {pt.lead && <strong className="font-semibold text-primary">{pt.lead} </strong>}
+                            {pt.lead && (
+                              <strong className="font-semibold text-primary">
+                                {pt.lead}{" "}
+                              </strong>
+                            )}
                             {pt.text}
                           </span>
                         </li>

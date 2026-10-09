@@ -11,19 +11,18 @@ import {
   EMPTY_ANSWERS,
   FOCUS_OPTIONS,
   GOAL_OPTIONS,
+  GRADUATE_LEVEL_OPTIONS,
   JOURNEY_OPTIONS,
   LEVELS,
+  MAX_PICKS,
   Option,
   QuizAnswers,
   STORAGE_KEY,
-  STYLE_OPTIONS,
-  routeFor,
+  WHEN_OPTIONS,
   summaryLine,
 } from "./quizData";
 
 type Step = 0 | 1 | 2 | 3 | 4 | 5; // 0 intro, 1 to 4 questions, 5 contact form
-
-const MAX_FOCUS = 2;
 
 function getCookie(name: string): string | null {
   const m = document.cookie.match(new RegExp("(^|;\\s*)" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "=([^;]*)"));
@@ -31,69 +30,52 @@ function getCookie(name: string): string | null {
 }
 
 // ---------------------------------------------------------------------------
-// The live "path" panel: the same programme cards as the home page (public/images/programs/level-N.jpg).
-// Cards on the person's route light up and pop as they answer; the rest fade back.
+// The live "path" panel: the same programme cards as the home page.
+// Per the quiz brief, no card lights up or shows a level before the results page.
+// Card 1 carries START HERE from page 1 onwards.
 // ---------------------------------------------------------------------------
 function PathPanel({ answers, step }: { answers: QuizAnswers; step: Step }) {
-  const route = routeFor(answers);
-  const hasGoal = answers.goal !== null;
-  const graduate = answers.journey === "graduate";
-  const routeText = route.join("  →  ");
+  const chips = [
+    ...answers.focus.map((id) => FOCUS_OPTIONS.find((o) => o.id === id)?.label),
+    ...answers.goals.map((id) => GOAL_OPTIONS.find((o) => o.id === id)?.label),
+  ].filter(Boolean) as string[];
 
   return (
     <div className="relative h-full overflow-hidden bg-[#000A12] px-5 py-10 sm:px-10 lg:px-12 lg:py-12">
-      
-
       <div className="relative">
         <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-secondary">
           {step === 0 ? "Six levels, one road" : "Your path is forming"}
         </p>
         <h2 className="mt-2 font-outfit text-2xl sm:text-3xl font-semibold leading-tight text-white">
           {step === 0
-            ? "Everyone begins at the same door."
-            : hasGoal
-              ? "Here is the road we would walk with you."
-              : "Answer a few questions and watch it appear."}
+            ? "Every transformational journey starts with taking the first step."
+            : "Answer a few questions and watch it take shape."}
         </h2>
 
         <ol className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
           {LEVELS.map((lv, i) => {
-            const inRoute = route.includes(lv.level);
             const first = lv.level === 1;
-            const lit = step === 0 ? true : first || (hasGoal && inRoute);
             return (
               <li
                 key={lv.level}
                 style={{ animationDelay: `${i * 70}ms` }}
-                className={`qz-in group relative aspect-[3/4] overflow-hidden rounded-2xl border-2 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl ${
-                  lit ? "border-white/40 shadow-lg" : "border-white/10"
-                } ${lit && hasGoal && !first ? "qz-pop" : ""}`}
+                className="qz-in group relative aspect-[3/4] overflow-hidden rounded-2xl border-2 border-white/40 shadow-lg transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl"
               >
-                      <video
-                  key={lit ? "on" : "off"}
+                <video
                   src={`/videos/programs/level-${lv.level}.mp4#t=0.1`}
-                  autoPlay={lit}
+                  autoPlay
                   muted
                   loop
                   playsInline
                   preload="metadata"
                   aria-hidden="true"
-                  className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-110 motion-reduce:hidden ${
-                    lit ? "brightness-110 contrast-105 saturate-110" : "grayscale opacity-40"
-                  }`}
+                  className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110 transition-all duration-700 group-hover:scale-110 motion-reduce:hidden"
                 />
                 <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#000A12]/90 via-[#000A12]/15 to-transparent" />
-                {first && step !== 0 && <span aria-hidden="true" className="qz-pulse pointer-events-none absolute inset-0 rounded-2xl" />}
-                {first ? (
+                {first && (
                   <span className="qz-shimmer absolute left-2 top-2 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-primary-darkest">
-                    {graduate ? "Revisit free" : "Start here"}
+                    Start here
                   </span>
-                ) : (
-                  lit && hasGoal && (
-                    <span className="qz-in absolute left-2 top-2 rounded-full border border-white/25 bg-primary-darkest/70 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-secondary">
-                      On your route
-                    </span>
-                  )
                 )}
                 <span className="absolute inset-x-0 bottom-0 p-3">
                   <span className="block font-outfit text-sm sm:text-base font-semibold leading-snug text-white">{lv.name}</span>
@@ -103,17 +85,11 @@ function PathPanel({ answers, step }: { answers: QuizAnswers; step: Step }) {
           })}
         </ol>
 
-        {step !== 0 && hasGoal && (
-          <p className="qz-in mt-5 font-outfit text-base text-white/80">
-            Your route: <span className="font-semibold text-secondary">Level {routeText}</span>
-          </p>
-        )}
-
-        {step !== 0 && answers.focus.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {answers.focus.map((id) => (
-              <span key={id} className="qz-in rounded-full border border-secondary/60 bg-secondary/15 px-3 py-1 text-sm text-white">
-                {FOCUS_OPTIONS.find((o) => o.id === id)?.label}
+        {step !== 0 && chips.length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-2">
+            {chips.map((c) => (
+              <span key={c} className="qz-in rounded-full border border-secondary/60 bg-secondary/15 px-3 py-1 text-sm text-white">
+                {c}
               </span>
             ))}
           </div>
@@ -185,20 +161,28 @@ export default function StartQuiz() {
     topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Single-choice questions move on by themselves after a short beat.
-  const pickSingle = (patch: Partial<QuizAnswers>, next: Step) => {
-    setAnswers((a) => ({ ...a, ...patch }));
-    if (advanceTimer.current) clearTimeout(advanceTimer.current);
-    advanceTimer.current = setTimeout(() => go(next), 320);
-  };
-
+  // Multi-pick questions (pages 2 and 3): up to MAX_PICKS; a fifth pick replaces the oldest.
   const toggleFocus = (id: QuizAnswers["focus"][number]) => {
     setAnswers((a) => {
       if (a.focus.includes(id)) return { ...a, focus: a.focus.filter((f) => f !== id) };
-      if (a.focus.length >= MAX_FOCUS) return { ...a, focus: [...a.focus.slice(1), id] };
+      if (a.focus.length >= MAX_PICKS) return { ...a, focus: [...a.focus.slice(1), id] };
       return { ...a, focus: [...a.focus, id] };
     });
   };
+
+  const toggleGoal = (id: QuizAnswers["goals"][number]) => {
+    setAnswers((a) => {
+      if (a.goals.includes(id)) return { ...a, goals: a.goals.filter((g) => g !== id) };
+      if (a.goals.length >= MAX_PICKS) return { ...a, goals: [...a.goals.slice(1), id] };
+      return { ...a, goals: [...a.goals, id] };
+    });
+  };
+
+  // Page 4 is only complete once a graduate has also said which level they finished.
+  const journeyDone = answers.journey !== null && (answers.journey !== "graduate" || answers.graduateLevel !== null);
+
+  // Odd option counts leave one card alone; let the last one span the row.
+  const lastSpans = <T extends string>(list: Option<T>[], i: number) => (list.length % 2 === 1 && i === list.length - 1 ? "sm:col-span-2" : "");
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -285,7 +269,7 @@ export default function StartQuiz() {
                   Ready to change how you think, feel and lead?
                 </h1>
                 <p className="qz-in mt-5 max-w-xl text-lg font-light text-black/70" style={{ animationDelay: "160ms" }}>
-                  Four quick questions. We will show you where to begin with NLP and hypnosis, and the road that follows. It takes about a minute.
+                  Four quick questions. We&apos;ll show you where to start with NLP and hypnosis, and where it can take you. Takes under two minutes.
                 </p>
                 <button
                   type="button"
@@ -301,12 +285,14 @@ export default function StartQuiz() {
             {step === 1 && (
               <div>
                 <h1 className="qz-in font-outfit text-3xl sm:text-4xl font-semibold leading-tight text-primary-darkest">
-                  What do you want to change?
+                  What would you like to change?
                 </h1>
-                <p className="qz-in mt-2 text-black/60" style={{ animationDelay: "60ms" }}>Pick up to {MAX_FOCUS}.</p>
+                <p className="qz-in mt-2 text-black/60" style={{ animationDelay: "60ms" }}>Pick up to {MAX_PICKS}.</p>
                 <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {FOCUS_OPTIONS.map((o, i) => (
-                    <Choice key={o.id} option={o} index={i} selected={answers.focus.includes(o.id)} onSelect={() => toggleFocus(o.id)} />
+                    <div key={o.id} className={lastSpans(FOCUS_OPTIONS, i)}>
+                      <Choice option={o} index={i} selected={answers.focus.includes(o.id)} onSelect={() => toggleFocus(o.id)} />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -314,10 +300,15 @@ export default function StartQuiz() {
 
             {step === 2 && (
               <div>
-                <h1 className="qz-in font-outfit text-3xl sm:text-4xl font-semibold leading-tight text-primary-darkest">Why are you here?</h1>
-                <div className="mt-6 grid grid-cols-1 gap-3">
+                <h1 className="qz-in font-outfit text-3xl sm:text-4xl font-semibold leading-tight text-primary-darkest">
+                  What would you like to achieve?
+                </h1>
+                <p className="qz-in mt-2 text-black/60" style={{ animationDelay: "60ms" }}>Pick up to {MAX_PICKS}.</p>
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {GOAL_OPTIONS.map((o, i) => (
-                    <Choice key={o.id} option={o} index={i} selected={answers.goal === o.id} onSelect={() => pickSingle({ goal: o.id }, 3)} />
+                    <div key={o.id} className={lastSpans(GOAL_OPTIONS, i)}>
+                      <Choice option={o} index={i} selected={answers.goals.includes(o.id)} onSelect={() => toggleGoal(o.id)} />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -325,21 +316,49 @@ export default function StartQuiz() {
 
             {step === 3 && (
               <div>
-                <h1 className="qz-in font-outfit text-3xl sm:text-4xl font-semibold leading-tight text-primary-darkest">Where are you on your journey?</h1>
+                <h1 className="qz-in font-outfit text-3xl sm:text-4xl font-semibold leading-tight text-primary-darkest">
+                  Where are you on your transformational journey?
+                </h1>
                 <div className="mt-6 grid grid-cols-1 gap-3">
                   {JOURNEY_OPTIONS.map((o, i) => (
-                    <Choice key={o.id} option={o} index={i} selected={answers.journey === o.id} onSelect={() => pickSingle({ journey: o.id }, 4)} />
+                    <Choice
+                      key={o.id}
+                      option={o}
+                      index={i}
+                      selected={answers.journey === o.id}
+                      onSelect={() => setAnswers((a) => ({ ...a, journey: o.id, graduateLevel: o.id === "graduate" ? a.graduateLevel : null }))}
+                    />
                   ))}
                 </div>
+
+                {/* Only for graduates */}
+                {answers.journey === "graduate" && (
+                  <div className="mt-8">
+                    <h2 className="qz-in font-outfit text-2xl font-semibold leading-tight text-primary-darkest">
+                      Which level have you completed with us?
+                    </h2>
+                    <div className="mt-4 grid grid-cols-1 gap-3">
+                      {GRADUATE_LEVEL_OPTIONS.map((lv, i) => (
+                        <Choice
+                          key={lv.level}
+                          option={{ id: String(lv.level), label: `Level ${lv.level}: ${lv.name}` }}
+                          index={i}
+                          selected={answers.graduateLevel === lv.level}
+                          onSelect={() => setAnswers((a) => ({ ...a, graduateLevel: lv.level }))}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
             {step === 4 && (
               <div>
-                <h1 className="qz-in font-outfit text-3xl sm:text-4xl font-semibold leading-tight text-primary-darkest">How do you like to learn?</h1>
+                <h1 className="qz-in font-outfit text-3xl sm:text-4xl font-semibold leading-tight text-primary-darkest">When would you like to begin?</h1>
                 <div className="mt-6 grid grid-cols-1 gap-3">
-                  {STYLE_OPTIONS.map((o, i) => (
-                    <Choice key={o.id} option={o} index={i} selected={answers.style === o.id} onSelect={() => pickSingle({ style: o.id }, 5)} />
+                  {WHEN_OPTIONS.map((o, i) => (
+                    <Choice key={o.id} option={o} index={i} selected={answers.when === o.id} onSelect={() => setAnswers((a) => ({ ...a, when: o.id }))} />
                   ))}
                 </div>
               </div>
@@ -380,7 +399,7 @@ export default function StartQuiz() {
                   disabled={submitting || !turnstileToken}
                   className="mt-5 rounded-full bg-secondary px-8 py-4 font-outfit text-lg font-semibold text-primary-darkest shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-secondary-darkest disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                 >
-                  {submitting ? "Building your path..." : "Show me my path"}
+                  {submitting ? "Building your path..." : "See my path"}
                 </button>
               </form>
             )}
@@ -396,14 +415,19 @@ export default function StartQuiz() {
               >
                 Back
               </button>
-              {step === 1 && (
+              {step >= 1 && step <= 4 && (
                 <button
                   type="button"
-                  disabled={answers.focus.length === 0}
-                  onClick={() => go(2)}
+                  disabled={
+                    (step === 1 && answers.focus.length === 0) ||
+                    (step === 2 && answers.goals.length === 0) ||
+                    (step === 3 && !journeyDone) ||
+                    (step === 4 && answers.when === null)
+                  }
+                  onClick={() => go((step + 1) as Step)}
                   className="rounded-full bg-primary px-7 py-2.5 font-outfit text-base font-semibold text-white transition-all hover:bg-primary-darkest disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  Next step
+                  {step === 4 ? "See my path" : "Next"}
                 </button>
               )}
             </div>
