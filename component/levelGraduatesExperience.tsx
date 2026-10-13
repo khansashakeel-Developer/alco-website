@@ -11,8 +11,10 @@ type Props = {
   primary?: CtaRef;
 };
 
-export default function LevelGraduatesExperience({ data, primary = { id: "C1" } }: Props) {
-
+export default function LevelGraduatesExperience({
+  data,
+  primary = { id: "C1" },
+}: Props) {
   // No video (Level 6 today): render nothing. page.tsx also guards this.
   if (!data?.video) return null;
 
@@ -26,9 +28,20 @@ export default function LevelGraduatesExperience({ data, primary = { id: "C1" } 
             <span className="text-white">{data?.title?.line2}</span>
           </h2>
           <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <CtaButton id={primary.id} message={primary.message} href={primary.href} label={primary.label} variant="white" className="my-auto w-full sm:w-auto" />
+            <CtaButton
+              id={primary.id}
+              message={primary.message}
+              href={primary.href}
+              label={primary.label}
+              variant="white"
+              className="my-auto w-full sm:w-auto"
+            />
             {/* Decision (0 Shared/01): graduate proof sits next to a graduate video; the hub is linked by LevelNav and the breadcrumb. */}
-            <CtaButton id="C10" variant="secondary" className="my-auto w-full sm:w-auto" />
+            <CtaButton
+              id="C10"
+              variant="secondary"
+              className="my-auto w-full sm:w-auto"
+            />
           </div>
         </div>
         <div className="my-8">
@@ -37,6 +50,7 @@ export default function LevelGraduatesExperience({ data, primary = { id: "C1" } 
             videoUrl={data.video}
             thumbnail={data?.thumbnail}
             videoClass="w-full h-full object-contain rounded-lg"
+            autoPlayMuted
           />
         </div>
       </div>

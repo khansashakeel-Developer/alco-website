@@ -33,8 +33,9 @@ export default function LevelIntroWithVideo({ data }: Props) {
           <VideoPlayer
             className="aspect-auto relative rounded-xl overflow-hidden lg:h-[70dvh] w-full bg-black"
             videoUrl={data?.video}
-            thumbnail={data?.thumbnail} 
+            thumbnail={data?.thumbnail}
             videoClass="w-full h-full object-contain rounded-lg"
+            autoPlayMuted
             // hoverPlay={true}
           />
         </div>

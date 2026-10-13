@@ -339,39 +339,54 @@ export default function ProgrammesHubPage() {
         </ol>
       </nav>
 
-      {/* The Learning Journey */}
-      <section className={SECTION}>
+            {/* The Learning Journey */}
+      <section className={`${SECTION} bg-gradient-to-b from-white to-slate-50`}>
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="h3 text-primary text-center">The Learning Journey: Six Levels, One Ladder</h2>
-          <p className="custom-text1 text-primary-light text-center mt-4">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-secondary-dark">Six levels, one ladder</p>
+          <h2 className="h3 mt-2 text-primary text-center">The Learning Journey: Six Levels, One Ladder</h2>
+          <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary" />
+
+          <p className="custom-text1 mx-auto mt-6 max-w-3xl text-center text-lg text-primary">
             AL&CO is built as a ladder. Step on at the first rung and climb as far as you wish, from
             your own transformation to running your own training business. Each level is complete
             in itself, and each one opens the door to the next.
           </p>
-          <p className="custom-text1 text-primary-light text-center mt-4">
+          <p className="custom-text1 mx-auto mt-4 max-w-3xl text-center text-primary-light">
             Every level is backed by international certification boards: the ABNLP and its NLP
             Coaching Division, the ABH, the TLTA and the NGH (USA), together with a UK ANLP CPD
             accreditation and AL&CO’s own credential. These are real, recognised qualifications,
             not a certificate for the wall.
           </p>
+
           {/* P7 seal row. Every entry is a LOGO marker: artwork from Khansa. */}
-          <ul aria-label="Certification boards and CPD accreditation" className="flex flex-wrap justify-center items-center gap-6 mt-6">
+          <ul aria-label="Certification boards and CPD accreditation" className="mt-8 flex flex-wrap items-center justify-center gap-5">
             {BOARD_SEALS.map((seal) => (
-              <li key={seal.alt}>
-                <Image src={seal.src} alt={seal.alt} width={96} height={96} className="object-contain h-20 w-20" />
+              <li
+                key={seal.alt}
+                className="rounded-full bg-white p-2.5 shadow-md ring-1 ring-primary/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:ring-secondary"
+              >
+                <Image src={seal.src} alt={seal.alt} width={96} height={96} className="h-20 w-20 object-contain" />
               </li>
             ))}
           </ul>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-8">
+
+          {/* Key facts: one dark band, five columns */}
+          <ul className="mt-10 grid grid-cols-1 overflow-hidden rounded-2xl bg-gradient-to-br from-[#09263D] to-[#1B507C] shadow-xl sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-white/15">
             {[
               "Live on Zoom, taught personally",
               "Sessions run 8:00pm to 2:00am PKT",
               "Cohorts of 20 to 25 (Level 3: never more than 20)",
               "Free revisits for five years at Levels 1 to 3",
               "2,000+ graduates across 20+ countries",
-            ].map((fact) => (
-              <li key={fact} className="rounded-xl bg-slate-200/60 drop-shadow-sm px-4 py-4 text-center text-primary font-medium">
-                {fact}
+            ].map((fact, i) => (
+              <li
+                key={fact}
+                className="group flex flex-col items-center gap-3 px-5 py-6 text-center transition-colors duration-300 hover:bg-white/10"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-sm font-bold text-primary-darkest transition-transform duration-300 group-hover:scale-110">
+                  {i + 1}
+                </span>
+                <span className="font-medium text-white">{fact}</span>
               </li>
             ))}
           </ul>
@@ -441,53 +456,99 @@ export default function ProgrammesHubPage() {
         </div>
       </section>
 
-      {/* Who arranges your place */}
+            {/* Who arranges your place */}
       <section className={`${SECTION} bg-light-neutral bg-cover bg-top-left`}>
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="h3 text-primary">Who Arranges Your Place</h2>
-          <p className="custom-text1 text-primary-light mt-4">
-            Levels 1 and 2 are arranged by your relationship manager. Levels 3 and above are
-            arranged directly with Bismillah Pervez and Arslan Larik. One conversation is all it
-            takes to find the pathway that fits you.
-          </p>
-          <p className="custom-text1 text-primary-light mt-4">
-            Our relationship managers walk beside you from your very first question to the day you
-            graduate and long after. Most of them come from psychology themselves, so they
-            understand your journey from the inside.
-          </p>
-          <div className="flex justify-center mt-6">
-            <SpeakToManager />
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+            {/* Left: message and buttons */}
+            <div className="text-center md:text-start">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary-dark">Your place</p>
+              <h2 className="h3 mt-2 text-primary">Who Arranges Your Place</h2>
+              <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary md:mx-0" />
+              <p className="custom-text1 mt-5 text-primary-light">
+                Our relationship managers walk beside you from your very first question to the day you
+                graduate and long after. Most of them come from psychology themselves, so they
+                understand your journey from the inside.
+              </p>
+              <div className="mt-6 flex justify-center md:justify-start">
+                <SpeakToManager />
+              </div>
+              <p className="mt-4">
+                <Link href="/about-us/why-train-with-alco" className="font-medium text-primary underline underline-offset-4 hover:text-secondary-dark">
+                  Meet the team behind every promise
+                </Link>
+              </p>
+            </div>
+
+            {/* Right: two routes joined by a line */}
+            <div className="relative">
+              <span aria-hidden="true" className="absolute left-7 top-10 bottom-16 w-0.5 bg-gradient-to-b from-secondary to-primary/30" />
+
+              <div className="group relative flex items-start gap-5 pb-8">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">1–2</span>
+                <div className="pt-1">
+                  <h3 className="font-outfit text-lg font-semibold text-primary">Levels 1 and 2</h3>
+                  <p className="mt-1 text-primary-light">Arranged by your relationship manager.</p>
+                </div>
+              </div>
+
+              <div className="group relative flex items-start gap-5 pb-8">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">3+</span>
+                <div className="pt-1">
+                  <h3 className="font-outfit text-lg font-semibold text-primary">Levels 3 and above</h3>
+                  <p className="mt-1 text-primary-light">Arranged directly with Bismillah Pervez and Arslan Larik.</p>
+                </div>
+              </div>
+
+              <div className="relative flex items-start gap-5">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary text-2xl text-primary-darkest shadow-lg">✓</span>
+                <p className="pt-3 font-outfit text-lg font-semibold text-primary">One conversation is all it takes to find the pathway that fits you.</p>
+              </div>
+            </div>
           </div>
-          <p className="mt-4">
-            <Link href="/about-us/why-train-with-alco" className="text-primary underline font-medium">
-              Meet the team behind every promise
-            </Link>
-          </p>
         </div>
       </section>
 
       {/* Why you will not find a number here (approved wording, brochure long p37) */}
-      <section className={SECTION}>
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="h3 text-primary text-center">Why You Will Not Find a Number Here</h2>
-          <p className="custom-text1 text-primary-light mt-4">
-            This is an investment in your future, and we treat it as one, so you will not see a
-            price in these pages. That is deliberate, and it is out of fairness to you. To print a
-            single figure, we would have to quote you for every level at once, whether or not you
-            need them all. We would rather understand what you actually want first, and then build
-            a proposition around your own journey, only what serves you, and nothing that does not.
-          </p>
-          <p className="custom-text1 text-primary-light mt-4">
-            There is a deeper reason, and we will be honest about it. A number on a page makes
-            people decide with the wrong question. Some assume they cannot afford this, and never
-            discover that what it would resolve for them is worth far more than the investment
-            itself. Others could invest many times over, and yet it may not truly serve what they
-            are after, and in that case we would gently tell them so. We would rather be honest
-            with you than simply take a payment. All it takes to find out where you stand is a
-            conversation.
-          </p>
+      <section className={`${SECTION} bg-gradient-to-br from-[#09263D] via-[#0E3556] to-[#1B507C]`}>
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary">The honest answer</p>
+            <h2 className="h3 mt-2 text-white">Why You Will Not Find a Number Here</h2>
+            <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary" />
+          </div>
+
+          <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-0 md:divide-x md:divide-white/15">
+            <div className="md:pr-10">
+              <span className="text-5xl font-bold leading-none text-secondary/60">01</span>
+              <h3 className="mt-3 font-outfit text-xl font-semibold text-secondary">Out of fairness to you</h3>
+              <p className="custom-text1 mt-3 leading-relaxed text-white/85">
+                This is an investment in your future, and we treat it as one, so you will not see a
+                price in these pages. That is deliberate, and it is out of fairness to you. To print a
+                single figure, we would have to quote you for every level at once, whether or not you
+                need them all. We would rather understand what you actually want first, and then build
+                a proposition around your own journey, only what serves you, and nothing that does not.
+              </p>
+            </div>
+
+            <div className="md:pl-10">
+              <span className="text-5xl font-bold leading-none text-secondary/60">02</span>
+              <h3 className="mt-3 font-outfit text-xl font-semibold text-secondary">The deeper reason</h3>
+              <p className="custom-text1 mt-3 leading-relaxed text-white/85">
+                There is a deeper reason, and we will be honest about it. A number on a page makes
+                people decide with the wrong question. Some assume they cannot afford this, and never
+                discover that what it would resolve for them is worth far more than the investment
+                itself. Others could invest many times over, and yet it may not truly serve what they
+                are after, and in that case we would gently tell them so. We would rather be honest
+                with you than simply take a payment. All it takes to find out where you stand is a
+                conversation.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
+      
 
       {/* How to enrol + training times (shared with /enroll) */}
       <HowToEnrol />

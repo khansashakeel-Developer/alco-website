@@ -76,9 +76,9 @@ const trainers: TrainerCard[] = [
       link: "/about-us/who-is-bismillah-pervez",
     },
     logos: [
-      { image: badgeABNLPColor, alt: "ABNLP Approved Training (colored logo)" },
+      { image: badgeABNLP, alt: "ABNLP Approved Training" },
       { image: badgeANLP, alt: "ANLP Accredited Trainer (UK)" },
-      { image: badgeNGHColor, alt: "National Guild of Hypnotists (NGH)" },
+      { image: badgeNGH, alt: "National Guild of Hypnotists (NGH)" },
       { image: badgeABH, alt: "ABH Trainer of Hypnosis" },
       { image: badgeICFMCC, alt: "ICF Master Certified Coach (MCC)" },
       {

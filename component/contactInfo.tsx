@@ -25,16 +25,33 @@ type Props = {
   primary?: CtaRef;
   secondary?: CtaRef;
   description?: string;
+  bgVideo?: string;
 };
 
-export default function ContactInfo({ primary = { id: "C1" }, secondary, description }: Props) {
+export default function ContactInfo({ primary = { id: "C1" }, secondary, description, bgVideo }: Props) {
   const data = { ...contactInfoData, description: description ?? contactInfoData.description };
 
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-light-neutral bg-cover bg-top-left w-full">
       <div className="container mx-auto px-4">
-        <div className="px-6 md:px-8 lg:px-12 xl:px-16 py-4 md:py-6 lg:py-10 xl:py-14  bg-cover bg-top-left w-full rounded-xl" style={{ backgroundImage: `url(${ContactBg.src})` }}>
-          <div className="grid grid-cols-12 gap-2 my-8">
+                <div className="relative overflow-hidden px-6 md:px-8 lg:px-12 xl:px-16 py-4 md:py-6 lg:py-10 xl:py-14  bg-cover bg-top-left w-full rounded-xl" style={{ backgroundImage: `url(${ContactBg.src})` }}>
+          {bgVideo && (
+            <>
+              <video
+                className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+                src={bgVideo}
+                poster="/videos/alco-center.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+              />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#04121F]/85 via-[#04121F]/70 to-[#04121F]/55" />
+            </>
+          )}
+          <div className="relative z-10 grid grid-cols-12 gap-2 my-8">
             <div className="col-span-12 md:col-span-8 lg:col-span-9 xl:col-span-5 2xl:col-span-4 flex flex-col items-center sm:flex-row sm:space-x-4 sm:items-center">
               <Link
                 href="tel:+923360082222"

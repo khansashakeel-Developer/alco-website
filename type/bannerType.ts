@@ -22,5 +22,6 @@ export type BannerType = {
   thumbnail?: StaticImageData
   className?: string
   height?: string
+  wide?: boolean
   children?: React.ReactNode
 }

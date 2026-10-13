@@ -67,7 +67,9 @@ const bannerDataLevel1: BannerType = {
   },
   description: "Quad Certification plus UK ANLP CPD",
   image: programLevel1.src,
-  // className: "bg-no-repeat bg-top-right bg-cover"
+  bgVideo: "/videos/program-level-1.mp4",
+  height: "min-h-[520px] lg:min-h-[580px]",
+  wide: true,
 };
 
 const LevelIntroWithVideoDataLevel1: LevelIntroWithVideoType = {
@@ -291,7 +293,7 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
       { title: "What You Will Walk Away With", body: <>Upon completing this certification, you will be equipped to identify and shift limiting beliefs, communicate with precision and influence, facilitate powerful change conversations, and apply NLP methodologies within your professional practice.</> },
       { title: "Who This Programme Is For", body: <>Everyone, including the complete beginner. You leave able to coach professionally and change your own life.</> },
       { title: "Prerequisite", body: <>None. Level 1 is built for the complete beginner.</> },
-      { title: "How to Join", body: <>Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. US and Canada: +1 (206) 614 0234.</> },
+      { title: "How to Join", body: <>Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. International: +1 (206) 614 0234.</> },
       { title: "Why You Will Not Find a Number Here", body: <>This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.</> },
       ]}
     />
@@ -369,31 +371,79 @@ const LevelGraduatesExperienceDataLevel1: LevelGraduatesExperienceType = {
   video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599133/Level1_Review_f8fbjg.mp4",
   thumbnail: ThumbnailReview1,
 }
-
-// "Where It Leads" (no trademark attribution line: the ® carries it, DECISIONS v2 P5)
 const WhereItLeadsDataLevel1: ContentSectionType = {
   title: "Where It Leads",
   TagType: "h2",
-  textAlign: "text-start",
-  fullBg: "bg-white",
+  textAlign: "text-center",
+  fullBg: "bg-neutral-100",
   padding: "py-6 md:py-8 lg:py-12 xl:py-16",
   description: (
-    <div className="max-w-5xl">
-      <p className="my-4">
+    <div className="mx-auto max-w-6xl text-center">
+      <p className="mx-auto my-4 max-w-3xl">
         Practitioner changes you, and for many that is enough. But if you feel the pull to make this a profession, Level 2 is built for exactly that.
       </p>
-      <p className="mb-4">
-        <strong>A note we make with pride, not apology.</strong> Hypnosis is not part of the Practitioner. We refuse to dilute. Our hypnotherapy is a full journey of its own at Level 3.
-      </p>
-      <ul className="list-disc pl-5 space-y-1 mb-4">
-        <li>Next level: <Link href="/program/nlp-master-practitioner" className="underline">Level 2, NLP Master Practitioner</Link></li>
-        <li>Later: <Link href="/program/advanced-hypnotherapy-interventionist" className="underline">Level 3, Advanced Hypnotherapy and Interventionist</Link></li>
-        <li>See the whole ladder: <Link href="/programs" className="underline">All programmes</Link></li>
-        <li>Not sure yet? <Link href="/contact#form" className="underline" data-cta-id="C5" data-gtm-event="cta_click">Book a conversation</Link> or ask your relationship manager for the link to our free weekly introductory webinar.</li>
-      </ul>
+
+      {/* Note, dark panel with gold top bar */}
+      <div className="relative mx-auto my-6 max-w-4xl overflow-hidden rounded-2xl bg-gradient-to-br from-[#09263D] to-[#1B507C] p-6 md:p-8 text-white shadow-lg">
+        <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-secondary" />
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">A note we make with pride, not apology</p>
+        <p className="mx-auto mt-2 max-w-3xl text-base md:text-lg text-white/90">
+          Hypnosis is not part of the Practitioner. We refuse to dilute. Our hypnotherapy is a full journey of its own at Level 3.
+        </p>
+      </div>
+
+      {/* Route cards */}
+      <div className="grid gap-4 md:grid-cols-3">
+        <Link
+          href="/program/nlp-master-practitioner"
+          className="group relative flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary-darkest">Next</span>
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">2</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Next level</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 2, NLP Master Practitioner</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 2 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+        </Link>
+
+        <Link
+          href="/program/advanced-hypnotherapy-interventionist"
+          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">3</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Later</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 3, Advanced Hypnotherapy and Interventionist</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 3 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+        </Link>
+
+        <Link
+          href="/programs"
+          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">1–6</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">The whole ladder</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">All programmes</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">See every level <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+        </Link>
+      </div>
+
+      {/* Not sure yet strip */}
+      <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
+        <p className="max-w-3xl text-base text-primary">
+          <strong>Not sure yet?</strong> Book a conversation, or ask your relationship manager for the link to our free weekly introductory webinar.
+        </p>
+        <Link
+          href="/contact#form"
+          className="inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-bold text-primary-darkest transition hover:bg-secondary-dark hover:shadow-lg"
+          data-cta-id="C5"
+          data-gtm-event="cta_click"
+        >
+          Book a conversation
+        </Link>
+      </div>
     </div>
   ),
 };
+
 
 // Plain strings: the same array feeds the visible accordion and the FAQPage JSON-LD.
 const FaqDataLevel1: LevelFaq[] = [
@@ -435,6 +485,9 @@ const bannerDataLevel2: BannerType = {
   },
   description: "Quad Certification plus a Second UK ANLP CPD",
   image: programLevel2.src,
+  bgVideo: "/videos/program-level-2.mp4", 
+  height: "min-h-[520px] lg:min-h-[580px]",
+  wide: true,
   className: "bg-center bg-no-repeat bg-primary"
 };
 
@@ -639,23 +692,15 @@ const LevelProgramIncludesDataLevel2: LevelProgramIncludesType = {
   ],
   textAlign: "text-start",
   // No prices, fees or payment plans anywhere (ruling 25 Sep 2026). US number is plain text, never a link.
-  detailContent: (
-    <div className="text-gray-600">
-      <p className="mb-2"><strong>Who This Programme Is For</strong></p>
-      <p className="mb-4">
-        Graduates of Level 1 aiming for mastery and professional advancement. You leave able to take on the diverse cases and build authority. It is equally valuable if you only want to develop yourself: the deepest way to master this for your own life is to learn it to a professional standard.
-      </p>
-      <p className="mb-2"><strong>Prerequisite</strong></p>
-      <p className="mb-4">Level 1, <a href="/program/nlp-practitioner" className="underline">NLP Practitioner</a>.</p>
-      <p className="mb-2"><strong>How to Join</strong></p>
-      <p className="mb-4">
-        Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. US and Canada: +1 (206) 614 0234.
-      </p>
-      <p className="mb-2"><strong>Why You Will Not Find a Number Here</strong></p>
-      <p className="mb-4">
-        This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.
-      </p>
-    </div>
+    detailContent: (
+    <NextStepCards
+      cards={[
+        { title: "Who This Programme Is For", body: <>Graduates of Level 1 aiming for mastery and professional advancement. You leave able to take on the diverse cases and build authority. It is equally valuable if you only want to develop yourself: the deepest way to master this for your own life is to learn it to a professional standard.</> },
+        { title: "Prerequisite", body: <>Level 1, <a href="/program/nlp-practitioner" className="underline">NLP Practitioner</a>.</> },
+        { title: "How to Join", body: <>Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. International: +1 (206) 614 0234.</> },
+        { title: "Why You Will Not Find a Number Here", body: <>This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.</> },
+      ]}
+    />
   ),
 };
 
@@ -731,21 +776,61 @@ const LevelGraduatesExperienceDataLevel2: LevelGraduatesExperienceType = {
 const WhereItLeadsDataLevel2: ContentSectionType = {
   title: "Where It Leads",
   TagType: "h2",
-  textAlign: "text-start",
-  fullBg: "bg-white",
+  textAlign: "text-center",
+  fullBg: "bg-neutral-100",
   padding: "py-6 md:py-8 lg:py-12 xl:py-16",
   description: (
-    <div className="max-w-5xl">
-      <p className="my-4">
+    <div className="mx-auto max-w-6xl text-center">
+      <p className="mx-auto my-4 max-w-3xl">
         Master Practitioner makes you a master of the work. The next questions are whether you want the depth that hypnosis brings, and whether you want to teach, Levels 3 and 4.
       </p>
-      <ul className="list-disc pl-5 space-y-1 mb-4">
-        <li>Previous level: <Link href="/program/nlp-practitioner" className="underline">Level 1, NLP Practitioner</Link></li>
-        <li>Next level: <Link href="/program/advanced-hypnotherapy-interventionist" className="underline">Level 3, Advanced Hypnotherapy and Interventionist</Link></li>
-        <li>Or teach: <Link href="/program/nlp-trainers-training-program" className="underline">Level 4, NLP Train the Trainer</Link></li>
-        <li>See the whole ladder: <Link href="/programs" className="underline">All programmes</Link></li>
-        <li>Ready to talk? <Link href="/contact#form" className="underline" data-cta-id="C5" data-gtm-event="cta_click">Book a conversation</Link></li>
-      </ul>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <Link
+          href="/program/nlp-practitioner"
+          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">1</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Previous level</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 1, NLP Practitioner</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark"><span aria-hidden="true" className="inline-block transition-transform group-hover:-translate-x-1">←</span> Explore Level 1</span>
+        </Link>
+
+        <Link
+          href="/program/advanced-hypnotherapy-interventionist"
+          className="group relative flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary-darkest">Next</span>
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">3</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Next level</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 3, Advanced Hypnotherapy and Interventionist</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 3 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+        </Link>
+
+        <Link
+          href="/program/nlp-trainers-training-program"
+          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">4</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Or teach</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 4, NLP Train the Trainer</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 4 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+        </Link>
+      </div>
+
+      <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
+        <p className="max-w-3xl text-base text-primary">
+          <strong>Ready to talk?</strong> Book a conversation, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
+        </p>
+        <Link
+          href="/contact#form"
+          className="inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-bold text-primary-darkest transition hover:bg-secondary-dark hover:shadow-lg"
+          data-cta-id="C5"
+          data-gtm-event="cta_click"
+        >
+          Book a conversation
+        </Link>
+      </div>
     </div>
   ),
 };
@@ -792,6 +877,9 @@ const bannerDataLevel3: BannerType = {
   },
   description: "ABH and NGH Hypnosis Certification",
   image: programLevel2.src,
+  bgVideo: "/videos/program-level-2.mp4",
+  height: "min-h-[520px] lg:min-h-[580px]",
+  wide: true,
   className: "bg-center bg-no-repeat bg-primary"
 };
 
@@ -1007,25 +1095,15 @@ const LevelProgramIncludesDataLevel3: LevelProgramIncludesType = {
   ],
   textAlign: "text-start",
   // No prices, fees or payment plans anywhere (ruling 25 Sep 2026). US number is plain text, never a link.
-  detailContent: (
-    <div className="text-gray-600">
-      <p className="mb-2"><strong>Who This Programme Is For</strong></p>
-      <p className="mb-4">
-        Those who wish to pursue coaching as a full-time career. You leave able to work at the deepest unconscious level, with advanced modalities and tools for personal change. You are never pushed into clinical territory: we teach firm boundaries, and this is work for change, performance and habits, never the treatment of illness.
-      </p>
-      <p className="mb-2"><strong>Prerequisite</strong></p>
-      <p className="mb-4">
-        Level 2, <a href="/program/nlp-master-practitioner" className="underline">NLP Master Practitioner</a>, and an interview. The interview and the small cohort are matters of safety and quality, not scarcity: deep hypnotic work needs a trainer's eye on every participant.
-      </p>
-      <p className="mb-2"><strong>How to Join</strong></p>
-      <p className="mb-4">
-        Level 3 is arranged directly with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and Arslan Larik. To request an interview, call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. US and Canada: +1 (206) 614 0234.
-      </p>
-      <p className="mb-2"><strong>Why You Will Not Find a Number Here</strong></p>
-      <p className="mb-4">
-        This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.
-      </p>
-    </div>
+   detailContent: (
+    <NextStepCards
+      cards={[
+        { title: "Who This Programme Is For", body: <>Those who wish to pursue coaching as a full-time career. You leave able to work at the deepest unconscious level, with advanced modalities and tools for personal change. You are never pushed into clinical territory: we teach firm boundaries, and this is work for change, performance and habits, never the treatment of illness.</> },
+        { title: "Prerequisite", body: <>Level 2, <a href="/program/nlp-master-practitioner" className="underline">NLP Master Practitioner</a>, and an interview. The interview and the small cohort are matters of safety and quality, not scarcity: deep hypnotic work needs a trainer's eye on every participant.</> },
+        { title: "How to Join", body: <>Level 3 is arranged directly with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and Arslan Larik. To request an interview, call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. International: +1 (206) 614 0234.</> },
+        { title: "Why You Will Not Find a Number Here", body: <>This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.</> },
+      ]}
+    />
   ),
 };
 
@@ -1099,21 +1177,63 @@ const LevelGraduatesExperienceDataLevel3: LevelGraduatesExperienceType = {
 const WhereItLeadsDataLevel3: ContentSectionType = {
   title: "Where It Leads",
   TagType: "h2",
-  textAlign: "text-start",
-  fullBg: "bg-white",
+  textAlign: "text-center",
+  fullBg: "bg-neutral-100",
   padding: "py-6 md:py-8 lg:py-12 xl:py-16",
   description: (
-    <div className="max-w-5xl">
-      <p className="my-4">
+    <div className="mx-auto max-w-6xl text-center">
+      <p className="mx-auto my-4 max-w-3xl">
         With the full spectrum in hand, the ladder opens two ways: teach NLP through Train the Trainer, or teach hypnosis through the Hypnosis Trainer's Training.
       </p>
-      <ul className="list-disc pl-5 space-y-1 mb-4">
-        <li>Previous level: <Link href="/program/nlp-master-practitioner" className="underline">Level 2, NLP Master Practitioner</Link></li>
-        <li>Teach NLP: <Link href="/program/nlp-trainers-training-program" className="underline">Level 4, NLP Train the Trainer</Link></li>
-        <li>Teach hypnosis: <Link href="/program/hypnosis-trainers-training-program" className="underline">Level 5, Hypnosis Train the Trainer</Link></li>
-        <li>See the whole ladder: <Link href="/programs" className="underline">All programmes</Link></li>
-        <li>Request an interview: <a href={whatsappHref(waLine("Level 3, Advanced Hypnotherapy and Interventionist"))} target="_blank" rel="noopener noreferrer" className="underline" data-cta-id="C1" data-gtm-event="whatsapp_click">Speak to a relationship manager</a></li>
-      </ul>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <Link
+          href="/program/nlp-master-practitioner"
+          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">2</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Previous level</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 2, NLP Master Practitioner</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark"><span aria-hidden="true" className="inline-block transition-transform group-hover:-translate-x-1">←</span> Explore Level 2</span>
+        </Link>
+
+        <Link
+          href="/program/nlp-trainers-training-program"
+          className="group relative flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary-darkest">Next</span>
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">4</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Teach NLP</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 4, NLP Train the Trainer</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 4 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+        </Link>
+
+        <Link
+          href="/program/hypnosis-trainers-training-program"
+          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+        >
+          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">5</span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Teach hypnosis</p>
+          <h3 className="mt-1 text-lg font-semibold text-primary">Level 5, Hypnosis Train the Trainer</h3>
+          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 5 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+        </Link>
+      </div>
+
+      <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
+        <p className="max-w-3xl text-base text-primary">
+          <strong>Ready for the next step?</strong> Request an interview, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
+        </p>
+        <a
+          href={whatsappHref(waLine("Level 3, Advanced Hypnotherapy and Interventionist"))}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-bold text-primary-darkest transition hover:bg-secondary-dark hover:shadow-lg"
+          data-cta-id="C1"
+          data-gtm-event="whatsapp_click"
+        >
+          Speak to a relationship manager
+        </a>
+      </div>
     </div>
   ),
 };
@@ -1155,6 +1275,9 @@ const bannerDataLevel4: BannerType = {
     line2: "NLP Trainer training: turn a master into a maker of masters",
   },
   image: programLevel2.src,
+  bgVideo: "/videos/program-level-2.mp4",
+  height: "min-h-[520px] lg:min-h-[580px]",
+  wide: true,
   className: "bg-center bg-no-repeat bg-primary",
   children: (
     <p className="custom-text1 text-white mt-4 max-w-2xl">
@@ -1252,7 +1375,7 @@ const CurriculumDataLevel4: ContentSectionType = {
   TagType: "h2",
   textAlign: "text-start",
   description: (
-    <ul className="list-disc pl-5 space-y-2 text-gray-700">
+    <ul className="mt-6 grid list-none gap-x-12 gap-y-5 md:grid-cols-2 [counter-reset:item] [&>li]:relative [&>li]:flex [&>li]:items-start [&>li]:gap-4 [&>li]:border-t [&>li]:border-primary/20 [&>li]:pt-4 [&>li]:text-base [&>li]:leading-relaxed [&>li]:text-gray-700 [&>li]:transition-colors [&>li]:[counter-increment:item] [&>li:hover]:border-secondary [&>li:hover]:text-primary-darkest [&>li]:before:w-12 [&>li]:before:shrink-0 [&>li]:before:text-3xl [&>li]:before:font-bold [&>li]:before:leading-none [&>li]:before:text-primary/20 [&>li]:before:transition-colors [&>li]:before:content-[counter(item,decimal-leading-zero)] [&>li:hover]:before:text-secondary">
       <li>Platform mastery and the Trainer’s State (Uptime)</li>
       <li>Calibrating a whole room, and leading the unconscious room leaders</li>
       <li>Stage anchoring: spaces for content, metaphor, debrief and humour</li>
@@ -1311,6 +1434,9 @@ const bannerDataLevel5: BannerType = {
     line2: "Hypnosis trainer certification: become a maker of hypnotists",
   },
   image: programLevel2.src,
+  bgVideo: "/videos/program-level-2.mp4",
+  height: "min-h-[520px] lg:min-h-[580px]",
+  wide: true,
   className: "bg-center bg-no-repeat bg-primary",
   children: (
     <p className="custom-text1 text-white mt-4 max-w-2xl">
@@ -1408,7 +1534,7 @@ const CurriculumDataLevel5: ContentSectionType = {
   TagType: "h2",
   textAlign: "text-start",
   description: (
-    <ul className="list-disc pl-5 space-y-2 text-gray-700">
+    <ul className="mt-6 grid list-none gap-x-12 gap-y-5 md:grid-cols-2 [counter-reset:item] [&>li]:relative [&>li]:flex [&>li]:items-start [&>li]:gap-4 [&>li]:border-t [&>li]:border-primary/20 [&>li]:pt-4 [&>li]:text-base [&>li]:leading-relaxed [&>li]:text-gray-700 [&>li]:transition-colors [&>li]:[counter-increment:item] [&>li:hover]:border-secondary [&>li:hover]:text-primary-darkest [&>li]:before:w-12 [&>li]:before:shrink-0 [&>li]:before:text-3xl [&>li]:before:font-bold [&>li]:before:leading-none [&>li]:before:text-primary/20 [&>li]:before:transition-colors [&>li]:before:content-[counter(item,decimal-leading-zero)] [&>li:hover]:before:text-secondary">
       <li>The lineage and pedagogy of hypnosis: Mesmer, Braid, Elman, Erickson, Krasner</li>
       <li>Teaching the full spectrum, from direct-authoritarian to indirect-permissive</li>
       <li>Teaching progressive, rapid and instant inductions</li>
@@ -1463,6 +1589,9 @@ const bannerDataLevel6: BannerType = {
   level: "Level 6",
   title: { line1: "NLP Master Trainer", line2: "The summit: produce the trainers" },
   image: programLevel2.src,
+  bgVideo: "/videos/program-level-2.mp4",
+  height: "min-h-[520px] lg:min-h-[580px]",
+  wide: true,
   className: "bg-center bg-no-repeat bg-primary",
   children: (
     <p className="custom-text1 text-white mt-4 max-w-2xl">
@@ -1495,13 +1624,46 @@ const ContentSectionDataLevel6: ContentSectionType = {
   title: "Who may apply",
   TagType: "h2",
   description: (
-    <div className="text-gray-600 max-w-4xl">
-      <p className="my-4">You must already be a Certified Trainer of NLP in good standing, having completed the Trainer’s Training and holding current ABNLP Trainer membership. Once you do, you may apply to enrol. Entry is not automatic. Every candidate has an interview with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and a direct conversation with the Board, and their standing is verified before admission. Even a trainer certified through the ABNLP is checked first, and a trainer arriving from another board is scrutinised more closely still. This is the highest level we offer, and the gate is set accordingly.</p>
-      <p className="my-4">Throughout the programme you keep your Trainer membership current, renewing it each year and remaining an accredited Trainer of good standing. You apply for Master Trainer membership itself only once the programme is complete.</p>
+    <div className="mx-auto max-w-6xl">
+      {/* Three steps joined by a line */}
+      <div className="relative mt-10 grid gap-10 md:grid-cols-3">
+        <span aria-hidden="true" className="absolute left-[16.66%] right-[16.66%] top-7 hidden h-0.5 bg-gradient-to-r from-secondary via-primary/40 to-secondary md:block" />
+
+        <div className="group relative flex flex-col items-center text-center">
+          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">1</span>
+          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">Be a Certified Trainer</h3>
+          <p className="mt-2 text-gray-600">You must already be a Certified Trainer of NLP in good standing, having completed the Trainer’s Training and holding current ABNLP Trainer membership. Once you do, you may apply to enrol.</p>
+        </div>
+
+        <div className="group relative flex flex-col items-center text-center">
+          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">2</span>
+          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">Interview and the Board</h3>
+          <p className="mt-2 text-gray-600">Entry is not automatic. Every candidate has an interview with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and a direct conversation with the Board, and their standing is verified before admission.</p>
+        </div>
+
+        <div className="group relative flex flex-col items-center text-center">
+          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">3</span>
+          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">Your standing is checked</h3>
+          <p className="mt-2 text-gray-600">Even a trainer certified through the ABNLP is checked first, and a trainer arriving from another board is scrutinised more closely still.</p>
+        </div>
+      </div>
+
+      {/* The gate statement */}
+      <div className="mt-12 flex items-center gap-4">
+        <span aria-hidden="true" className="h-px flex-1 bg-primary/20" />
+        <p className="max-w-2xl text-center font-outfit text-lg md:text-xl font-semibold text-primary">
+          This is the highest level we offer, and the gate is set accordingly.
+        </p>
+        <span aria-hidden="true" className="h-px flex-1 bg-primary/20" />
+      </div>
+
+      <p className="mx-auto mt-6 max-w-3xl text-center text-gray-600">
+        Throughout the programme you keep your Trainer membership current, renewing it each year and remaining an accredited Trainer of good standing. You apply for Master Trainer membership itself only once the programme is complete.
+      </p>
     </div>
   ),
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
-  textAlign: "text-start",
+  textAlign: "text-center",
   fullBg: "bg-slate-100 ",
 };
 
@@ -1591,22 +1753,62 @@ const LevelBenefitsTableDataLevel6: LevelBenefitsTableType = {
 const SignOffDataLevel6: ContentSectionType = {
   title: "How it is signed off, and why the rigour is the point",
   TagType: "h2",
-  textAlign: "text-start",
+  textAlign: "text-center",
   description: (
-    <div className="text-gray-600 max-w-4xl">
-      <p className="my-4">On completion you apply to the Board for Master Trainer level membership, submitting your evidence across all four pillars. Every AL&amp;CO Master Trainer is signed off by two Master Trainers in good standing: Arslan Larik signs as one, and the second is another certified Master Trainer appointed at our discretion. Two recognised Master Trainer signatures on the certificate is a firm rule at AL&amp;CO, a standard we hold ourselves to without exception, and that double, independent sign-off is exactly what makes the grade worth holding.</p>
-      <h3 className="h5 text-primary font-semibold mt-6">A point of clarity on revisiting</h3>
-      <p className="my-4">The free five-year revisit that comes with Levels 1 to 3 does not extend to the Trainer’s Trainings. Nobody re-attends the NLP Trainer’s Training or the Hypnosis Trainer’s Training simply to revise. The only people who return to those rooms are Master Trainer candidates, who attend as coaching assistants as part of this programme. That is by design: the trainer levels are earned once, and revisited only by those climbing to Master Trainer.</p>
-      <h3 className="h5 text-primary font-semibold mt-6">Certifying other Master Trainers</h3>
-      <p className="my-4">Producing Master Trainers of your own is a further step. To do it, you must be registered with the ABNLP in the capacity of a Master Trainer, and clear the Board’s scrutiny, an interview at the very least, before you may certify others at this grade. We facilitate this for you at the time of your graduation. It is a check that must be in place, and we make it straightforward.</p>
-      <h3 className="h5 text-primary font-semibold mt-6">Where it leads</h3>
-      <p className="my-4">Nowhere higher. From here your work outlives you, because the trainers you make will make practitioners long after you.</p>
+    <div className="mx-auto max-w-6xl">
+      <p className="mx-auto my-4 max-w-3xl text-gray-600">On completion you apply to the Board for Master Trainer level membership, submitting your evidence across all four pillars. Every AL&amp;CO Master Trainer is signed off by two Master Trainers in good standing: Arslan Larik signs as one, and the second is another certified Master Trainer appointed at our discretion. Two recognised Master Trainer signatures on the certificate is a firm rule at AL&amp;CO, a standard we hold ourselves to without exception, and that double, independent sign-off is exactly what makes the grade worth holding.</p>
+
+      {/* Two signatures lead to one certificate */}
+      <div className="my-8 flex flex-col items-center justify-center gap-3 md:flex-row md:gap-5">
+        <div className="rounded-full border border-primary/20 bg-white px-6 py-3 text-center shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-widest text-secondary-dark">Signature 1</p>
+          <p className="font-outfit text-base font-semibold text-primary">Arslan Larik</p>
+        </div>
+        <span aria-hidden="true" className="text-2xl font-bold text-secondary">+</span>
+        <div className="rounded-full border border-primary/20 bg-white px-6 py-3 text-center shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-widest text-secondary-dark">Signature 2</p>
+          <p className="font-outfit text-base font-semibold text-primary">A second certified Master Trainer</p>
+        </div>
+        <span aria-hidden="true" className="text-2xl font-bold text-secondary md:rotate-0 rotate-90">→</span>
+        <div className="rounded-full bg-gradient-to-br from-secondary to-secondary-dark px-7 py-4 text-center shadow-lg">
+          <p className="font-outfit text-base font-bold text-primary-darkest">Master Trainer certificate</p>
+        </div>
+      </div>
+
+      {/* Three points, no boxes */}
+      <div className="mt-12 grid gap-10 text-start md:grid-cols-3">
+        <div className="group relative border-t border-primary/20 pt-6">
+          <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-16 bg-secondary transition-all duration-500 group-hover:w-32" />
+          <span className="text-5xl font-bold leading-none text-primary/15">01</span>
+          <h3 className="mt-3 font-outfit text-lg xl:text-xl font-semibold text-primary">A point of clarity on revisiting</h3>
+          <p className="mt-3 text-gray-600">The free five-year revisit that comes with Levels 1 to 3 does not extend to the Trainer’s Trainings. Nobody re-attends the NLP Trainer’s Training or the Hypnosis Trainer’s Training simply to revise. The only people who return to those rooms are Master Trainer candidates, who attend as coaching assistants as part of this programme. That is by design: the trainer levels are earned once, and revisited only by those climbing to Master Trainer.</p>
+        </div>
+
+        <div className="group relative border-t border-primary/20 pt-6">
+          <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-16 bg-secondary transition-all duration-500 group-hover:w-32" />
+          <span className="text-5xl font-bold leading-none text-primary/15">02</span>
+          <h3 className="mt-3 font-outfit text-lg xl:text-xl font-semibold text-primary">Certifying other Master Trainers</h3>
+          <p className="mt-3 text-gray-600">Producing Master Trainers of your own is a further step. To do it, you must be registered with the ABNLP in the capacity of a Master Trainer, and clear the Board’s scrutiny, an interview at the very least, before you may certify others at this grade. We facilitate this for you at the time of your graduation. It is a check that must be in place, and we make it straightforward.</p>
+        </div>
+
+        <div className="group relative border-t border-primary/20 pt-6">
+          <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-16 bg-secondary transition-all duration-500 group-hover:w-32" />
+          <span className="text-5xl font-bold leading-none text-primary/15">03</span>
+          <h3 className="mt-3 font-outfit text-lg xl:text-xl font-semibold text-primary">Where it leads</h3>
+          <p className="mt-3 text-gray-600">Nowhere higher. From here your work outlives you, because the trainers you make will make practitioners long after you.</p>
+        </div>
+      </div>
+
       {/* Business in the Box "add-on" line removed: ruling 25 Sep 2026, Business in the Box is never presented as a level or product. */}
       {/* PLEASE CHECK: publish only after Bismillah Pervez approves */}
-      <blockquote className="border-l-4 border-secondary pl-4 my-8 text-primary">
-        <p className="italic">“I can vouch for every word of this personally, because I have lived it. I completed every programme at Arslan Larik &amp; Company, from Practitioner all the way through, and I did my Trainer’s Training with The Tad James Company, under the mentorship of Dr Adriana James. My standing as a Master Trainer was accredited through ANLP in the United Kingdom. I am proud to be the first Master Trainer this institution has produced, and prouder still of what that means: AL&amp;CO now grows its own.”</p>
-        <p className="mt-2 font-semibold not-italic">Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). Karachi, Pakistan.</p>
-      </blockquote>
+      <figure className="relative mx-auto mt-14 max-w-4xl text-center">
+        <span aria-hidden="true" className="absolute -top-6 left-1/2 -translate-x-1/2 select-none font-serif text-8xl leading-none text-secondary/60">“</span>
+        <blockquote className="pt-8 text-primary">
+          <p className="font-outfit text-lg md:text-xl italic leading-relaxed">I can vouch for every word of this personally, because I have lived it. I completed every programme at Arslan Larik &amp; Company, from Practitioner all the way through, and I did my Trainer’s Training with The Tad James Company, under the mentorship of Dr Adriana James. My standing as a Master Trainer was accredited through ANLP in the United Kingdom. I am proud to be the first Master Trainer this institution has produced, and prouder still of what that means: AL&amp;CO now grows its own.”</p>
+          <span aria-hidden="true" className="mx-auto mt-6 block h-0.5 w-16 bg-secondary" />
+          <figcaption className="mt-4 font-semibold not-italic text-primary-darkest">Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). Karachi, Pakistan.</figcaption>
+        </blockquote>
+      </figure>
     </div>
   ),
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",

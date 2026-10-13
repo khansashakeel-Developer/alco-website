@@ -2,26 +2,14 @@
 import React from "react";
 import { LevelProgramIncludesType } from "@/type/levelProgramIncludes";
 import Image from "next/image";
+import Reveal from "./Reveal";
 
 type Props = {
   data?: LevelProgramIncludesType
 }
 
-const themeClasses: any = {
-  dark: "bg-primary-darkest",
-  light: "bg-white",
-  yellow: "bg-secondary-darkest",
-};
-
-// Layout: every card is the same shape (icon + title on one row, text underneath) and every row is the same
-// height on tablet/desktop, so the section reads as an even grid. Six cards run 3 across on xl; any other count
-// (Levels 4 to 6 have four) runs 2 across, so the grid never ends with a lone card. An odd last card spans the row.
 export default function LevelProgramIncludes({ data }: Props) {
   const count = data?.points?.length ?? 0;
-  const threeAcross = count > 0 && count % 3 === 0;
-  const gridClass = data?.pointsClass
-    ? data.pointsClass
-    : `grid grid-cols-1 md:grid-cols-2 ${threeAcross ? "xl:grid-cols-3" : ""} gap-4 lg:gap-6 2xl:gap-8 py-4 lg:py-8 xl:py-10`;
 
   return (
     data &&
@@ -41,8 +29,7 @@ export default function LevelProgramIncludes({ data }: Props) {
         )}
 
         {data?.layout === "split" ? (
-          // Split layout: heading and intro sit on top as usual; below, one white panel of evenly spaced rows.
-          // Each row is label (icon + title) on the left and text on the right, so the text lines up down the panel.
+          // Split layout: one white panel of evenly spaced rows (label on the left, text on the right).
           <div className="mt-4 lg:mt-6 mb-4 lg:mb-8 xl:mb-10 bg-white rounded-xl shadow-lg divide-y divide-slate-200">
             {data.points.map((point, index) => (
               <div key={index} className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] gap-3 md:gap-8 p-5 lg:p-6">
@@ -63,8 +50,7 @@ export default function LevelProgramIncludes({ data }: Props) {
             ))}
           </div>
         ) : data?.layout === "rows" ? (
-          // Rows layout: one full-width row per point, a dark label panel (number, icon, title) beside the text.
-          // Every row has the same anatomy, so nothing depends on card heights matching.
+          // Rows layout: one full-width row per point, a dark label panel beside the text.
           <div className="flex flex-col gap-4 lg:gap-6 py-4 lg:py-8 xl:py-10">
             {data.points.map((point, index) => (
               <div key={index} className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] overflow-hidden rounded-xl shadow-lg bg-white">
@@ -90,49 +76,70 @@ export default function LevelProgramIncludes({ data }: Props) {
             ))}
           </div>
         ) : (
-        <div className={gridClass}>
-          {data?.points.map((point, index) => {
-            const isLastOdd = !threeAcross && count % 2 === 1 && index === count - 1;
-            return (
-              <div
-                key={index}
-                className={`flex flex-col h-full p-5 lg:p-6 2xl:p-8 rounded-xl shadow-lg ${themeClasses[point?.theme]} ${isLastOdd ? "md:col-span-2" : ""}`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 shrink-0 p-3 bg-primary rounded-lg">
-                    {point?.image?.src && (
-                      <div className="relative">
-                        <Image
-                          src={point.image.src}
-                          alt={point.image.alt || "image"}
-                          width={100}
-                          height={100}
-                          className="object-cover"
-                        />
+          // Default layout (Levels 2 to 6): animated journey timeline.
+          <div className="relative mt-10 mb-6 lg:mb-10">
+            {/* glowing spine */}
+            <span
+              aria-hidden="true"
+              className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2 rounded-full bg-gradient-to-b from-secondary via-primary/50 to-transparent shadow-[0_0_12px_rgba(249,184,30,0.6)]"
+            />
+
+            <div className="space-y-8 md:space-y-4">
+              {data?.points.map((point, index) => {
+                const left = index % 2 === 0;
+                return (
+                  <div
+                    key={index}
+                    className={`group relative pl-16 md:pl-0 md:w-1/2 ${
+                      left ? "md:pr-12 lg:pr-16" : "md:pl-12 lg:pl-16 md:ml-auto"
+                    }`}
+                  >
+                    {/* numbered node on the spine */}
+                    <div
+                      className={`absolute top-6 left-0 flex h-10 w-10 items-center justify-center ${
+                        left ? "md:left-auto md:right-0 md:translate-x-1/2" : "md:left-0 md:-translate-x-1/2"
+                      }`}
+                    >
+                      <span aria-hidden="true" className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary/40" />
+                      <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-white ring-4 ring-secondary/60 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:bg-secondary group-hover:text-primary-darkest">
+                        {index + 1}
+                      </span>
+                    </div>
+
+                    <Reveal delay={Math.min(index, 4) * 80}>
+                      <div className="rounded-2xl p-5 lg:p-6 transition-all duration-300 group-hover:bg-white group-hover:shadow-2xl group-hover:-translate-y-1">
+                        <div className="flex items-center gap-3">
+                          <div className="h-11 w-11 shrink-0 rounded-full bg-gradient-to-br from-primary to-primary-darkest p-2.5 shadow-md transition-transform duration-500 group-hover:rotate-[360deg]">
+                            {point?.image?.src && (
+                              <Image
+                                src={point.image.src}
+                                alt={point.image.alt || ""}
+                                width={100}
+                                height={100}
+                                className="object-cover"
+                              />
+                            )}
+                          </div>
+                          <h3 className="font-outfit text-lg xl:text-xl font-semibold text-primary text-start transition-colors duration-300 group-hover:text-primary-darkest">
+                            {point.title}
+                          </h3>
+                        </div>
+
+                        <span aria-hidden="true" className="mt-3 block h-0.5 w-10 rounded-full bg-secondary transition-all duration-500 group-hover:w-24" />
+
+                        <div className="mt-3 font-outfit text-base leading-relaxed text-gray-700 text-start [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_p+ul]:mt-2">
+                          {point.description}
+                        </div>
                       </div>
-                    )}
+                    </Reveal>
                   </div>
-                  <h3 className={`
-                    text-lg sm:text-xl
-                    text-start
-                    font-outfit font-semibold
-                    ${point.theme === "dark" ? "text-secondary" : point.theme === "light" ? "text-primary" : "text-gray-800"}
-                    `}>
-                    {point.title}
-                  </h3>
-                </div>
-                <div className={`mt-4 text-base leading-relaxed font-outfit text-start
-                    [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1
-                    ${point.theme === "dark" ? "text-white" : "text-gray-800"}`}>
-                  {point.description}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                );
+              })}
+            </div>
+          </div>
         )}
 
-        {/* Deatil Content */}
+        {/* Detail Content */}
         {data?.detailContent && (
           <div className={`${data?.textAlign ? data?.textAlign : "text-center"} text-primary-light custom-text1  mx-auto`}>{data?.detailContent}</div>
         )}

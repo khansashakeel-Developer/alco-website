@@ -24,7 +24,7 @@ export function CoachingKeyFacts() {
       <div className="container mx-auto max-w-6xl">
         <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {FACTS.map((fact) => (
-            <div key={fact.big} className="rounded-xl bg-white shadow-lg border-t-4 border-secondary p-4 sm:p-5 text-center">
+            <div key={fact.big} className="rounded-xl bg-white shadow-lg border-t-4 border-secondary p-4 sm:p-5 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl">
               <dt className="font-outfit text-lg sm:text-2xl font-semibold text-primary">{fact.big}</dt>
               <dd className="font-outfit text-xs sm:text-sm text-gray-600 mt-1">{fact.small}</dd>
             </div>

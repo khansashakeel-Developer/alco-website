@@ -24,7 +24,8 @@ import OneOnOneCoachingSessionsImg15 from "@/assets/sessions/session15.svg"
 import ContentSection from "@/component/contentSection";
 import CtaBand from "@/component/CtaBand";
 import Reveal from "@/component/Reveal";
-import { CoachingKeyFacts, CoachingIntro, CoachingHowToApply, CoachingMethodology } from "@/component/coaching/PrivateCoachingSections";
+import { CoachingKeyFacts, CoachingHowToApply, CoachingMethodology } from "@/component/coaching/PrivateCoachingSections";
+import CoachingIntro from "@/component/coaching/CoachingIntroInteractive";
 
 // DECISIONS v2 G1: this page is exclusive to Arslan Larik. No session prices, no other coach cards.
 // G2: sensitive tiles stay, each framed as working alongside the person's medical practitioner, with proper referral.
@@ -34,6 +35,7 @@ const bannerData: BannerType = {
         align: "text-center mx-auto "
     },
     image: programLevel2.src,
+    bgVideo: "/videos/private-coaching.mp4", 
     className: "bg-center bg-cover bg-no-repeat bg-primary"
 };
 
@@ -45,7 +47,7 @@ const tile = (title: string, img: any, text: string) => ({
     position: "object-contain",
     src: img.src,
     alt: title,
-    description: (<p className="text-sm mt-2 px-2">{text}</p>),
+    description: (<p className="mt-3 px-1 text-sm leading-relaxed text-gray-600">{text}</p>),
 });
 
 const WhatWeAddressList: ContentSectionType = {
@@ -74,11 +76,11 @@ const WhatWeAddressList: ContentSectionType = {
         tile("Weight management challenges", OneOnOneCoachingSessionsImg14, "Where weight is connected to health, you work with your medical practitioner, and we work alongside, with proper referral, coaching you, and the family members who support you, on the beliefs, emotions and habits around food and movement."),
         tile("Time management challenges", OneOnOneCoachingSessionsImg15, "We work with you on priorities, focus and the inner conflicts that scatter your time, so your days serve what matters most to you."),
     ],
-    fullBg: "bg-neutral-100",
+        fullBg: "bg-neutral-100",
     padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
-    contentlisItemClass: "w-full sm:w-[48%] lg:w-[23%] rounded-xl bg-primary/10 backdrop-blur-sm py-6 px-4",
-    contentlistClass: "flex flex-wrap justify-center gap-4 max-w-6xl mx-auto pt-6 md:pt-8 lg:pt-12 xl:pt-16",
-    contentlistTitle: "text-lg font-semibold text-center text-primary min-h-12 px-4 mt-4",
+    contentlisItemClass: "group w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-2xl bg-white border border-primary/10 border-t-4 border-t-secondary shadow-sm py-6 px-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-secondary [&_img]:transition-transform [&_img]:duration-500 hover:[&_img]:scale-110",
+    contentlistClass: "flex flex-wrap justify-center gap-6 max-w-6xl mx-auto pt-6 md:pt-8 lg:pt-12 xl:pt-16",
+    contentlistTitle: "text-lg xl:text-xl font-semibold text-center text-primary min-h-12 px-2 mt-4 transition-colors group-hover:text-primary-darkest",
 };
 
 async function getSeoData() {

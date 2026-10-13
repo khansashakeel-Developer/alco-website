@@ -36,7 +36,7 @@ export default function Banner({ data }: Props) {
           </>
         )}
         <div className="container relative z-10 mx-auto px-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.75)]">
-          <div className={`grid grid-cols-1 ${!data?.title?.align && "lg:grid-cols-2"} gap-2 my-8`}>
+          <div className={`grid grid-cols-1 ${!data?.title?.align && (data?.wide ? "lg:grid-cols-[3fr_1fr]" : "lg:grid-cols-2")} gap-2 my-8`}>
             <div className="flex flex-col justify-start ">
               <div className="flex mb-4">
                 {data?.level && (

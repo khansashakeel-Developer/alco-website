@@ -1,19 +1,31 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LevelCertificationType } from "@/type/levelCertification";
 import Image from "next/image";
+import { ZoomIn, X } from "lucide-react";
 
 type Props = {
   data: LevelCertificationType
 }
 
-// Layout: every credential is the same compact card (seal + title + description) in a two-column grid, so the
-// section is short and even. Sample certificates are shown once, as a row of thumbnails underneath, instead of
-// beside only some of the cards. Works for every level: 5 credentials (Levels 1 to 3) or a single one (Levels 4 to 6).
+// Layout: sample certificates come first as a large framed showcase (click to view full screen), then every
+// credential as a white card (medal-style seal + title + description) in a two-column grid.
+// Works for every level: 5 credentials (Levels 1 to 3) or a single one (Levels 4 to 6).
 export default function LevelCertification({ data }: Props) {
   const points = data?.points ?? [];
   const credentials = points.filter((p) => p?.title);
   const samples = points.filter((p) => p?.imageCerficate?.src);
+  const [open, setOpen] = useState<number | null>(null);
+
+  // Esc closes the viewer and the page does not scroll behind it.
+  useEffect(() => {
+    if (open === null) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(null); };
+    document.addEventListener("keydown", onKey);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = overflow; };
+  }, [open]);
 
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-dark-primary bg-cover bg-top-left w-full">
@@ -29,65 +41,113 @@ export default function LevelCertification({ data }: Props) {
           </span>
         </h2>
 
-        {/* Credentials: equal cards; an odd last card spans the full row so the grid never ends lopsided. */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-6 lg:mt-8">
-          {credentials.map((point, index) => {
-            const isLastOdd = credentials.length % 2 === 1 && index === credentials.length - 1;
-            return (
-              <div
-                key={index}
-                className={`flex items-center gap-4 bg-white rounded-lg shadow-lg border-l-4 border-secondary p-4 lg:p-5 ${
-                  isLastOdd ? "lg:col-span-2" : ""
-                }`}
-              >
-                {point?.imageBrand?.src && (
-                  <Image
-                    src={point.imageBrand.src}
-                    alt={point.imageBrand.alt || "Brand"}
-                    width={64}
-                    height={64}
-                    className="shrink-0 object-contain"
-                  />
-                )}
-                <div>
-                  <h3 className="text-lg xl:text-xl text-primary text-start font-outfit font-semibold mb-1">
-                    {point.title}
-                  </h3>
-                  <p className="custom-text1 font-light text-black/70 text-start">
-                    {point.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Sample certificates: one even row of thumbnails. Click opens the full-size image in a new tab. */}
+        {/* Sample certificates: large framed cards, straight. Click opens the full-screen viewer. */}
         {samples.length > 0 && (
-          <div className="flex flex-wrap justify-center gap-4 lg:gap-6 mt-6 lg:mt-8">
+          <div className="flex flex-wrap justify-center gap-6 [&>*]:w-full sm:[&>*]:w-[calc(50%-0.75rem)] lg:[&>*]:w-[calc(33.333%-1rem)]">
             {samples.map((point, index) => (
-              <figure key={index} className="w-[calc(50%-0.5rem)] sm:w-[220px]">
-                <a
-                  href={point.imageCerficate!.src.src}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-md overflow-hidden bg-white ring-1 ring-white/20 hover:ring-secondary transition"
+              <figure key={index} className="group transition duration-500 ease-out hover:-translate-y-1 hover:scale-[1.03] motion-reduce:transform-none">
+                <button
+                  type="button"
+                  onClick={() => setOpen(index)}
+                  aria-label={`View full size: ${point.imageCerficate!.alt || "Certificate"}`}
+                  className="relative block w-full rounded-xl bg-white p-2.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/30 transition group-hover:ring-2 group-hover:ring-secondary focus-visible:ring-2 focus-visible:ring-secondary"
                 >
                   <Image
                     src={point.imageCerficate!.src}
                     alt={point.imageCerficate!.alt || "Certificate"}
-                    sizes="220px"
-                    className="w-full h-auto"
+                    sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw"
+                    quality={90}
+                    className="h-auto w-full rounded-md"
                   />
-                </a>
-                <figcaption aria-hidden="true" className="text-white/80 text-sm leading-snug text-center mt-2">
+                  <span className="pointer-events-none absolute inset-2.5 flex items-end justify-center rounded-md bg-gradient-to-t from-primary-darkest/70 via-transparent to-transparent pb-3 opacity-0 transition duration-300 group-hover:opacity-100">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-semibold text-primary-darkest">
+                      <ZoomIn size={16} aria-hidden="true" /> View full size
+                    </span>
+                  </span>
+                </button>
+                <figcaption aria-hidden="true" className="mt-4 text-center text-sm leading-snug text-white/85 sm:text-base">
                   {point.imageCerficate!.alt}
                 </figcaption>
               </figure>
             ))}
           </div>
         )}
+
+        {/* Credentials: equal white cards with a gold top bar and a medal-style seal; an odd last card spans the full row. */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 mt-10 lg:mt-14">
+          {credentials.map((point, index) => {
+            const isLastOdd = credentials.length % 2 === 1 && index === credentials.length - 1;
+            return (
+              <div
+                key={index}
+                className={`group relative overflow-hidden rounded-2xl bg-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl motion-reduce:transition-none motion-reduce:hover:transform-none ${
+                  isLastOdd ? "lg:col-span-2" : ""
+                }`}
+              >
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-secondary-dark via-secondary to-[#FFE29D]" />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-1 -top-3 select-none font-outfit text-[88px] font-extrabold leading-none text-primary/15 transition duration-300 group-hover:text-primary/25"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <div className="relative flex items-center gap-5 p-5 pt-7 lg:p-6 lg:pt-8">
+                  {point?.imageBrand?.src && (
+                    <span className="flex h-[84px] w-[84px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-darkest to-primary p-1 shadow-md ring-4 ring-secondary transition duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:transform-none">
+                      <span className="flex h-full w-full items-center justify-center rounded-full bg-white p-2">
+                        <Image
+                          src={point.imageBrand.src}
+                          alt={point.imageBrand.alt || "Brand"}
+                          width={64}
+                          height={64}
+                          className="h-full w-full object-contain"
+                        />
+                      </span>
+                    </span>
+                  )}
+                  <div className="pr-6">
+                    <h3 className="mb-1 text-start font-outfit text-lg font-semibold text-primary xl:text-xl">
+                      {point.title}
+                    </h3>
+                    <p className="custom-text1 text-start font-light text-black/70">
+                      {point.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
+
+      {/* Full-screen viewer */}
+      {open !== null && samples[open] && (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/85 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={samples[open].imageCerficate!.alt || "Certificate"}
+          onClick={() => setOpen(null)}
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setOpen(null)}
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 focus-visible:ring-2 focus-visible:ring-secondary"
+          >
+            <X size={24} aria-hidden="true" />
+          </button>
+          <Image
+            src={samples[open].imageCerficate!.src}
+            alt={samples[open].imageCerficate!.alt || "Certificate"}
+            sizes="92vw"
+            quality={100}
+            className="h-auto max-h-[88vh] w-auto max-w-[92vw] rounded-lg bg-white p-2 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }

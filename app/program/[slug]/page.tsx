@@ -16,6 +16,8 @@ import LevelNav from "@/component/levelNav";
 import CtaButton from "@/component/CtaButton";
 import CtaBand from "@/component/CtaBand";
 import { waLine, type CtaRef } from "@/component/cta";
+import type { ReactNode } from "react";
+import Reveal from "@/component/Reveal";
 
 export default async function ProgramDetail({
   params,
@@ -24,7 +26,9 @@ export default async function ProgramDetail({
 }) {
   const { slug } = await params;
 
-  const program: ProgramType | undefined = programs.find((p) => p.slug === slug);
+  const program: ProgramType | undefined = programs.find(
+    (p) => p.slug === slug,
+  );
   if (!program) notFound();
 
   // CTA plan, page to stage map.
@@ -35,7 +39,9 @@ export default async function ProgramDetail({
   const waMessage = waLine(`Level ${level}, ${program.name}`);
   const c1: CtaRef = { id: "C1", message: waMessage };
   const nextHref = program.NavData?.next?.href;
-  const lateSecondary: CtaRef = nextHref ? { id: "C9", href: nextHref } : { id: "C8" };
+  const lateSecondary: CtaRef = nextHref
+    ? { id: "C9", href: nextHref }
+    : { id: "C8" };
   const midPrimary: CtaRef = openEnrolment ? { id: "C4" } : c1;
   const bannerData = {
     ...program.BannerData,
@@ -43,51 +49,75 @@ export default async function ProgramDetail({
       <>
         {program.BannerData.children}
         <div className="flex flex-col sm:flex-row gap-4 mt-6">
-          <CtaButton id="C1" message={waMessage} variant="secondary" className="px-6" />
+          <CtaButton
+            id="C1"
+            message={waMessage}
+            variant="secondary"
+            className="px-6"
+          />
           {!openEnrolment && (
-            <CtaButton id={lateSecondary.id} href={lateSecondary.href} variant="outlineWhite" className="px-6" />
+            <CtaButton
+              id={lateSecondary.id}
+              href={lateSecondary.href}
+              variant="outlineWhite"
+              className="px-6"
+            />
           )}
         </div>
       </>
     ),
   };
 
+    // Fade-in on scroll. Level 1 only for now: change `level === 1` to `true` to use it on every level.
+  const Fade = ({ children }: { children: ReactNode }) =>
+    level === 1 ? <Reveal>{children}</Reveal> : <>{children}</>;
+
   return (
     <div>
       <ViewContentTracker contentName={program.name} />
       <Banner data={bannerData} />
-      <LevelIntroWithVideo data={program.LevelIntroWithVideoData} />
-      <LevelCertification data={program.LevelCertificationData} />
-      <ContentSection data={program.ContentSectionData} />
-      <LevelProgramIncludes data={program.LevelProgramIncludesData} />
-      <ContactInfo primary={midPrimary} secondary={openEnrolment ? c1 : undefined} />
-      <ContentSection data={program.ContentSectionContentListData} />
-      <LevelBenefitsTable data={program.LevelBenefitsTableData} />
-      <ContentSection data={program.ContentSectionImgContentListData} />
-      <LevelContent data={program.LevelContentData} />
+      <Fade><LevelIntroWithVideo data={program.LevelIntroWithVideoData} /></Fade>
+      <Fade><LevelCertification data={program.LevelCertificationData} /></Fade>
+      <Fade><ContentSection data={program.ContentSectionData} /></Fade>
+      <Fade><LevelProgramIncludes data={program.LevelProgramIncludesData} /></Fade>
+      <Fade>
+        <ContactInfo
+          primary={midPrimary}
+          secondary={openEnrolment ? c1 : undefined}
+          bgVideo="/videos/alco-center.mp4"
+        />
+      </Fade>
+      <Fade><ContentSection data={program.ContentSectionContentListData} /></Fade>
+      <Fade><LevelBenefitsTable data={program.LevelBenefitsTableData} /></Fade>
+      <Fade><ContentSection data={program.ContentSectionImgContentListData} /></Fade>
+      <Fade><LevelContent data={program.LevelContentData} /></Fade>
       {/* "Where It Leads" (Levels 1 to 3). ContentSection renders nothing when data is undefined (contentSection.tsx:16). */}
-      <ContentSection data={program.WhereItLeadsData} />
+      <Fade><ContentSection data={program.WhereItLeadsData} /></Fade>
       {program.LevelGraduatesExperienceData?.video && (
-        <LevelGraduatesExperience data={program.LevelGraduatesExperienceData} primary={midPrimary} />
+        <Fade><LevelGraduatesExperience data={program.LevelGraduatesExperienceData} primary={midPrimary} /></Fade>
       )}
       {/* OurFaqs renders nothing when data is empty (faqs.tsx:22). Default H2 "Your Questions Answered". */}
-      <OurFaqs data={program.FaqData} />
-      <LevelNav data={program.NavData} waMessage={waMessage} />
+      <Fade><OurFaqs data={program.FaqData} /></Fade>
+      <Fade><LevelNav data={program.NavData} waMessage={waMessage} /></Fade>
       {/* Closing band (CTA plan rule 2). */}
       {openEnrolment ? (
-        <CtaBand
-          title="Your Transformation Starts Here"
-          text="Places are limited and cohorts are capped. Enrol now, or come to a free webinar first and meet us."
-          primary={{ id: "C4" }}
-          secondary={{ id: "C2" }}
-        />
+        <Fade>
+          <CtaBand
+            title="Your Transformation Starts Here"
+            text="Places are limited and cohorts are capped. Enrol now, or come to a free webinar first and meet us."
+            primary={{ id: "C4" }}
+            secondary={{ id: "C2" }}
+          />
+        </Fade>
       ) : (
-        <CtaBand
-          title="Your Next Step Is a Conversation"
-          text="This level is arranged directly with Bismillah Pervez and Arslan Larik. Your relationship manager will set up the conversation."
-          primary={c1}
-          secondary={lateSecondary}
-        />
+        <Fade>
+          <CtaBand
+            title="Your Next Step Is a Conversation"
+            text="This level is arranged directly with Bismillah Pervez and Arslan Larik. Your relationship manager will set up the conversation."
+            primary={c1}
+            secondary={lateSecondary}
+          />
+        </Fade>
       )}
     </div>
   );

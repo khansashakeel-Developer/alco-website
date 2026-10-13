@@ -20,6 +20,7 @@ export default function LevelBenefitsTable({ data }: Props) {
   const endIndex = startIndex + rowsPerPage;
 
   const currentRows = data?.points?.slice(startIndex, endIndex);
+  const light = !!data?.bgColor; // true when this table sits on a light background
 
   // ✅ Reset page when data changes
   useEffect(() => {

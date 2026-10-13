@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Faq } from "@/app/faqs/data";
-import { SlArrowDown } from "react-icons/sl";
 
 type Props = {
   data?: Faq[];
@@ -13,7 +12,7 @@ type Props = {
 };
 
 export default function OurFaqs({ data, title, id }: Props) {
-  const [expanded, setExpanded] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<number | null>(0);
 
   const handleChange = (panel: number) => {
     setExpanded(expanded === panel ? null : panel);
@@ -21,70 +20,94 @@ export default function OurFaqs({ data, title, id }: Props) {
 
   return (
     data && data?.length > 0 && (
-        <section id={id} className="w-full bg-white py-4 px-4 sm:px-20  my-10 rounded-md">
+      <section
+        id={id}
+        className="relative w-full overflow-hidden bg-gradient-to-b from-neutral-100 to-white py-12 md:py-16 px-4 sm:px-8 my-10"
+      >
 
-          <div className="flex justify-center items-center">
-            <h2 className="h4 text-primary font-bold font-outfit">
+        <div className="relative mx-auto max-w-4xl">
+          <div className="mb-8 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary-dark">FAQ</p>
+            <h2 className="h4 mt-2 text-primary font-bold font-outfit">
               {title ?? <>Your Questions <span className="text-primary-dark">Answered</span></>}
             </h2>
+            <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary" />
           </div>
 
-          <div className="accordion-group max-w-5xl mx-auto">
+          <div className="space-y-3">
             {data.map((faq, i) => {
               const isOpen = expanded === i;
 
               return (
-                <div key={i} className={`accordion p-6 border-b border-gray-200 ${isOpen ? "bg-neutral-50 border-b border-primary ": ""}`}>
+                <div
+                  key={i}
+                  className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 ${
+                    isOpen
+                      ? "border-secondary bg-white shadow-xl"
+                      : "border-primary/10 bg-white shadow-sm hover:border-primary/30 hover:shadow-md"
+                  }`}
+                >
+                  {/* gold bar on the left when open */}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-y-0 left-0 w-1.5 bg-secondary transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
+                  />
 
                   <button
+                    type="button"
                     onClick={() => handleChange(i)}
-                    className={`flex justify-between w-full text-2xl text-outfit transition-colors duration-300 relative ${isOpen ? "text-gray-800" : "text-primary"
-                      }`}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-center gap-4 p-5 md:p-6 text-left"
                   >
-                    <h3 className="text-left pr-3 w-[90%] font-outfit">
+                    {/* number */}
+                    <span
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors duration-300 ${
+                        isOpen ? "bg-secondary text-primary-darkest" : "bg-primary/10 text-primary"
+                      }`}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+
+                    <h3
+                      className={`flex-1 font-outfit text-lg md:text-xl font-semibold transition-colors duration-300 ${
+                        isOpen ? "text-primary-darkest" : "text-primary"
+                      }`}
+                    >
                       {faq.question}
                     </h3>
 
-                    {/* Arrow */}
+                    {/* plus / minus */}
                     <span
-                      className={`transition-transform duration-300 absolute top-2 right-4 ${isOpen ? "rotate-180" : ""
-                        }`}
+                      aria-hidden="true"
+                      className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                        isOpen ? "border-primary bg-primary text-white rotate-180" : "border-primary/30 text-primary group-hover:bg-primary/10"
+                      }`}
                     >
-                      <SlArrowDown size={14}/>
+                      <span className="absolute h-0.5 w-3.5 rounded bg-current" />
+                      <span className={`absolute h-3.5 w-0.5 rounded bg-current transition-opacity duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`} />
                     </span>
                   </button>
 
-                  {/* Animated Content */}
+                  {/* Animated content */}
                   <div
-                    className={`grid transition-all duration-500 ease-in-out ${isOpen
-                        ? "grid-rows-[1fr] opacity-100 pt-3"
-                        : "grid-rows-[0fr] opacity-0"
-                      }`}
+                    className={`grid transition-all duration-500 ease-in-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
                   >
                     <div className="overflow-hidden">
-                      <div
-                        className={`transform transition-all duration-500 delay-100 ${isOpen
-                            ? "translate-y-0 opacity-100"
-                            : "-translate-y-2 opacity-0"
-                          }`}
-                      >
-                        {/* <div
-                          className="pr-4 text-black text-sm md:text-md faq_editor"
-                          dangerouslySetInnerHTML={{ __html: faq.answer }}
-                        /> */}
-                        <div
-                          className="pr-4 text-gray-600 text-sm md:text-base font-outfit">
-                            {faq.answer}
-                      </div>
+                      <div className="px-5 md:px-6 pb-6 pl-[4.5rem] md:pl-[5.25rem]">
+                        <div className="border-t border-primary/10 pt-4 pr-2 font-outfit text-sm md:text-base leading-relaxed text-gray-600">
+                          {faq.answer}
+                        </div>
                       </div>
                     </div>
                   </div>
-
                 </div>
               );
             })}
           </div>
-        </section>
-      )
+        </div>
+      </section>
+    )
   );
 }
