@@ -14,8 +14,28 @@ export default function Banner({ data }: Props) {
 
   return (
     <>
-      <section className={`py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 w-full ${data.height ? data.height : "min-h-[450px]"} flex items-center  ${data?.className ? data?.className : "bg-cover bg-no-repeat"}`} style={{ backgroundImage: `url(${data?.image})` }}>
-        <div className="container mx-auto px-4">
+            <section className={`relative overflow-hidden py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 w-full ${data.height ? data.height : "min-h-[450px]"} flex items-center  ${data?.className ? data?.className : "bg-cover bg-no-repeat"}`} style={{ backgroundImage: `url(${data?.image})` }}>
+        {data?.bgVideo && (
+          <>
+            <video
+              src={data.bgVideo}
+              poster={data?.image}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+            />
+            {/* Dark layer so the white text stays readable over the bright animation */}
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"
+              aria-hidden="true"
+            />
+          </>
+        )}
+        <div className="container relative z-10 mx-auto px-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.75)]">
           <div className={`grid grid-cols-1 ${!data?.title?.align && "lg:grid-cols-2"} gap-2 my-8`}>
             <div className="flex flex-col justify-start ">
               <div className="flex mb-4">

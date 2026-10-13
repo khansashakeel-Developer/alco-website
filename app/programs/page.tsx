@@ -313,6 +313,7 @@ export default function ProgrammesHubPage() {
         data={{
           title: { line1: "NLP and Hypnosis Certification Programmes", align: "text-center mx-auto" },
           image: programLevel1.src,
+          bgVideo: "/videos/program-level-1.mp4",
           children: (
             <>
             <p className="custom-text1 font-light text-white text-center mt-4 max-w-3xl mx-auto">
