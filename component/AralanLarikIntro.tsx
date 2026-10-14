@@ -36,7 +36,7 @@ type TrainerCard = {
 // While it is false her normal photo keeps the blue tint.
 const BISMILLAH_IS_CUTOUT = false;
 
-const title = "Meet Your Trainers: Arslan Larik and Bismillah Pervez";
+const title = "Meet Your Master Trainers: Arslan Larik and Bismillah Pervez";
 
 // B 01 rows A13 to A18: two cards of equal weight.
 const trainers: TrainerCard[] = [
