@@ -8,98 +8,119 @@ type Props = {
   credentials: string[];
   caption: string; // the full original caption, kept for screen readers and search engines
   photo: string;
-  tailWords?: number; // how many closing words glow gold
+  highlights?: string[]; // phrases that get the gold marker stroke
 };
 
-const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-export default function SignOffQuote({ text, name, credentials, caption, photo, tailWords = 6 }: Props) {
-  const ref = useRef<HTMLQuoteElement>(null);
-  const [p, setP] = useState(0);
+export default function SignOffQuote({ text, name, credentials, caption, photo, highlights = [] }: Props) {
+  const ref = useRef<HTMLElement>(null);
+  const [seen, setSeen] = useState(false);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const el = ref.current;
-      if (!el) return;
-      if (reduce) {
-        setP(1);
-        return;
-      }
-      const r = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      setP(clamp((vh * 0.85 - r.top) / (vh * 0.6)));
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setSeen(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
-  const words = text.split(" ");
-  const n = words.length;
+  // the first sentence becomes the large lead
+  const cut = text.indexOf(". ");
+  const lead = cut > -1 ? text.slice(0, cut + 1) : "";
+  const body = cut > -1 ? text.slice(cut + 2) : text;
+
+  // split the body so the highlighted phrases can be wrapped
+  const parts = highlights.length
+    ? body.split(new RegExp(`(${highlights.map(esc).join("|")})`, "g"))
+    : [body];
+  let mark = 0;
+
+  const reveal = (delay: number): React.CSSProperties => ({
+    opacity: seen ? 1 : 0,
+    transform: seen ? "none" : "translateY(18px)",
+    transition: "opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1)",
+    transitionDelay: `${delay}ms`,
+  });
 
   return (
-    <figure className="relative mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl bg-[#071a33] bg-dark-primary bg-cover bg-top-left text-left shadow-[0_40px_80px_-30px_rgba(7,26,51,0.7)] md:grid md:grid-cols-[300px_1fr] lg:grid-cols-[340px_1fr]">
-      {/* photo */}
-      <div className="relative p-4 md:p-6">
-        <div className="relative h-[300px] overflow-hidden rounded-2xl ring-2 ring-secondary/70 shadow-[0_0_0_6px_rgba(249,184,30,0.12)] md:h-full md:min-h-[420px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={photo} alt={name} className="absolute inset-0 h-full w-full object-cover object-top" />
-          <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#071a33]/90 to-transparent" />
-          <div className="absolute bottom-4 left-4 right-4">
-            <p className="font-outfit text-lg font-bold text-white">{name}</p>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">CEO</p>
-          </div>
-        </div>
-      </div>
+    <figure ref={ref} className="relative mx-auto mt-20 grid max-w-5xl items-center gap-10 text-left md:grid-cols-[1fr_300px] lg:grid-cols-[1fr_340px] lg:gap-16">
+      <style>{`
+        @media (prefers-reduced-motion: reduce) { .sq-mark { transition: none !important } }
+      `}</style>
 
-      {/* quote */}
-      <div className="relative flex flex-col justify-center px-6 pb-8 pt-2 md:px-10 md:py-12">
-        <span aria-hidden className="pointer-events-none absolute -top-2 right-4 select-none font-serif text-[160px] leading-none text-secondary/20 md:text-[200px]">“</span>
+      {/* the words */}
+      <div className="relative order-2 md:order-1">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -left-1 -top-14 select-none font-serif text-[120px] leading-none text-secondary md:-left-8 md:-top-16 md:text-[150px]"
+          style={reveal(0)}
+        >
+          “
+        </span>
 
-        <blockquote ref={ref} className="relative font-outfit text-lg italic leading-relaxed md:text-[22px] md:leading-[1.65]">
-          {words.map((w, i) => {
-            const lit = (i + 1) / n <= p * 1.04;
-            const tail = i >= n - tailWords;
-            return (
-              <span
-                key={i}
-                className={`inline transition-colors duration-300 ${
-                  lit ? (tail ? "font-semibold text-secondary" : "text-white") : "text-white/25"
-                }`}
-              >
-                {w}{" "}
-              </span>
-            );
-          })}
+        <blockquote>
+          {lead && (
+            <p
+              className="relative font-serif text-[26px] leading-[1.25] text-primary-darkest md:text-[38px] md:leading-[1.2]"
+              style={reveal(150)}
+            >
+              {lead}
+            </p>
+          )}
+
+          <p className="mt-6 font-outfit text-base leading-[1.85] text-gray-700 md:text-lg md:leading-[1.9]" style={reveal(450)}>
+            {parts.map((part, i) => {
+              if (i % 2 === 1) {
+                const n = mark++;
+                return (
+                  <mark
+                    key={i}
+                    className="sq-mark bg-no-repeat px-0.5 font-semibold text-primary-darkest [box-decoration-break:clone]"
+                    style={{
+                      backgroundColor: "transparent",
+                      backgroundImage: "linear-gradient(transparent 58%, rgba(249,184,30,0.6) 58%)",
+                      backgroundSize: seen ? "100% 100%" : "0% 100%",
+                      transition: "background-size 1s cubic-bezier(.6,.05,.2,1)",
+                      transitionDelay: `${1000 + n * 700}ms`,
+                    }}
+                  >
+                    {part}
+                  </mark>
+                );
+              }
+              return <span key={i}>{part}</span>;
+            })}
+          </p>
         </blockquote>
 
-        <span aria-hidden className="mt-7 block h-0.5 w-16 bg-secondary" />
-
-        <div className="mt-5 flex flex-wrap gap-2" aria-hidden>
-          {credentials.map((c, i) => (
-            <span
-              key={c}
-              className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                i === 0 ? "bg-secondary text-[#0b2545]" : "border border-secondary/40 bg-white/5 text-white/90"
-              }`}
-            >
-              {c}
+        <figcaption className="mt-8 flex items-start gap-4" style={reveal(700)}>
+          <span aria-hidden className="mt-1 h-12 w-1 shrink-0 rounded-full bg-secondary" />
+          <span>
+            <span className="block font-serif text-xl italic text-primary-darkest md:text-2xl">{name}</span>
+            <span aria-hidden className="mt-1 block max-w-md font-outfit text-xs leading-relaxed tracking-wide text-gray-500 md:text-[13px]">
+              {credentials.join(" · ")}
             </span>
-          ))}
-        </div>
+            <span className="sr-only">{caption}</span>
+          </span>
+        </figcaption>
+      </div>
 
-        <figcaption className="sr-only">{caption}</figcaption>
+      {/* the photo */}
+      <div className="relative order-1 mx-auto w-full max-w-[320px] md:order-2 md:max-w-none" style={reveal(250)}>
+        <span aria-hidden className="absolute -bottom-4 -right-4 h-full w-full bg-primary/10 md:-bottom-5 md:-right-5" />
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-200">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={photo} alt={name} className="absolute inset-0 h-full w-full object-cover object-top" />
+        </div>
       </div>
     </figure>
   );

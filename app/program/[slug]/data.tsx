@@ -2712,6 +2712,7 @@ const SignOffDataLevel6: ContentSectionType = {
       <SignOffQuote
         photo="/og/bismillah-pervez.webp"
         name="Bismillah Pervez"
+        highlights={["the first Master Trainer this institution has produced", "AL&CO now grows its own."]}
         credentials={["CEO", "ICF Master Certified Coach (MCC)", "ACTC", "ANLP Accredited Master Trainer (UK)", "Karachi, Pakistan"]}
         caption="Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). Karachi, Pakistan."
         text="I can vouch for every word of this personally, because I have lived it. I completed every programme at Arslan Larik & Company, from Practitioner all the way through, and I did my Trainer’s Training with The Tad James Company, under the mentorship of Dr Adriana James. My standing as a Master Trainer was accredited through ANLP in the United Kingdom. I am proud to be the first Master Trainer this institution has produced, and prouder still of what that means: AL&CO now grows its own.”"
