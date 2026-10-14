@@ -17,6 +17,10 @@ import SealANLP from "@/assets/level-certificate/badges/cpd.webp";
 import SealALCO from "@/assets/level-certificate/badges/alco.webp";
 import { DEFAULT_OG_IMAGE, SITE_URL } from "@/utils/buildMetadata";
 import { CTA, ctaDataAttrs, whatsappHref } from "@/component/cta";
+import LevelsExpandGallery from "@/component/LevelsExpandGallery";
+import WhyNoNumber from "@/component/WhyNoNumber";
+import LearningJourney from "@/component/LearningJourney";
+import WebinarDoor from "@/component/WebinarDoor";
 
 const PAGE_URL = `${SITE_URL}/programs`;
 const TITLE = "NLP and Hypnosis Certification Programmes Online | AL&CO";
@@ -77,7 +81,8 @@ const LEVELS: Level[] = [
     prerequisite: "None. Open to everyone, including the complete beginner.",
     certification:
       "Quad certification: Certified Practitioner of NLP (ABNLP); Practitioner of Time Line Therapy® Techniques (TLTA); Certified NLP Coach (ABNLP Coaching Division); AL&CO Certified Practitioner of Behavioral Reengineering. Plus a UK ANLP CPD certificate.",
-    entry: "Arranged by your relationship manager. Free revisits for five years.",
+    entry:
+      "Arranged by your relationship manager. Free revisits for five years.",
   },
   {
     level: 2,
@@ -92,7 +97,8 @@ const LEVELS: Level[] = [
     prerequisite: "Level 1: NLP Practitioner.",
     certification:
       "Quad certification at master level: Certified Master Practitioner of NLP (ABNLP); Master Practitioner of Time Line Therapy® Techniques (TLTA); Certified NLP Master Coach (ABNLP Coaching Division); AL&CO Certified Practitioner of Behavioral Reengineering at master level. Plus a second ANLP CPD certificate and a dedicated coach for your breakthrough.",
-    entry: "Arranged by your relationship manager. Free revisits for five years.",
+    entry:
+      "Arranged by your relationship manager. Free revisits for five years.",
   },
   {
     level: 3,
@@ -174,9 +180,18 @@ const CERTS: Record<string, CertBlock> = {
     lead: "Quad certification:",
     items: [
       { text: "Certified Practitioner of NLP (ABNLP)", seal: SealABNLP },
-      { text: "Practitioner of Time Line Therapy® Techniques (TLTA)", seal: SealTLTA },
-      { text: "Certified NLP Coach (ABNLP Coaching Division)", seal: SealABNLPCoaching },
-      { text: "AL&CO Certified Practitioner of Behavioral Reengineering", seal: SealALCO },
+      {
+        text: "Practitioner of Time Line Therapy® Techniques (TLTA)",
+        seal: SealTLTA,
+      },
+      {
+        text: "Certified NLP Coach (ABNLP Coaching Division)",
+        seal: SealABNLPCoaching,
+      },
+      {
+        text: "AL&CO Certified Practitioner of Behavioral Reengineering",
+        seal: SealALCO,
+      },
     ],
     note: { text: "Plus a UK ANLP CPD certificate.", seal: SealANLP },
   },
@@ -184,17 +199,38 @@ const CERTS: Record<string, CertBlock> = {
     lead: "Quad certification at master level:",
     items: [
       { text: "Certified Master Practitioner of NLP (ABNLP)", seal: SealABNLP },
-      { text: "Master Practitioner of Time Line Therapy® Techniques (TLTA)", seal: SealTLTA },
-      { text: "Certified NLP Master Coach (ABNLP Coaching Division)", seal: SealABNLPCoaching },
-      { text: "AL&CO Certified Practitioner of Behavioral Reengineering at master level", seal: SealALCO },
+      {
+        text: "Master Practitioner of Time Line Therapy® Techniques (TLTA)",
+        seal: SealTLTA,
+      },
+      {
+        text: "Certified NLP Master Coach (ABNLP Coaching Division)",
+        seal: SealABNLPCoaching,
+      },
+      {
+        text: "AL&CO Certified Practitioner of Behavioral Reengineering at master level",
+        seal: SealALCO,
+      },
     ],
-    note: { text: "Plus a second ANLP CPD certificate and a dedicated coach for your breakthrough.", seal: SealANLP },
+    note: {
+      text: "Plus a second ANLP CPD certificate and a dedicated coach for your breakthrough.",
+      seal: SealANLP,
+    },
   },
   "advanced-hypnotherapy-interventionist": {
     items: [
-      { text: "Certified Practitioner and Master Practitioner of Hypnosis (ABH)", seal: SealABH },
-      { text: "NGH hypnosis certification with one year of NGH membership", seal: SealNGH },
-      { text: "The AL&CO Quintuple Certification, the Testament to the Graduate", seal: SealALCO },
+      {
+        text: "Certified Practitioner and Master Practitioner of Hypnosis (ABH)",
+        seal: SealABH,
+      },
+      {
+        text: "NGH hypnosis certification with one year of NGH membership",
+        seal: SealNGH,
+      },
+      {
+        text: "The AL&CO Quintuple Certification, the Testament to the Graduate",
+        seal: SealALCO,
+      },
     ],
   },
   "nlp-trainers-training-program": {
@@ -204,21 +240,44 @@ const CERTS: Record<string, CertBlock> = {
     items: [{ text: "Certified Hypnosis Trainer (ABH)", seal: SealABH }],
   },
   "nlp-master-trainer-program": {
-    items: [{ text: "Certified Master Trainer of NLP (ABNLP)", seal: SealABNLP }],
-    note: { text: "By AL&CO's own standard, two Master Trainers in good standing sign off your certification." },
+    items: [
+      { text: "Certified Master Trainer of NLP (ABNLP)", seal: SealABNLP },
+    ],
+    note: {
+      text: "By AL&CO's own standard, two Master Trainers in good standing sign off your certification.",
+    },
   },
 };
 
 function CertIcon({ seal }: { seal?: StaticImageData }) {
   return (
-    <span className="shrink-0 w-10 h-10 flex items-center justify-center" aria-hidden="true">
+    <span
+      className="shrink-0 w-10 h-10 flex items-center justify-center"
+      aria-hidden="true"
+    >
       {seal ? (
-        <Image src={seal} alt="" width={40} height={40} className="object-contain" />
+        <Image
+          src={seal}
+          alt=""
+          width={40}
+          height={40}
+          className="object-contain"
+        />
       ) : (
         <span className="w-6 h-6 rounded-full bg-secondary text-black flex items-center justify-center">
-             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-     <path d="M5 12.5l4.5 4.5L19 7.5" />
-   </svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12.5l4.5 4.5L19 7.5" />
+          </svg>
         </span>
       )}
     </span>
@@ -230,22 +289,23 @@ const levelUrl = (slug: string) => `/program/${slug}`;
 // DECISIONS v2 P7: board seals where the PDF brochure shows them (cover seal row, same order).
 // Existing repo badge files are used; Khansa confirms each is the current approved artwork.
 const BOARD_SEALS = [
-  { src: SealABNLP, alt: "ABNLP seal" },                                   // LOGO: ABNLP - Khansa to supply approved artwork
-  { src: SealABNLPCoaching, alt: "ABNLP Coaching Division seal" },         // LOGO: ABNLP Coaching Division - Khansa to supply approved artwork
+  { src: SealABNLP, alt: "ABNLP seal" }, // LOGO: ABNLP - Khansa to supply approved artwork
+  { src: SealABNLPCoaching, alt: "ABNLP Coaching Division seal" }, // LOGO: ABNLP Coaching Division - Khansa to supply approved artwork
   { src: SealTLTA, alt: "Time Line Therapy Association (TLTA) seal" },
-  { src: SealABH, alt: "American Board of Hypnotherapy (ABH) seal" },      // LOGO: ABH - Khansa to supply approved artwork
-  { src: SealNGH, alt: "National Guild of Hypnotists (NGH) seal" },        // LOGO: NGH - Khansa to supply approved artwork
-  { src: SealANLP, alt: "ANLP (UK) CPD accreditation seal" },              // LOGO: ANLP (UK) - Khansa to supply approved artwork
+  { src: SealABH, alt: "American Board of Hypnotherapy (ABH) seal" }, // LOGO: ABH - Khansa to supply approved artwork
+  { src: SealNGH, alt: "National Guild of Hypnotists (NGH) seal" }, // LOGO: NGH - Khansa to supply approved artwork
+  { src: SealANLP, alt: "ANLP (UK) CPD accreditation seal" }, // LOGO: ANLP (UK) - Khansa to supply approved artwork
 ];
 
 // CTA plan (24 Sep 2026), /programs is MoFu: primary C1, secondary C2. Labels exactly as the CTA library.
 // C1 and C2 come from the shared CTA library (component/cta.ts).
 const WHATSAPP_C1 = whatsappHref(
-  "Hi, I would like to know which AL&CO programme is right for me (All Programmes page)"
+  "Hi, I would like to know which AL&CO programme is right for me (All Programmes page)",
 );
 const WEBINAR_C2 = CTA.C2.href;
 
-const BTN_BASE = "inline-flex items-center justify-center rounded-md font-medium transition font-outfit px-6 py-2";
+const BTN_BASE =
+  "inline-flex items-center justify-center rounded-md font-medium transition font-outfit px-6 py-2";
 const BTN_PRIMARY = `${BTN_BASE} bg-secondary hover:bg-secondary-600 text-black`;
 const BTN_OUTLINE_WHITE = `${BTN_BASE} border border-white text-white hover:bg-white hover:text-gray-900`;
 const BTN_OUTLINE_PRIMARY = `${BTN_BASE} border border-primary text-primary hover:bg-primary hover:text-white`;
@@ -264,7 +324,11 @@ function SpeakToManager({ className = BTN_PRIMARY }: { className?: string }) {
   );
 }
 
-function JoinWebinar({ className = BTN_OUTLINE_WHITE }: { className?: string }) {
+function JoinWebinar({
+  className = BTN_OUTLINE_WHITE,
+}: {
+  className?: string;
+}) {
   return (
     <Link href={WEBINAR_C2} className={className} {...ctaDataAttrs("C2")}>
       {CTA.C2.label}
@@ -280,7 +344,12 @@ const jsonLd = {
       "@id": `${PAGE_URL}#breadcrumb`,
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "All Programmes", item: PAGE_URL },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "All Programmes",
+          item: PAGE_URL,
+        },
       ],
     },
     {
@@ -306,175 +375,204 @@ export default function ProgrammesHubPage() {
     <div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
 
       <Banner
         data={{
-          title: { line1: "NLP and Hypnosis Certification Programmes", align: "text-center mx-auto" },
+          title: {
+            line1: "NLP and Hypnosis Certification Programmes",
+            align: "text-center mx-auto",
+          },
           image: programLevel1.src,
           bgVideo: "/videos/program-level-1.mp4",
           children: (
             <>
-            <p className="custom-text1 font-light text-white text-center mt-4 max-w-3xl mx-auto">
-              Transform your own life, and learn to transform the lives of others. Six levels of
-              internationally certified NLP, hypnosis and coaching training, all delivered live on
-              Zoom and taught personally.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
-              <SpeakToManager />
-              <JoinWebinar />
-            </div>
+              <p className="custom-text1 font-light text-white text-center mt-4 max-w-3xl mx-auto">
+                Transform your own life, and learn to transform the lives of
+                others. Six levels of internationally certified NLP, hypnosis
+                and coaching training, all delivered live on Zoom and taught
+                personally.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                <SpeakToManager />
+                <JoinWebinar />
+              </div>
             </>
           ),
         }}
       />
 
       {/* Breadcrumb (visible, matches the JSON-LD) */}
-      <nav aria-label="Breadcrumb" className="container mx-auto px-4 pt-4 text-sm text-primary-light">
+      <nav
+        aria-label="Breadcrumb"
+        className="container mx-auto px-4 pt-4 text-sm text-primary-light"
+      >
         <ol className="flex gap-2">
-          <li><Link href="/" className="hover:underline">Home</Link></li>
+          <li>
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>
+          </li>
           <li aria-hidden="true">/</li>
           <li aria-current="page">All Programmes</li>
         </ol>
       </nav>
 
-            {/* The Learning Journey */}
-      <section className={`${SECTION} bg-gradient-to-b from-white to-slate-50`}>
-        <div className="container mx-auto px-4 max-w-5xl">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-secondary-dark">Six levels, one ladder</p>
-          <h2 className="h3 mt-2 text-primary text-center">The Learning Journey: Six Levels, One Ladder</h2>
-          <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary" />
+      {/* The Learning Journey */}
+      <LearningJourney seals={BOARD_SEALS} />
 
-          <p className="custom-text1 mx-auto mt-6 max-w-3xl text-center text-lg text-primary">
-            AL&CO is built as a ladder. Step on at the first rung and climb as far as you wish, from
-            your own transformation to running your own training business. Each level is complete
-            in itself, and each one opens the door to the next.
-          </p>
-          <p className="custom-text1 mx-auto mt-4 max-w-3xl text-center text-primary-light">
-            Every level is backed by international certification boards: the ABNLP and its NLP
-            Coaching Division, the ABH, the TLTA and the NGH (USA), together with a UK ANLP CPD
-            accreditation and AL&CO’s own credential. These are real, recognised qualifications,
-            not a certificate for the wall.
-          </p>
-
-          {/* P7 seal row. Every entry is a LOGO marker: artwork from Khansa. */}
-          <ul aria-label="Certification boards and CPD accreditation" className="mt-8 flex flex-wrap items-center justify-center gap-5">
-            {BOARD_SEALS.map((seal) => (
-              <li
-                key={seal.alt}
-                className="rounded-full bg-white p-2.5 shadow-md ring-1 ring-primary/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:ring-secondary"
-              >
-                <Image src={seal.src} alt={seal.alt} width={96} height={96} className="h-20 w-20 object-contain" />
-              </li>
-            ))}
-          </ul>
-
-          {/* Key facts: one dark band, five columns */}
-          <ul className="mt-10 grid grid-cols-1 overflow-hidden rounded-2xl bg-gradient-to-br from-[#09263D] to-[#1B507C] shadow-xl sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-white/15">
-            {[
-              "Live on Zoom, taught personally",
-              "Sessions run 8:00pm to 2:00am PKT",
-              "Cohorts of 20 to 25 (Level 3: never more than 20)",
-              "Free revisits for five years at Levels 1 to 3",
-              "2,000+ graduates across 20+ countries",
-            ].map((fact, i) => (
-              <li
-                key={fact}
-                className="group flex flex-col items-center gap-3 px-5 py-6 text-center transition-colors duration-300 hover:bg-white/10"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-sm font-bold text-primary-darkest transition-transform duration-300 group-hover:scale-110">
-                  {i + 1}
-                </span>
-                <span className="font-medium text-white">{fact}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-            {/* At a glance table */}
-      <section className={`${SECTION} bg-dark-primary bg-cover bg-top-left`}>
-        <div className="container mx-auto px-4">
-          <h2 className="h3 text-start">
-            <span className="text-secondary mr-2">The Six Levels</span>
-            <span className="text-white">at a Glance</span>
+      <section className="w-full bg-white py-10 md:py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-center text-2xl md:text-4xl font-bold italic uppercase tracking-wide text-[#2B527D]">
+            Six Levels at a Glance
           </h2>
 
-          {/* Tablet and desktop: table */}
-          <div className="hidden md:block overflow-x-auto rounded-xl shadow-lg mt-8">
-            <table className="w-full border-collapse min-w-[760px]">
-              <caption className="sr-only">
-                The six AL&CO levels: days, what you earn, who it is for and what you leave able to do
-              </caption>
-              <thead>
-                <tr className="bg-primary text-white text-left">
-                  <th scope="col" className="px-6 py-5 h6">Level</th>
-                  <th scope="col" className="px-6 py-5 h6">Days</th>
-                  <th scope="col" className="px-6 py-5 h6">You earn</th>
-                  <th scope="col" className="px-6 py-5 h6">For whom</th>
-                  <th scope="col" className="px-6 py-5 h6">You leave able to</th>
-                </tr>
-              </thead>
-              <tbody>
-                {LEVELS.map((l, index) => (
-                  <tr
-                    key={l.slug}
-                    className={index % 2 === 0 ? "bg-white" : "bg-blue-50 border-y border-primary"}
-                  >
-                    <th scope="row" className="px-6 py-5 text-left font-semibold text-primary">
-                      <Link href={levelUrl(l.slug)} className="hover:underline">
-                        {l.level}. {l.name}
-                      </Link>
-                    </th>
-                    <td className="px-6 py-5 text-gray-700">{l.days}</td>
-                    <td className="px-6 py-5 text-gray-700">{l.earn}</td>
-                    <td className="px-6 py-5 text-gray-700">{l.forWhom}</td>
-                    <td className="px-6 py-5 text-gray-700">{l.leaveAble}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ol className="relative mt-10 md:mt-14 before:absolute before:top-0 before:bottom-0 before:left-8 md:before:left-11 before:w-1.5 before:-translate-x-1/2 before:rounded-full before:bg-[#0C2565]">
+            {LEVELS.map((l) => {
+              const base = l.name.replace(/^NLP\s+/, "");
+              const tag = /^Hypnosis/.test(l.name) ? "Hypnosis" : "NLP";
+              const shown = /^Hypnosis\s/.test(l.name)
+                ? l.name.replace(/^Hypnosis\s+/, "")
+                : base;
+              return (
+                <li
+                  key={l.level}
+                  className="relative grid grid-cols-[64px_1fr] md:grid-cols-[88px_1fr] gap-x-4 md:gap-x-6 pb-10 md:pb-14 last:pb-0"
+                >
+                  {/* number circle */}
+                  <div className="relative z-10 flex h-16 w-16 md:h-[88px] md:w-[88px] items-center justify-center rounded-full bg-[#0F2763] text-2xl md:text-4xl font-bold text-white ring-4 ring-white">
+                    {String(l.level).padStart(2, "0")}
+                  </div>
 
-          {/* Phone: stacked cards */}
-          <div className="md:hidden mt-8 space-y-4">
-            {LEVELS.map((l) => (
-              <div key={l.slug} className="rounded-xl bg-white p-5 shadow-lg">
-                <Link href={levelUrl(l.slug)} className="font-semibold text-primary text-lg hover:underline">
-                  {l.level}. {l.name}
-                </Link>
-                <dl className="mt-3 space-y-2 text-sm text-gray-700">
-                  <div><dt className="font-semibold text-primary">Days</dt><dd>{l.days}</dd></div>
-                  <div><dt className="font-semibold text-primary">You earn</dt><dd>{l.earn}</dd></div>
-                  <div><dt className="font-semibold text-primary">For whom</dt><dd>{l.forWhom}</dd></div>
-                  <div><dt className="font-semibold text-primary">You leave able to</dt><dd>{l.leaveAble}</dd></div>
-                </dl>
-              </div>
-            ))}
+                  <div>
+                    {/* icon + pill row (same height for every level) */}
+                    <Link
+                      href={levelUrl(l.slug)}
+                      className="group flex h-16 md:h-[88px] items-center"
+                    >
+                      {/* water drop icon */}
+                      <div className="relative h-[52px] w-[67px] md:h-[92px] md:w-[118px] shrink-0">
+                        <svg
+                          viewBox="0 0 128 100"
+                          className="absolute inset-0 h-full w-full"
+                          aria-hidden
+                        >
+                          <path
+                            d="M128 50 L79.5 87.8 A48 48 0 1 1 79.5 12.2 Z"
+                            fill="#344887"
+                          />
+                          <circle cx="48" cy="50" r="42" fill="#FAF8EC" />
+                        </svg>
+                        <div
+                          role="img"
+                          aria-label={`Level ${l.level} icon`}
+                          className="absolute rounded-full"
+                          style={{
+                            left: "4.7%",
+                            top: "8%",
+                            width: "65.6%",
+                            height: "84%",
+                            backgroundImage: `url(/images/levels/level-${l.level}-icon.png)`,
+                            backgroundSize: "115%",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                          }}
+                        />
+                      </div>
+
+                      {/* pill with the white ">" notch */}
+                      <div className="flex h-full flex-1 items-center rounded-r-full bg-[#152757] pr-6 shadow-lg transition-transform duration-300 group-hover:translate-x-1 [--n:32px] md:[--n:44px] ml-[calc(var(--n)*-0.77)] pl-[calc(var(--n)+14px)] [clip-path:polygon(0_0,100%_0,100%_100%,0_100%,var(--n)_50%)]">
+                        <div className="leading-tight">
+                          <p className="text-xs md:text-base font-bold uppercase tracking-wide text-secondary">
+                            {tag}
+                          </p>
+                          <p className="text-base md:text-2xl font-semibold text-white">
+                            {shown}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+
+                    {/* text under the pill */}
+                    <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-gray-800">
+                      {l.summary} {l.earn}. {l.days}
+                    </p>
+                    <p className="mt-1 text-xs md:text-sm text-gray-600">
+                      <span className="font-semibold text-gray-800">
+                        For whom:
+                      </span>{" "}
+                      {l.forWhom}
+                    </p>
+                    <p className="mt-0.5 text-xs md:text-sm text-gray-600">
+                      <span className="font-semibold text-gray-800">
+                        You leave able to:
+                      </span>{" "}
+                      {l.leaveAble}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+
+          <div className="mt-10 md:mt-14 rounded-full bg-secondary px-6 py-3 text-center text-sm md:text-lg font-semibold text-primary-darkest">
+            All programmes are delivered live on Zoom, taught personally.
           </div>
         </div>
       </section>
 
-            {/* Who arranges your place */}
+      <section className="w-full bg-gradient-to-b from-slate-50 to-white py-10 md:py-16 px-4">
+  <div className="container mx-auto max-w-6xl">
+    <p className="text-center text-[11px] font-bold uppercase tracking-[0.3em] text-secondary-dark">
+      Find your place
+    </p>
+    <h2 className="h3 mt-2 text-center text-primary">Choose Your Level</h2>
+    <div className="mx-auto mt-4 h-[3px] w-14 rounded bg-secondary" />
+    <p className="mx-auto mt-4 mb-10 max-w-2xl text-center text-gray-600">
+      Hover a level to see where it takes you.
+    </p>
+    <LevelsExpandGallery
+      levels={LEVELS.map((l) => ({
+        level: l.level,
+        name: l.name,
+        summary: l.summary,
+        href: levelUrl(l.slug),
+      }))}
+    />
+  </div>
+</section>
+
+      {/* Who arranges your place */}
       <section className={`${SECTION} bg-light-neutral bg-cover bg-top-left`}>
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
             {/* Left: message and buttons */}
             <div className="text-center md:text-start">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary-dark">Your place</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary-dark">
+                Your place
+              </p>
               <h2 className="h3 mt-2 text-primary">Who Arranges Your Place</h2>
-              <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary md:mx-0" />
+              <span
+                aria-hidden="true"
+                className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary md:mx-0"
+              />
               <p className="custom-text1 mt-5 text-primary-light">
-                Our relationship managers walk beside you from your very first question to the day you
-                graduate and long after. Most of them come from psychology themselves, so they
-                understand your journey from the inside.
+                Our relationship managers walk beside you from your very first
+                question to the day you graduate and long after. Most of them
+                come from psychology themselves, so they understand your journey
+                from the inside.
               </p>
               <div className="mt-6 flex justify-center md:justify-start">
                 <SpeakToManager />
               </div>
               <p className="mt-4">
-                <Link href="/about-us/why-train-with-alco" className="font-medium text-primary underline underline-offset-4 hover:text-secondary-dark">
+                <Link
+                  href="/about-us/why-train-with-alco"
+                  className="font-medium text-primary underline underline-offset-4 hover:text-secondary-dark"
+                >
                   Meet the team behind every promise
                 </Link>
               </p>
@@ -482,27 +580,47 @@ export default function ProgrammesHubPage() {
 
             {/* Right: two routes joined by a line */}
             <div className="relative">
-              <span aria-hidden="true" className="absolute left-7 top-10 bottom-16 w-0.5 bg-gradient-to-b from-secondary to-primary/30" />
+              <span
+                aria-hidden="true"
+                className="absolute left-7 top-10 bottom-16 w-0.5 bg-gradient-to-b from-secondary to-primary/30"
+              />
 
               <div className="group relative flex items-start gap-5 pb-8">
-                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">1–2</span>
+                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+                  1–2
+                </span>
                 <div className="pt-1">
-                  <h3 className="font-outfit text-lg font-semibold text-primary">Levels 1 and 2</h3>
-                  <p className="mt-1 text-primary-light">Arranged by your relationship manager.</p>
+                  <h3 className="font-outfit text-lg font-semibold text-primary">
+                    Levels 1 and 2
+                  </h3>
+                  <p className="mt-1 text-primary-light">
+                    Arranged by your relationship manager.
+                  </p>
                 </div>
               </div>
 
               <div className="group relative flex items-start gap-5 pb-8">
-                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">3+</span>
+                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+                  3+
+                </span>
                 <div className="pt-1">
-                  <h3 className="font-outfit text-lg font-semibold text-primary">Levels 3 and above</h3>
-                  <p className="mt-1 text-primary-light">Arranged directly with Bismillah Pervez and Arslan Larik.</p>
+                  <h3 className="font-outfit text-lg font-semibold text-primary">
+                    Levels 3 and above
+                  </h3>
+                  <p className="mt-1 text-primary-light">
+                    Arranged directly with Bismillah Pervez and Arslan Larik.
+                  </p>
                 </div>
               </div>
 
               <div className="relative flex items-start gap-5">
-                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary text-2xl text-primary-darkest shadow-lg">✓</span>
-                <p className="pt-3 font-outfit text-lg font-semibold text-primary">One conversation is all it takes to find the pathway that fits you.</p>
+                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary text-2xl text-primary-darkest shadow-lg">
+                  ✓
+                </span>
+                <p className="pt-3 font-outfit text-lg font-semibold text-primary">
+                  One conversation is all it takes to find the pathway that fits
+                  you.
+                </p>
               </div>
             </div>
           </div>
@@ -510,87 +628,26 @@ export default function ProgrammesHubPage() {
       </section>
 
       {/* Why you will not find a number here (approved wording, brochure long p37) */}
-      <section className={`${SECTION} bg-gradient-to-br from-[#09263D] via-[#0E3556] to-[#1B507C]`}>
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary">The honest answer</p>
-            <h2 className="h3 mt-2 text-white">Why You Will Not Find a Number Here</h2>
-            <span aria-hidden="true" className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary" />
-          </div>
-
-          <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-0 md:divide-x md:divide-white/15">
-            <div className="md:pr-10">
-              <span className="text-5xl font-bold leading-none text-secondary/60">01</span>
-              <h3 className="mt-3 font-outfit text-xl font-semibold text-secondary">Out of fairness to you</h3>
-              <p className="custom-text1 mt-3 leading-relaxed text-white/85">
-                This is an investment in your future, and we treat it as one, so you will not see a
-                price in these pages. That is deliberate, and it is out of fairness to you. To print a
-                single figure, we would have to quote you for every level at once, whether or not you
-                need them all. We would rather understand what you actually want first, and then build
-                a proposition around your own journey, only what serves you, and nothing that does not.
-              </p>
-            </div>
-
-            <div className="md:pl-10">
-              <span className="text-5xl font-bold leading-none text-secondary/60">02</span>
-              <h3 className="mt-3 font-outfit text-xl font-semibold text-secondary">The deeper reason</h3>
-              <p className="custom-text1 mt-3 leading-relaxed text-white/85">
-                There is a deeper reason, and we will be honest about it. A number on a page makes
-                people decide with the wrong question. Some assume they cannot afford this, and never
-                discover that what it would resolve for them is worth far more than the investment
-                itself. Others could invest many times over, and yet it may not truly serve what they
-                are after, and in that case we would gently tell them so. We would rather be honest
-                with you than simply take a payment. All it takes to find out where you stand is a
-                conversation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
+      <WhyNoNumber />
 
       {/* How to enrol + training times (shared with /enroll) */}
       <HowToEnrol />
 
-      {/* Free weekly webinar (brochure long p36) */}
-      <section className={`${SECTION} bg-light-neutral bg-cover bg-top-left`}>
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="h3 text-primary">Start with a Free Webinar</h2>
-          <p className="custom-text1 text-primary-light mt-4">
-            Not sure yet? That is exactly what our weekly webinar is for. Once a week we open a
-            free, live introductory session for anyone exploring this world, a relaxed hour to
-            understand what NLP really is, to feel the way we teach, and to ask anything you like
-            before you decide a single thing.
-          </p>
-          <p className="custom-text1 text-primary-light mt-4">
-            It is hosted by our relationship managers, the same people who walk beside our
-            students from the first hello. So you meet a real person, in a real room, not a sales
-            page. There is no pressure and no obligation. Come to listen, come with your questions,
-            come simply to see whether this is for you.
-          </p>
-          <p className="custom-text1 text-primary-light mt-4">
-            These sessions are for those still deciding. The moment you enrol, a far richer world
-            opens to you: the full programme, the global community, the live trainings and years of
-            support. So think of the webinar as the doorway, a first, easy step towards the version
-            of yourself you have been curious about.
-          </p>
-          <p className="custom-text1 text-primary-light mt-4">
-            The webinar is for people new to AL&CO. Sign up and we will email you the joining
-            link. Already an AL&CO graduate? You do not need it: you can revisit your trainings free,
-            and your relationship manager will be glad to arrange it.
-          </p>
-          <div className="flex justify-center pt-6">
-            {/* DECISIONS v2 G7: one public sign-up page (spec 10). The Zoom link is emailed, never shown here. */}
-            <JoinWebinar className={BTN_OUTLINE_PRIMARY} />
-          </div>
-        </div>
-      </section>
+     {/* Free weekly webinar (brochure long p36) */}
+<WebinarDoor
+  cta={
+    <JoinWebinar
+      className={`${BTN_BASE} bg-primary-darkest text-white shadow-xl hover:bg-primary`}
+    />
+  }
+/>
 
       {/* Closing CTA */}
       <section className={`${SECTION} bg-dark-primary bg-cover bg-top-left`}>
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="h3 text-white">Your Transformation Starts with One Conversation</h2>
+          <h2 className="h3 text-white">
+            Your Transformation Starts with One Conversation
+          </h2>
           {/* CTA plan: the closing band uses C1 (primary) and C2 (secondary). */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
             <SpeakToManager />
@@ -599,12 +656,32 @@ export default function ProgrammesHubPage() {
           <ul className="mt-6 space-y-1 text-white custom-text1">
             <li>
               Call or WhatsApp:{" "}
-              <a href="tel:+923360082222" className="underline" data-cta-id="C6" data-gtm-event="phone_click">+92 336 008 2222</a>{" "}
-              (<a href="https://wa.me/923360082222" target="_blank" rel="noopener noreferrer" className="underline" data-cta-id="C1" data-gtm-event="whatsapp_click">WhatsApp</a>)
+              <a
+                href="tel:+923360082222"
+                className="underline"
+                data-cta-id="C6"
+                data-gtm-event="phone_click"
+              >
+                +92 336 008 2222
+              </a>{" "}
+              (
+              <a
+                href="https://wa.me/923360082222"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+                data-cta-id="C1"
+                data-gtm-event="whatsapp_click"
+              >
+                WhatsApp
+              </a>
+              )
             </li>
             <li>International: +1 (206) 614 0234</li>
             <li>
-              <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>
+              <a href="mailto:connect@arslanlarik.com" className="underline">
+                connect@arslanlarik.com
+              </a>
             </li>
           </ul>
         </div>

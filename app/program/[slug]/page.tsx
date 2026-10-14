@@ -18,6 +18,7 @@ import CtaBand from "@/component/CtaBand";
 import { waLine, type CtaRef } from "@/component/cta";
 import type { ReactNode } from "react";
 import Reveal from "@/component/Reveal";
+import LevelsExpandGallery from "@/component/LevelsExpandGallery";
 
 export default async function ProgramDetail({
   params,
@@ -98,6 +99,17 @@ export default async function ProgramDetail({
       )}
       {/* OurFaqs renders nothing when data is empty (faqs.tsx:22). Default H2 "Your Questions Answered". */}
       <Fade><OurFaqs data={program.FaqData} /></Fade>
+      <Fade>
+  <section className="w-full bg-white py-8 md:py-12 sm:px-4">
+    <div className="container mx-auto px-4">
+      <h2 className="h3 text-primary text-center">The Six Levels</h2>
+      <p className="mx-auto mt-2 mb-8 max-w-2xl text-center text-gray-600">
+        Hover a level to explore the next steps on the ladder.
+      </p>
+      <LevelsExpandGallery defaultLevel={level} />
+    </div>
+  </section>
+</Fade>
       <Fade><LevelNav data={program.NavData} waMessage={waMessage} /></Fade>
       {/* Closing band (CTA plan rule 2). */}
       {openEnrolment ? (
