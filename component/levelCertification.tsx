@@ -5,8 +5,8 @@ import Image from "next/image";
 import { ZoomIn, X } from "lucide-react";
 
 type Props = {
-  data: LevelCertificationType
-}
+  data: LevelCertificationType;
+};
 
 // Layout: sample certificates come first as a large framed showcase (click to view full screen), then every
 // credential as a white card (medal-style seal + title + description) in a two-column grid.
@@ -20,32 +20,35 @@ export default function LevelCertification({ data }: Props) {
   // Esc closes the viewer and the page does not scroll behind it.
   useEffect(() => {
     if (open === null) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(null); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(null);
+    };
     document.addEventListener("keydown", onKey);
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = overflow; };
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = overflow;
+    };
   }, [open]);
 
   return (
     <section className="py-6 md:py-8 lg:py-12 xl:py-16 sm:px-4 bg-dark-primary bg-cover bg-top-left w-full">
       <div className="container mx-auto px-4">
-
         <h2 className="h3 text-start">
-          <span className="text-secondary">
-            {data?.title?.line1}
-          </span>
+          <span className="text-secondary">{data?.title?.line1}</span>
           <br />
-          <span className="text-white">
-            {data?.title?.line2}
-          </span>
+          <span className="text-white">{data?.title?.line2}</span>
         </h2>
 
         {/* Sample certificates: large framed cards, straight. Click opens the full-screen viewer. */}
         {samples.length > 0 && (
           <div className="flex flex-wrap justify-center gap-6 [&>*]:w-full sm:[&>*]:w-[calc(50%-0.75rem)] lg:[&>*]:w-[calc(33.333%-1rem)]">
             {samples.map((point, index) => (
-              <figure key={index} className="group transition duration-500 ease-out hover:-translate-y-1 hover:scale-[1.03] motion-reduce:transform-none">
+              <figure
+                key={index}
+                className="group transition duration-500 ease-out hover:-translate-y-1 hover:scale-[1.03] motion-reduce:transform-none"
+              >
                 <button
                   type="button"
                   onClick={() => setOpen(index)}
@@ -65,7 +68,10 @@ export default function LevelCertification({ data }: Props) {
                     </span>
                   </span>
                 </button>
-                <figcaption aria-hidden="true" className="mt-4 text-center text-sm leading-snug text-white/85 sm:text-base">
+                <figcaption
+                  aria-hidden="true"
+                  className="mt-4 text-center text-sm leading-snug text-white/85 sm:text-base"
+                >
                   {point.imageCerficate!.alt}
                 </figcaption>
               </figure>
@@ -76,7 +82,8 @@ export default function LevelCertification({ data }: Props) {
         {/* Credentials: equal white cards with a gold top bar and a medal-style seal; an odd last card spans the full row. */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 mt-10 lg:mt-14">
           {credentials.map((point, index) => {
-            const isLastOdd = credentials.length % 2 === 1 && index === credentials.length - 1;
+            const isLastOdd =
+              credentials.length % 2 === 1 && index === credentials.length - 1;
             return (
               <div
                 key={index}
@@ -84,7 +91,10 @@ export default function LevelCertification({ data }: Props) {
                   isLastOdd ? "lg:col-span-2" : ""
                 }`}
               >
-                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-secondary-dark via-secondary to-[#FFE29D]" />
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-secondary-dark via-secondary to-[#FFE29D]"
+                />
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute -right-1 -top-3 select-none font-outfit text-[88px] font-extrabold leading-none text-primary/15 transition duration-300 group-hover:text-primary/25"
@@ -94,16 +104,16 @@ export default function LevelCertification({ data }: Props) {
 
                 <div className="relative flex items-center gap-5 p-5 pt-7 lg:p-6 lg:pt-8">
                   {point?.imageBrand?.src && (
-                    <span className="flex h-[84px] w-[84px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-darkest to-primary p-1 shadow-md ring-4 ring-secondary transition duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:transform-none">
-                      <span className="flex h-full w-full items-center justify-center rounded-full bg-white p-2">
-                        <Image
-                          src={point.imageBrand.src}
-                          alt={point.imageBrand.alt || "Brand"}
-                          width={64}
-                          height={64}
-                          className="h-full w-full object-contain"
-                        />
-                      </span>
+                                        <span className="relative block size-[120px] min-h-[120px] min-w-[120px] shrink-0 overflow-hidden rounded-full bg-white shadow-md ring-4 ring-secondary transition duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:transform-none lg:size-[132px] lg:min-h-[132px] lg:min-w-[132px]">
+                      <Image
+                        src={point.imageBrand.src}
+                        alt={point.imageBrand.alt || "Brand"}
+                        fill
+                        sizes="132px"
+                        className={`rounded-full object-cover ${
+                          point.imageBrand.alt?.includes("AL&CO") ? "scale-[1.3]" : "scale-[0.92]"
+                        }`}
+                      />
                     </span>
                   )}
                   <div className="pr-6">

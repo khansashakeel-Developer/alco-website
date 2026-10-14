@@ -36,7 +36,7 @@ import AccreditedBrand2 from "@/assets/level-certificate/badges/tlta.webp";
 import AccreditedBrand3 from "@/assets/accredited/accredited-3.webp";
 import AccreditedBrand4 from "@/assets/accredited/accredited-4.webp";
 import AccreditedBrand5 from "@/assets/accredited/accredited-5.webp";
-import AccreditedBrand6 from "@/assets/accredited/accredited-6.webp";
+import AccreditedBrand6 from "@/assets/level-certificate/badges/alco.webp";
 import Certificate1Level1 from "@/assets/level-certificate/certificate-1-level-1.webp";
 import Certificate2Level1 from "@/assets/level-certificate/certificate-2-level-1.webp";
 import Certificate3Level1 from "@/assets/level-certificate/certificate-3-level-1.webp";
