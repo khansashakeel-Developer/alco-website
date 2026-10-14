@@ -19,6 +19,11 @@ import ThumbnailReview2 from "@/assets/thumbnail/review/review_level2.webp";
 import ThumbnailReview3 from "@/assets/thumbnail/review/review_level3.webp";
 import ThumbnailReview4 from "@/assets/thumbnail/review/review_level4.webp";
 import ThumbnailReview5 from "@/assets/thumbnail/review/review_level5.webp";
+import WhereItLeadsPath from "@/component/WhereItLeadsPath";
+
+// Components
+import WhereItLeadsStairs from "@/component/WhereItLeadsStairs";
+
 
 // Images
 import programLevel1 from "@/assets/background/program-level-1.webp"
@@ -379,66 +384,55 @@ const WhereItLeadsDataLevel1: ContentSectionType = {
   padding: "py-6 md:py-8 lg:py-12 xl:py-16",
   description: (
     <div className="mx-auto max-w-6xl text-center">
+      {/* paste your old intro <p> ... </p> here, unchanged */}
       <p className="mx-auto my-4 max-w-3xl">
-        Practitioner changes you, and for many that is enough. But if you feel the pull to make this a profession, Level 2 is built for exactly that.
+        PASTE YOUR OLD INTRO SENTENCE HERE
       </p>
 
-      {/* Note, dark panel with gold top bar */}
-      <div className="relative mx-auto my-6 max-w-4xl overflow-hidden rounded-2xl bg-gradient-to-br from-[#09263D] to-[#1B507C] p-6 md:p-8 text-white shadow-lg">
-        <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-secondary" />
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">A note we make with pride, not apology</p>
-        <p className="mx-auto mt-2 max-w-3xl text-base md:text-lg text-white/90">
-          Hypnosis is not part of the Practitioner. We refuse to dilute. Our hypnotherapy is a full journey of its own at Level 3.
-        </p>
+      <div className="mt-10 text-left">
+        <WhereItLeadsPath
+          current={{ level: 1, name: "NLP Practitioner" }}
+          previous={{
+            level: 0,
+            kind: "Not sure yet?",
+            title: "Start with the free weekly webinar",
+            href: "/programs",
+            cta: "See how to start",
+          }}
+          forks={[
+            {
+              level: 2,
+              kind: "Next level",
+              title: "Level 2, NLP Master Practitioner",
+              href: "/program/nlp-master-practitioner",
+              cta: "Explore Level 2",
+              next: true,
+            },
+            {
+              level: 3,
+              kind: "Then go deeper",
+              title: "Level 3, Advanced Hypnotherapy and Interventionist",
+              href: "/program/advanced-hypnotherapy-interventionist",
+              cta: "Explore Level 3",
+            },
+          ]}
+        />
       </div>
 
-      {/* Route cards */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <Link
-          href="/program/nlp-master-practitioner"
-          className="group relative flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary-darkest">Next</span>
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">2</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Next level</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 2, NLP Master Practitioner</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 2 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </Link>
-
-        <Link
-          href="/program/advanced-hypnotherapy-interventionist"
-          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">3</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Later</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 3, Advanced Hypnotherapy and Interventionist</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 3 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </Link>
-
-        <Link
-          href="/programs"
-          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">1–6</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">The whole ladder</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">All programmes</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">See every level <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </Link>
-      </div>
-
-      {/* Not sure yet strip */}
       <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
         <p className="max-w-3xl text-base text-primary">
-          <strong>Not sure yet?</strong> Book a conversation, or ask your relationship manager for the link to our free weekly introductory webinar.
+          <strong>Ready for the next step?</strong> Request an interview, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
         </p>
-        <Link
-          href="/contact#form"
+        <a
+          href={whatsappHref(waLine("Level 1, NLP Practitioner"))}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-bold text-primary-darkest transition hover:bg-secondary-dark hover:shadow-lg"
-          data-cta-id="C5"
-          data-gtm-event="cta_click"
+          data-cta-id="C1"
+          data-gtm-event="whatsapp_click"
         >
-          Book a conversation
-        </Link>
+          Speak to a relationship manager
+        </a>
       </div>
     </div>
   ),
@@ -785,37 +779,34 @@ const WhereItLeadsDataLevel2: ContentSectionType = {
         Master Practitioner makes you a master of the work. The next questions are whether you want the depth that hypnosis brings, and whether you want to teach, Levels 3 and 4.
       </p>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        <Link
-          href="/program/nlp-practitioner"
-          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">1</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Previous level</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 1, NLP Practitioner</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark"><span aria-hidden="true" className="inline-block transition-transform group-hover:-translate-x-1">←</span> Explore Level 1</span>
-        </Link>
-
-        <Link
-          href="/program/advanced-hypnotherapy-interventionist"
-          className="group relative flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary-darkest">Next</span>
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">3</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Next level</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 3, Advanced Hypnotherapy and Interventionist</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 3 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </Link>
-
-        <Link
-          href="/program/nlp-trainers-training-program"
-          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">4</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Or teach</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 4, NLP Train the Trainer</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 4 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </Link>
+      <div className="mt-10 text-left">
+        <WhereItLeadsPath
+          current={{ level: 2, name: "NLP Master Practitioner" }}
+          previous={{
+            level: 1,
+            kind: "Previous level",
+            title: "Level 1, NLP Practitioner",
+            href: "/program/nlp-practitioner",
+            cta: "Explore Level 1",
+          }}
+          forks={[
+            {
+              level: 3,
+              kind: "Next level",
+              title: "Level 3, Advanced Hypnotherapy and Interventionist",
+              href: "/program/advanced-hypnotherapy-interventionist",
+              cta: "Explore Level 3",
+              next: true,
+            },
+            {
+              level: 4,
+              kind: "Or teach",
+              title: "Level 4, NLP Train the Trainer",
+              href: "/program/nlp-trainers-training-program",
+              cta: "Explore Level 4",
+            },
+          ]}
+        />
       </div>
 
       <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
@@ -834,6 +825,9 @@ const WhereItLeadsDataLevel2: ContentSectionType = {
     </div>
   ),
 };
+
+      
+ 
 
 const FaqDataLevel2: LevelFaq[] = [
   {
@@ -1186,53 +1180,50 @@ const WhereItLeadsDataLevel3: ContentSectionType = {
         With the full spectrum in hand, the ladder opens two ways: teach NLP through Train the Trainer, or teach hypnosis through the Hypnosis Trainer's Training.
       </p>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        <Link
-          href="/program/nlp-master-practitioner"
-          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
+      <div className="mt-10 text-left">
+        <WhereItLeadsPath
+          current={{ level: 3, name: "Advanced Hypnotherapy Interventionist" }}
+          previous={{
+            level: 2,
+            kind: "Previous level",
+            title: "Level 2, NLP Master Practitioner",
+            href: "/program/nlp-master-practitioner",
+            cta: "Explore Level 2",
+          }}
+          forks={[
+            {
+              level: 4,
+              kind: "Teach NLP",
+              title: "Level 4, NLP Train the Trainer",
+              href: "/program/nlp-trainers-training-program",
+              cta: "Explore Level 4",
+              next: true,
+            },
+            {
+              level: 5,
+              kind: "Teach hypnosis",
+              title: "Level 5, Hypnosis Train the Trainer",
+              href: "/program/hypnosis-trainers-training-program",
+              cta: "Explore Level 5",
+            },
+          ]}
         >
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">2</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Previous level</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 2, NLP Master Practitioner</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark"><span aria-hidden="true" className="inline-block transition-transform group-hover:-translate-x-1">←</span> Explore Level 2</span>
-        </Link>
-
-        <Link
-          href="/program/nlp-trainers-training-program"
-          className="group relative flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-primary-darkest">Next</span>
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">4</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Teach NLP</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 4, NLP Train the Trainer</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 4 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </Link>
-
-        <Link
-          href="/program/hypnosis-trainers-training-program"
-          className="group flex flex-col items-center rounded-2xl border border-primary/10 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary hover:shadow-xl"
-        >
-          <span className="text-5xl font-bold leading-none text-primary/15 group-hover:text-secondary/60 transition-colors">5</span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-secondary-dark">Teach hypnosis</p>
-          <h3 className="mt-1 text-lg font-semibold text-primary">Level 5, Hypnosis Train the Trainer</h3>
-          <span className="mt-auto pt-4 text-sm font-semibold text-primary group-hover:text-secondary-dark">Explore Level 5 <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </Link>
-      </div>
-
-      <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
-        <p className="max-w-3xl text-base text-primary">
-          <strong>Ready for the next step?</strong> Request an interview, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
-        </p>
-        <a
-          href={whatsappHref(waLine("Level 3, Advanced Hypnotherapy and Interventionist"))}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-bold text-primary-darkest transition hover:bg-secondary-dark hover:shadow-lg"
-          data-cta-id="C1"
-          data-gtm-event="whatsapp_click"
-        >
-          Speak to a relationship manager
-        </a>
+          <div className="flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
+            <p className="max-w-3xl text-base text-primary">
+              <strong>Ready for the next step?</strong> Request an interview, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
+            </p>
+            <a
+              href={whatsappHref(waLine("Level 3, Advanced Hypnotherapy and Interventionist"))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-bold text-primary-darkest transition hover:bg-secondary-dark hover:shadow-lg"
+              data-cta-id="C1"
+              data-gtm-event="whatsapp_click"
+            >
+              Speak to a relationship manager
+            </a>
+          </div>
+        </WhereItLeadsPath>
       </div>
     </div>
   ),

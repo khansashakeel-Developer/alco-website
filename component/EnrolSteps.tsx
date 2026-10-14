@@ -65,7 +65,7 @@ export default function EnrolSteps() {
               className="flex cursor-default items-start gap-4 text-left md:flex-col md:items-center md:gap-0 md:text-center"
             >
               <div className="relative flex h-[72px] w-[72px] shrink-0 items-center justify-center [perspective:600px]">
-  {on && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-secondary/40" />}
+  {on && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-[#2B6CA3]/40" />}
 
   {/* ground shadow */}
   <span
@@ -75,15 +75,15 @@ export default function EnrolSteps() {
 
   {/* the sphere */}
   <span
-    className={`relative flex h-[72px] w-[72px] items-center justify-center overflow-hidden rounded-full ring-4 ring-white transition-all duration-500 shadow-[inset_-7px_-9px_16px_rgba(0,0,0,0.35),0_14px_22px_-8px_rgba(11,37,69,0.55)] ${
+    className={`relative flex h-[72px] w-[72px] items-center justify-center overflow-hidden rounded-full ring-4 ring-white transition-all duration-500 shadow-[0_0_0_5px_rgba(43,108,163,0.3)]
       on ? "scale-110" : ""
     }`}
     style={{
-      background: on
-        ? "radial-gradient(circle at 32% 28%, #FFE9A8 0%, #F9B81E 45%, #C98500 100%)"
-        : done
-        ? "radial-gradient(circle at 32% 28%, #6C9CC8 0%, #1B507C 50%, #0b2545 100%)"
-        : "radial-gradient(circle at 32% 28%, #4E7FAB 0%, #1B507C 45%, #08203a 100%)",
+     background: on
+  ? "radial-gradient(circle at 32% 28%, #9fd0f2 0%, #2B6CA3 48%, #12395c 100%)"
+  : done
+  ? "radial-gradient(circle at 32% 28%, #6C9CC8 0%, #1B507C 50%, #0b2545 100%)"
+  : "radial-gradient(circle at 32% 28%, #4E7FAB 0%, #1B507C 45%, #08203a 100%)",
     }}
   >
     {/* meridian lines turning like a globe */}
@@ -104,7 +104,7 @@ export default function EnrolSteps() {
     {/* number: spins once on its vertical axis when this step becomes active */}
     <span
       key={on ? `spin-${active}` : "still"}
-      className={`es-anim relative text-2xl font-bold ${on ? "text-primary-darkest" : "text-white"}`}
+      className="es-anim relative text-2xl font-bold text-white"
       style={on ? { animation: "es-spin 1.4s ease-in-out 1" } : undefined}
     >
       {i + 1}

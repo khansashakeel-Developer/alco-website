@@ -3,12 +3,14 @@ import React from "react";
 import { LevelProgramIncludesType } from "@/type/levelProgramIncludes";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import IncludesScrollStory from "@/component/IncludesScrollStory";
 
 type Props = {
   data?: LevelProgramIncludesType
 }
 
 export default function LevelProgramIncludes({ data }: Props) {
+  if (data?.layout === "split") return <IncludesScrollStory data={data} />;
   const count = data?.points?.length ?? 0;
 
   return (
@@ -28,7 +30,7 @@ export default function LevelProgramIncludes({ data }: Props) {
           </div>
         )}
 
-        {data?.layout === "split" ? (
+        {(data?.layout as string | undefined) === "split" ? (
           // Split layout: one white panel of evenly spaced rows (label on the left, text on the right).
           <div className="mt-4 lg:mt-6 mb-4 lg:mb-8 xl:mb-10 bg-white rounded-xl shadow-lg divide-y divide-slate-200">
             {data.points.map((point, index) => (

@@ -4,6 +4,12 @@ import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+// Replace with the countries your graduates are really from (2-letter codes).
+const GRAD_FLAGS = [
+  "pk", "ae", "gb", "us", "ca", "au", "sa", "in", "qa", "kw",
+  "om", "bh", "my", "sg", "nz", "de", "fr", "za", "ke", "ng",
+];
+
 type Seal = { src: StaticImageData; alt: string };
 
 const INTRO =
@@ -201,17 +207,19 @@ export default function LearningJourney({ seals }: { seals: Seal[] }) {
     </div>
 
     {/* 20 dots, one per country, lighting up in turn */}
-    <div className="grid grid-cols-10 gap-1.5" aria-hidden>
-      {Array.from({ length: 20 }).map((_, i) => (
-        <span
-          key={i}
-          style={{ transitionDelay: `${700 + i * 90}ms` }}
-          className={`aspect-square rounded-full transition-all duration-500 ${
-            seen ? "scale-100 bg-primary-darkest" : "scale-0 bg-primary-darkest"
-          }`}
-        />
-      ))}
-    </div>
+    <div className="grid grid-cols-10 gap-1.5 md:gap-2">
+  {GRAD_FLAGS.map((c, i) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      key={c}
+      src={`https://flagcdn.com/w80/${c}.png`}
+      alt=""
+      loading="lazy"
+      className="aspect-square w-full rounded-full object-cover ring-2 ring-[#0b2545]/80 transition-transform duration-300 hover:scale-125"
+      style={{ animationDelay: `${i * 40}ms` }}
+    />
+  ))}
+</div>
   </div>
 </Tile>
 
@@ -274,17 +282,29 @@ export default function LearningJourney({ seals }: { seals: Seal[] }) {
           {/* Cohort: 25 dots */}
           <Tile seen={seen} delay={360} className="bg-white text-primary shadow-md lg:col-span-2">
             <p className="text-xl font-semibold leading-snug">Cohorts of 20 to 25 (Level 3: never more than 20)</p>
-            <div className="mt-5 grid grid-cols-10 gap-1.5">
-              {Array.from({ length: 25 }).map((_, i) => (
-                <span
-                  key={i}
-                  style={{ transitionDelay: `${600 + i * 40}ms` }}
-                  className={`aspect-square rounded-full transition-all duration-500 ${
-                    seen ? (i < 20 ? "scale-100 bg-primary" : "scale-100 bg-primary/20") : "scale-0 bg-primary"
-                  }`}
-                />
-              ))}
-            </div>
+            <div className="mt-4 grid grid-cols-10 gap-1.5 md:gap-2">
+  {Array.from({ length: 25 }).map((_, i) => {
+    const filled = i < 20; // first 20 = solid, last 5 = the "up to 25" extras
+    return (
+      <span
+        key={i}
+        className={`flex aspect-square items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-110 ${
+          filled ? "bg-[#1B507C] text-white/90" : "bg-slate-200 text-slate-400"
+        }`}
+      >
+        <svg
+          viewBox="0 0 100 100"
+          className="h-[85%] w-[85%] translate-y-[12%]"
+          fill="currentColor"
+          aria-hidden
+        >
+          <circle cx="50" cy="38" r="17" />
+          <path d="M16 100c0-24 15-36 34-36s34 12 34 36z" />
+        </svg>
+      </span>
+    );
+  })}
+</div>
           </Tile>
 
           {/* Revisits: 5 years */}

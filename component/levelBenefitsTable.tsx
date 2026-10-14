@@ -4,6 +4,7 @@ import { LevelBenefitsTableType } from "@/type/levelBenefitsTable";
 import React, { useState, useEffect } from "react";
 import Button from "./button";
 import VideoPlayer from "./videoPlayer";
+import BenefitsExplorer from "./BenefitsExplorer";
 
 type Props = {
   data?: LevelBenefitsTableType;
@@ -99,115 +100,12 @@ export default function LevelBenefitsTable({ data }: Props) {
           </div>
 
           {/* Table */}
-          <div className="grid grid-cols-1 gap-8 2xl:gap-12 py-2 md:py-4 lg:py-8 xl:py-12">
-            <div className="hidden md:block overflow-x-auto rounded-xl shadow-lg">
-              <table className="w-full border-collapse">
-
-                {/* Header */}
-                <thead>
-                  <tr className="bg-primary text-white text-left">
-                    {data?.headers.map((header, i) => (
-                      <th key={i} className="px-8 py-6 h6">
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-
-                {/* Body */}
-                <tbody>
-                  {currentRows?.map((point, index) => (
-                    <tr
-                      key={index}
-                      className={`${index % 2 === 0
-                        ? "bg-white"
-                        : "bg-blue-50 border-y border-primary drop-shadow-lg"
-                        }`}
-                    >
-                      {/* Content */}
-                      <td className={data?.dynamicColumn ? data?.dynamicColumn : `px-8 py-6 font-medium text-gray-800 hover:text-gray-600 cursor-pointer`}>
-                        {point.content}
-                      </td>
-
-                      {/* Dynamic Columns */}
-                      {point.values.map((val, i) => (
-                        <td
-                          key={i}
-                          className="px-8 py-6 text-gray-600 hover:text-gray-500 cursor-pointer"
-                        >
-                          {val}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-
-                            </table>
-            </div>
-
-            {/* Phone: stacked cards */}
-            <div className="md:hidden space-y-4">
-              {currentRows?.map((point, index) => (
-                <div key={index} className="rounded-xl bg-white p-5 shadow-lg">
-                  <p className="font-semibold text-gray-800">{point.content}</p>
-                  <dl className="mt-3 space-y-3">
-                    {point.values.map((val, i) => (
-                      <div key={i}>
-                        <dt className="text-xs font-semibold uppercase tracking-wide text-primary">
-                          {data?.headers[i + 1]}
-                        </dt>
-                        <dd className="text-sm text-gray-600">{val}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              ))}
-            </div>
-
-            {/* ✅ Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 mt-6 flex-wrap">
-
-                {/* Prev */}
-                <button
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.max(prev - 1, 1))
-                  }
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 bg-primary text-white rounded disabled:opacity-50"
-                >
-                  Prev
-                </button>
-
-                {/* Numbers */}
-                {[...Array(totalPages)].map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`px-4 py-2 rounded ${currentPage === i + 1
-                      ? "bg-secondary text-white"
-                      : "bg-white text-black"
-                      }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-
-                {/* Next */}
-                <button
-                  onClick={() =>
-                    setCurrentPage((prev) =>
-                      Math.min(prev + 1, totalPages)
-                    )
-                  }
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 bg-primary text-white rounded disabled:opacity-50"
-                >
-                  Next
-                </button>
-              </div>
-            )}
-          </div>
+          {/* Benefits explorer */}
+<BenefitsExplorer
+  headers={data.headers}
+  points={data.points}
+  light={!!data.bgColor}
+/>
 
           {/* Videos Section */}
           {data?.introPage === true && data?.videos && (

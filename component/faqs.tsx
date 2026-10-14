@@ -21,9 +21,9 @@ export default function OurFaqs({ data, title, id }: Props) {
   return (
     data && data?.length > 0 && (
       <section
-        id={id}
-        className="relative w-full overflow-hidden bg-gradient-to-b from-neutral-100 to-white py-12 md:py-16 px-4 sm:px-8 my-10"
-      >
+  id={id}
+  className="w-full bg-gradient-light-neutral-lg bg-cover bg-top-left py-10 md:py-16 px-4 sm:px-20"
+>
 
         <div className="relative mx-auto max-w-4xl">
           <div className="mb-8 text-center">
