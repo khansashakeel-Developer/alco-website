@@ -23,41 +23,43 @@ import WhereItLeadsPath from "@/component/WhereItLeadsPath";
 
 // Components
 import WhereItLeadsStairs from "@/component/WhereItLeadsStairs";
-
+import SignOffCertificate from "@/component/SignOffCertificate";
+import SignOffPoints from "@/component/SignOffPoints";
+import SignOffQuote from "@/component/SignOffQuote";
 
 // Images
-import programLevel1 from "@/assets/background/program-level-1.webp"
-import programLevel2 from "@/assets/background/program-level-2.webp"
+import programLevel1 from "@/assets/background/program-level-1.webp";
+import programLevel2 from "@/assets/background/program-level-2.webp";
 import { LevelCertificationType } from "@/type/levelCertification";
-import AccreditedBrand1 from "@/assets/accredited/accredited-1.webp"
+import AccreditedBrand1 from "@/assets/accredited/accredited-1.webp";
 import AccreditedBrand2 from "@/assets/level-certificate/badges/tlta.webp";
-import AccreditedBrand3 from "@/assets/accredited/accredited-3.webp"
-import AccreditedBrand4 from "@/assets/accredited/accredited-4.webp"
-import AccreditedBrand5 from "@/assets/accredited/accredited-5.webp"
-import AccreditedBrand6 from "@/assets/accredited/accredited-6.webp"
-import Certificate1Level1 from "@/assets/level-certificate/certificate-1-level-1.webp"
-import Certificate2Level1 from "@/assets/level-certificate/certificate-2-level-1.webp"
-import Certificate3Level1 from "@/assets/level-certificate/certificate-3-level-1.webp"
-import Certificate1Level2 from "@/assets/level-certificate/certificate-1-level-2.webp"
-import Certificate2Level2 from "@/assets/level-certificate/certificate-2-level-2.webp"
-import Certificate3Level2 from "@/assets/level-certificate/certificate-3-level-2.webp"
-import Certificate1Level3 from "@/assets/level-certificate/certificate-1-level-3.webp"
-import Certificate2Level3 from "@/assets/level-certificate/certificate-2-level-3.webp"
-import Certificate3Level3 from "@/assets/level-certificate/certificate-3-level-3.webp"
-import Certificate4Level3 from "@/assets/level-certificate/certificate-4-level-3.webp"
-import Certificate5Level3 from "@/assets/level-certificate/certificate-5-level-3.webp"
-import Certificate1Level4 from "@/assets/level-certificate/certificate-1-level-4.webp"
-import Certificate1Level5 from "@/assets/level-certificate/certificate-1-level-5.webp"
-import Certificate1Level6 from "@/assets/level-certificate/certificate-1-level-6.webp"
-import LevelProgram1 from "@/assets/level-program-included/program-1.webp"
-import LevelProgram2 from "@/assets/level-program-included/program-2.webp"
-import LevelProgram3 from "@/assets/level-program-included/program-3.webp"
-import LevelProgram4 from "@/assets/level-program-included/program-4.webp"
-import LevelProgram5 from "@/assets/level-program-included/program-5.webp"
-import LevelProgram6 from "@/assets/level-program-included/program-6.webp"
-import LevetContent1 from "@/assets/level-content/level-content-1.webp"
-import LevetContent2 from "@/assets/level-content/level-content-2.webp"
-import LevetContent3 from "@/assets/level-content/level-content-3.webp"
+import AccreditedBrand3 from "@/assets/accredited/accredited-3.webp";
+import AccreditedBrand4 from "@/assets/accredited/accredited-4.webp";
+import AccreditedBrand5 from "@/assets/accredited/accredited-5.webp";
+import AccreditedBrand6 from "@/assets/accredited/accredited-6.webp";
+import Certificate1Level1 from "@/assets/level-certificate/certificate-1-level-1.webp";
+import Certificate2Level1 from "@/assets/level-certificate/certificate-2-level-1.webp";
+import Certificate3Level1 from "@/assets/level-certificate/certificate-3-level-1.webp";
+import Certificate1Level2 from "@/assets/level-certificate/certificate-1-level-2.webp";
+import Certificate2Level2 from "@/assets/level-certificate/certificate-2-level-2.webp";
+import Certificate3Level2 from "@/assets/level-certificate/certificate-3-level-2.webp";
+import Certificate1Level3 from "@/assets/level-certificate/certificate-1-level-3.webp";
+import Certificate2Level3 from "@/assets/level-certificate/certificate-2-level-3.webp";
+import Certificate3Level3 from "@/assets/level-certificate/certificate-3-level-3.webp";
+import Certificate4Level3 from "@/assets/level-certificate/certificate-4-level-3.webp";
+import Certificate5Level3 from "@/assets/level-certificate/certificate-5-level-3.webp";
+import Certificate1Level4 from "@/assets/level-certificate/certificate-1-level-4.webp";
+import Certificate1Level5 from "@/assets/level-certificate/certificate-1-level-5.webp";
+import Certificate1Level6 from "@/assets/level-certificate/certificate-1-level-6.webp";
+import LevelProgram1 from "@/assets/level-program-included/program-1.webp";
+import LevelProgram2 from "@/assets/level-program-included/program-2.webp";
+import LevelProgram3 from "@/assets/level-program-included/program-3.webp";
+import LevelProgram4 from "@/assets/level-program-included/program-4.webp";
+import LevelProgram5 from "@/assets/level-program-included/program-5.webp";
+import LevelProgram6 from "@/assets/level-program-included/program-6.webp";
+import LevetContent1 from "@/assets/level-content/level-content-1.webp";
+import LevetContent2 from "@/assets/level-content/level-content-2.webp";
+import LevetContent3 from "@/assets/level-content/level-content-3.webp";
 import { ContentSectionType } from "@/type/contentSection";
 import Link from "next/link";
 import BadgeCPD from "@/assets/level-certificate/badges/cpd.webp";
@@ -68,7 +70,7 @@ import type { LevelFaq, LevelNavType } from "@/type/programType";
 const bannerDataLevel1: BannerType = {
   level: "level 1",
   title: {
-    line1: "NLP Practitioner Certification"
+    line1: "NLP Practitioner Certification",
   },
   description: "Quad Certification plus UK ANLP CPD",
   image: programLevel1.src,
@@ -80,57 +82,84 @@ const bannerDataLevel1: BannerType = {
 const LevelIntroWithVideoDataLevel1: LevelIntroWithVideoType = {
   title: {
     line1: "Quad Certification",
-    line2: "Plus One CPD Accreditation"
+    line2: "Plus One CPD Accreditation",
   },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599136/Level1_Intro_pssnhq.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599136/Level1_Intro_pssnhq.mp4",
   thumbnail: ThumbnailIntro1,
-  description:
-    `<p><strong>Quick facts:</strong> 10 days, 130 credit hours, live on Zoom 8pm to 2am PKT, no prerequisite, cohorts of 20 to 25.</p>
+  description: `<p><strong>Quick facts:</strong> 10 days, 130 credit hours, live on Zoom 8pm to 2am PKT, no prerequisite, cohorts of 20 to 25.</p>
     <p><strong>What it is.</strong> Ten consecutive evenings in which you learn the actual mechanics of how your mind builds your reality, and how to change it. It is not a lecture series you watch; from the first day you are practising on real people, guided and corrected in the room, until the skills are yours.</p>
     <p><strong>What it gives you.</strong> The tools to read another person and connect fast; the language to hold a room and defuse conflict; the ability to release emotions you have carried for years, at the root; a switch for your own state before any interview, stage or hard conversation; and a complete coaching toolkit, so you finish able to take a paying client through change and open a practice the week the training ends.</p>`,
-}
+};
 
 // Quad = ABNLP + ABNLP Coaching Division + TLTA + AL&CO's own credential; ANLP is a separate CPD accreditation, never a board (DECISIONS v2 F4).
 const LevelCertificationDataLevel1: LevelCertificationType = {
   title: {
     line1: "Certifications",
-    line2: "Quad Certification plus UK ANLP CPD"
+    line2: "Quad Certification plus UK ANLP CPD",
   },
   points: [
     {
       // LOGO: ABNLP - Khansa to supply approved artwork (accredited-1.webp is a placeholder until confirmed)
       title: "Certified Practitioner of NLP, American Board of NLP (ABNLP)",
-      description: "From the American Board of NLP, the world's largest NLP authority. Internationally recognised, for use in coaching, training and personal development.",
-      imageBrand: { src: AccreditedBrand1, alt: "American Board of NLP (ABNLP) seal" },
-      imageCerficate: { src: Certificate1Level1, alt: "Sample ABNLP Certified Practitioner of NLP certificate" },
+      description:
+        "From the American Board of NLP, the world's largest NLP authority. Internationally recognised, for use in coaching, training and personal development.",
+      imageBrand: {
+        src: AccreditedBrand1,
+        alt: "American Board of NLP (ABNLP) seal",
+      },
+      imageCerficate: {
+        src: Certificate1Level1,
+        alt: "Sample ABNLP Certified Practitioner of NLP certificate",
+      },
     },
     {
-      title: "Certified Practitioner of Time Line Therapy® Techniques, Time Line Therapy Association (TLTA)",
-      description: "The trademarked technique set acknowledged as the fastest way to release negative emotions, limiting beliefs and anxiety, at the unconscious level.",
-      imageBrand: { src: AccreditedBrand2, alt: "Time Line Therapy Association (TLTA) seal" },
-      imageCerficate: { src: Certificate2Level1, alt: "Sample TLTA Certified Practitioner of Time Line Therapy certificate" },
+      title:
+        "Certified Practitioner of Time Line Therapy® Techniques, Time Line Therapy Association (TLTA)",
+      description:
+        "The trademarked technique set acknowledged as the fastest way to release negative emotions, limiting beliefs and anxiety, at the unconscious level.",
+      imageBrand: {
+        src: AccreditedBrand2,
+        alt: "Time Line Therapy Association (TLTA) seal",
+      },
+      imageCerficate: {
+        src: Certificate2Level1,
+        alt: "Sample TLTA Certified Practitioner of Time Line Therapy certificate",
+      },
     },
     {
       // LOGO: ABNLP Coaching Division - Khansa to supply approved artwork (accredited-3.webp is a placeholder until confirmed)
       title: "Certified NLP Coach, Coaching Division of the ABNLP",
-      description: "The Coaching Division of the ABNLP is a certifying board in its own right, so you are certified to coach, not only to practise techniques.",
-      imageBrand: { src: AccreditedBrand3, alt: "Coaching Division of the American Board of NLP seal" },
-      imageCerficate: { src: Certificate3Level1, alt: "Sample ABNLP Coaching Division Certified NLP Coach certificate" },
+      description:
+        "The Coaching Division of the ABNLP is a certifying board in its own right, so you are certified to coach, not only to practise techniques.",
+      imageBrand: {
+        src: AccreditedBrand3,
+        alt: "Coaching Division of the American Board of NLP seal",
+      },
+      imageCerficate: {
+        src: Certificate3Level1,
+        alt: "Sample ABNLP Coaching Division Certified NLP Coach certificate",
+      },
     },
     {
       // LOGO: AL&CO - Khansa to supply approved artwork (accredited-6.webp is a placeholder until confirmed)
       title: "AL&CO Certified Practitioner of Behavioral Reengineering",
-      description: "Our own credential, earned through a short assignment and awarded only to AL&CO graduates.",
-      imageBrand: { src: AccreditedBrand6, alt: "Arslan Larik & Company (AL&CO) seal" },
+      description:
+        "Our own credential, earned through a short assignment and awarded only to AL&CO graduates.",
+      imageBrand: {
+        src: AccreditedBrand6,
+        alt: "Arslan Larik & Company (AL&CO) seal",
+      },
     },
     {
       // LOGO: ANLP CPD - Khansa to supply approved artwork (cpd.webp is a placeholder until confirmed). A CPD accreditation, not a certifying board
       title: "Plus a UK ANLP CPD Certificate",
-      description: "Your 130 hours logged as continuing professional development against a UK standard, from ANLP in the United Kingdom. ANLP confers no title; it evidences your hours and your standard.",
+      description:
+        "Your 130 hours logged as continuing professional development against a UK standard, from ANLP in the United Kingdom. ANLP confers no title; it evidences your hours and your standard.",
       imageBrand: { src: BadgeCPD, alt: "ANLP (UK) CPD accreditation badge" },
     },
   ],
-}
+};
 
 const LevelBenefitsTableDataLevel1: LevelBenefitsTableType = {
   title: {
@@ -140,7 +169,7 @@ const LevelBenefitsTableDataLevel1: LevelBenefitsTableType = {
 
   button: {
     text: "Learn More",
-    href: "/program-detail/benefits-of-choosing-nlp-training-course"
+    href: "/program-detail/benefits-of-choosing-nlp-training-course",
   },
 
   headers: [
@@ -191,16 +220,24 @@ const LevelBenefitsTableDataLevel1: LevelBenefitsTableType = {
 const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
   title: {
     line1: "This Programme Includes",
-    line2: "NLP Practitioner Training"
+    line2: "NLP Practitioner Training",
   },
   layout: "split",
   description: (
     <>
       <p className="my-4">
-        The NLP Practitioner is Level 1 of AL&CO's six-level ladder, taught live and personally by Arslan Larik, Founder and Master Trainer, alongside Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). It is open to everyone, including the complete beginner.
+        The NLP Practitioner is Level 1 of AL&CO's six-level ladder, taught live
+        and personally by Arslan Larik, Founder and Master Trainer, alongside
+        Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP
+        Accredited Master Trainer (UK). It is open to everyone, including the
+        complete beginner.
       </p>
       <p>
-        You build practical skill in the core tools of NLP, coaching and Time Line Therapy® Techniques, including the Meta Model, the Milton Model, anchoring, submodality work and well-formed outcomes, practised on real people in every session. These skills apply straight away in coaching, leadership, sales, education and your own life.
+        You build practical skill in the core tools of NLP, coaching and Time
+        Line Therapy® Techniques, including the Meta Model, the Milton Model,
+        anchoring, submodality work and well-formed outcomes, practised on real
+        people in every session. These skills apply straight away in coaching,
+        leadership, sales, education and your own life.
       </p>
     </>
   ),
@@ -208,7 +245,11 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
     {
       title: "10 Days, 130 Hours, Live on Zoom",
       description: (
-        <p>Ten consecutive evenings, 8pm to 2am PKT, live on Zoom in cohorts of 20 to 25. From the first day you practise on real people, guided and corrected in the room, until the skills are yours.</p>
+        <p>
+          Ten consecutive evenings, 8pm to 2am PKT, live on Zoom in cohorts of
+          20 to 25. From the first day you practise on real people, guided and
+          corrected in the room, until the skills are yours.
+        </p>
       ),
       theme: "dark",
       image: {
@@ -219,7 +260,13 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
     {
       title: "A 500-Page Training Manual",
       description: (
-        <p>Your training manual, about 500 pages, covers every technique in the programme. It is issued digitally and is yours to keep, so you can study back at home and revise every technique in your own time. We encourage the e-copy, which is kinder to the planet; a printed set is available at an additional charge.</p>
+        <p>
+          Your training manual, about 500 pages, covers every technique in the
+          programme. It is issued digitally and is yours to keep, so you can
+          study back at home and revise every technique in your own time. We
+          encourage the e-copy, which is kinder to the planet; a printed set is
+          available at an additional charge.
+        </p>
       ),
       theme: "light",
       image: {
@@ -230,7 +277,11 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
     {
       title: "222 Audio Files",
       description: (
-        <p>222 audio files, mapped to your manual and provided through the AL&CO online learning portal, so you can study back at home and revise every technique in your own time.</p>
+        <p>
+          222 audio files, mapped to your manual and provided through the AL&CO
+          online learning portal, so you can study back at home and revise every
+          technique in your own time.
+        </p>
       ),
       theme: "yellow",
       image: {
@@ -242,10 +293,16 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
       title: "Quad Certification plus CPD",
       description: (
         <>
-          <p className="mb-2">A true quad: three international board certifications plus AL&CO's own credential, and in addition a UK ANLP CPD accreditation (ANLP is a CPD accreditation, not a board):</p>
+          <p className="mb-2">
+            A true quad: three international board certifications plus AL&CO's
+            own credential, and in addition a UK ANLP CPD accreditation (ANLP is
+            a CPD accreditation, not a board):
+          </p>
           <ul className="list-disc pl-5 space-y-1">
             <li>Certified Practitioner of NLP (ABNLP).</li>
-            <li>Certified Practitioner of Time Line Therapy® Techniques (TLTA).</li>
+            <li>
+              Certified Practitioner of Time Line Therapy® Techniques (TLTA).
+            </li>
             <li>Certified NLP Coach (Coaching Division of the ABNLP).</li>
             <li>AL&CO Certified Practitioner of Behavioral Reengineering.</li>
             <li>Plus a UK ANLP CPD certificate for your 130 hours.</li>
@@ -261,7 +318,11 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
     {
       title: "Free Revisits for Five Years",
       description: (
-        <p>A genuine 130 hours, and a door that stays open to revisit, free, for five years. Come back to a different room each time: change that is repeated is change that holds.</p>
+        <p>
+          A genuine 130 hours, and a door that stays open to revisit, free, for
+          five years. Come back to a different room each time: change that is
+          repeated is change that holds.
+        </p>
       ),
       theme: "dark",
       image: {
@@ -273,11 +334,22 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
       title: "A Global Support Network",
       description: (
         <>
-          <p className="mb-2">Join a global community of 2,000+ AL&CO graduates across 20+ countries, a space where learning thrives beyond the training room. You'll:</p>
+          <p className="mb-2">
+            Join a global community of 2,000+ AL&CO graduates across 20+
+            countries, a space where learning thrives beyond the training room.
+            You'll:
+          </p>
           <ul className="list-disc pl-5 space-y-1">
             <li>Practice interventions with peers to sharpen your skills.</li>
-            <li> Gain access to expert mentorship and guidance whenever you need it.</li>
-            <li>Stay motivated and inspired through shared experiences and collaborative growth.</li>
+            <li>
+              {" "}
+              Gain access to expert mentorship and guidance whenever you need
+              it.
+            </li>
+            <li>
+              Stay motivated and inspired through shared experiences and
+              collaborative growth.
+            </li>
           </ul>
         </>
       ),
@@ -295,26 +367,80 @@ const LevelProgramIncludesDataLevel1: LevelProgramIncludesType = {
   detailContent: (
     <NextStepCards
       cards={[
-      { title: "What You Will Walk Away With", body: <>Upon completing this certification, you will be equipped to identify and shift limiting beliefs, communicate with precision and influence, facilitate powerful change conversations, and apply NLP methodologies within your professional practice.</> },
-      { title: "Who This Programme Is For", body: <>Everyone, including the complete beginner. You leave able to coach professionally and change your own life.</> },
-      { title: "Prerequisite", body: <>None. Level 1 is built for the complete beginner.</> },
-      { title: "How to Join", body: <>Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. International: +1 (206) 614 0234.</> },
-      { title: "Why You Will Not Find a Number Here", body: <>This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.</> },
+        {
+          title: "What You Will Walk Away With",
+          body: (
+            <>
+              Upon completing this certification, you will be equipped to
+              identify and shift limiting beliefs, communicate with precision
+              and influence, facilitate powerful change conversations, and apply
+              NLP methodologies within your professional practice.
+            </>
+          ),
+        },
+        {
+          title: "Who This Programme Is For",
+          body: (
+            <>
+              Everyone, including the complete beginner. You leave able to coach
+              professionally and change your own life.
+            </>
+          ),
+        },
+        {
+          title: "Prerequisite",
+          body: <>None. Level 1 is built for the complete beginner.</>,
+        },
+        {
+          title: "How to Join",
+          body: (
+            <>
+              Levels 1 and 2 are arranged by your relationship manager, who will
+              confirm exactly what is included at your level and in your
+              confirmed package. Call or WhatsApp{" "}
+              <a href="tel:+923360082222" className="underline">
+                +92 336 008 2222
+              </a>{" "}
+              (
+              <a href="https://wa.me/923360082222" className="underline">
+                WhatsApp
+              </a>
+              ), or write to{" "}
+              <a href="mailto:connect@arslanlarik.com" className="underline">
+                connect@arslanlarik.com
+              </a>
+              . International: +1 (206) 614 0234.
+            </>
+          ),
+        },
+        {
+          title: "Why You Will Not Find a Number Here",
+          body: (
+            <>
+              This is an investment in your future, and we treat it as one, so
+              you will not see a figure in these pages. That is deliberate, and
+              it is out of fairness to you. To print a single figure, we would
+              have to quote you for every level at once, whether or not you need
+              them all. We would rather understand what you actually want first,
+              and then build a proposition around your own journey, only what
+              serves you, and nothing that does not.
+            </>
+          ),
+        },
       ]}
     />
   ),
 };
 
-
 const LevelContentDataLevel1: LevelContentType = {
   title: {
     line1: "The Full Curriculum",
-    line2: ""
+    line2: "",
   },
 
   button: {
     text: "See the Detailed Course Outline",
-    href: "/course-outline/nlp-practitioner"
+    href: "/course-outline/nlp-practitioner",
   },
 
   // All 28 brochure bullets, verbatim, each once; the grouping into three cards is ours.
@@ -341,7 +467,10 @@ const LevelContentDataLevel1: LevelContentType = {
         "Perceptual Positions",
         "Parts Integration",
       ],
-      image: { src: LevetContent1.src, alt: "Neuro-Linguistic Programming modules" },
+      image: {
+        src: LevetContent1.src,
+        alt: "Neuro-Linguistic Programming modules",
+      },
     },
     {
       title: "Time Line Therapy® Techniques",
@@ -353,7 +482,10 @@ const LevelContentDataLevel1: LevelContentType = {
         "General Reframes, and TLT for Anxiety and Limiting Decisions",
         "Through-Time and In-Time",
       ],
-      image: { src: LevetContent2.src, alt: "Time Line Therapy Techniques modules" },
+      image: {
+        src: LevetContent2.src,
+        alt: "Time Line Therapy Techniques modules",
+      },
     },
     {
       title: "NLP Coaching",
@@ -371,11 +503,12 @@ const LevelContentDataLevel1: LevelContentType = {
 const LevelGraduatesExperienceDataLevel1: LevelGraduatesExperienceType = {
   title: {
     line1: "In Their Own Words",
-    line2: "NLP Practitioner Graduates"
+    line2: "NLP Practitioner Graduates",
   },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599133/Level1_Review_f8fbjg.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599133/Level1_Review_f8fbjg.mp4",
   thumbnail: ThumbnailReview1,
-}
+};
 const WhereItLeadsDataLevel1: ContentSectionType = {
   title: "Where It Leads",
   TagType: "h2",
@@ -421,7 +554,11 @@ const WhereItLeadsDataLevel1: ContentSectionType = {
 
       <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
         <p className="max-w-3xl text-base text-primary">
-          <strong>Ready for the next step?</strong> Request an interview, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
+          <strong>Ready for the next step?</strong> Request an interview, or{" "}
+          <Link href="/programs" className="underline">
+            see the whole ladder
+          </Link>{" "}
+          first.
         </p>
         <a
           href={whatsappHref(waLine("Level 1, NLP Practitioner"))}
@@ -438,62 +575,69 @@ const WhereItLeadsDataLevel1: ContentSectionType = {
   ),
 };
 
-
 // Plain strings: the same array feeds the visible accordion and the FAQPage JSON-LD.
 const FaqDataLevel1: LevelFaq[] = [
   {
-    question: "Four certifications in ten days sounds like a lot. Can a complete beginner really be ready to practise?",
-    answer: "The quad is not marketing; it reflects four real, connected skills you build together: the language patterns of NLP, goal-focused coaching, the release work of Time Line Therapy® Techniques, and our own Behavioral Reengineering. And ten days here is not ten short sittings; it is a genuine 130 hours, most of it spent practising on real people under a trainer's eye. You leave with skill in your hands, not theory in a folder.",
+    question:
+      "Four certifications in ten days sounds like a lot. Can a complete beginner really be ready to practise?",
+    answer:
+      "The quad is not marketing; it reflects four real, connected skills you build together: the language patterns of NLP, goal-focused coaching, the release work of Time Line Therapy® Techniques, and our own Behavioral Reengineering. And ten days here is not ten short sittings; it is a genuine 130 hours, most of it spent practising on real people under a trainer's eye. You leave with skill in your hands, not theory in a folder.",
   },
   {
     question: "Do I need any background to start?",
-    answer: "None at all. Level 1 is built for the complete beginner. Think of it like learning to swim: we do not ask whether you already can, we get in the water with you and stay there until you are moving on your own.",
+    answer:
+      "None at all. Level 1 is built for the complete beginner. Think of it like learning to swim: we do not ask whether you already can, we get in the water with you and stay there until you are moving on your own.",
   },
   {
     question: "Is hypnosis part of the Practitioner?",
-    answer: "No, and that is deliberate. Hypnosis is a full journey of its own at Level 3, taught properly, so we build hypnotists, not people reading from scripts.",
+    answer:
+      "No, and that is deliberate. Hypnosis is a full journey of its own at Level 3, taught properly, so we build hypnotists, not people reading from scripts.",
   },
   {
     question: "Is it really all online, and does that work?",
-    answer: "Yes, fully live on Zoom, and it is nothing like watching a recording. You are in a real room with a real trainer and real classmates, practising on each other in every session. We were the first in the region to teach NLP this way, and our graduates now coach clients across the world because of it.",
+    answer:
+      "Yes, fully live on Zoom, and it is nothing like watching a recording. You are in a real room with a real trainer and real classmates, practising on each other in every session. We were the first in the region to teach NLP this way, and our graduates now coach clients across the world because of it.",
   },
   {
     question: "I work full time. Can I keep up?",
-    answer: "The trainings run live in the evenings on Zoom. Your manual is yours to keep, and your audio files are on the AL&CO online learning portal, so you can revisit both at your own pace. Because you can re-attend free for five years, you are never one missed evening away from falling behind. It is built to fit a working life.",
+    answer:
+      "The trainings run live in the evenings on Zoom. Your manual is yours to keep, and your audio files are on the AL&CO online learning portal, so you can revisit both at your own pace. Because you can re-attend free for five years, you are never one missed evening away from falling behind. It is built to fit a working life.",
   },
 ];
 
 const NavDataLevel1: LevelNavType = {
-  next: { href: "/program/nlp-master-practitioner", label: "Level 2: NLP Master Practitioner" },
+  next: {
+    href: "/program/nlp-master-practitioner",
+    label: "Level 2: NLP Master Practitioner",
+  },
 };
 
 // Level 1 End
-
 
 // Level 2 Start
 
 const bannerDataLevel2: BannerType = {
   level: "level 2",
   title: {
-    line1: "NLP Master Practitioner Certification"
+    line1: "NLP Master Practitioner Certification",
   },
   description: "Quad Certification plus a Second UK ANLP CPD",
   image: programLevel2.src,
-  bgVideo: "/videos/program-level-2.mp4", 
+  bgVideo: "/videos/program-level-2.mp4",
   height: "min-h-[520px] lg:min-h-[580px]",
   wide: true,
-  className: "bg-center bg-no-repeat bg-primary"
+  className: "bg-center bg-no-repeat bg-primary",
 };
 
 const LevelIntroWithVideoDataLevel2: LevelIntroWithVideoType = {
   title: {
     line1: "Quad Certification Plus One CPD Accreditation",
-    line2: "Building the Castle on the Foundation"
+    line2: "Building the Castle on the Foundation",
   },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599143/Level2_Intro_rhs6uo.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599143/Level2_Intro_rhs6uo.mp4",
   thumbnail: ThumbnailIntro2,
-  description:
-    `<p><strong>Quick facts:</strong> 13 days, 140 hours, live on Zoom 8pm to 2am PKT, requires Level 1 (NLP Practitioner), cohorts of 20 to 25, includes a dedicated coach for your personal breakthrough.</p>
+  description: `<p><strong>Quick facts:</strong> 13 days, 140 hours, live on Zoom 8pm to 2am PKT, requires Level 1 (NLP Practitioner), cohorts of 20 to 25, includes a dedicated coach for your personal breakthrough.</p>
     <p><strong>What it is.</strong> The Master Practitioner picks up where the Practitioner ended and builds a castle on that foundation, with advanced tools that work at the conscious and unconscious level at once. At Practitioner you change yourself; here you gain a capability and a livelihood.</p>
     <p><strong>What you master.</strong> Reading people at depth; the language of a master; working at the level of values; the advanced change work that other coaches refer away; Modelling, the highest-paid skill in the field; and building the business, including your own eight-hour breakthrough session.</p>`,
 };
@@ -502,39 +646,67 @@ const LevelIntroWithVideoDataLevel2: LevelIntroWithVideoType = {
 const LevelCertificationDataLevel2: LevelCertificationType = {
   title: {
     line1: "Certifications",
-    line2: "Quad Certification plus a Second UK ANLP CPD"
+    line2: "Quad Certification plus a Second UK ANLP CPD",
   },
   points: [
     {
       // LOGO: ABNLP - Khansa to supply approved artwork (accredited-1.webp is a placeholder until confirmed)
-      title: "Certified Master Practitioner of NLP, American Board of NLP (ABNLP)",
-      description: "The senior international credential in the field, from the ABNLP, the world's largest NLP authority.",
-      imageBrand: { src: AccreditedBrand1, alt: "American Board of NLP (ABNLP) seal" },
-      imageCerficate: { src: Certificate1Level2, alt: "Sample ABNLP Certified Master Practitioner of NLP certificate" },
+      title:
+        "Certified Master Practitioner of NLP, American Board of NLP (ABNLP)",
+      description:
+        "The senior international credential in the field, from the ABNLP, the world's largest NLP authority.",
+      imageBrand: {
+        src: AccreditedBrand1,
+        alt: "American Board of NLP (ABNLP) seal",
+      },
+      imageCerficate: {
+        src: Certificate1Level2,
+        alt: "Sample ABNLP Certified Master Practitioner of NLP certificate",
+      },
     },
     {
-      title: "Master Practitioner of Time Line Therapy® Techniques, Time Line Therapy Association (TLTA)",
+      title:
+        "Master Practitioner of Time Line Therapy® Techniques, Time Line Therapy Association (TLTA)",
       description: "Mastery of the technique set, not familiarity with it.",
-      imageBrand: { src: AccreditedBrand2, alt: "Time Line Therapy Association (TLTA) seal" },
-      imageCerficate: { src: Certificate2Level2, alt: "Sample TLTA Master Practitioner of Time Line Therapy certificate" },
+      imageBrand: {
+        src: AccreditedBrand2,
+        alt: "Time Line Therapy Association (TLTA) seal",
+      },
+      imageCerficate: {
+        src: Certificate2Level2,
+        alt: "Sample TLTA Master Practitioner of Time Line Therapy certificate",
+      },
     },
     {
       // LOGO: ABNLP Coaching Division - Khansa to supply approved artwork (accredited-3.webp is a placeholder until confirmed)
       title: "Certified NLP Master Coach, Coaching Division of the ABNLP",
-      description: "From the Coaching Division of the ABNLP, so you are a master coach, able to command a master-level investment and defend it.",
-      imageBrand: { src: AccreditedBrand3, alt: "Coaching Division of the American Board of NLP seal" },
-      imageCerficate: { src: Certificate3Level2, alt: "Sample ABNLP Coaching Division Certified NLP Master Coach certificate" },
+      description:
+        "From the Coaching Division of the ABNLP, so you are a master coach, able to command a master-level investment and defend it.",
+      imageBrand: {
+        src: AccreditedBrand3,
+        alt: "Coaching Division of the American Board of NLP seal",
+      },
+      imageCerficate: {
+        src: Certificate3Level2,
+        alt: "Sample ABNLP Coaching Division Certified NLP Master Coach certificate",
+      },
     },
     {
       // LOGO: AL&CO - Khansa to supply approved artwork (accredited-6.webp is a placeholder until confirmed)
-      title: "AL&CO Certified Practitioner of Behavioral Reengineering, at Master Level",
-      description: "AL&CO's own credential at master level, awarded only to AL&CO graduates.",
-      imageBrand: { src: AccreditedBrand6, alt: "Arslan Larik & Company (AL&CO) seal" },
+      title:
+        "AL&CO Certified Practitioner of Behavioral Reengineering, at Master Level",
+      description:
+        "AL&CO's own credential at master level, awarded only to AL&CO graduates.",
+      imageBrand: {
+        src: AccreditedBrand6,
+        alt: "Arslan Larik & Company (AL&CO) seal",
+      },
     },
     {
       // LOGO: ANLP CPD - Khansa to supply approved artwork (cpd.webp is a placeholder until confirmed). A CPD accreditation, not a certifying board
       title: "Plus a Second UK ANLP CPD Certificate",
-      description: "Your 140 hours logged as continuing professional development against the UK standard, from ANLP in the United Kingdom. ANLP confers no title; it evidences your hours and your standard.",
+      description:
+        "Your 140 hours logged as continuing professional development against the UK standard, from ANLP in the United Kingdom. ANLP confers no title; it evidences your hours and your standard.",
       imageBrand: { src: BadgeCPD, alt: "ANLP (UK) CPD accreditation badge" },
     },
   ],
@@ -548,7 +720,7 @@ const LevelBenefitsTableDataLevel2: LevelBenefitsTableType = {
 
   button: {
     text: "Learn More",
-    href: "/program-detail/how-nlp-master-practitioner-training-helps-you-in-your-life"
+    href: "/program-detail/how-nlp-master-practitioner-training-helps-you-in-your-life",
   },
 
   headers: [
@@ -606,15 +778,21 @@ const LevelBenefitsTableDataLevel2: LevelBenefitsTableType = {
 const LevelProgramIncludesDataLevel2: LevelProgramIncludesType = {
   title: {
     line1: "This Programme Includes",
-    line2: ""
+    line2: "",
   },
   description: (
     <>
       <p className="my-4">
-        The NLP Master Practitioner is Level 2 of AL&CO's six-level ladder, taught live and personally by Arslan Larik, Founder and Master Trainer, alongside Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK).
+        The NLP Master Practitioner is Level 2 of AL&CO's six-level ladder,
+        taught live and personally by Arslan Larik, Founder and Master Trainer,
+        alongside Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC,
+        and ANLP Accredited Master Trainer (UK).
       </p>
       <p className="mb-4">
-        At this level you work with values, advanced language patterns, Meta Programs, Modelling and advanced Time Line Therapy® Techniques, and you learn to build the business: how to position your work, design your packages, and run a practice that pays.
+        At this level you work with values, advanced language patterns, Meta
+        Programs, Modelling and advanced Time Line Therapy® Techniques, and you
+        learn to build the business: how to position your work, design your
+        packages, and run a practice that pays.
       </p>
     </>
   ),
@@ -622,7 +800,12 @@ const LevelProgramIncludesDataLevel2: LevelProgramIncludesType = {
     {
       title: "13 Days, 140 Hours, Live on Zoom",
       description: (
-        <p>Thirteen days and 140 hours, taught live on Zoom from 8pm to 2am PKT in cohorts of 20 to 25. You practise every tool on real people, guided and corrected in the room, at the conscious and unconscious level at once.</p>
+        <p>
+          Thirteen days and 140 hours, taught live on Zoom from 8pm to 2am PKT
+          in cohorts of 20 to 25. You practise every tool on real people, guided
+          and corrected in the room, at the conscious and unconscious level at
+          once.
+        </p>
       ),
       theme: "dark",
       image: { src: LevelProgram1, alt: "13 days, 140 hours, live on Zoom" },
@@ -631,12 +814,23 @@ const LevelProgramIncludesDataLevel2: LevelProgramIncludesType = {
       title: "Quad Certification plus CPD",
       description: (
         <>
-          <p className="mb-2">Again a true quad: three international board certifications plus AL&CO's own credential, and in addition a second UK ANLP CPD accreditation (ANLP is a CPD accreditation, not a board):</p>
+          <p className="mb-2">
+            Again a true quad: three international board certifications plus
+            AL&CO's own credential, and in addition a second UK ANLP CPD
+            accreditation (ANLP is a CPD accreditation, not a board):
+          </p>
           <ul className="list-disc pl-5 space-y-1">
             <li>Certified Master Practitioner of NLP (ABNLP).</li>
-            <li>Master Practitioner of Time Line Therapy® Techniques (TLTA).</li>
-            <li>Certified NLP Master Coach (Coaching Division of the ABNLP).</li>
-            <li>AL&CO Certified Practitioner of Behavioral Reengineering, at master level.</li>
+            <li>
+              Master Practitioner of Time Line Therapy® Techniques (TLTA).
+            </li>
+            <li>
+              Certified NLP Master Coach (Coaching Division of the ABNLP).
+            </li>
+            <li>
+              AL&CO Certified Practitioner of Behavioral Reengineering, at
+              master level.
+            </li>
             <li>Plus a second UK ANLP CPD certificate.</li>
           </ul>
         </>
@@ -647,23 +841,43 @@ const LevelProgramIncludesDataLevel2: LevelProgramIncludesType = {
     {
       title: "Your Second Training Manual",
       description: (
-        <p>A second training manual of about 500 pages and a dedicated Time Line Therapy® companion, with worksheets and questionnaires to support every session. Your manuals are issued digitally and are yours to keep. We encourage the e-copy, which is kinder to the planet; a printed set is available at an additional charge.</p>
+        <p>
+          A second training manual of about 500 pages and a dedicated Time Line
+          Therapy® companion, with worksheets and questionnaires to support
+          every session. Your manuals are issued digitally and are yours to
+          keep. We encourage the e-copy, which is kinder to the planet; a
+          printed set is available at an additional charge.
+        </p>
       ),
       theme: "yellow",
-      image: { src: LevelProgram3, alt: "500-page Master Practitioner manual and Time Line Therapy companion" },
+      image: {
+        src: LevelProgram3,
+        alt: "500-page Master Practitioner manual and Time Line Therapy companion",
+      },
     },
     {
       title: "225 Audio Files",
       description: (
-        <p>225 audio files, mapped to your manual and provided through the AL&CO online learning portal, so you can study at home and revise every technique in your own time.</p>
+        <p>
+          225 audio files, mapped to your manual and provided through the AL&CO
+          online learning portal, so you can study at home and revise every
+          technique in your own time.
+        </p>
       ),
       theme: "yellow",
-      image: { src: LevelProgram4, alt: "225 audio files on the AL&CO online learning portal" },
+      image: {
+        src: LevelProgram4,
+        alt: "225 audio files on the AL&CO online learning portal",
+      },
     },
     {
       title: "Free Revisits for Five Years",
       description: (
-        <p>Come back and sit the Master Practitioner training again, free, for five years, in a different room each time. Change that is repeated is change that holds.</p>
+        <p>
+          Come back and sit the Master Practitioner training again, free, for
+          five years, in a different room each time. Change that is repeated is
+          change that holds.
+        </p>
       ),
       theme: "dark",
       image: { src: LevelProgram5, alt: "Free revisits for five years" },
@@ -672,27 +886,95 @@ const LevelProgramIncludesDataLevel2: LevelProgramIncludesType = {
       title: "A Dedicated Coach and a Global Network",
       description: (
         <>
-          <p className="mb-2">Master Practitioner includes a dedicated coach for your personal breakthrough, and a place in a global community of 2,000+ AL&CO graduates across 20+ countries. You'll:</p>
+          <p className="mb-2">
+            Master Practitioner includes a dedicated coach for your personal
+            breakthrough, and a place in a global community of 2,000+ AL&CO
+            graduates across 20+ countries. You'll:
+          </p>
           <ul className="list-disc pl-5 space-y-1">
-            <li>Practise advanced interventions with peers to refine your skills.</li>
+            <li>
+              Practise advanced interventions with peers to refine your skills.
+            </li>
             <li>Gain access to expert mentorship and guidance.</li>
-            <li>Stay motivated through shared experiences and collaborative learning.</li>
+            <li>
+              Stay motivated through shared experiences and collaborative
+              learning.
+            </li>
           </ul>
         </>
       ),
       theme: "light",
-      image: { src: LevelProgram6, alt: "Dedicated coach and global graduate network" },
+      image: {
+        src: LevelProgram6,
+        alt: "Dedicated coach and global graduate network",
+      },
     },
   ],
   textAlign: "text-start",
   // No prices, fees or payment plans anywhere (ruling 25 Sep 2026). US number is plain text, never a link.
-    detailContent: (
+  detailContent: (
     <NextStepCards
       cards={[
-        { title: "Who This Programme Is For", body: <>Graduates of Level 1 aiming for mastery and professional advancement. You leave able to take on the diverse cases and build authority. It is equally valuable if you only want to develop yourself: the deepest way to master this for your own life is to learn it to a professional standard.</> },
-        { title: "Prerequisite", body: <>Level 1, <a href="/program/nlp-practitioner" className="underline">NLP Practitioner</a>.</> },
-        { title: "How to Join", body: <>Levels 1 and 2 are arranged by your relationship manager, who will confirm exactly what is included at your level and in your confirmed package. Call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. International: +1 (206) 614 0234.</> },
-        { title: "Why You Will Not Find a Number Here", body: <>This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.</> },
+        {
+          title: "Who This Programme Is For",
+          body: (
+            <>
+              Graduates of Level 1 aiming for mastery and professional
+              advancement. You leave able to take on the diverse cases and build
+              authority. It is equally valuable if you only want to develop
+              yourself: the deepest way to master this for your own life is to
+              learn it to a professional standard.
+            </>
+          ),
+        },
+        {
+          title: "Prerequisite",
+          body: (
+            <>
+              Level 1,{" "}
+              <a href="/program/nlp-practitioner" className="underline">
+                NLP Practitioner
+              </a>
+              .
+            </>
+          ),
+        },
+        {
+          title: "How to Join",
+          body: (
+            <>
+              Levels 1 and 2 are arranged by your relationship manager, who will
+              confirm exactly what is included at your level and in your
+              confirmed package. Call or WhatsApp{" "}
+              <a href="tel:+923360082222" className="underline">
+                +92 336 008 2222
+              </a>{" "}
+              (
+              <a href="https://wa.me/923360082222" className="underline">
+                WhatsApp
+              </a>
+              ), or write to{" "}
+              <a href="mailto:connect@arslanlarik.com" className="underline">
+                connect@arslanlarik.com
+              </a>
+              . International: +1 (206) 614 0234.
+            </>
+          ),
+        },
+        {
+          title: "Why You Will Not Find a Number Here",
+          body: (
+            <>
+              This is an investment in your future, and we treat it as one, so
+              you will not see a figure in these pages. That is deliberate, and
+              it is out of fairness to you. To print a single figure, we would
+              have to quote you for every level at once, whether or not you need
+              them all. We would rather understand what you actually want first,
+              and then build a proposition around your own journey, only what
+              serves you, and nothing that does not.
+            </>
+          ),
+        },
       ]}
     />
   ),
@@ -701,12 +983,12 @@ const LevelProgramIncludesDataLevel2: LevelProgramIncludesType = {
 const LevelContentDataLevel2: LevelContentType = {
   title: {
     line1: "The Full Curriculum",
-    line2: ""
+    line2: "",
   },
 
   button: {
     text: "See the Detailed Course Outline",
-    href: "/course-outline/nlp-master-practitioner"
+    href: "/course-outline/nlp-master-practitioner",
   },
 
   // All 25 brochure bullets, verbatim, each once; the grouping is ours.
@@ -742,7 +1024,10 @@ const LevelContentDataLevel2: LevelContentType = {
         "Forensic and regression work with Time Line Therapy®",
         "Secondary gains, and the Pain Paradigm for pain management",
       ],
-      image: { src: LevetContent2.src, alt: "Advanced Time Line Therapy Techniques modules" },
+      image: {
+        src: LevetContent2.src,
+        alt: "Advanced Time Line Therapy Techniques modules",
+      },
     },
     {
       title: "NLP Coaching and the Coaching Business",
@@ -752,7 +1037,10 @@ const LevelContentDataLevel2: LevelContentType = {
         "Coaching Values Inventory and Logical Levels of Coaching",
         "How to get paid coaching clients and build a coaching business",
       ],
-      image: { src: LevetContent3.src, alt: "NLP master coaching and business modules" },
+      image: {
+        src: LevetContent3.src,
+        alt: "NLP master coaching and business modules",
+      },
     },
   ],
 };
@@ -760,9 +1048,10 @@ const LevelContentDataLevel2: LevelContentType = {
 const LevelGraduatesExperienceDataLevel2: LevelGraduatesExperienceType = {
   title: {
     line1: "In Their Own Words",
-    line2: "NLP Master Practitioner Graduates"
+    line2: "NLP Master Practitioner Graduates",
   },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599132/Level2_Review_psgcmr.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599132/Level2_Review_psgcmr.mp4",
   thumbnail: ThumbnailReview2,
 };
 
@@ -776,7 +1065,9 @@ const WhereItLeadsDataLevel2: ContentSectionType = {
   description: (
     <div className="mx-auto max-w-6xl text-center">
       <p className="mx-auto my-4 max-w-3xl">
-        Master Practitioner makes you a master of the work. The next questions are whether you want the depth that hypnosis brings, and whether you want to teach, Levels 3 and 4.
+        Master Practitioner makes you a master of the work. The next questions
+        are whether you want the depth that hypnosis brings, and whether you
+        want to teach, Levels 3 and 4.
       </p>
 
       <div className="mt-10 text-left">
@@ -811,7 +1102,11 @@ const WhereItLeadsDataLevel2: ContentSectionType = {
 
       <div className="mt-6 flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
         <p className="max-w-3xl text-base text-primary">
-          <strong>Ready to talk?</strong> Book a conversation, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
+          <strong>Ready to talk?</strong> Book a conversation, or{" "}
+          <Link href="/programs" className="underline">
+            see the whole ladder
+          </Link>{" "}
+          first.
         </p>
         <Link
           href="/contact#form"
@@ -826,40 +1121,54 @@ const WhereItLeadsDataLevel2: ContentSectionType = {
   ),
 };
 
-      
- 
-
 const FaqDataLevel2: LevelFaq[] = [
   {
-    question: "I already have my toolkit from Level 1. Why another thirteen days?",
-    answer: "Level 1 gives you the techniques of change; Level 2 gives you the architecture beneath them, how a person's values, patterns and deepest beliefs are organised, and how to model the strategies of people who excel. It is also where the livelihood is built: how to position your work, design your packages, and run a practice that pays. Practitioner changes you; Master Practitioner turns that into a profession.",
+    question:
+      "I already have my toolkit from Level 1. Why another thirteen days?",
+    answer:
+      "Level 1 gives you the techniques of change; Level 2 gives you the architecture beneath them, how a person's values, patterns and deepest beliefs are organised, and how to model the strategies of people who excel. It is also where the livelihood is built: how to position your work, design your packages, and run a practice that pays. Practitioner changes you; Master Practitioner turns that into a profession.",
   },
   {
     question: "Will this really get me clients, or just give me a certificate?",
-    answer: "A certificate does not generate a client; skill and clear positioning do, and both are built into the climb. You practise on many people before you ever meet a paying one, at Master Practitioner we teach the business itself, how to find, enrol and keep premium clients, and you join a global community that refers and mentors for years. We will be straight with you: it still takes your effort. But this is not a certificate for the wall. It is the thing you can earn from for the next twenty years.",
+    answer:
+      "A certificate does not generate a client; skill and clear positioning do, and both are built into the climb. You practise on many people before you ever meet a paying one, at Master Practitioner we teach the business itself, how to find, enrol and keep premium clients, and you join a global community that refers and mentors for years. We will be straight with you: it still takes your effort. But this is not a certificate for the wall. It is the thing you can earn from for the next twenty years.",
   },
   {
-    question: "I only want to develop myself. I don't want to be a professional coach.",
-    answer: "That is welcome, and you are far from alone. The deepest way to master this for your own life is to learn it to a professional standard. When you can read a room, calibrate what is not being said, and shift a pattern with precision, your command over your own decisions, relationships and leadership changes by an order of magnitude. Many who join us never intend to practise professionally at all; they come because it transforms how they parent, how they lead, and how they meet their own hard days.",
+    question:
+      "I only want to develop myself. I don't want to be a professional coach.",
+    answer:
+      "That is welcome, and you are far from alone. The deepest way to master this for your own life is to learn it to a professional standard. When you can read a room, calibrate what is not being said, and shift a pattern with precision, your command over your own decisions, relationships and leadership changes by an order of magnitude. Many who join us never intend to practise professionally at all; they come because it transforms how they parent, how they lead, and how they meet their own hard days.",
   },
   {
     question: "What certifications will I actually hold?",
-    answer: "At Practitioner and Master Practitioner, a true quad of three international board certifications plus AL&CO's own credential: NLP from the ABNLP, NLP Coach from its Coaching Division, Time Line Therapy® Techniques from the TLTA, and AL&CO's own Behavioral Reengineering credential, plus a UK ANLP CPD accreditation, which is a CPD and not a board. At Level 3 you add ABH and NGH hypnosis credentials, with the exact hypnosis title matched to your qualifications and country.",
+    answer:
+      "At Practitioner and Master Practitioner, a true quad of three international board certifications plus AL&CO's own credential: NLP from the ABNLP, NLP Coach from its Coaching Division, Time Line Therapy® Techniques from the TLTA, and AL&CO's own Behavioral Reengineering credential, plus a UK ANLP CPD accreditation, which is a CPD and not a board. At Level 3 you add ABH and NGH hypnosis credentials, with the exact hypnosis title matched to your qualifications and country.",
   },
   {
     question: "I work full time. Can I keep up?",
-    answer: "The trainings run live in the evenings on Zoom. Your manual is yours to keep, and your audio files are on the AL&CO online learning portal, so you can revisit both at your own pace. Because you can re-attend free for five years, you are never one missed evening away from falling behind. It is built to fit a working life.",
+    answer:
+      "The trainings run live in the evenings on Zoom. Your manual is yours to keep, and your audio files are on the AL&CO online learning portal, so you can revisit both at your own pace. Because you can re-attend free for five years, you are never one missed evening away from falling behind. It is built to fit a working life.",
   },
 ];
 
 const NavDataLevel2: LevelNavType = {
-  prev: { href: "/program/nlp-practitioner", label: "Level 1: NLP Practitioner" },
-  next: { href: "/program/advanced-hypnotherapy-interventionist", label: "Level 3: Advanced Hypnotherapy and Interventionist" },
-  more: [{ href: "/program/nlp-trainers-training-program", label: "Level 4: NLP Train the Trainer" }],
+  prev: {
+    href: "/program/nlp-practitioner",
+    label: "Level 1: NLP Practitioner",
+  },
+  next: {
+    href: "/program/advanced-hypnotherapy-interventionist",
+    label: "Level 3: Advanced Hypnotherapy and Interventionist",
+  },
+  more: [
+    {
+      href: "/program/nlp-trainers-training-program",
+      label: "Level 4: NLP Train the Trainer",
+    },
+  ],
 };
 
 // Level 2 End
-
 
 // Level 3 Start
 
@@ -867,27 +1176,28 @@ const bannerDataLevel3: BannerType = {
   level: "level 3",
   title: {
     line1: "Advanced Hypnotherapy and Interventionist",
-    line2: "Hypnotherapy Certification"
+    line2: "Hypnotherapy Certification",
   },
   description: "ABH and NGH Hypnosis Certification",
   image: programLevel2.src,
   bgVideo: "/videos/program-level-2.mp4",
   height: "min-h-[520px] lg:min-h-[580px]",
   wide: true,
-  className: "bg-center bg-no-repeat bg-primary"
+  className: "bg-center bg-no-repeat bg-primary",
 };
 
 // DECISIONS v2 F1: Level 3 is 13 days, worded exactly as below. Level 3 has no audio files (P2).
 const LevelIntroWithVideoDataLevel3: LevelIntroWithVideoType = {
   title: {
     line1: "Your Chance to Become ",
-    line2: "a World-Class Interventionist."
+    line2: "a World-Class Interventionist.",
   },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599141/Level3_Intro_w093ky.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599141/Level3_Intro_w093ky.mp4",
   thumbnail: ThumbnailIntro3,
   description: `<p><strong>Quick facts:</strong> 13 days: 12 days of live teaching, plus one mandatory day in between for assignments set by AL&CO, held with breaks rather than back to back, live on Zoom, requires Level 2, entry by interview, never more than 20 participants, with a full professional library included.</p>
    <p><strong>What it is.</strong> The full hypnosis and hypnotherapy path, taught by a Master Trainer of Hypnosis. Hypnotherapy creates rapid change by working at the deepest level of the unconscious mind, reaching the root of a problem quickly. Here we build hypnotists, not scriptists, and the work changes you as much as it equips you, through learning self-hypnosis.</p>
-   <p><strong>Firm boundaries.</strong> This is work for change, performance and habits, never the treatment of illness, and your exact hypnosis title is matched to the rules of your own country.</p>`
+   <p><strong>Firm boundaries.</strong> This is work for change, performance and habits, never the treatment of illness, and your exact hypnosis title is matched to the rules of your own country.</p>`,
 };
 
 // Images verified: certificate-1/2-level-3 = ABH; certificate-3-level-3 = AL&CO Testament; certificate-4/5-level-3 = NGH.
@@ -895,43 +1205,80 @@ const LevelIntroWithVideoDataLevel3: LevelIntroWithVideoType = {
 const LevelCertificationDataLevel3: LevelCertificationType = {
   title: {
     line1: "Certifications",
-    line2: "ABH, NGH and the AL&CO Quintuple Certification"
+    line2: "ABH, NGH and the AL&CO Quintuple Certification",
   },
   points: [
     {
       // LOGO: ABH - Khansa to supply approved artwork (accredited-4.webp is a placeholder until confirmed)
-      title: "Certified Practitioner of Hypnosis, American Board of Hypnotherapy (ABH)",
-      description: "From AL&CO and the American Board of Hypnotherapy. Awarded by default to every Level 3 graduate.",
-      imageBrand: { src: AccreditedBrand4, alt: "American Board of Hypnotherapy (ABH) seal" },
-      imageCerficate: { src: Certificate1Level3, alt: "Sample ABH Certified Practitioner of Hypnosis certificate" },
+      title:
+        "Certified Practitioner of Hypnosis, American Board of Hypnotherapy (ABH)",
+      description:
+        "From AL&CO and the American Board of Hypnotherapy. Awarded by default to every Level 3 graduate.",
+      imageBrand: {
+        src: AccreditedBrand4,
+        alt: "American Board of Hypnotherapy (ABH) seal",
+      },
+      imageCerficate: {
+        src: Certificate1Level3,
+        alt: "Sample ABH Certified Practitioner of Hypnosis certificate",
+      },
     },
     {
       // LOGO: ABH - Khansa to supply approved artwork (accredited-4.webp is a placeholder until confirmed)
-      title: "Certified Master Practitioner of Hypnosis, American Board of Hypnotherapy (ABH)",
-      description: "From AL&CO and the American Board of Hypnotherapy. Awarded by default alongside the Practitioner of Hypnosis.",
-      imageBrand: { src: AccreditedBrand4, alt: "American Board of Hypnotherapy (ABH) seal" },
-      imageCerficate: { src: Certificate2Level3, alt: "Sample ABH Certified Master Practitioner of Hypnosis certificate" },
+      title:
+        "Certified Master Practitioner of Hypnosis, American Board of Hypnotherapy (ABH)",
+      description:
+        "From AL&CO and the American Board of Hypnotherapy. Awarded by default alongside the Practitioner of Hypnosis.",
+      imageBrand: {
+        src: AccreditedBrand4,
+        alt: "American Board of Hypnotherapy (ABH) seal",
+      },
+      imageCerficate: {
+        src: Certificate2Level3,
+        alt: "Sample ABH Certified Master Practitioner of Hypnosis certificate",
+      },
     },
     {
       // LOGO: NGH - Khansa to supply approved artwork (accredited-5.webp is a placeholder until confirmed)
       title: "NGH Hypnosis Certification, National Guild of Hypnotists (USA)",
-      description: "Your NGH hypnosis certification, bearing the gold National Guild of Hypnotists seal. Whether you also hold the Hypnotherapist title, or the Hypnotist or Consulting Hypnotist designation, depends on your own qualifications and the rules of your country, which our trainers assess with each student, so the credential is always accurate to where you practise.",
-      imageBrand: { src: AccreditedBrand5, alt: "National Guild of Hypnotists (NGH) seal" },
-      imageCerficate: { src: Certificate4Level3, alt: "Sample NGH hypnosis certification" },
+      description:
+        "Your NGH hypnosis certification, bearing the gold National Guild of Hypnotists seal. Whether you also hold the Hypnotherapist title, or the Hypnotist or Consulting Hypnotist designation, depends on your own qualifications and the rules of your country, which our trainers assess with each student, so the credential is always accurate to where you practise.",
+      imageBrand: {
+        src: AccreditedBrand5,
+        alt: "National Guild of Hypnotists (NGH) seal",
+      },
+      imageCerficate: {
+        src: Certificate4Level3,
+        alt: "Sample NGH hypnosis certification",
+      },
     },
     {
       // LOGO: NGH - Khansa to supply approved artwork (accredited-5.webp is a placeholder until confirmed)
       title: "NGH Member in Good Standing",
-      description: "One year of National Guild of Hypnotists membership, with your NGH Member in Good Standing certificate and embossed membership card.",
-      imageBrand: { src: AccreditedBrand5, alt: "National Guild of Hypnotists (NGH) seal" },
-      imageCerficate: { src: Certificate5Level3, alt: "Sample NGH Member in Good Standing certificate" },
+      description:
+        "One year of National Guild of Hypnotists membership, with your NGH Member in Good Standing certificate and embossed membership card.",
+      imageBrand: {
+        src: AccreditedBrand5,
+        alt: "National Guild of Hypnotists (NGH) seal",
+      },
+      imageCerficate: {
+        src: Certificate5Level3,
+        alt: "Sample NGH Member in Good Standing certificate",
+      },
     },
     {
       // LOGO: AL&CO - Khansa to supply approved artwork (accredited-6.webp is a placeholder until confirmed)
       title: "AL&CO Testament to the Graduate: Quintuple Certification",
-      description: "Recognising the full multi-disciplinary mastery you now hold across NLP, coaching, Time Line Therapy® Techniques and hypnosis. Because Levels 1 and 2 are prerequisites, you arrive already certified in those, so you finish holding a set of credentials few practitioners anywhere can match.",
-      imageBrand: { src: AccreditedBrand6, alt: "Arslan Larik & Company (AL&CO) seal" },
-      imageCerficate: { src: Certificate3Level3, alt: "Sample AL&CO Testament to the Graduate, Quintuple Certification" },
+      description:
+        "Recognising the full multi-disciplinary mastery you now hold across NLP, coaching, Time Line Therapy® Techniques and hypnosis. Because Levels 1 and 2 are prerequisites, you arrive already certified in those, so you finish holding a set of credentials few practitioners anywhere can match.",
+      imageBrand: {
+        src: AccreditedBrand6,
+        alt: "Arslan Larik & Company (AL&CO) seal",
+      },
+      imageCerficate: {
+        src: Certificate3Level3,
+        alt: "Sample AL&CO Testament to the Graduate, Quintuple Certification",
+      },
     },
   ],
 };
@@ -944,7 +1291,7 @@ const LevelBenefitsTableDataLevel3: LevelBenefitsTableType = {
 
   button: {
     text: "Learn More",
-    href: "/program-detail/benefits-of-advanced-hypnotherapy-interventionist-training"
+    href: "/program-detail/benefits-of-advanced-hypnotherapy-interventionist-training",
   },
 
   headers: [
@@ -998,29 +1345,45 @@ const ContentSectionDataLevel3: ContentSectionType = {
   description: (
     <div className="max-w-7xl mx-auto">
       <p className="my-4">
-        Level 3 is taught by <strong>Arslan Larik, Founder and Master Trainer of AL&CO</strong>, Pakistan's first Certified Master Trainer of NLP (ABNLP) and of Hypnosis (ABH). He is an ANLP Accredited Master Trainer (UK), a Master Trainer under Robert Dilts at NLP University, and the ANLP International Ambassador for Pakistan.
+        Level 3 is taught by{" "}
+        <strong>Arslan Larik, Founder and Master Trainer of AL&CO</strong>,
+        Pakistan's first Certified Master Trainer of NLP (ABNLP) and of Hypnosis
+        (ABH). He is an ANLP Accredited Master Trainer (UK), a Master Trainer
+        under Robert Dilts at NLP University, and the ANLP International
+        Ambassador for Pakistan.
       </p>
       <p className="mt-4">
-        He has trained and coached since 2010, with a lineage through The Tad James Company, and is the architect of the AL&CO curriculum. Level 3 and above are arranged directly with <strong>Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK)</strong>, and <strong>Arslan Larik</strong>.
+        He has trained and coached since 2010, with a lineage through The Tad
+        James Company, and is the architect of the AL&CO curriculum. Level 3 and
+        above are arranged directly with{" "}
+        <strong>
+          Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and
+          ANLP Accredited Master Trainer (UK)
+        </strong>
+        , and <strong>Arslan Larik</strong>.
       </p>
     </div>
   ),
   fullBg: "bg-slate-100 ",
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
-}
+};
 
 const LevelProgramIncludesDataLevel3: LevelProgramIncludesType = {
   title: {
     line1: "This Programme Includes",
-    line2: ""
+    line2: "",
   },
   description: (
     <>
       <p className="my-4">
-        Advanced Hypnotherapy and Interventionist is Level 3 of AL&CO's six-level ladder: a highly specialised programme with a deliberately limited intake, certified through the American Board of Hypnotherapy (ABH) and the National Guild of Hypnotists (NGH, USA).
+        Advanced Hypnotherapy and Interventionist is Level 3 of AL&CO's
+        six-level ladder: a highly specialised programme with a deliberately
+        limited intake, certified through the American Board of Hypnotherapy
+        (ABH) and the National Guild of Hypnotists (NGH, USA).
       </p>
       <p className="mb-4">
-        Level 3 arrives as a genuine professional library, not a folder of notes, so you can open and fill a practice, not only pass a course.
+        Level 3 arrives as a genuine professional library, not a folder of
+        notes, so you can open and fill a practice, not only pass a course.
       </p>
     </>
   ),
@@ -1031,7 +1394,12 @@ const LevelProgramIncludesDataLevel3: LevelProgramIncludesType = {
       description: (
         <>
           <p className="mb-2">
-            13 days: 12 days of live teaching, plus one mandatory day in between for assignments set by AL&CO. The days are held with breaks rather than back to back, live on Zoom. The intake is never more than twenty participants, so the days are scheduled by mutual arrangement once the cohort has been interviewed and confirmed, and every participant completes all thirteen.
+            13 days: 12 days of live teaching, plus one mandatory day in between
+            for assignments set by AL&CO. The days are held with breaks rather
+            than back to back, live on Zoom. The intake is never more than
+            twenty participants, so the days are scheduled by mutual arrangement
+            once the cohort has been interviewed and confirmed, and every
+            participant completes all thirteen.
           </p>
           <p>
             <strong className="me-1">Led by Arslan Larik,</strong>
@@ -1046,42 +1414,82 @@ const LevelProgramIncludesDataLevel3: LevelProgramIncludesType = {
       title: "Your Manuals and Reference Library",
       description: (
         <ul className="list-disc pl-5 space-y-1">
-          <li>The ABH Practitioner of Hypnosis manual and the ABH Master Practitioner of Hypnosis manual.</li>
-          <li>The National Guild of Hypnotists Certification Books 1 and 2, from suggestibility testing and classical inductions through to advanced clinical protocols, age regression, pain control and emergency hypnosis.</li>
-          <li>A published reference library: Hypnotic Recollections, HYPNOmotivation, 7th Path Self-Hypnosis and The Secret Language of Feelings.</li>
+          <li>
+            The ABH Practitioner of Hypnosis manual and the ABH Master
+            Practitioner of Hypnosis manual.
+          </li>
+          <li>
+            The National Guild of Hypnotists Certification Books 1 and 2, from
+            suggestibility testing and classical inductions through to advanced
+            clinical protocols, age regression, pain control and emergency
+            hypnosis.
+          </li>
+          <li>
+            A published reference library: Hypnotic Recollections,
+            HYPNOmotivation, 7th Path Self-Hypnosis and The Secret Language of
+            Feelings.
+          </li>
         </ul>
       ),
       theme: "light",
-      image: { src: LevelProgram2, alt: "ABH and NGH manuals and reference library" },
+      image: {
+        src: LevelProgram2,
+        alt: "ABH and NGH manuals and reference library",
+      },
     },
     {
       title: "A Practice-Building and Marketing Pack",
       description: (
-        <p>The Master Marketing Manual and From Scratch and On A Shoestring, plus a suite of ready-to-use, customisable advertising copy, session brochures and direct-mail templates, so you can open and fill a practice, not only pass a course.</p>
+        <p>
+          The Master Marketing Manual and From Scratch and On A Shoestring, plus
+          a suite of ready-to-use, customisable advertising copy, session
+          brochures and direct-mail templates, so you can open and fill a
+          practice, not only pass a course.
+        </p>
       ),
       theme: "yellow",
-      image: { src: LevelProgram3, alt: "Practice-building and marketing pack" },
+      image: {
+        src: LevelProgram3,
+        alt: "Practice-building and marketing pack",
+      },
     },
     {
       title: "A Professional Tool Kit",
       description: (
-        <p>Your own Chevreul's Pendulum for ideomotor and suggestibility work, and the National Guild's standardised clinical script packet.</p>
+        <p>
+          Your own Chevreul's Pendulum for ideomotor and suggestibility work,
+          and the National Guild's standardised clinical script packet.
+        </p>
       ),
       theme: "yellow",
-      image: { src: LevelProgram4, alt: "Chevreul's Pendulum and clinical script packet" },
+      image: {
+        src: LevelProgram4,
+        alt: "Chevreul's Pendulum and clinical script packet",
+      },
     },
     {
       title: "One Year of NGH Membership",
       description: (
-        <p>One year of National Guild of Hypnotists membership: your embossed NGH membership card, the members' portal, subscriptions to The Journal of Hypnotism and The Hypno-Gram, and continuing-education eligibility.</p>
+        <p>
+          One year of National Guild of Hypnotists membership: your embossed NGH
+          membership card, the members' portal, subscriptions to The Journal of
+          Hypnotism and The Hypno-Gram, and continuing-education eligibility.
+        </p>
       ),
       theme: "light",
-      image: { src: LevelProgram5, alt: "One year of National Guild of Hypnotists membership" },
+      image: {
+        src: LevelProgram5,
+        alt: "One year of National Guild of Hypnotists membership",
+      },
     },
     {
       title: "Free Revisits for Five Years",
       description: (
-        <p>Like Levels 1 and 2, Level 3 comes with a free five-year revisit: come back to a different room each time, and keep refining your skill. Change that is repeated is change that holds.</p>
+        <p>
+          Like Levels 1 and 2, Level 3 comes with a free five-year revisit: come
+          back to a different room each time, and keep refining your skill.
+          Change that is repeated is change that holds.
+        </p>
       ),
       theme: "dark",
       image: { src: LevelProgram6, alt: "Free revisits for five years" },
@@ -1089,13 +1497,73 @@ const LevelProgramIncludesDataLevel3: LevelProgramIncludesType = {
   ],
   textAlign: "text-start",
   // No prices, fees or payment plans anywhere (ruling 25 Sep 2026). US number is plain text, never a link.
-   detailContent: (
+  detailContent: (
     <NextStepCards
       cards={[
-        { title: "Who This Programme Is For", body: <>Those who wish to pursue coaching as a full-time career. You leave able to work at the deepest unconscious level, with advanced modalities and tools for personal change. You are never pushed into clinical territory: we teach firm boundaries, and this is work for change, performance and habits, never the treatment of illness.</> },
-        { title: "Prerequisite", body: <>Level 2, <a href="/program/nlp-master-practitioner" className="underline">NLP Master Practitioner</a>, and an interview. The interview and the small cohort are matters of safety and quality, not scarcity: deep hypnotic work needs a trainer's eye on every participant.</> },
-        { title: "How to Join", body: <>Level 3 is arranged directly with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and Arslan Larik. To request an interview, call or WhatsApp <a href="tel:+923360082222" className="underline">+92 336 008 2222</a> (<a href="https://wa.me/923360082222" className="underline">WhatsApp</a>), or write to <a href="mailto:connect@arslanlarik.com" className="underline">connect@arslanlarik.com</a>. International: +1 (206) 614 0234.</> },
-        { title: "Why You Will Not Find a Number Here", body: <>This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. To print a single figure, we would have to quote you for every level at once, whether or not you need them all. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not.</> },
+        {
+          title: "Who This Programme Is For",
+          body: (
+            <>
+              Those who wish to pursue coaching as a full-time career. You leave
+              able to work at the deepest unconscious level, with advanced
+              modalities and tools for personal change. You are never pushed
+              into clinical territory: we teach firm boundaries, and this is
+              work for change, performance and habits, never the treatment of
+              illness.
+            </>
+          ),
+        },
+        {
+          title: "Prerequisite",
+          body: (
+            <>
+              Level 2,{" "}
+              <a href="/program/nlp-master-practitioner" className="underline">
+                NLP Master Practitioner
+              </a>
+              , and an interview. The interview and the small cohort are matters
+              of safety and quality, not scarcity: deep hypnotic work needs a
+              trainer's eye on every participant.
+            </>
+          ),
+        },
+        {
+          title: "How to Join",
+          body: (
+            <>
+              Level 3 is arranged directly with Bismillah Pervez, CEO, ICF
+              Master Certified Coach (MCC), ACTC, and ANLP Accredited Master
+              Trainer (UK), and Arslan Larik. To request an interview, call or
+              WhatsApp{" "}
+              <a href="tel:+923360082222" className="underline">
+                +92 336 008 2222
+              </a>{" "}
+              (
+              <a href="https://wa.me/923360082222" className="underline">
+                WhatsApp
+              </a>
+              ), or write to{" "}
+              <a href="mailto:connect@arslanlarik.com" className="underline">
+                connect@arslanlarik.com
+              </a>
+              . International: +1 (206) 614 0234.
+            </>
+          ),
+        },
+        {
+          title: "Why You Will Not Find a Number Here",
+          body: (
+            <>
+              This is an investment in your future, and we treat it as one, so
+              you will not see a figure in these pages. That is deliberate, and
+              it is out of fairness to you. To print a single figure, we would
+              have to quote you for every level at once, whether or not you need
+              them all. We would rather understand what you actually want first,
+              and then build a proposition around your own journey, only what
+              serves you, and nothing that does not.
+            </>
+          ),
+        },
       ]}
     />
   ),
@@ -1104,12 +1572,12 @@ const LevelProgramIncludesDataLevel3: LevelProgramIncludesType = {
 const LevelContentDataLevel3: LevelContentType = {
   title: {
     line1: "The Full Curriculum",
-    line2: ""
+    line2: "",
   },
 
   button: {
     text: "See the Detailed Course Outline",
-    href: "/course-outline/advanced-hypnotherapy-interventionist"
+    href: "/course-outline/advanced-hypnotherapy-interventionist",
   },
 
   // All 23 brochure bullets, verbatim, each once; grouping and card titles are ours.
@@ -1153,7 +1621,10 @@ const LevelContentDataLevel3: LevelContentType = {
         "Ernest Rossi's technique, and free-style hypnosis",
         "Achieving breakthrough with hypnosis, integrated with every intervention",
       ],
-      image: { src: LevetContent3.src, alt: "Applied hypnosis and self-hypnosis modules" },
+      image: {
+        src: LevetContent3.src,
+        alt: "Applied hypnosis and self-hypnosis modules",
+      },
     },
   ],
 };
@@ -1161,9 +1632,10 @@ const LevelContentDataLevel3: LevelContentType = {
 const LevelGraduatesExperienceDataLevel3: LevelGraduatesExperienceType = {
   title: {
     line1: "In Their Own Words",
-    line2: "Advanced Hypnotherapy Graduates"
+    line2: "Advanced Hypnotherapy Graduates",
   },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599132/Level3_Review_jzdltq.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774599132/Level3_Review_jzdltq.mp4",
   thumbnail: ThumbnailReview3,
 };
 
@@ -1177,7 +1649,9 @@ const WhereItLeadsDataLevel3: ContentSectionType = {
   description: (
     <div className="mx-auto max-w-6xl text-center">
       <p className="mx-auto my-4 max-w-3xl">
-        With the full spectrum in hand, the ladder opens two ways: teach NLP through Train the Trainer, or teach hypnosis through the Hypnosis Trainer's Training.
+        With the full spectrum in hand, the ladder opens two ways: teach NLP
+        through Train the Trainer, or teach hypnosis through the Hypnosis
+        Trainer's Training.
       </p>
 
       <div className="mt-10 text-left">
@@ -1210,10 +1684,16 @@ const WhereItLeadsDataLevel3: ContentSectionType = {
         >
           <div className="flex flex-col items-center gap-4 rounded-2xl border-2 border-dashed border-primary/25 bg-white p-6 text-center">
             <p className="max-w-3xl text-base text-primary">
-              <strong>Ready for the next step?</strong> Request an interview, or <Link href="/programs" className="underline">see the whole ladder</Link> first.
+              <strong>Ready for the next step?</strong> Request an interview, or{" "}
+              <Link href="/programs" className="underline">
+                see the whole ladder
+              </Link>{" "}
+              first.
             </p>
             <a
-              href={whatsappHref(waLine("Level 3, Advanced Hypnotherapy and Interventionist"))}
+              href={whatsappHref(
+                waLine("Level 3, Advanced Hypnotherapy and Interventionist"),
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-bold text-primary-darkest transition hover:bg-secondary-dark hover:shadow-lg"
@@ -1231,31 +1711,46 @@ const WhereItLeadsDataLevel3: ContentSectionType = {
 
 const FaqDataLevel3: LevelFaq[] = [
   {
-    question: "Why the interview and the small cohort? And without a psychology degree, am I taking on too much?",
-    answer: "The interview and a cohort of never more than twenty are matters of safety and quality, not scarcity; deep hypnotic work needs a trainer's eye on every participant. And you are never pushed into clinical territory: we teach firm boundaries, this is work for change, performance and habits, never the treatment of illness, and your exact hypnosis title is matched to the rules of your own country.",
+    question:
+      "Why the interview and the small cohort? And without a psychology degree, am I taking on too much?",
+    answer:
+      "The interview and a cohort of never more than twenty are matters of safety and quality, not scarcity; deep hypnotic work needs a trainer's eye on every participant. And you are never pushed into clinical territory: we teach firm boundaries, this is work for change, performance and habits, never the treatment of illness, and your exact hypnosis title is matched to the rules of your own country.",
   },
   {
     question: "Which hypnosis title will I hold?",
-    answer: "By default the ABH awards Practitioner of Hypnosis and Master Practitioner of Hypnosis. Whether a graduate also holds the Hypnotherapist title, or the Hypnotist or Consulting Hypnotist designation, depends on their own qualifications and the rules of their country, which our trainers assess with each student, so the credential is always accurate to where you practise.",
+    answer:
+      "By default the ABH awards Practitioner of Hypnosis and Master Practitioner of Hypnosis. Whether a graduate also holds the Hypnotherapist title, or the Hypnotist or Consulting Hypnotist designation, depends on their own qualifications and the rules of their country, which our trainers assess with each student, so the credential is always accurate to where you practise.",
   },
   {
     question: "How are the thirteen days scheduled?",
-    answer: "Level 3 runs over 13 days: 12 days of live teaching, plus one mandatory day in between for assignments set by AL&CO. This is a highly specialised programme with a deliberately limited intake, never more than twenty participants, so the days are scheduled by mutual arrangement once the cohort has been interviewed and confirmed. The days are spread out with breaks rather than run back to back, and every participant completes all thirteen.",
+    answer:
+      "Level 3 runs over 13 days: 12 days of live teaching, plus one mandatory day in between for assignments set by AL&CO. This is a highly specialised programme with a deliberately limited intake, never more than twenty participants, so the days are scheduled by mutual arrangement once the cohort has been interviewed and confirmed. The days are spread out with breaks rather than run back to back, and every participant completes all thirteen.",
   },
   {
     question: "Is this mind control?",
-    answer: "No, and this matters, so let us be clear. All hypnosis is, in the end, self-hypnosis. Nobody can be made to act against their own values or beliefs, and we would never try. Far from surrendering your will, this work returns your awareness to you: it shows you the quiet suggestions you already meet every day, from media, from advertising, from the people around you, and hands you back the choice. It rests entirely on your conscious consent, and on the codes of ethics of the boards behind it.",
+    answer:
+      "No, and this matters, so let us be clear. All hypnosis is, in the end, self-hypnosis. Nobody can be made to act against their own values or beliefs, and we would never try. Far from surrendering your will, this work returns your awareness to you: it shows you the quiet suggestions you already meet every day, from media, from advertising, from the people around you, and hands you back the choice. It rests entirely on your conscious consent, and on the codes of ethics of the boards behind it.",
   },
 ];
 
 const NavDataLevel3: LevelNavType = {
-  prev: { href: "/program/nlp-master-practitioner", label: "Level 2: NLP Master Practitioner" },
-  next: { href: "/program/nlp-trainers-training-program", label: "Level 4: NLP Train the Trainer" },
-  more: [{ href: "/program/hypnosis-trainers-training-program", label: "Level 5: Hypnosis Train the Trainer" }],
+  prev: {
+    href: "/program/nlp-master-practitioner",
+    label: "Level 2: NLP Master Practitioner",
+  },
+  next: {
+    href: "/program/nlp-trainers-training-program",
+    label: "Level 4: NLP Train the Trainer",
+  },
+  more: [
+    {
+      href: "/program/hypnosis-trainers-training-program",
+      label: "Level 5: Hypnosis Train the Trainer",
+    },
+  ],
 };
 
 // Level 3 End
-
 
 // Level 4 Start
 
@@ -1272,14 +1767,16 @@ const bannerDataLevel4: BannerType = {
   className: "bg-center bg-no-repeat bg-primary",
   children: (
     <p className="custom-text1 text-white mt-4 max-w-2xl">
-      Quick facts: 18 days (14 training and 4 evaluation), 120 hours, ABNLP accredited, fully live on Zoom, requires Level 2.
+      Quick facts: 18 days (14 training and 4 evaluation), 120 hours, ABNLP
+      accredited, fully live on Zoom, requires Level 2.
     </p>
   ),
 };
 
 const LevelIntroWithVideoDataLevel4: LevelIntroWithVideoType = {
   title: { line1: "What it is: ", line2: "from doing the work to teaching it" },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603562/Level4_Intro_otvc3u.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603562/Level4_Intro_otvc3u.mp4",
   thumbnail: ThumbnailIntro4,
   description: `<p><strong>What it is.</strong> The rung where you step from doing the work to teaching it. You are not certified until you have proven it, live, in front of evaluators.</p>
 <p><strong>Entry is by interview.</strong> Every applicant meets Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), in person before a place is offered. The Trainer’s Training is selective by design, and the interview is where fit is decided.</p>
@@ -1287,14 +1784,24 @@ const LevelIntroWithVideoDataLevel4: LevelIntroWithVideoType = {
 };
 
 const LevelCertificationDataLevel4: LevelCertificationType = {
-  title: { line1: "Your certification", line2: "Certified Trainer of NLP (ABNLP)" },
+  title: {
+    line1: "Your certification",
+    line2: "Certified Trainer of NLP (ABNLP)",
+  },
   points: [
     {
       title: `Certified Trainer of NLP via the American Board of Neuro-Linguistic Programming (ABNLP)`,
-      description: "You may teach, evaluate and graduate Practitioners and Master Practitioners, register your business as an Approved NLP Training Institute, and issue ABNLP-sealed certificates.",
+      description:
+        "You may teach, evaluate and graduate Practitioners and Master Practitioners, register your business as an Approved NLP Training Institute, and issue ABNLP-sealed certificates.",
       // LOGO: ABNLP - Khansa to supply approved artwork (accredited-1.webp is a placeholder until confirmed; DECISIONS v2 P7)
-      imageBrand: { src: AccreditedBrand1, alt: "ABNLP, American Board of Neuro-Linguistic Programming seal" },
-      imageCerficate: { src: Certificate1Level4, alt: "Certified Trainer of NLP certificate issued through the ABNLP" },
+      imageBrand: {
+        src: AccreditedBrand1,
+        alt: "ABNLP, American Board of Neuro-Linguistic Programming seal",
+      },
+      imageCerficate: {
+        src: Certificate1Level4,
+        alt: "Certified Trainer of NLP certificate issued through the ABNLP",
+      },
     },
   ],
 };
@@ -1304,10 +1811,48 @@ const ContentSectionDataLevel4: ContentSectionType = {
   TagType: "h2",
   description: (
     <NextStepCards
-      intro={<>Certification is the first half of the journey. To train and certify under the ABNLP, you must then enrol as a member of the board, both as an organisation, registering your Approved NLP Training Institute in your organisation’s name, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. It is a straightforward process, and guiding you through the application is part of our job. This is what makes “Approved NLP Training Institute” real and recognised.</>}
+      intro={
+        <>
+          Certification is the first half of the journey. To train and certify
+          under the ABNLP, you must then enrol as a member of the board, both as
+          an organisation, registering your Approved NLP Training Institute in
+          your organisation’s name, and as an individual first-time trainer
+          member. Membership is compulsory: you cannot train until it is in
+          place, and it begins only once we have certified you. It is a
+          straightforward process, and guiding you through the application is
+          part of our job. This is what makes “Approved NLP Training Institute”
+          real and recognised.
+        </>
+      }
       cards={[
-        { title: "A note on revisiting", body: <>The free five-year revisit that comes with Levels 1 to 3 does not apply to the Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant. For a trainer who wants to keep returning to the room and deepening the craft, that is one more reason to take the final step to Master Trainer.</> },
-        { title: "Where it leads", body: <>Trainer produces practitioners; the final rung, <Link href="/program/nlp-master-trainer-program" className="underline">Master Trainer</Link>, produces trainers.</> },
+        {
+          title: "A note on revisiting",
+          body: (
+            <>
+              The free five-year revisit that comes with Levels 1 to 3 does not
+              apply to the Trainer’s Training. The only way to sit through this
+              level again is to be enrolled in the Master Trainer programme and
+              attend as a coaching assistant. For a trainer who wants to keep
+              returning to the room and deepening the craft, that is one more
+              reason to take the final step to Master Trainer.
+            </>
+          ),
+        },
+        {
+          title: "Where it leads",
+          body: (
+            <>
+              Trainer produces practitioners; the final rung,{" "}
+              <Link
+                href="/program/nlp-master-trainer-program"
+                className="underline"
+              >
+                Master Trainer
+              </Link>
+              , produces trainers.
+            </>
+          ),
+        },
       ]}
     />
   ),
@@ -1321,25 +1866,68 @@ const LevelProgramIncludesDataLevel4: LevelProgramIncludesType = {
   points: [
     {
       title: "What this level is, and what it is not",
-      description: (<p>This is the one rung that is not about learning more content. Levels 1 to 3 fill your toolkit; here you prove you can teach it. You will not pick up a new coaching or therapeutic technique. Instead you gain everything a trainer needs: how to design and run a training, how to hold and simulate a room, how to work with the most difficult audience, and how to build and register your own training business. New tools appear only where they sharpen you as a trainer, and you leave a world-class one.</p>),
+      description: (
+        <p>
+          This is the one rung that is not about learning more content. Levels 1
+          to 3 fill your toolkit; here you prove you can teach it. You will not
+          pick up a new coaching or therapeutic technique. Instead you gain
+          everything a trainer needs: how to design and run a training, how to
+          hold and simulate a room, how to work with the most difficult
+          audience, and how to build and register your own training business.
+          New tools appear only where they sharpen you as a trainer, and you
+          leave a world-class one.
+        </p>
+      ),
       theme: "dark",
       image: { src: LevelProgram1, alt: "Trainer reading the room" },
     },
     {
       title: "The mindset we look for",
-      description: (<p>Because this is an evaluation, you are expected to arrive already able to demonstrate it. We look for someone operating at cause, holding the highest integrity, adhering to the ABNLP Code of Ethics, and living the NLP presuppositions rather than reciting them. This is assessed in the interview and, more importantly, throughout the training itself.</p>),
+      description: (
+        <p>
+          Because this is an evaluation, you are expected to arrive already able
+          to demonstrate it. We look for someone operating at cause, holding the
+          highest integrity, adhering to the ABNLP Code of Ethics, and living
+          the NLP presuppositions rather than reciting them. This is assessed in
+          the interview and, more importantly, throughout the training itself.
+        </p>
+      ),
       theme: "light",
-      image: { src: LevelProgram2, alt: "Trainer holding the ABNLP Code of Ethics" },
+      image: {
+        src: LevelProgram2,
+        alt: "Trainer holding the ABNLP Code of Ethics",
+      },
     },
     {
       title: "What your time will go into",
-      description: (<p>Expect to work, and to work hard. Most of your hours are spent reading, completing and submitting homework, preparing for the written exam, and running demo simulations again and again, until you can hold a room and stay composed through the difficult moments every trainer eventually meets. This is why the final days are called evaluation, not tuition.</p>),
+      description: (
+        <p>
+          Expect to work, and to work hard. Most of your hours are spent
+          reading, completing and submitting homework, preparing for the written
+          exam, and running demo simulations again and again, until you can hold
+          a room and stay composed through the difficult moments every trainer
+          eventually meets. This is why the final days are called evaluation,
+          not tuition.
+        </p>
+      ),
       theme: "yellow",
-      image: { src: LevelProgram3, alt: "Candidate preparing homework and demo simulations" },
+      image: {
+        src: LevelProgram3,
+        alt: "Candidate preparing homework and demo simulations",
+      },
     },
     {
       title: "Why we say all this",
-      description: (<p>People often arrive expecting to learn more, as they did at Practitioner, Master Practitioner and Advanced Hypnotherapy. Here the intention is different. Trainer’s Training is your doorway to the credentials that let you open a training business, and it is earned by demonstrating mastery you already hold. The same is true of the Hypnosis Trainer’s Training at Level 5.</p>),
+      description: (
+        <p>
+          People often arrive expecting to learn more, as they did at
+          Practitioner, Master Practitioner and Advanced Hypnotherapy. Here the
+          intention is different. Trainer’s Training is your doorway to the
+          credentials that let you open a training business, and it is earned by
+          demonstrating mastery you already hold. The same is true of the
+          Hypnosis Trainer’s Training at Level 5.
+        </p>
+      ),
       theme: "dark",
       image: { src: LevelProgram4, alt: "Trainer on the platform" },
     },
@@ -1350,13 +1938,26 @@ const LevelBenefitsTableDataLevel4: LevelBenefitsTableType = {
   title: { line1: "Level 4", line2: "at a glance" },
   headers: ["Detail", "NLP Train the Trainer"],
   points: [
-    { content: "Duration", values: ["18 days, 14 training and 4 evaluation, 120 hours"] },
+    {
+      content: "Duration",
+      values: ["18 days, 14 training and 4 evaluation, 120 hours"],
+    },
     { content: "Delivery", values: ["Fully live on Zoom"] },
     { content: "Prerequisite", values: ["Level 2, NLP Master Practitioner"] },
     { content: "Entry", values: ["By interview with Bismillah Pervez"] },
-    { content: "How you are assessed", values: ["A closed-book written exam over the whole Practitioner and Master Practitioner syllabus, two thirty-minute platform presentations, and a live Demo Day on a real subject"] },
+    {
+      content: "How you are assessed",
+      values: [
+        "A closed-book written exam over the whole Practitioner and Master Practitioner syllabus, two thirty-minute platform presentations, and a live Demo Day on a real subject",
+      ],
+    },
     { content: "Certification", values: ["Certified Trainer of NLP (ABNLP)"] },
-    { content: "Revisit", values: ["The free five-year revisit for Levels 1 to 3 does not apply to this level"] },
+    {
+      content: "Revisit",
+      values: [
+        "The free five-year revisit for Levels 1 to 3 does not apply to this level",
+      ],
+    },
     { content: "Arranged with", values: ["Bismillah Pervez and Arslan Larik"] },
   ],
 };
@@ -1368,7 +1969,9 @@ const CurriculumDataLevel4: ContentSectionType = {
   description: (
     <ul className="mt-6 grid list-none gap-x-12 gap-y-5 md:grid-cols-2 [counter-reset:item] [&>li]:relative [&>li]:flex [&>li]:items-start [&>li]:gap-4 [&>li]:border-t [&>li]:border-primary/20 [&>li]:pt-4 [&>li]:text-base [&>li]:leading-relaxed [&>li]:text-gray-700 [&>li]:transition-colors [&>li]:[counter-increment:item] [&>li:hover]:border-secondary [&>li:hover]:text-primary-darkest [&>li]:before:w-12 [&>li]:before:shrink-0 [&>li]:before:text-3xl [&>li]:before:font-bold [&>li]:before:leading-none [&>li]:before:text-primary/20 [&>li]:before:transition-colors [&>li]:before:content-[counter(item,decimal-leading-zero)] [&>li:hover]:before:text-secondary">
       <li>Platform mastery and the Trainer’s State (Uptime)</li>
-      <li>Calibrating a whole room, and leading the unconscious room leaders</li>
+      <li>
+        Calibrating a whole room, and leading the unconscious room leaders
+      </li>
       <li>Stage anchoring: spaces for content, metaphor, debrief and humour</li>
       <li>The 4-MAT design system: Why, What, How, What-if</li>
       <li>Designing exercises with overt and covert learning</li>
@@ -1388,30 +1991,73 @@ const CurriculumDataLevel4: ContentSectionType = {
 const LevelContentDataLevel4: LevelContentType = {
   title: { line1: "How you are assessed", line2: "" },
   points: [
-    { title: "A closed-book written exam", items: ["Over the whole Practitioner and Master Practitioner syllabus."], image: { src: LevetContent1.src, alt: "" } },
-    { title: "Two platform presentations", items: ["Two thirty-minute platform presentations."], image: { src: LevetContent2.src, alt: "" } },
-    { title: "A live Demo Day", items: ["A live demonstration on a real subject."], image: { src: LevetContent3.src, alt: "" } },
+    {
+      title: "A closed-book written exam",
+      items: ["Over the whole Practitioner and Master Practitioner syllabus."],
+      image: { src: LevetContent1.src, alt: "" },
+    },
+    {
+      title: "Two platform presentations",
+      items: ["Two thirty-minute platform presentations."],
+      image: { src: LevetContent2.src, alt: "" },
+    },
+    {
+      title: "A live Demo Day",
+      items: ["A live demonstration on a real subject."],
+      image: { src: LevetContent3.src, alt: "" },
+    },
   ],
 };
 
 const LevelGraduatesExperienceDataLevel4: LevelGraduatesExperienceType = {
   title: { line1: "Watch:", line2: "NLP Train the Trainer at AL&CO" },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603567/Level4_Review_jh6n5s.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603567/Level4_Review_jh6n5s.mp4",
   thumbnail: ThumbnailReview4,
 };
 
 const FaqDataLevel4: LevelFaq[] = [
-  { question: "Eighteen days just to be evaluated, with no brand-new content? And what if I fail?", answer: "This is not a lecture series; it is where a capable practitioner becomes a stage-ready trainer. Understanding NLP from a chair and holding a room, reading it, anchoring it, meeting the hard question, are different skills, and those are what these days build and test. You are not investing in an exam; you are investing in the daily conditioning that makes you a trainer. And because you arrive already holding the mastery, passing is a matter of demonstrating what you know, not gambling on it." },
-  { question: "Who can apply for NLP Train the Trainer?", answer: "You need Level 2, NLP Master Practitioner. Entry is by interview. Every applicant meets Bismillah Pervez in person before a place is offered. The Trainer’s Training is selective by design, and the interview is where fit is decided." },
-  { question: "Can I re-attend the Trainer’s Training later?", answer: "The free five-year revisit that comes with Levels 1 to 3 does not apply to the Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant." },
-  { question: "What happens after I am certified?", answer: "To train and certify under the ABNLP, you must then enrol as a member of the board, both as an organisation, registering your Approved NLP Training Institute in your organisation’s name, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. Guiding you through the application is part of our job." },
-  { question: "Why is there no price on this page?", answer: "This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not. All it takes to find out where you stand is a conversation: please contact us for details, and your relationship manager will take you through it." },
+  {
+    question:
+      "Eighteen days just to be evaluated, with no brand-new content? And what if I fail?",
+    answer:
+      "This is not a lecture series; it is where a capable practitioner becomes a stage-ready trainer. Understanding NLP from a chair and holding a room, reading it, anchoring it, meeting the hard question, are different skills, and those are what these days build and test. You are not investing in an exam; you are investing in the daily conditioning that makes you a trainer. And because you arrive already holding the mastery, passing is a matter of demonstrating what you know, not gambling on it.",
+  },
+  {
+    question: "Who can apply for NLP Train the Trainer?",
+    answer:
+      "You need Level 2, NLP Master Practitioner. Entry is by interview. Every applicant meets Bismillah Pervez in person before a place is offered. The Trainer’s Training is selective by design, and the interview is where fit is decided.",
+  },
+  {
+    question: "Can I re-attend the Trainer’s Training later?",
+    answer:
+      "The free five-year revisit that comes with Levels 1 to 3 does not apply to the Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant.",
+  },
+  {
+    question: "What happens after I am certified?",
+    answer:
+      "To train and certify under the ABNLP, you must then enrol as a member of the board, both as an organisation, registering your Approved NLP Training Institute in your organisation’s name, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. Guiding you through the application is part of our job.",
+  },
+  {
+    question: "Why is there no price on this page?",
+    answer:
+      "This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not. All it takes to find out where you stand is a conversation: please contact us for details, and your relationship manager will take you through it.",
+  },
 ];
 
 const NavDataLevel4: LevelNavType = {
-  prev: { href: "/program/advanced-hypnotherapy-interventionist", label: "Level 3: Advanced Hypnotherapy and Interventionist" },
-  prerequisite: { href: "/program/nlp-master-practitioner", label: "Prerequisite: Level 2, NLP Master Practitioner" },
-  next: { href: "/program/hypnosis-trainers-training-program", label: "Level 5: Hypnosis Train the Trainer" },
+  prev: {
+    href: "/program/advanced-hypnotherapy-interventionist",
+    label: "Level 3: Advanced Hypnotherapy and Interventionist",
+  },
+  prerequisite: {
+    href: "/program/nlp-master-practitioner",
+    label: "Prerequisite: Level 2, NLP Master Practitioner",
+  },
+  next: {
+    href: "/program/hypnosis-trainers-training-program",
+    label: "Level 5: Hypnosis Train the Trainer",
+  },
 };
 
 // Level 4 End
@@ -1438,7 +2084,8 @@ const bannerDataLevel5: BannerType = {
 
 const LevelIntroWithVideoDataLevel5: LevelIntroWithVideoType = {
   title: { line1: "What it is: ", line2: "the trainer path for hypnosis" },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603567/Level5_intro_jy8cqr.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603567/Level5_intro_jy8cqr.mp4",
   thumbnail: ThumbnailIntro5,
   description: `<p><strong>What it is.</strong> The trainer path for hypnosis. You learn not only to practise hypnosis at depth but to teach it, and to certify the next generation under an internationally recognised board.</p>
 <p><strong>Entry is by interview.</strong> Every applicant meets Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), in person before a place is offered. Like the NLP Trainer’s Training, this is selective by design, and the interview is where fit is decided.</p>
@@ -1446,14 +2093,24 @@ const LevelIntroWithVideoDataLevel5: LevelIntroWithVideoType = {
 };
 
 const LevelCertificationDataLevel5: LevelCertificationType = {
-  title: { line1: "Your certification", line2: "Certified Hypnosis Trainer (ABH)" },
+  title: {
+    line1: "Your certification",
+    line2: "Certified Hypnosis Trainer (ABH)",
+  },
   points: [
     {
       title: `Certified Hypnosis Trainer via the American Board of Hypnotherapy (ABH)`,
-      description: "You may train, examine and certify Hypnotists, register your organisation as an Approved School of Hypnosis, and issue ABH diplomas.",
+      description:
+        "You may train, examine and certify Hypnotists, register your organisation as an Approved School of Hypnosis, and issue ABH diplomas.",
       // LOGO: ABH - Khansa to supply approved artwork (accredited-4.webp is a placeholder until confirmed; DECISIONS v2 P7)
-      imageBrand: { src: AccreditedBrand4, alt: "ABH, American Board of Hypnotherapy seal" },
-      imageCerficate: { src: Certificate1Level5, alt: "Certified Hypnosis Trainer certificate issued through the ABH" },
+      imageBrand: {
+        src: AccreditedBrand4,
+        alt: "ABH, American Board of Hypnotherapy seal",
+      },
+      imageCerficate: {
+        src: Certificate1Level5,
+        alt: "Certified Hypnosis Trainer certificate issued through the ABH",
+      },
     },
   ],
 };
@@ -1463,10 +2120,48 @@ const ContentSectionDataLevel5: ContentSectionType = {
   TagType: "h2",
   description: (
     <NextStepCards
-      intro={<>Certification is the first half of the journey. To train and certify under the ABH, you must then enrol as a member of the board, both as an organisation, registering your Approved School of Hypnosis, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. It is a straightforward process, and guiding you through the application is part of our job. This is what makes “Approved School of Hypnosis” real and recognised.</>}
+      intro={
+        <>
+          Certification is the first half of the journey. To train and certify
+          under the ABH, you must then enrol as a member of the board, both as
+          an organisation, registering your Approved School of Hypnosis, and as
+          an individual first-time trainer member. Membership is compulsory: you
+          cannot train until it is in place, and it begins only once we have
+          certified you. It is a straightforward process, and guiding you
+          through the application is part of our job. This is what makes
+          “Approved School of Hypnosis” real and recognised.
+        </>
+      }
       cards={[
-        { title: "A note on revisiting", body: <>The free five-year revisit that comes with Levels 1 to 3 does not apply to the Hypnosis Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant. For a trainer who wants to keep returning to the room and deepening the craft, that is one more reason to take the final step to <Link href="/program/nlp-master-trainer-program" className="underline">Master Trainer</Link>.</> },
-        { title: "Where it leads", body: <>With both trainer paths in hand, NLP and hypnosis, you are running an institution of your own.</> },
+        {
+          title: "A note on revisiting",
+          body: (
+            <>
+              The free five-year revisit that comes with Levels 1 to 3 does not
+              apply to the Hypnosis Trainer’s Training. The only way to sit
+              through this level again is to be enrolled in the Master Trainer
+              programme and attend as a coaching assistant. For a trainer who
+              wants to keep returning to the room and deepening the craft, that
+              is one more reason to take the final step to{" "}
+              <Link
+                href="/program/nlp-master-trainer-program"
+                className="underline"
+              >
+                Master Trainer
+              </Link>
+              .
+            </>
+          ),
+        },
+        {
+          title: "Where it leads",
+          body: (
+            <>
+              With both trainer paths in hand, NLP and hypnosis, you are running
+              an institution of your own.
+            </>
+          ),
+        },
       ]}
     />
   ),
@@ -1480,25 +2175,65 @@ const LevelProgramIncludesDataLevel5: LevelProgramIncludesType = {
   points: [
     {
       title: "What this level is, and what it is not",
-      description: (<p>Like the NLP Trainer’s Training, this rung is not about learning more hypnosis technique for yourself. You proved that at Level 3. Here you prove you can teach it and certify others. You gain everything a hypnosis trainer needs: how to teach the full spectrum of inductions, how to hold and run a training room, how to keep a room safe, and how to build and register your own Approved School of Hypnosis.</p>),
+      description: (
+        <p>
+          Like the NLP Trainer’s Training, this rung is not about learning more
+          hypnosis technique for yourself. You proved that at Level 3. Here you
+          prove you can teach it and certify others. You gain everything a
+          hypnosis trainer needs: how to teach the full spectrum of inductions,
+          how to hold and run a training room, how to keep a room safe, and how
+          to build and register your own Approved School of Hypnosis.
+        </p>
+      ),
       theme: "dark",
-      image: { src: LevelProgram1, alt: "Hypnosis trainer teaching an induction" },
+      image: {
+        src: LevelProgram1,
+        alt: "Hypnosis trainer teaching an induction",
+      },
     },
     {
       title: "The mindset we look for",
-      description: (<p>Because this is an evaluation, you are expected to arrive already able to demonstrate it. We look for someone operating at cause, holding the highest integrity, and adhering to the ABH Code of Ethics and its scope-of-practice and referral standards. This is assessed in the interview and, more importantly, throughout the training itself.</p>),
+      description: (
+        <p>
+          Because this is an evaluation, you are expected to arrive already able
+          to demonstrate it. We look for someone operating at cause, holding the
+          highest integrity, and adhering to the ABH Code of Ethics and its
+          scope-of-practice and referral standards. This is assessed in the
+          interview and, more importantly, throughout the training itself.
+        </p>
+      ),
       theme: "light",
-      image: { src: LevelProgram2, alt: "Trainer holding the ABH Code of Ethics" },
+      image: {
+        src: LevelProgram2,
+        alt: "Trainer holding the ABH Code of Ethics",
+      },
     },
     {
       title: "What your time will go into",
-      description: (<p>Expect to work, and to work hard. Most of your hours are spent reading, completing and submitting homework, preparing for the examination, and running demo simulations again and again, until you can hold a room and stay composed through the difficult moments every trainer eventually meets. This is an evaluation, not tuition.</p>),
+      description: (
+        <p>
+          Expect to work, and to work hard. Most of your hours are spent
+          reading, completing and submitting homework, preparing for the
+          examination, and running demo simulations again and again, until you
+          can hold a room and stay composed through the difficult moments every
+          trainer eventually meets. This is an evaluation, not tuition.
+        </p>
+      ),
       theme: "yellow",
       image: { src: LevelProgram3, alt: "Candidate running a demo simulation" },
     },
     {
       title: "A requirement unique to this level",
-      description: (<p>Unlike the NLP Trainer’s Training, this programme asks you to return to the source. You will study the classical literature of hypnosis, from Mesmer and Braid to Elman, Erickson and Krasner, and deliver a talk, as a master hypnotist, on the true and authentic history of the field. Carrying that lineage faithfully is part of what it means to teach hypnosis here.</p>),
+      description: (
+        <p>
+          Unlike the NLP Trainer’s Training, this programme asks you to return
+          to the source. You will study the classical literature of hypnosis,
+          from Mesmer and Braid to Elman, Erickson and Krasner, and deliver a
+          talk, as a master hypnotist, on the true and authentic history of the
+          field. Carrying that lineage faithfully is part of what it means to
+          teach hypnosis here.
+        </p>
+      ),
       theme: "dark",
       image: { src: LevelProgram4, alt: "Classical literature of hypnosis" },
     },
@@ -1511,11 +2246,24 @@ const LevelBenefitsTableDataLevel5: LevelBenefitsTableType = {
   points: [
     { content: "Duration", values: ["8 days"] },
     { content: "Delivery", values: ["Live on Zoom"] },
-    { content: "Prerequisite", values: ["Level 3, Advanced Hypnotherapy and Interventionist"] },
+    {
+      content: "Prerequisite",
+      values: ["Level 3, Advanced Hypnotherapy and Interventionist"],
+    },
     { content: "Entry", values: ["By interview with Bismillah Pervez"] },
     { content: "Certification", values: ["Certified Hypnosis Trainer (ABH)"] },
-    { content: "Unique requirement", values: ["A talk, as a master hypnotist, on the true and authentic history of hypnosis"] },
-    { content: "Revisit", values: ["The free five-year revisit for Levels 1 to 3 does not apply to this level"] },
+    {
+      content: "Unique requirement",
+      values: [
+        "A talk, as a master hypnotist, on the true and authentic history of hypnosis",
+      ],
+    },
+    {
+      content: "Revisit",
+      values: [
+        "The free five-year revisit for Levels 1 to 3 does not apply to this level",
+      ],
+    },
     { content: "Arranged with", values: ["Bismillah Pervez and Arslan Larik"] },
   ],
 };
@@ -1526,14 +2274,24 @@ const CurriculumDataLevel5: ContentSectionType = {
   textAlign: "text-start",
   description: (
     <ul className="mt-6 grid list-none gap-x-12 gap-y-5 md:grid-cols-2 [counter-reset:item] [&>li]:relative [&>li]:flex [&>li]:items-start [&>li]:gap-4 [&>li]:border-t [&>li]:border-primary/20 [&>li]:pt-4 [&>li]:text-base [&>li]:leading-relaxed [&>li]:text-gray-700 [&>li]:transition-colors [&>li]:[counter-increment:item] [&>li:hover]:border-secondary [&>li:hover]:text-primary-darkest [&>li]:before:w-12 [&>li]:before:shrink-0 [&>li]:before:text-3xl [&>li]:before:font-bold [&>li]:before:leading-none [&>li]:before:text-primary/20 [&>li]:before:transition-colors [&>li]:before:content-[counter(item,decimal-leading-zero)] [&>li:hover]:before:text-secondary">
-      <li>The lineage and pedagogy of hypnosis: Mesmer, Braid, Elman, Erickson, Krasner</li>
-      <li>Teaching the full spectrum, from direct-authoritarian to indirect-permissive</li>
+      <li>
+        The lineage and pedagogy of hypnosis: Mesmer, Braid, Elman, Erickson,
+        Krasner
+      </li>
+      <li>
+        Teaching the full spectrum, from direct-authoritarian to
+        indirect-permissive
+      </li>
       <li>Teaching progressive, rapid and instant inductions</li>
       <li>Suggestibility tests and pattern interrupts</li>
       <li>Deep-trance phenomena: catalepsy, analgesia, regression</li>
       <li>Safety: abreaction management and dehypnotization</li>
       <li>Hypnotic voice and platform installation</li>
-      <li>The five turn-key trainings you can then deliver: an introductory demonstration, a self-hypnosis seminar, an Ericksonian weekend, a direct-authoritarian weekend, and a full hypnosis certification</li>
+      <li>
+        The five turn-key trainings you can then deliver: an introductory
+        demonstration, a self-hypnosis seminar, an Ericksonian weekend, a
+        direct-authoritarian weekend, and a full hypnosis certification
+      </li>
       <li>Ethics, scope of practice and referral protocols</li>
     </ul>
   ),
@@ -1544,32 +2302,83 @@ const CurriculumDataLevel5: ContentSectionType = {
 const LevelContentDataLevel5: LevelContentType = {
   title: { line1: "Five turn-key trainings you can then deliver", line2: "" },
   points: [
-    { title: "An introductory demonstration", items: [], image: { src: LevetContent1.src, alt: "" } },
-    { title: "A self-hypnosis seminar", items: [], image: { src: LevetContent2.src, alt: "" } },
-    { title: "An Ericksonian weekend", items: [], image: { src: LevetContent3.src, alt: "" } },
-    { title: "A direct-authoritarian weekend", items: [], image: { src: LevetContent1.src, alt: "" } },
-    { title: "A full hypnosis certification", items: [], image: { src: LevetContent2.src, alt: "" } },
+    {
+      title: "An introductory demonstration",
+      items: [],
+      image: { src: LevetContent1.src, alt: "" },
+    },
+    {
+      title: "A self-hypnosis seminar",
+      items: [],
+      image: { src: LevetContent2.src, alt: "" },
+    },
+    {
+      title: "An Ericksonian weekend",
+      items: [],
+      image: { src: LevetContent3.src, alt: "" },
+    },
+    {
+      title: "A direct-authoritarian weekend",
+      items: [],
+      image: { src: LevetContent1.src, alt: "" },
+    },
+    {
+      title: "A full hypnosis certification",
+      items: [],
+      image: { src: LevetContent2.src, alt: "" },
+    },
   ],
 };
 
 const LevelGraduatesExperienceDataLevel5: LevelGraduatesExperienceType = {
   title: { line1: "Watch:", line2: "Hypnosis Train the Trainer at AL&CO" },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603571/Level5_Review_q1l8ff.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603571/Level5_Review_q1l8ff.mp4",
   thumbnail: ThumbnailReview5,
 };
 
 const FaqDataLevel5: LevelFaq[] = [
-  { question: "I am already an NLP Trainer. Can I not just teach hypnosis inside my NLP courses?", answer: "NLP carries hypnotic language, but formal hypnosis is its own craft, with its own inductions and depth, and the ABH does not permit an NLP Trainer to certify hypnotists without this dedicated qualification. Beyond the rule, there is a real market: people increasingly seek focused hypnotic work for performance, calm and habits. An approved school of hypnosis opens an independent stream of your own, separate from your NLP training." },
-  { question: "Who can apply for Hypnosis Train the Trainer?", answer: "You need Level 3, Advanced Hypnotherapy and Interventionist. Entry is by interview. Every applicant meets Bismillah Pervez in person before a place is offered. Like the NLP Trainer’s Training, this is selective by design, and the interview is where fit is decided." },
-  { question: "Can I re-attend the Hypnosis Trainer’s Training later?", answer: "The free five-year revisit that comes with Levels 1 to 3 does not apply to the Hypnosis Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant." },
-  { question: "What happens after I am certified?", answer: "To train and certify under the ABH, you must then enrol as a member of the board, both as an organisation, registering your Approved School of Hypnosis, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. Guiding you through the application is part of our job." },
-  { question: "Why is there no price on this page?", answer: "This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not. All it takes to find out where you stand is a conversation: please contact us for details, and your relationship manager will take you through it." },
+  {
+    question:
+      "I am already an NLP Trainer. Can I not just teach hypnosis inside my NLP courses?",
+    answer:
+      "NLP carries hypnotic language, but formal hypnosis is its own craft, with its own inductions and depth, and the ABH does not permit an NLP Trainer to certify hypnotists without this dedicated qualification. Beyond the rule, there is a real market: people increasingly seek focused hypnotic work for performance, calm and habits. An approved school of hypnosis opens an independent stream of your own, separate from your NLP training.",
+  },
+  {
+    question: "Who can apply for Hypnosis Train the Trainer?",
+    answer:
+      "You need Level 3, Advanced Hypnotherapy and Interventionist. Entry is by interview. Every applicant meets Bismillah Pervez in person before a place is offered. Like the NLP Trainer’s Training, this is selective by design, and the interview is where fit is decided.",
+  },
+  {
+    question: "Can I re-attend the Hypnosis Trainer’s Training later?",
+    answer:
+      "The free five-year revisit that comes with Levels 1 to 3 does not apply to the Hypnosis Trainer’s Training. The only way to sit through this level again is to be enrolled in the Master Trainer programme and attend as a coaching assistant.",
+  },
+  {
+    question: "What happens after I am certified?",
+    answer:
+      "To train and certify under the ABH, you must then enrol as a member of the board, both as an organisation, registering your Approved School of Hypnosis, and as an individual first-time trainer member. Membership is compulsory: you cannot train until it is in place, and it begins only once we have certified you. Guiding you through the application is part of our job.",
+  },
+  {
+    question: "Why is there no price on this page?",
+    answer:
+      "This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not. All it takes to find out where you stand is a conversation: please contact us for details, and your relationship manager will take you through it.",
+  },
 ];
 
 const NavDataLevel5: LevelNavType = {
-  prev: { href: "/program/nlp-trainers-training-program", label: "Level 4: NLP Train the Trainer" },
-  prerequisite: { href: "/program/advanced-hypnotherapy-interventionist", label: "Prerequisite: Level 3, Advanced Hypnotherapy and Interventionist" },
-  next: { href: "/program/nlp-master-trainer-program", label: "Level 6: NLP Master Trainer" },
+  prev: {
+    href: "/program/nlp-trainers-training-program",
+    label: "Level 4: NLP Train the Trainer",
+  },
+  prerequisite: {
+    href: "/program/advanced-hypnotherapy-interventionist",
+    label: "Prerequisite: Level 3, Advanced Hypnotherapy and Interventionist",
+  },
+  next: {
+    href: "/program/nlp-master-trainer-program",
+    label: "Level 6: NLP Master Trainer",
+  },
 };
 
 // Level 5 End
@@ -1578,7 +2387,10 @@ const NavDataLevel5: LevelNavType = {
 
 const bannerDataLevel6: BannerType = {
   level: "Level 6",
-  title: { line1: "NLP Master Trainer", line2: "The summit: produce the trainers" },
+  title: {
+    line1: "NLP Master Trainer",
+    line2: "The summit: produce the trainers",
+  },
   image: programLevel2.src,
   bgVideo: "/videos/program-level-2.mp4",
   height: "min-h-[520px] lg:min-h-[580px]",
@@ -1586,27 +2398,40 @@ const bannerDataLevel6: BannerType = {
   className: "bg-center bg-no-repeat bg-primary",
   children: (
     <p className="custom-text1 text-white mt-4 max-w-2xl">
-      Quick facts: a supervised, mentored programme of three to five years, ABNLP, by application, interview and Board evaluation, prerequisite a Certified Trainer of NLP in good standing.
+      Quick facts: a supervised, mentored programme of three to five years,
+      ABNLP, by application, interview and Board evaluation, prerequisite a
+      Certified Trainer of NLP in good standing.
     </p>
   ),
 };
 
 const LevelIntroWithVideoDataLevel6: LevelIntroWithVideoType = {
   title: { line1: "What it is: ", line2: "the highest grade in NLP" },
-  video: "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603569/Level6_Intro_oscnrq.mp4",
+  video:
+    "https://res.cloudinary.com/dmbpjv9e8/video/upload/v1774603569/Level6_Intro_oscnrq.mp4",
   thumbnail: ThumbnailIntro6,
   description: `<p>A Trainer produces practitioners; a Master Trainer produces trainers. Certified through the ABNLP, it is the authority to train, evaluate and certify other NLP trainers, to run the Trainer’s Training and Evaluation, and to run your own Board-recognised Master Trainer Program. It is the exact standing Arslan holds.</p>`,
 };
 
 const LevelCertificationDataLevel6: LevelCertificationType = {
-  title: { line1: "Your certification", line2: "Certified Master Trainer of NLP (ABNLP)" },
+  title: {
+    line1: "Your certification",
+    line2: "Certified Master Trainer of NLP (ABNLP)",
+  },
   points: [
     {
       title: `Certified Master Trainer of NLP via the American Board of Neuro-Linguistic Programming (ABNLP)`,
-      description: "You may train, evaluate and certify NLP trainers, run the full Trainer’s Training and Evaluation, and run your own Board-recognised Master Trainer Program.",
+      description:
+        "You may train, evaluate and certify NLP trainers, run the full Trainer’s Training and Evaluation, and run your own Board-recognised Master Trainer Program.",
       // LOGO: ABNLP - Khansa to supply approved artwork (accredited-1.webp is a placeholder until confirmed; DECISIONS v2 P7)
-      imageBrand: { src: AccreditedBrand1, alt: "ABNLP, American Board of Neuro-Linguistic Programming seal" },
-      imageCerficate: { src: Certificate1Level6, alt: "Certified Master Trainer of NLP certificate issued through the ABNLP" },
+      imageBrand: {
+        src: AccreditedBrand1,
+        alt: "ABNLP, American Board of Neuro-Linguistic Programming seal",
+      },
+      imageCerficate: {
+        src: Certificate1Level6,
+        alt: "Certified Master Trainer of NLP certificate issued through the ABNLP",
+      },
     },
   ],
 };
@@ -1618,24 +2443,52 @@ const ContentSectionDataLevel6: ContentSectionType = {
     <div className="mx-auto max-w-6xl">
       {/* Three steps joined by a line */}
       <div className="relative mt-10 grid gap-10 md:grid-cols-3">
-        <span aria-hidden="true" className="absolute left-[16.66%] right-[16.66%] top-7 hidden h-0.5 bg-gradient-to-r from-secondary via-primary/40 to-secondary md:block" />
+        <span
+          aria-hidden="true"
+          className="absolute left-[16.66%] right-[16.66%] top-7 hidden h-0.5 bg-gradient-to-r from-secondary via-primary/40 to-secondary md:block"
+        />
 
         <div className="group relative flex flex-col items-center text-center">
-          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">1</span>
-          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">Be a Certified Trainer</h3>
-          <p className="mt-2 text-gray-600">You must already be a Certified Trainer of NLP in good standing, having completed the Trainer’s Training and holding current ABNLP Trainer membership. Once you do, you may apply to enrol.</p>
+          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+            1
+          </span>
+          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">
+            Be a Certified Trainer
+          </h3>
+          <p className="mt-2 text-gray-600">
+            You must already be a Certified Trainer of NLP in good standing,
+            having completed the Trainer’s Training and holding current ABNLP
+            Trainer membership. Once you do, you may apply to enrol.
+          </p>
         </div>
 
         <div className="group relative flex flex-col items-center text-center">
-          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">2</span>
-          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">Interview and the Board</h3>
-          <p className="mt-2 text-gray-600">Entry is not automatic. Every candidate has an interview with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and a direct conversation with the Board, and their standing is verified before admission.</p>
+          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+            2
+          </span>
+          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">
+            Interview and the Board
+          </h3>
+          <p className="mt-2 text-gray-600">
+            Entry is not automatic. Every candidate has an interview with
+            Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and
+            ANLP Accredited Master Trainer (UK), and a direct conversation with
+            the Board, and their standing is verified before admission.
+          </p>
         </div>
 
         <div className="group relative flex flex-col items-center text-center">
-          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">3</span>
-          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">Your standing is checked</h3>
-          <p className="mt-2 text-gray-600">Even a trainer certified through the ABNLP is checked first, and a trainer arriving from another board is scrutinised more closely still.</p>
+          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+            3
+          </span>
+          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">
+            Your standing is checked
+          </h3>
+          <p className="mt-2 text-gray-600">
+            Even a trainer certified through the ABNLP is checked first, and a
+            trainer arriving from another board is scrutinised more closely
+            still.
+          </p>
         </div>
       </div>
 
@@ -1649,7 +2502,10 @@ const ContentSectionDataLevel6: ContentSectionType = {
       </div>
 
       <p className="mx-auto mt-6 max-w-3xl text-center text-gray-600">
-        Throughout the programme you keep your Trainer membership current, renewing it each year and remaining an accredited Trainer of good standing. You apply for Master Trainer membership itself only once the programme is complete.
+        Throughout the programme you keep your Trainer membership current,
+        renewing it each year and remaining an accredited Trainer of good
+        standing. You apply for Master Trainer membership itself only once the
+        programme is complete.
       </p>
     </div>
   ),
@@ -1661,17 +2517,31 @@ const ContentSectionDataLevel6: ContentSectionType = {
 const LevelProgramIncludesDataLevel6: LevelProgramIncludesType = {
   title: { line1: "The standard you meet: four pillars", line2: "" },
   layout: "rows",
-  description: (<p>The ABNLP Master Trainer grade rests on four pillars, and at AL&amp;CO we hold you to a full and demanding version of each, provided with evidence.</p>),
+  description: (
+    <p>
+      The ABNLP Master Trainer grade rests on four pillars, and at AL&amp;CO we
+      hold you to a full and demanding version of each, provided with evidence.
+    </p>
+  ),
   points: [
     {
       title: "Leadership",
-      description: (<p>High-level leadership in your trainings, your community and with the Boards, with exceptional conduct and ethics.</p>),
+      description: (
+        <p>
+          High-level leadership in your trainings, your community and with the
+          Boards, with exceptional conduct and ethics.
+        </p>
+      ),
       theme: "dark",
       image: { src: LevelProgram1, alt: "Leadership pillar" },
     },
     {
       title: "Mentorship",
-      description: (<p>Demonstrated mentoring of other trainers and of new training schools.</p>),
+      description: (
+        <p>
+          Demonstrated mentoring of other trainers and of new training schools.
+        </p>
+      ),
       theme: "light",
       image: { src: LevelProgram2, alt: "Mentorship pillar" },
     },
@@ -1681,10 +2551,26 @@ const LevelProgramIncludesDataLevel6: LevelProgramIncludesType = {
         <div className="space-y-2">
           <p>The heart of the standard, evidenced through four things:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li>delivering or co-delivering a minimum of six NLP Practitioner and three NLP Master Practitioner trainings across the programme, evidenced through student testimonials, videos, social posts and short news articles shared with the Boards;</li>
-            <li>development under the supervision of one or more NLP Master Trainers;</li>
-            <li>completion of the requirements of your nominated Master Trainer Program, verified by sign-off, including project-based work that augments the application of NLP in the real world;</li>
-            <li>compulsory participation as a Coaching Assistant or Trainer at a minimum of one NLP Practitioner, two NLP Master Practitioner and two NLP Trainer’s Trainings across the programme.</li>
+            <li>
+              delivering or co-delivering a minimum of six NLP Practitioner and
+              three NLP Master Practitioner trainings across the programme,
+              evidenced through student testimonials, videos, social posts and
+              short news articles shared with the Boards;
+            </li>
+            <li>
+              development under the supervision of one or more NLP Master
+              Trainers;
+            </li>
+            <li>
+              completion of the requirements of your nominated Master Trainer
+              Program, verified by sign-off, including project-based work that
+              augments the application of NLP in the real world;
+            </li>
+            <li>
+              compulsory participation as a Coaching Assistant or Trainer at a
+              minimum of one NLP Practitioner, two NLP Master Practitioner and
+              two NLP Trainer’s Trainings across the programme.
+            </li>
           </ul>
         </div>
       ),
@@ -1693,13 +2579,21 @@ const LevelProgramIncludesDataLevel6: LevelProgramIncludesType = {
     },
     {
       title: "Community",
-      description: (<p>Evidence of supporting your NLP and local communities to grow.</p>),
+      description: (
+        <p>Evidence of supporting your NLP and local communities to grow.</p>
+      ),
       theme: "dark",
       image: { src: LevelProgram4, alt: "Community pillar" },
     },
   ],
   detailContent: (
-    <p className="mt-6">Alongside these, you contribute an original innovation to the development and application of NLP, shared with the Boards; you hold continuous Board membership in good standing, as a coach and a trainer, for at least two consecutive years; and you show evidence of further trainer-level trainings.</p>
+    <p className="mt-6">
+      Alongside these, you contribute an original innovation to the development
+      and application of NLP, shared with the Boards; you hold continuous Board
+      membership in good standing, as a coach and a trainer, for at least two
+      consecutive years; and you show evidence of further trainer-level
+      trainings.
+    </p>
   ),
 };
 
@@ -1711,13 +2605,25 @@ const ContentSectionContentListData6: ContentSectionType = {
     {
       title: "The three-year programme",
       TagType: "h3",
-      description: (<p className="text-gray-600 my-4">Our standard AL&amp;CO Master Trainer Program, completed over three years from the year you enrol.</p>),
+      description: (
+        <p className="text-gray-600 my-4">
+          Our standard AL&amp;CO Master Trainer Program, completed over three
+          years from the year you enrol.
+        </p>
+      ),
       textAlign: "text-start px-4",
     },
     {
       title: "The five-year programme",
       TagType: "h3",
-      description: (<p className="text-gray-600 my-4">The very same requirements, nothing added and nothing removed, simply spread over five years. It is the gentler route on your calendar, and the more manageable one, because the commitment and its investment are carried across five years rather than three.</p>),
+      description: (
+        <p className="text-gray-600 my-4">
+          The very same requirements, nothing added and nothing removed, simply
+          spread over five years. It is the gentler route on your calendar, and
+          the more manageable one, because the commitment and its investment are
+          carried across five years rather than three.
+        </p>
+      ),
       textAlign: "text-start px-4",
     },
   ],
@@ -1730,13 +2636,41 @@ const LevelBenefitsTableDataLevel6: LevelBenefitsTableType = {
   title: { line1: "Level 6", line2: "at a glance" },
   headers: ["Detail", "NLP Master Trainer"],
   points: [
-    { content: "Length", values: ["Three or five years, by your choice; the same requirements either way"] },
+    {
+      content: "Length",
+      values: [
+        "Three or five years, by your choice; the same requirements either way",
+      ],
+    },
     { content: "Format", values: ["A supervised, mentored programme"] },
-    { content: "Prerequisite", values: ["Levels 1, 2 and 4; a Certified Trainer of NLP in good standing with current ABNLP Trainer membership"] },
-    { content: "Entry", values: ["By application, an interview with Bismillah Pervez and a direct conversation with the Board"] },
-    { content: "Standard", values: ["Four pillars: leadership, mentorship, NLP training experience and community"] },
-    { content: "Sign-off", values: ["Two Master Trainers in good standing, one of them Arslan Larik (AL&CO's own standard)"] },
-    { content: "Certification", values: ["Certified Master Trainer of NLP (ABNLP)"] },
+    {
+      content: "Prerequisite",
+      values: [
+        "Levels 1, 2 and 4; a Certified Trainer of NLP in good standing with current ABNLP Trainer membership",
+      ],
+    },
+    {
+      content: "Entry",
+      values: [
+        "By application, an interview with Bismillah Pervez and a direct conversation with the Board",
+      ],
+    },
+    {
+      content: "Standard",
+      values: [
+        "Four pillars: leadership, mentorship, NLP training experience and community",
+      ],
+    },
+    {
+      content: "Sign-off",
+      values: [
+        "Two Master Trainers in good standing, one of them Arslan Larik (AL&CO's own standard)",
+      ],
+    },
+    {
+      content: "Certification",
+      values: ["Certified Master Trainer of NLP (ABNLP)"],
+    },
     { content: "Arranged with", values: ["Arslan Larik and Bismillah Pervez"] },
   ],
 };
@@ -1749,68 +2683,68 @@ const SignOffDataLevel6: ContentSectionType = {
     <div className="mx-auto max-w-6xl">
       <p className="mx-auto my-4 max-w-3xl text-gray-600">On completion you apply to the Board for Master Trainer level membership, submitting your evidence across all four pillars. Every AL&amp;CO Master Trainer is signed off by two Master Trainers in good standing: Arslan Larik signs as one, and the second is another certified Master Trainer appointed at our discretion. Two recognised Master Trainer signatures on the certificate is a firm rule at AL&amp;CO, a standard we hold ourselves to without exception, and that double, independent sign-off is exactly what makes the grade worth holding.</p>
 
-      {/* Two signatures lead to one certificate */}
-      <div className="my-8 flex flex-col items-center justify-center gap-3 md:flex-row md:gap-5">
-        <div className="rounded-full border border-primary/20 bg-white px-6 py-3 text-center shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-widest text-secondary-dark">Signature 1</p>
-          <p className="font-outfit text-base font-semibold text-primary">Arslan Larik</p>
-        </div>
-        <span aria-hidden="true" className="text-2xl font-bold text-secondary">+</span>
-        <div className="rounded-full border border-primary/20 bg-white px-6 py-3 text-center shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-widest text-secondary-dark">Signature 2</p>
-          <p className="font-outfit text-base font-semibold text-primary">A second certified Master Trainer</p>
-        </div>
-        <span aria-hidden="true" className="text-2xl font-bold text-secondary md:rotate-0 rotate-90">→</span>
-        <div className="rounded-full bg-gradient-to-br from-secondary to-secondary-dark px-7 py-4 text-center shadow-lg">
-          <p className="font-outfit text-base font-bold text-primary-darkest">Master Trainer certificate</p>
-        </div>
-      </div>
+      {/* Four pillars, a lintel, two signatures: the certificate builds as it scrolls into view */}
+      <SignOffCertificate />
 
-      {/* Three points, no boxes */}
-      <div className="mt-12 grid gap-10 text-start md:grid-cols-3">
-        <div className="group relative border-t border-primary/20 pt-6">
-          <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-16 bg-secondary transition-all duration-500 group-hover:w-32" />
-          <span className="text-5xl font-bold leading-none text-primary/15">01</span>
-          <h3 className="mt-3 font-outfit text-lg xl:text-xl font-semibold text-primary">A point of clarity on revisiting</h3>
-          <p className="mt-3 text-gray-600">The free five-year revisit that comes with Levels 1 to 3 does not extend to the Trainer’s Trainings. Nobody re-attends the NLP Trainer’s Training or the Hypnosis Trainer’s Training simply to revise. The only people who return to those rooms are Master Trainer candidates, who attend as coaching assistants as part of this programme. That is by design: the trainer levels are earned once, and revisited only by those climbing to Master Trainer.</p>
-        </div>
-
-        <div className="group relative border-t border-primary/20 pt-6">
-          <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-16 bg-secondary transition-all duration-500 group-hover:w-32" />
-          <span className="text-5xl font-bold leading-none text-primary/15">02</span>
-          <h3 className="mt-3 font-outfit text-lg xl:text-xl font-semibold text-primary">Certifying other Master Trainers</h3>
-          <p className="mt-3 text-gray-600">Producing Master Trainers of your own is a further step. To do it, you must be registered with the ABNLP in the capacity of a Master Trainer, and clear the Board’s scrutiny, an interview at the very least, before you may certify others at this grade. We facilitate this for you at the time of your graduation. It is a check that must be in place, and we make it straightforward.</p>
-        </div>
-
-        <div className="group relative border-t border-primary/20 pt-6">
-          <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-16 bg-secondary transition-all duration-500 group-hover:w-32" />
-          <span className="text-5xl font-bold leading-none text-primary/15">03</span>
-          <h3 className="mt-3 font-outfit text-lg xl:text-xl font-semibold text-primary">Where it leads</h3>
-          <p className="mt-3 text-gray-600">Nowhere higher. From here your work outlives you, because the trainers you make will make practitioners long after you.</p>
-        </div>
-      </div>
+      {/* Three points */}
+      <SignOffPoints
+        items={[
+          {
+            n: "01",
+            title: "A point of clarity on revisiting",
+            text: "The free five-year revisit that comes with Levels 1 to 3 does not extend to the Trainer’s Trainings. Nobody re-attends the NLP Trainer’s Training or the Hypnosis Trainer’s Training simply to revise. The only people who return to those rooms are Master Trainer candidates, who attend as coaching assistants as part of this programme. That is by design: the trainer levels are earned once, and revisited only by those climbing to Master Trainer.",
+          },
+          {
+            n: "02",
+            title: "Certifying other Master Trainers",
+            text: "Producing Master Trainers of your own is a further step. To do it, you must be registered with the ABNLP in the capacity of a Master Trainer, and clear the Board’s scrutiny, an interview at the very least, before you may certify others at this grade. We facilitate this for you at the time of your graduation. It is a check that must be in place, and we make it straightforward.",
+          },
+          {
+            n: "03",
+            title: "Where it leads",
+            text: "Nowhere higher. From here your work outlives you, because the trainers you make will make practitioners long after you.",
+          },
+        ]}
+      />
 
       {/* Business in the Box "add-on" line removed: ruling 25 Sep 2026, Business in the Box is never presented as a level or product. */}
       {/* PLEASE CHECK: publish only after Bismillah Pervez approves */}
-      <figure className="relative mx-auto mt-14 max-w-4xl text-center">
-        <span aria-hidden="true" className="absolute -top-6 left-1/2 -translate-x-1/2 select-none font-serif text-8xl leading-none text-secondary/60">“</span>
-        <blockquote className="pt-8 text-primary">
-          <p className="font-outfit text-lg md:text-xl italic leading-relaxed">I can vouch for every word of this personally, because I have lived it. I completed every programme at Arslan Larik &amp; Company, from Practitioner all the way through, and I did my Trainer’s Training with The Tad James Company, under the mentorship of Dr Adriana James. My standing as a Master Trainer was accredited through ANLP in the United Kingdom. I am proud to be the first Master Trainer this institution has produced, and prouder still of what that means: AL&amp;CO now grows its own.”</p>
-          <span aria-hidden="true" className="mx-auto mt-6 block h-0.5 w-16 bg-secondary" />
-          <figcaption className="mt-4 font-semibold not-italic text-primary-darkest">Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). Karachi, Pakistan.</figcaption>
-        </blockquote>
-      </figure>
+      <SignOffQuote
+        photo="/og/bismillah-pervez.webp"
+        name="Bismillah Pervez"
+        credentials={["CEO", "ICF Master Certified Coach (MCC)", "ACTC", "ANLP Accredited Master Trainer (UK)", "Karachi, Pakistan"]}
+        caption="Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK). Karachi, Pakistan."
+        text="I can vouch for every word of this personally, because I have lived it. I completed every programme at Arslan Larik & Company, from Practitioner all the way through, and I did my Trainer’s Training with The Tad James Company, under the mentorship of Dr Adriana James. My standing as a Master Trainer was accredited through ANLP in the United Kingdom. I am proud to be the first Master Trainer this institution has produced, and prouder still of what that means: AL&CO now grows its own.”"
+      />
     </div>
   ),
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
 };
-
 const LevelContentDataLevel6: LevelContentType = {
   title: { line1: "Alongside the four pillars", line2: "" },
   points: [
-    { title: "An original innovation", items: ["You contribute an original innovation to the development and application of NLP, shared with the Boards."], image: { src: LevetContent1.src, alt: "Original innovation in NLP" } },
-    { title: "Continuous Board membership", items: ["You hold continuous Board membership in good standing, as a coach and a trainer, for at least two consecutive years."], image: { src: LevetContent2.src, alt: "Board membership in good standing" } },
-    { title: "Further trainer-level trainings", items: ["You show evidence of further trainer-level trainings."], image: { src: LevetContent3.src, alt: "Further trainer-level trainings" } },
+    {
+      title: "An original innovation",
+      items: [
+        "You contribute an original innovation to the development and application of NLP, shared with the Boards.",
+      ],
+      image: { src: LevetContent1.src, alt: "Original innovation in NLP" },
+    },
+    {
+      title: "Continuous Board membership",
+      items: [
+        "You hold continuous Board membership in good standing, as a coach and a trainer, for at least two consecutive years.",
+      ],
+      image: {
+        src: LevetContent2.src,
+        alt: "Board membership in good standing",
+      },
+    },
+    {
+      title: "Further trainer-level trainings",
+      items: ["You show evidence of further trainer-level trainings."],
+      image: { src: LevetContent3.src, alt: "Further trainer-level trainings" },
+    },
   ],
 };
 
@@ -1820,16 +2754,44 @@ const LevelGraduatesExperienceDataLevel6: LevelGraduatesExperienceType = {
 };
 
 const FaqDataLevel6: LevelFaq[] = [
-  { question: "Three to five years is a long commitment. Why bind myself for so long when I already run a training business?", answer: "Because this is the highest grade in the discipline, and it cannot be bought in a workshop. The years are not waiting; they are the real work: delivering trainings, supervising and mentoring, completing your project, meeting a standard the board recognises, and being signed off under AL&CO's own two-signature rule. This path is not for someone wanting a quick badge. It is for the educator who intends to shape the profession and certify the next generation of trainers." },
-  { question: "Who may apply for the NLP Master Trainer programme?", answer: "You must already be a Certified Trainer of NLP in good standing, having completed the Trainer’s Training and holding current ABNLP Trainer membership. Entry is not automatic. Every candidate has an interview with Bismillah Pervez and a direct conversation with the Board, and their standing is verified before admission." },
-  { question: "What is the difference between the three-year and the five-year programme?", answer: "Both meet the very same requirements and reach the same grade; you choose the pace. The five-year programme has the very same requirements, nothing added and nothing removed, simply spread over five years." },
-  { question: "Who signs off an AL&CO Master Trainer?", answer: "Every AL&CO Master Trainer is signed off by two Master Trainers in good standing: Arslan Larik signs as one, and the second is another certified Master Trainer appointed at our discretion. This two-signature sign-off is AL&CO's own standard, a rule we hold ourselves to without exception." },
-  { question: "Why is there no price on this page?", answer: "This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not. All it takes to find out where you stand is a conversation: please contact us for details, and your relationship manager will take you through it." },
+  {
+    question:
+      "Three to five years is a long commitment. Why bind myself for so long when I already run a training business?",
+    answer:
+      "Because this is the highest grade in the discipline, and it cannot be bought in a workshop. The years are not waiting; they are the real work: delivering trainings, supervising and mentoring, completing your project, meeting a standard the board recognises, and being signed off under AL&CO's own two-signature rule. This path is not for someone wanting a quick badge. It is for the educator who intends to shape the profession and certify the next generation of trainers.",
+  },
+  {
+    question: "Who may apply for the NLP Master Trainer programme?",
+    answer:
+      "You must already be a Certified Trainer of NLP in good standing, having completed the Trainer’s Training and holding current ABNLP Trainer membership. Entry is not automatic. Every candidate has an interview with Bismillah Pervez and a direct conversation with the Board, and their standing is verified before admission.",
+  },
+  {
+    question:
+      "What is the difference between the three-year and the five-year programme?",
+    answer:
+      "Both meet the very same requirements and reach the same grade; you choose the pace. The five-year programme has the very same requirements, nothing added and nothing removed, simply spread over five years.",
+  },
+  {
+    question: "Who signs off an AL&CO Master Trainer?",
+    answer:
+      "Every AL&CO Master Trainer is signed off by two Master Trainers in good standing: Arslan Larik signs as one, and the second is another certified Master Trainer appointed at our discretion. This two-signature sign-off is AL&CO's own standard, a rule we hold ourselves to without exception.",
+  },
+  {
+    question: "Why is there no price on this page?",
+    answer:
+      "This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not. All it takes to find out where you stand is a conversation: please contact us for details, and your relationship manager will take you through it.",
+  },
 ];
 
 const NavDataLevel6: LevelNavType = {
-  prev: { href: "/program/hypnosis-trainers-training-program", label: "Level 5: Hypnosis Train the Trainer" },
-  prerequisite: { href: "/program/nlp-trainers-training-program", label: "Prerequisite: Level 4, NLP Train the Trainer" },
+  prev: {
+    href: "/program/hypnosis-trainers-training-program",
+    label: "Level 5: Hypnosis Train the Trainer",
+  },
+  prerequisite: {
+    href: "/program/nlp-trainers-training-program",
+    label: "Prerequisite: Level 4, NLP Train the Trainer",
+  },
 };
 
 // Level 6 End

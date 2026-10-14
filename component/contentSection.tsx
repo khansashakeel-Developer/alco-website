@@ -13,16 +13,19 @@ type Props = {
 };
 
 const ContentSection = ({ data, onItemClick }: Props) => {
+    if (!data) return null;
+
+    const underlineClass = data?.underline === true ? "underline" : "";
+
     return (
-        data &&
         <section className={`${data?.padding ? data?.padding : "pb-6 md:pb-8 lg:pb-12 xl:pb-16 "} ${data?.fullBg ? data?.fullBg : "max-w-7xl"} mx-auto sm:px-4`}>
             <div className="container mx-auto px-4">
                 {/* Title */}
                 {data?.title && (
-                    data?.TagType ? <data.TagType className={`h4 font-semibold  ${data?.textAlign ? data?.textAlign : "text-center"} ${data?.titleColor ? data?.titleColor : "text-primary"}  ${data?.underline === true && "underline"} `}>
+                    data?.TagType ? <data.TagType className={`h4 font-semibold  ${data?.textAlign ? data?.textAlign : "text-center"} ${data?.titleColor ? data?.titleColor : "text-primary"}  ${underlineClass} `}>
                         {data?.title}
                     </data.TagType> :
-                    <div className={`h4 font-semibold  ${data?.textAlign ? data?.textAlign : "text-center"} ${data?.titleColor ? data?.titleColor : "text-primary"}  ${data?.underline === true && "underline"} `}>
+                    <div className={`h4 font-semibold  ${data?.textAlign ? data?.textAlign : "text-center"} ${data?.titleColor ? data?.titleColor : "text-primary"}  ${underlineClass} `}>
                         {data?.title}
                     </div>
                 )}
@@ -34,10 +37,10 @@ const ContentSection = ({ data, onItemClick }: Props) => {
 
                 {/* Mini Title */}
                 {data?.miniTitle && (
-                    data?.MiniTagType ? <data.MiniTagType className={`h5 font-semibold ${data?.textAlign ? data?.textAlign : "text-center"} text-primary ${data?.underline === true && "underline"} `}>
+                    data?.MiniTagType ? <data.MiniTagType className={`h5 font-semibold ${data?.textAlign ? data?.textAlign : "text-center"} text-primary ${underlineClass} `}>
                         {data?.miniTitle}
                     </data.MiniTagType> :
-                    <div className={`h5 font-semibold ${data?.textAlign ? data?.textAlign : "text-center"} text-primary ${data?.underline === true && "underline"} `}>
+                    <div className={`h5 font-semibold ${data?.textAlign ? data?.textAlign : "text-center"} text-primary ${underlineClass} `}>
                         {data?.miniTitle}
                     </div>
                 )}
@@ -47,6 +50,7 @@ const ContentSection = ({ data, onItemClick }: Props) => {
                     <div className={data.contentlistClass ? data.contentlistClass : `grid ${data.contentlistColumn ? data.contentlistColumn : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 "}   max-w-6xl mx-auto pt-6 md:pt-8 lg:pt-12 xl:pt-16 `}>
                         {data.contentlist.map((content, index) => (
                             <div
+                                key={index}
                                 className={`${data?.contentlisItemClass ? data?.contentlisItemClass : `rounded-xl bg-slate-200/60 drop-shadow-sm px-4 py-6`} ${(content as any)?.is_available === false ? "cursor-not-allowed" : "cursor-pointer"}`}
                                 onClick={() => onItemClick?.(content, index)}
                             >
@@ -54,7 +58,6 @@ const ContentSection = ({ data, onItemClick }: Props) => {
                                 {content.src && (
                                     <div className={`relative w-full ${content.height ? content.height : "h-36"}`}>
                                         <Image
-                                            key={index}
                                             src={content.src}
                                             alt={content.alt ?? ""}
                                             fill
@@ -102,6 +105,7 @@ const ContentSection = ({ data, onItemClick }: Props) => {
                 {data?.imagelist && data.imagelist.length > 0 && (
                     <div className="grid grid-cols-4 gap-4 sm:gap-8 lg:gap-12 xl:gap-16 2xl:gap-24 max-w-5xl mx-auto pt-6 md:pt-8 lg:pt-12 xl:pt-16">
                         {data.imagelist.map((img, index) => (
+                            // eslint-disable-next-line @next/next/no-img-element
                             <img
                                 key={index}
                                 src={img.src}
@@ -111,8 +115,6 @@ const ContentSection = ({ data, onItemClick }: Props) => {
                         ))}
                     </div>
                 )}
-
-
 
                 {data?.button && (
                     <div className="flex justify-center pt-6 md:pt-8">
