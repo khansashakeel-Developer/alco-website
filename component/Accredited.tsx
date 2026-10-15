@@ -93,7 +93,7 @@ export default function Accredited() {
         {/* All seals in one line (scrolls sideways on small phones) */}
         <ul
           ref={listRef}
-          className="mx-auto mt-12 flex max-w-6xl snap-x items-start gap-4 overflow-x-auto px-1 pb-4 md:overflow-visible md:pb-0"
+                   className="mx-auto mt-6 flex max-w-6xl snap-x items-start gap-4 overflow-x-auto px-3 pb-4 pt-8 md:mt-12 md:overflow-visible md:px-1 md:pb-0 md:pt-0"
         >
           {seals.map((s, i) => (
             <li
