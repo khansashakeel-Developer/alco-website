@@ -74,11 +74,11 @@ function ScrollText({ text }: { text: string }) {
   }, []);
   const words = text.split(" ");
   return (
-    <p ref={ref} className="text-xl font-medium leading-snug md:text-3xl md:leading-snug">
+        <p ref={ref} className="text-lg font-normal leading-relaxed md:text-2xl md:leading-relaxed">
       {words.map((w, i) => (
         <span
           key={i}
-          className={`transition-colors duration-300 ${i / words.length < p ? "text-primary" : "text-primary/20"}`}
+              className={`transition-colors duration-300 ${i / words.length < p ? "text-black" : "text-black/20"}`}
         >
           {w}{" "}
         </span>
@@ -232,7 +232,18 @@ export default function LearningJourney({ seals }: { seals: Seal[] }) {
               </span>
               Live
             </span>
-            <p className="mt-6 text-xl font-semibold leading-snug">Live on Zoom, taught personally</p>
+                        <div className="mt-6 flex items-center gap-4">
+              <span
+                aria-hidden="true"
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary shadow-md ring-4 ring-primary/10"
+              >
+                <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none">
+                  <rect x="2" y="6" width="13" height="12" rx="3" fill="#fff" />
+                  <path d="M16.5 10.2l4.3-2.7c.5-.3 1.2 0 1.2.7v8.6c0 .7-.7 1-1.2.7l-4.3-2.7v-4.6z" fill="#fff" />
+                </svg>
+              </span>
+              <p className="text-xl font-semibold leading-snug">Live on Zoom, taught personally</p>
+            </div>
           </Tile>
 
           {/* Sessions: 24 hour bar */}

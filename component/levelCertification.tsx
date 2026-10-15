@@ -104,14 +104,18 @@ export default function LevelCertification({ data }: Props) {
 
                 <div className="relative flex items-center gap-5 p-5 pt-7 lg:p-6 lg:pt-8">
                   {point?.imageBrand?.src && (
-                                        <span className="relative block size-[120px] min-h-[120px] min-w-[120px] shrink-0 overflow-hidden rounded-full bg-white shadow-md ring-4 ring-secondary transition duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:transform-none lg:size-[132px] lg:min-h-[132px] lg:min-w-[132px]">
+                    <span className="relative block size-[120px] min-h-[120px] min-w-[120px] shrink-0 overflow-hidden rounded-full shadow-md ring-4 ring-secondary transition duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:transform-none lg:size-[132px] lg:min-h-[132px] lg:min-w-[132px]">
                       <Image
                         src={point.imageBrand.src}
                         alt={point.imageBrand.alt || "Brand"}
                         fill
                         sizes="132px"
                         className={`rounded-full object-cover ${
-                          point.imageBrand.alt?.includes("AL&CO") ? "scale-[1.3]" : "scale-[0.92]"
+                          point.imageBrand.alt?.includes("AL&CO")
+                            ? "scale-[1.3]"
+                            : point.imageBrand.alt?.includes("(ABNLP)")
+                              ? "scale-[1.06]"
+                              : "scale-[1.12]"
                         }`}
                       />
                     </span>

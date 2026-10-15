@@ -5,8 +5,6 @@ import type { StaticImageData } from "next/image";
 import Banner from "@/component/banner";
 import HowToEnrol from "@/component/HowToEnrol";
 import programLevel1 from "@/assets/background/program-level-1.webp";
-// P7 board seals: the repo already holds these badge files (assets/level-certificate/badges).
-// LOGO markers below: Khansa to confirm or replace with the current approved artwork.
 import SealABNLP from "@/assets/level-certificate/badges/abnlp.webp";
 import SealABNLPCoaching from "@/assets/level-certificate/badges/cdab.webp";
 import SealTLTA from "@/assets/level-certificate/badges/tlta.webp";
@@ -21,6 +19,8 @@ import LevelsExpandGallery from "@/component/LevelsExpandGallery";
 import WhyNoNumber from "@/component/WhyNoNumber";
 import LearningJourney from "@/component/LearningJourney";
 import WebinarDoor from "@/component/WebinarDoor";
+import { LadderList, LadderItem } from "@/component/LadderScroll";
+import { RouteList, RouteStep } from "@/component/RouteScroll";
 
 const PAGE_URL = `${SITE_URL}/programs`;
 const TITLE = "NLP and Hypnosis Certification Programmes Online | AL&CO";
@@ -430,7 +430,7 @@ export default function ProgrammesHubPage() {
             Six Levels at a Glance
           </h2>
 
-          <ol className="relative mt-10 md:mt-14 before:absolute before:top-0 before:bottom-0 before:left-8 md:before:left-11 before:w-1.5 before:-translate-x-1/2 before:rounded-full before:bg-[#0C2565]">
+          <LadderList className="relative mt-10 md:mt-14 before:absolute before:top-0 before:bottom-0 before:left-8 md:before:left-11 before:w-1.5 before:-translate-x-1/2 before:rounded-full before:bg-[#0C2565]">
             {LEVELS.map((l) => {
               const base = l.name.replace(/^NLP\s+/, "");
               const tag = /^Hypnosis/.test(l.name) ? "Hypnosis" : "NLP";
@@ -438,12 +438,12 @@ export default function ProgrammesHubPage() {
                 ? l.name.replace(/^Hypnosis\s+/, "")
                 : base;
               return (
-                <li
+                <LadderItem
                   key={l.level}
                   className="relative grid grid-cols-[64px_1fr] md:grid-cols-[88px_1fr] gap-x-4 md:gap-x-6 pb-10 md:pb-14 last:pb-0"
                 >
                   {/* number circle */}
-                  <div className="relative z-10 flex h-16 w-16 md:h-[88px] md:w-[88px] items-center justify-center rounded-full bg-[#0F2763] text-2xl md:text-4xl font-bold text-white ring-4 ring-white">
+                  <div className="relative z-10 flex h-16 w-16 scale-50 transition-transform duration-700 ease-out group-data-[shown=true]/li:scale-100 md:h-[88px] md:w-[88px] items-center justify-center rounded-full bg-[#0F2763] text-2xl md:text-4xl font-bold text-white ring-4 ring-white">
                     {String(l.level).padStart(2, "0")}
                   </div>
 
@@ -451,7 +451,7 @@ export default function ProgrammesHubPage() {
                     {/* icon + pill row (same height for every level) */}
                     <Link
                       href={levelUrl(l.slug)}
-                      className="group flex h-16 md:h-[88px] items-center"
+                      className="group flex  -translate-x-6 opacity-0 transition-all delay-200 duration-700 group-data-[shown=true]/li:translate-x-0 group-data-[shown=true]/li:opacity-100 h-16 md:h-[88px] items-center"
                     >
                       {/* water drop icon */}
                       <div className="relative h-[52px] w-[67px] md:h-[92px] md:w-[118px] shrink-0">
@@ -513,10 +513,10 @@ export default function ProgrammesHubPage() {
                       {l.leaveAble}
                     </p>
                   </div>
-                </li>
+                </LadderItem>
               );
             })}
-          </ol>
+          </LadderList>
 
           <div className="mt-10 md:mt-14 rounded-full bg-secondary px-6 py-3 text-center text-sm md:text-lg font-semibold text-primary-darkest">
             All programmes are delivered live on Zoom, taught personally.
@@ -578,15 +578,10 @@ export default function ProgrammesHubPage() {
               </p>
             </div>
 
-            {/* Right: two routes joined by a line */}
-            <div className="relative">
-              <span
-                aria-hidden="true"
-                className="absolute left-7 top-10 bottom-16 w-0.5 bg-gradient-to-b from-secondary to-primary/30"
-              />
-
-              <div className="group relative flex items-start gap-5 pb-8">
-                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+                        {/* Right: two routes joined by a line */}
+            <RouteList>
+              <RouteStep className="group relative flex items-start gap-5 pb-8">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-700 group-data-[shown=true]/step:scale-100 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
                   1–2
                 </span>
                 <div className="pt-1">
@@ -597,10 +592,13 @@ export default function ProgrammesHubPage() {
                     Arranged by your relationship manager.
                   </p>
                 </div>
-              </div>
+              </RouteStep>
 
-              <div className="group relative flex items-start gap-5 pb-8">
-                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+              <RouteStep
+                delay={200}
+                className="group relative flex items-start gap-5 pb-8"
+              >
+                <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-700 group-data-[shown=true]/step:scale-100 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
                   3+
                 </span>
                 <div className="pt-1">
@@ -611,18 +609,18 @@ export default function ProgrammesHubPage() {
                     Arranged directly with Bismillah Pervez and Arslan Larik.
                   </p>
                 </div>
-              </div>
+              </RouteStep>
 
-              <div className="relative flex items-start gap-5">
-                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary text-2xl text-primary-darkest shadow-lg">
+              <RouteStep delay={400} className="relative flex items-start gap-5">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-secondary text-2xl text-primary-darkest shadow-lg transition-all duration-700 group-data-[shown=true]/step:scale-100 group-data-[shown=true]/step:animate-pulse">
                   ✓
                 </span>
                 <p className="pt-3 font-outfit text-lg font-semibold text-primary">
                   One conversation is all it takes to find the pathway that fits
                   you.
                 </p>
-              </div>
-            </div>
+              </RouteStep>
+            </RouteList>
           </div>
         </div>
       </section>

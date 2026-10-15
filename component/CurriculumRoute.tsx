@@ -22,23 +22,27 @@ function useSeen<T extends HTMLElement>(margin = "0px 0px -18% 0px") {
 
 function Topic({ n, text, left }: { n: number; text: string; left: boolean }) {
   const [ref, seen] = useSeen<HTMLLIElement>();
+  const words = text.split(" ");
+  let letter = 0;
   return (
     <li
       ref={ref}
-      className="relative grid grid-cols-[40px_1fr] items-center gap-x-4 py-1.5 md:grid-cols-[1fr_56px_1fr] md:gap-x-6"
+      className="relative grid min-h-[84px] grid-cols-[44px_1fr] items-center gap-x-5 py-3 md:min-h-[96px] md:grid-cols-[1fr_64px_1fr] md:gap-x-10 md:py-4"
     >
       {/* the station */}
       <span
-        className={`relative z-10 col-start-1 row-start-1 flex h-9 w-9 items-center justify-center justify-self-center rounded-full text-xs font-bold ring-4 ring-slate-100 transition-all duration-700 md:col-start-2 ${
-          seen ? "scale-110 bg-secondary text-primary-darkest shadow-[0_0_0_5px_rgba(249,184,30,0.25)]" : "scale-90 border border-slate-300 bg-white text-primary/60"
+        className={`relative z-10 col-start-1 row-start-1 flex h-11 w-11 items-center justify-center justify-self-center rounded-full text-sm font-bold ring-[6px] ring-slate-100 transition-all duration-700 md:col-start-2 md:h-12 md:w-12 ${
+          seen
+            ? "scale-110 bg-secondary text-primary-darkest shadow-[0_0_0_8px_rgba(249,184,30,0.25)]"
+            : "scale-90 border border-slate-300 bg-white text-primary/60"
         }`}
       >
         {n}
       </span>
 
-      {/* the topic card */}
+      {/* the topic card, with a connector that grows out of the circle */}
       <div
-        className={`col-start-2 row-start-1 transition-all duration-700 ease-out ${
+        className={`relative col-start-2 row-start-1 transition-all duration-700 ease-out ${
           left ? "md:col-start-1 md:justify-self-end md:text-right" : "md:col-start-3"
         } ${
           seen
@@ -46,8 +50,35 @@ function Topic({ n, text, left }: { n: number; text: string; left: boolean }) {
             : `opacity-0 ${left ? "md:-translate-x-10" : "md:translate-x-10"} translate-x-8`
         }`}
       >
-        <span className="inline-block rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:text-[15px]">
-          {text}
+        <span
+          aria-hidden="true"
+          className={`absolute right-full top-1/2 h-[3px] w-5 -translate-y-1/2 origin-left rounded-full bg-secondary transition-transform delay-300 duration-500 motion-reduce:transition-none md:w-10 ${
+            left ? "md:right-auto md:left-full md:origin-right" : ""
+          } ${seen ? "scale-x-100" : "scale-x-0"}`}
+        />
+        <span
+          aria-label={text}
+          className="inline-block rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:text-[15px]"
+        >
+          {words.map((w, wi) => (
+            <span key={wi} aria-hidden="true" className="inline-block whitespace-nowrap">
+              {w.split("").map((c, ci) => {
+                const d = 450 + letter++ * 28;
+                return (
+                  <span
+                    key={ci}
+                    style={{ transitionDelay: `${d}ms` }}
+                      className={`inline-block transition-all duration-500 ease-out ${
+                      seen ? "translate-y-0 opacity-100 blur-0" : "translate-y-2 opacity-0 blur-[3px]"
+                    }`}
+                  >
+                    {c}
+                  </span>
+                );
+              })}
+              {wi < words.length - 1 ? "\u00a0" : ""}
+            </span>
+          ))}
         </span>
       </div>
     </li>
@@ -59,7 +90,7 @@ function ModuleBanner({ i, title, image, count }: { i: number; title: string; im
   return (
     <div
       ref={ref}
-      className={`relative z-10 my-8 overflow-hidden rounded-2xl bg-cover bg-center shadow-xl transition-all duration-700 ${
+      className={`relative z-10 my-10 overflow-hidden rounded-2xl bg-cover bg-center shadow-xl transition-all duration-700 ${
         seen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
       style={{ backgroundImage: `url(${image})` }}
@@ -128,9 +159,9 @@ export default function CurriculumRoute({ data }: { data: LevelContentType }) {
 
         <div ref={wrap} className="relative mx-auto mt-6 max-w-5xl">
           {/* the rail */}
-          <div className="absolute bottom-0 left-5 top-0 w-1 -translate-x-1/2 rounded-full bg-slate-300/70 md:left-1/2">
+          <div className="absolute bottom-0 left-[22px] top-0 w-1.5 -translate-x-1/2 rounded-full bg-slate-300 md:left-1/2">
             <div
-              className="w-full rounded-full bg-gradient-to-b from-secondary to-secondary-dark shadow-[0_0_12px_rgba(249,184,30,0.7)]"
+              className="w-full rounded-full bg-gradient-to-b from-secondary to-secondary-dark shadow-[0_0_14px_rgba(249,184,30,0.8)]"
               style={{ height: `${fill * 100}%`, transition: "height 120ms linear" }}
             />
           </div>

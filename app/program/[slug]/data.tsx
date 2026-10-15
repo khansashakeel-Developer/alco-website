@@ -31,7 +31,7 @@ import SignOffQuote from "@/component/SignOffQuote";
 import programLevel1 from "@/assets/background/program-level-1.webp";
 import programLevel2 from "@/assets/background/program-level-2.webp";
 import { LevelCertificationType } from "@/type/levelCertification";
-import AccreditedBrand1 from "@/assets/accredited/accredited-1.webp";
+import AccreditedBrand1 from "@/assets/level-certificate/badges/abnlp.webp";
 import AccreditedBrand2 from "@/assets/level-certificate/badges/tlta.webp";
 import AccreditedBrand3 from "@/assets/accredited/accredited-3.webp";
 import AccreditedBrand4 from "@/assets/accredited/accredited-4.webp";
