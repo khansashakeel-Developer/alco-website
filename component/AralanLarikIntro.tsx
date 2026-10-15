@@ -50,7 +50,7 @@ const trainers: TrainerCard[] = [
     imageAlt: "Arslan Larik, Founder and Master Trainer at AL&CO",
     objectPosition: "center top",
     button: { text: "About Arslan", link: "/about-us/who-is-arslan-larik" },
-        logos: [
+    logos: [
       { image: badgeABNLP, alt: "ABNLP Certified Master Trainer of NLP" },
       { image: badgeANLP, alt: "ANLP Accredited Trainer (UK)" },
       { image: badgeNGH, alt: "National Guild of Hypnotists (NGH)" },
@@ -75,7 +75,7 @@ const trainers: TrainerCard[] = [
       text: "About Bismillah",
       link: "/about-us/who-is-bismillah-pervez",
     },
-        logos: [
+    logos: [
       { image: badgeABNLP, alt: "ABNLP Approved Training" },
       { image: badgeANLP, alt: "ANLP Accredited Trainer (UK)" },
       { image: badgeNGH, alt: "National Guild of Hypnotists (NGH)" },
@@ -199,8 +199,8 @@ export default function AralanLarikIntro() {
               </div>
 
               <div className="flex flex-col flex-1 p-5 lg:px-6 lg:py-5">
-                               {/* Credentials as logos. The text stays in the page for search engines and screen readers. */}
-                <div className="grid min-h-[5.5rem] grid-cols-7 items-center justify-items-center gap-1.5 sm:gap-2">
+                {/* Credentials as logos. The text stays in the page for search engines and screen readers. */}
+                <div className="flex min-h-[5.5rem] flex-nowrap items-center justify-center gap-1.5 sm:gap-2">
                   {t.logos.map((l) => (
                     <Image
                       key={l.alt}
@@ -209,7 +209,7 @@ export default function AralanLarikIntro() {
                       title={l.alt}
                       width={80}
                       height={80}
-                      className={`relative h-auto w-full max-w-[72px] object-contain transition-transform duration-300 hover:z-10 ${
+                      className={`relative h-auto w-[13.5%] min-w-0 max-w-[72px] shrink object-contain transition-transform duration-300 hover:z-10 ${
                         l.image === badgeNLPU
                           ? "scale-[1.3] hover:scale-[1.4]"
                           : "scale-105 hover:scale-110"
