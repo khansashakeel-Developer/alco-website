@@ -1,19 +1,31 @@
 import React from "react";
-import Image, { StaticImageData } from "next/image";
-import { BrandTitle } from "@/type/brandTypes";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import BrandCarousel from "@/component/brand-carousel/brandCarousel";
+
 import kElectric from "@/assets/brand/k-electric.webp";
 import bankAlfalah from "@/assets/brand/bank-alfalah.webp";
-import tameer from "@/assets/brand/tameer-microfinance-bank.webp";
-import emaar from "@/assets/brand/emaar-pakistan.webp";
-import hamdard from "@/assets/brand/hamdard-pakistan.webp";
-import alrahim from "@/assets/brand/alrahim-textile-mills.webp";
-import faysal from "@/assets/brand/faysal-bank.webp";
-import bayer from "@/assets/brand/bayer.webp";
 import gsk from "@/assets/brand/glaxosmithkline.webp";
+import bayer from "@/assets/brand/bayer.webp";
+import ibm from "@/assets/brand/ibm.webp";
 import pso from "@/assets/brand/pakistan-state-oil.webp";
+import emaar from "@/assets/brand/emaar-pakistan.webp";
+import faysal from "@/assets/brand/faysal-bank.webp";
+import hamdard from "@/assets/brand/hamdard-pakistan.webp";
 import pel from "@/assets/brand/pel.webp";
+import lucky from "@/assets/brand/lucky-cement.webp";
+import avient from "@/assets/brand/avient.webp";
+import tplInsurance from "@/assets/brand/tpl-insurance.webp";
+import tplTrakker from "@/assets/brand/tpl-trakker.webp";
+import ghandhara from "@/assets/brand/ghandhara-industries.webp";
+import habib from "@/assets/brand/habib-university.webp";
+import dha from "@/assets/brand/dha-suffa-university.webp";
+import icma from "@/assets/brand/icma.webp";
+import gulAhmed from "@/assets/brand/gul-ahmed.webp";
+import sicpa from "@/assets/brand/sicpa.webp";
+import stahl from "@/assets/brand/stahl.webp";
 import feroze from "@/assets/brand/feroze1888.webp";
+import alrahim from "@/assets/brand/alrahim-textile-mills.webp";
 
 import aajNews from "@/assets/about-us/featured/Aaj-News.webp";
 import bolNews from "@/assets/about-us/featured/Bol-News.webp";
@@ -22,23 +34,31 @@ import samaaNews from "@/assets/about-us/featured/Samaa-News.webp";
 
 type LogoItem = { name: string; image?: StaticImageData };
 
-// Exactly these 12, in this order (B 01 row A11). No other organisation may be added.
-// LOGO files: Khansa to source the approved logos as assets/brand/<slug>.webp (under 100KB each).
-// Until a logo exists, the organisation's name is shown in its tile. Once all 12 files exist,
-// this grid can switch back to <BrandCarousel images={...} />.
+// Big, well-known brands first, then the rest. Logo files live in assets/brand/ (lowercase names, under 100KB each).
 const organisations: LogoItem[] = [
   { name: "K-Electric", image: kElectric },
-  { name: "Tameer Microfinance Bank", image: tameer },
-  { name: "Emaar Pakistan", image: emaar },
-  { name: "Hamdard Pakistan", image: hamdard },
-  { name: "AlRahim Textile Mills", image: alrahim },
   { name: "Bank Alfalah", image: bankAlfalah },
-  { name: "Faysal Bank", image: faysal },
-  { name: "Bayer", image: bayer },
   { name: "GlaxoSmithKline", image: gsk },
+  { name: "Bayer", image: bayer },
+  { name: "IBM", image: ibm },
   { name: "Pakistan State Oil", image: pso },
+  { name: "Emaar Pakistan", image: emaar },
+  { name: "Faysal Bank", image: faysal },
+  { name: "Hamdard Pakistan", image: hamdard },
   { name: "PEL", image: pel },
+  { name: "Lucky Cement", image: lucky },
+  { name: "Avient", image: avient },
+  { name: "TPL Insurance", image: tplInsurance },
+  { name: "TPL Trakker", image: tplTrakker },
+  { name: "Ghandhara Industries", image: ghandhara },
+  { name: "Habib University", image: habib },
+  { name: "DHA Suffa University", image: dha },
+  { name: "ICMA International", image: icma },
+  { name: "Gul Ahmed", image: gulAhmed },
+  { name: "SICPA", image: sicpa },
+  { name: "Stahl", image: stahl },
   { name: "Feroze1888", image: feroze },
+  { name: "AlRahim Textile Mills", image: alrahim },
 ];
 
 const media: LogoItem[] = [
@@ -48,7 +68,7 @@ const media: LogoItem[] = [
   { name: "Samaa News", image: samaaNews },
 ];
 
-const brandTitle: BrandTitle = "A Ripple, Not a Headcount";
+const brandTitle = "A Ripple, Not a Headcount";
 
 // Every tile is a visible card (border, soft shadow, gold top edge) so text-only tiles read as intentional
 // and a logo can drop in later without changing the layout: just add `image` to the item above.
@@ -101,9 +121,9 @@ export default function Brand() {
         </div>
       </div>
 
-      {/* Organisations: one even grid of tiles (mixed text and logo tiles looked uneven in a moving strip). */}
-            <div className="mt-12 lg:mt-16">
-                <div className="mx-auto mb-10 max-w-4xl text-center">
+      {/* Organisations carousel. */}
+      <div className="mt-12 lg:mt-16">
+        <div className="mx-auto mb-10 max-w-4xl text-center">
           <span className="inline-block rounded-full bg-primary-darkest px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-secondary">
             Trusted by
           </span>
@@ -122,7 +142,7 @@ export default function Brand() {
           </p>
           <span aria-hidden="true" className="mx-auto mt-6 block h-px w-24 bg-gradient-to-r from-transparent via-secondary to-transparent" />
         </div>
-                <BrandCarousel items={organisations} />
+        <BrandCarousel items={organisations} />
       </div>
 
       {/* Featured In: stays inside this white section, directly under the organisations. */}

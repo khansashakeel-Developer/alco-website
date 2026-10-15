@@ -20,7 +20,7 @@ const BrandCarousel = ({ items }: BrandCarouselProps) => {
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const [emblaRef] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [
-    AutoScroll({ speed: 1, stopOnInteraction: false, startDelay: 0, playOnInit: !reduceMotion }),
+    AutoScroll({ speed: 1.8, stopOnInteraction: false, startDelay: 0, playOnInit: !reduceMotion }),
   ]);
 
   // Second copy makes the loop seamless. It is hidden from assistive tech and crawlers-as-text (aria-hidden, empty alt)
@@ -35,13 +35,13 @@ const BrandCarousel = ({ items }: BrandCarouselProps) => {
             const isCopy = index >= items.length;
             return (
               <div className="brand_embla__slide" key={`${item.name}-${index}`} aria-hidden={isCopy || undefined}>
-                <div className="relative w-full h-[80px] flex items-center justify-center">
+                <div className="relative w-full h-[130px] sm:h-[140px] md:h-[150px] flex items-center justify-center">
                   {item.image ? (
                     <Image
                       src={item.image}
                       alt={isCopy ? "" : `${item.name} logo`}
                       fill
-                      sizes="(max-width: 768px) 50vw, 200px"
+                      sizes="(max-width: 768px) 70vw, 300px"
                       className="object-contain"
                     />
                   ) : (

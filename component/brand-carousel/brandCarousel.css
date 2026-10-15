@@ -21,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 15px;
+  padding: 0 6px;
 }
 
 .brand_embla__slide__img {
@@ -34,7 +34,7 @@
 
 @media (min-width: 0px) and (max-width: 639px) {
   .brand_embla__slide {
-    flex: 0 0 50%; 
+    flex: 0 0 70%;
   }
 }
 
