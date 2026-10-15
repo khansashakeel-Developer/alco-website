@@ -28,15 +28,12 @@ const HeroCarousel = ({ slides, options, onEditSlide }: PropType) => {
   const [isFading, setIsFading] = useState(false);
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Video only on larger screens, with no data-saver or reduced-motion preference. Phones show the poster image.
+  // Video plays everywhere except when Data Saver is on. Phones get a smaller file.
   const [canPlayVideo, setCanPlayVideo] = useState<boolean | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     const saveData = (navigator as any).connection?.saveData === true;
-    setCanPlayVideo(!reduce && !saveData);
+    setCanPlayVideo(!saveData);
     setIsMobile(window.matchMedia("(max-width: 767px)").matches);
   }, []);
     useEffect(() => {

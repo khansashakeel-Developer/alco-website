@@ -8,6 +8,7 @@ import Accredited from "@/component/Accredited";
 import WhyTrainWithAL from "@/component/WhyTrainWithAL";
 import ALCOCenter from "@/component/ALCOCenter";
 import Testimonials from "@/component/testimonial";
+import StudentReviews from "@/component/StudentReviews";
 import AtAGlance from "@/component/AtAGlance";
 import { home } from "./data";
 import LiveSessionsSection from "@/component/Livesessionssection";
@@ -106,9 +107,12 @@ export default async function Home() {
         <Reveal><ALCOCenter /></Reveal>
         <Reveal><LiveSessionsSection /></Reveal>
         <Reveal><Testimonials /></Reveal>
+        <Reveal><StudentReviews /></Reveal>
+        
         {/* Closing band (CTA plan rule 2): Home primary C1, secondary C2. */}
         <CtaBand
           title="Your Transformation Starts with One Conversation"
+          tone="light"
           text="Tell a relationship manager where you are and where you want to go, or come to a free webinar first and simply listen."
           primary={{ id: "C1", message: "Hi, I would like to know about AL&CO's NLP training (home page)" }}
           secondary={{ id: "C2" }}

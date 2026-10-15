@@ -101,7 +101,7 @@ const approvedBodies: { board: string; seal?: StaticImageData; text: string }[] 
   // LOGO: ANLP (UK) - Khansa to supply approved artwork (ANLP CPD badge until then)
   { board: "ANLP (UK)", seal: badgeCPD, text: "ANLP, the Association for NLP (UK), which accredits Arslan as a trainer and provides your CPD accreditation." },
   // LOGO: AL&CO - Khansa to supply approved artwork
-  { board: "AL&CO", seal: badgeALCO, text: "AL&CO, our own Certified Practitioner of Behavioral Reengineering." },
+  { board: "AL&CO", seal: badgeALCO, text: "AL&CO, Our Own Certified Practitioner of Behavioral Reengineering." },
 ];
 
 const bannerDataAL: BannerType = {

@@ -55,7 +55,7 @@ const seals: SealLine[] = [
   {
     board: "AL&CO",
     seal: sealALCO,
-    text: "AL&CO: our own Certified Practitioner of Behavioral Reengineering.",
+    text: "AL&CO: Our Own Certified Practitioner of Behavioral Reengineering.",
   },
 ];
 

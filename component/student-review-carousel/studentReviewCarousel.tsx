@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react"
 import { EmblaOptionsType } from "embla-carousel"
 import useEmblaCarousel from "embla-carousel-react"
-import Button from "@/component/button"
+import Autoplay from "embla-carousel-autoplay"
 import "@/component/student-review-carousel/studentReviewCarousel.css"
 import { TestimonialsPost } from "@/type/testimonialsTypes"
 import { MdArrowForwardIos } from "react-icons/md";
@@ -14,10 +14,20 @@ import Image from "next/image"
 type PropType = {
     slides: TestimonialsPost[]
     options?: EmblaOptionsType
+    /** Milliseconds between automatic slides. Leave out for no autoplay. */
+    autoplayDelay?: number
 }
 
-const StudentReviewCarousel = ({ slides, options }: PropType) => {
-    const [emblaRef, emblaApi] = useEmblaCarousel(options)
+const StudentReviewCarousel = ({ slides, options, autoplayDelay }: PropType) => {
+    const autoplay = useRef(
+        autoplayDelay
+            ? Autoplay({ delay: autoplayDelay, stopOnInteraction: false, stopOnMouseEnter: true })
+            : null
+    )
+    const [emblaRef, emblaApi] = useEmblaCarousel(
+        { ...options, loop: autoplayDelay ? true : options?.loop },
+        autoplay.current ? [autoplay.current] : []
+    )
     const [expandedSlides, setExpandedSlides] = useState<{ [key: string]: boolean }>({});
 
     const toggleExpand = (id: string) => {
@@ -36,18 +46,17 @@ const StudentReviewCarousel = ({ slides, options }: PropType) => {
                                         {slide.thumbnail && (
                                             <div className="w-12 h-12 relative rounded-full overflow-hidden">
                                                 <Image
-                                                    src={slide.thumbnail}          // must be defined
+                                                    src={slide.thumbnail}
                                                     alt={slide.name}
-                                                    fill                            // makes it fill the parent div
+                                                    fill
                                                     className="object-cover rounded-full"
-                                                    sizes="48px"                    // optional, since w-12 h-12 = 48px
+                                                    sizes="48px"
                                                 />
                                             </div>
                                         )}
                                         <div>
                                             <h3 className="font-semibold text-lg font-outfit">{slide.name}</h3>
                                             <p className="text-sm text-gray-600 font-outfit">{slide.designation}</p>
-
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-1 ">
@@ -80,8 +89,6 @@ const StudentReviewCarousel = ({ slides, options }: PropType) => {
                         </div>
                     ))}
                 </div>
-
-
             </div>
 
             {/* Arrows fixed left/right */}
@@ -89,12 +96,14 @@ const StudentReviewCarousel = ({ slides, options }: PropType) => {
                 <div className="student_review_embla__buttons mt-8 xl:mt-0">
                     <button
                         onClick={() => emblaApi?.scrollPrev()}
+                        aria-label="Previous review"
                         className="xl:absolute xl:top-1/2 xl:-left-8 transform -translate-y-1/2 bg-primary text-white h-10 w-10 rounded-full shadow-lg z-10 flex justify-center items-center"
                     >
                         <MdArrowForwardIos className="rotate-180" />
                     </button>
                     <button
                         onClick={() => emblaApi?.scrollNext()}
+                        aria-label="Next review"
                         className=" xl:absolute xl:top-1/2 xl:-right-8 transform -translate-y-1/2 bg-primary text-white h-10 w-10 rounded-full shadow-lg z-10 flex justify-center items-center"
                     >
                         <MdArrowForwardIos />
