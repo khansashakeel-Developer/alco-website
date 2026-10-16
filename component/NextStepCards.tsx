@@ -37,14 +37,14 @@ export default function NextStepCards({ intro, cards }: { intro?: React.ReactNod
       <style>{`
         @keyframes nscPanel{from{opacity:0;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}
         @media (prefers-reduced-motion:no-preference){ .nsc-panel:not([hidden]){animation:nscPanel .45s cubic-bezier(.2,.8,.2,1) both} }
-        @media (min-width:1024px){ .nsc-panel{grid-column:2;grid-row:1 / span var(--nsc-n)} }
+        @media (min-width:1024px){ .nsc-panel{grid-column:2;grid-row:1 / -1} }
       `}</style>
 
       <div
         className={`rounded-3xl bg-primary-darkest bg-dark-primary bg-cover bg-top-left p-5 shadow-2xl sm:p-6 lg:p-10 ${intro ? "mt-6" : "mt-4 lg:mt-6"}`}
         style={{ ["--nsc-n" as string]: cards.length } as React.CSSProperties}
       >
-        <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:items-stretch lg:gap-x-10 lg:gap-y-4">
+        <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:[grid-template-rows:repeat(var(--nsc-n),auto)_1fr] lg:items-stretch lg:gap-x-10 lg:gap-y-4">
           {cards.map((card, i) => {
             const open = i === active;
             const { color, ink } = ACCENTS[i % ACCENTS.length];

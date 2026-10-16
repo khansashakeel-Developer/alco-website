@@ -10,6 +10,8 @@ import Level5 from "@/assets/Untitled design/5.webp";
 import Level6 from "@/assets/Untitled design/6.webp";
 import { OurProgramData } from "@/type/ourProgram";
 import OurProgramCarousel from "./our-program-carousel/ourProgramCarousel";
+import ArtYellow from "@/assets/our-program/program-art-yellow.webp";
+import ArtBlue from "@/assets/our-program/program-art-blue.webp";
 
 
 // B 01 rows A19 to A25; alts per A 09 C3.
@@ -26,7 +28,7 @@ const ourProgramData: OurProgramData = {
       button: {
         text: "Learn More"
       },
-      video: "/videos/programs/level-1.mp4",
+            art: { src: ArtYellow, tone: "light" },
       image: {
         src: Level1,
         alt: "Level 1: NLP Practitioner"
@@ -40,7 +42,7 @@ const ourProgramData: OurProgramData = {
         text: "Learn More"
       },
       
-      video: "/videos/programs/level-2.mp4",
+            art: { src: ArtBlue, tone: "dark" },
       image: {
         src: Level2,
         alt: "Level 2: NLP Master Practitioner"

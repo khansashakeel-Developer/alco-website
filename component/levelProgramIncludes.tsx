@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LevelProgramIncludesType } from "@/type/levelProgramIncludes";
 import Image from "next/image";
 import Reveal from "./Reveal";
@@ -8,7 +8,25 @@ import IncludesScrollStory from "@/component/IncludesScrollStory";
 type Props = {
   data?: LevelProgramIncludesType
 }
-
+function JourneyItem({ className, children }: { className: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => setActive(e.isIntersecting),
+      { rootMargin: "-35% 0px -35% 0px", threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div ref={ref} data-active={active} className={className}>
+      {children}
+    </div>
+  );
+}
 export default function LevelProgramIncludes({ data }: Props) {
   if (data?.layout === "split") return <IncludesScrollStory data={data} />;
   const count = data?.points?.length ?? 0;
@@ -90,7 +108,7 @@ export default function LevelProgramIncludes({ data }: Props) {
               {data?.points.map((point, index) => {
                 const left = index % 2 === 0;
                 return (
-                  <div
+                                    <JourneyItem
                     key={index}
                     className={`group relative pl-16 md:pl-0 md:w-1/2 ${
                       left ? "md:pr-12 lg:pr-16" : "md:pl-12 lg:pl-16 md:ml-auto"
@@ -103,13 +121,13 @@ export default function LevelProgramIncludes({ data }: Props) {
                       }`}
                     >
                       <span aria-hidden="true" className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary/40" />
-                      <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-white ring-4 ring-secondary/60 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:bg-secondary group-hover:text-primary-darkest">
+                      <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-white ring-4 ring-secondary/60 shadow-lg transition-all duration-500 group-hover:scale-125 group-hover:bg-secondary group-hover:text-primary-darkest group-data-[active=true]:scale-125 group-data-[active=true]:bg-secondary group-data-[active=true]:text-primary-darkest">
                         {index + 1}
                       </span>
                     </div>
 
                     <Reveal delay={Math.min(index, 4) * 80}>
-                      <div className="rounded-2xl p-5 lg:p-6 transition-all duration-300 group-hover:bg-white group-hover:shadow-2xl group-hover:-translate-y-1">
+                      <div className="rounded-2xl border border-transparent p-5 lg:p-6 transition-all duration-500 group-data-[active=true]:-translate-y-1 group-data-[active=true]:bg-white group-data-[active=true]:shadow-2xl group-hover:border-secondary group-hover:shadow-[0_0_0_4px_rgba(249,184,30,0.25)]">
                         <div className="flex items-center gap-3">
                           <div className="h-11 w-11 shrink-0 rounded-full bg-gradient-to-br from-primary to-primary-darkest p-2.5 shadow-md transition-transform duration-500 group-hover:rotate-[360deg]">
                             {point?.image?.src && (
@@ -122,19 +140,19 @@ export default function LevelProgramIncludes({ data }: Props) {
                               />
                             )}
                           </div>
-                          <h3 className="font-outfit text-lg xl:text-xl font-semibold text-primary text-start transition-colors duration-300 group-hover:text-primary-darkest">
+                          <h3 className="font-outfit text-lg xl:text-xl font-normal text-primary text-start transition-colors duration-300 group-hover:text-primary-darkest">
                             {point.title}
                           </h3>
                         </div>
 
-                        <span aria-hidden="true" className="mt-3 block h-0.5 w-10 rounded-full bg-secondary transition-all duration-500 group-hover:w-24" />
+                        <span aria-hidden="true" className="mt-3 block h-0.5 w-10 rounded-full bg-secondary transition-all duration-500 group-hover:w-24 group-data-[active=true]:w-24" />
 
                         <div className="mt-3 font-outfit text-base leading-relaxed text-gray-700 text-start [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_p+ul]:mt-2">
                           {point.description}
                         </div>
                       </div>
                     </Reveal>
-                  </div>
+                  </JourneyItem>
                 );
               })}
             </div>

@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-// Fades and lifts its content in the first time it scrolls into view.
-// Visible by default (no JavaScript, reduce-motion, or already on screen): it only hides content that is
-// below the fold, just before it is about to be revealed.
+// Fades and lifts its content in every time it scrolls into view (down or up).
+// Visible by default (no JavaScript or reduce-motion). When the section is off screen it is reset,
+// so the animation plays again the next time it comes into view.
 export default function Reveal({
   children,
   delay = 0,
@@ -21,17 +21,12 @@ export default function Reveal({
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return; // already on screen at load
 
-    setState("hidden");
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setState("shown");
-          observer.disconnect();
-        }
+        setState(entry.isIntersecting ? "shown" : "hidden");
       },
-      { threshold: 0.1 }
+            { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();

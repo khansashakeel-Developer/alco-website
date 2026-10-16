@@ -173,7 +173,7 @@ export default function IncludesScrollStory({
                   }}
                   data-i={i}
                   className={`flex items-center rounded-2xl bg-white p-5 shadow-md transition-all duration-500 lg:min-h-[34vh] lg:bg-transparent lg:p-0 lg:shadow-none ${
-                    on ? "lg:opacity-100" : "lg:opacity-30"
+                    on ? "lg:opacity-100" : "lg:opacity-40"
                   }`}
                 >
                   <div className="w-full">
@@ -190,17 +190,17 @@ export default function IncludesScrollStory({
                           />
                         )}
                       </span>
-                      <h3 className="font-outfit text-lg font-semibold text-primary">
+                      <h3 className="font-outfit text-xl font-semibold text-primary">
                         {p.title}
                       </h3>
                     </div>
-                    <h3 className="mb-3 hidden font-outfit text-xl font-semibold text-primary lg:block">
+                    <h3 className="mb-3 hidden font-outfit text-2xl font-semibold text-primary lg:block xl:text-3xl">
                       <span className="mr-3 text-secondary-dark">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       {p.title}
                     </h3>
-                    <div className="border-l-4 border-secondary pl-5 font-outfit text-base leading-relaxed text-gray-700 [&_p+ul]:mt-2 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5">
+                    <div className="border-l-4 border-secondary pl-5 font-outfit text-lg leading-relaxed text-gray-700 md:text-xl md:leading-8 [&_p+ul]:mt-2 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5">
                       {p.description}
                     </div>
                   </div>

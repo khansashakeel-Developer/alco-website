@@ -213,7 +213,10 @@ export default function AtAGlance() {
         </dl>
 
         {/* Bar 2: vertical headings. Click a heading to open its details (all panels stay in the DOM, hidden, so the text is crawlable). */}
-        <div className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-x-10 lg:gap-y-5 lg:items-stretch">
+        <div
+  style={{ ["--n" as string]: tabs.length }}
+  className="lg:grid lg:grid-cols-[minmax(280px,360px)_1fr] lg:[grid-template-rows:repeat(var(--n),auto)_1fr] lg:gap-x-10 lg:gap-y-5 lg:items-stretch"
+>
           {tabs.map((t, i) => {
             const open = i === active;
             return (
@@ -267,7 +270,7 @@ export default function AtAGlance() {
                   aria-labelledby={`glance-tab-${t.id}`}
                   hidden={!open}
                   style={{ borderTopColor: t.color }}
-                  className={`glance-panel ${open ? "flex" : "hidden"} flex-col justify-center mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-4 bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10`}
+                  className={`glance-panel ${open ? "flex" : "hidden"} flex-col justify-center mt-4 lg:mt-0 lg:col-start-2 lg:row-start-1 lg:row-span-full bg-white rounded-2xl border-t-8 shadow-2xl p-6 md:p-8 lg:p-10`}
                 >
                   <div className="flex items-center gap-4 mb-6 lg:mb-8">
                     <span

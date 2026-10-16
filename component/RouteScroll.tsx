@@ -33,7 +33,7 @@ export function RouteList({ children }: { children: ReactNode }) {
       <span
         aria-hidden="true"
         style={{ transform: `scaleY(${p})` }}
-        className="absolute left-7 top-10 bottom-16 w-0.5 origin-top bg-gradient-to-b from-secondary to-primary/30 motion-reduce:transform-none"
+        className="absolute left-7 top-10 bottom-16 w-0.5 origin-top bg-gradient-to-b from-secondary to-white/30 motion-reduce:transform-none"
       />
       {children}
     </div>

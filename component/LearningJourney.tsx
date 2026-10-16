@@ -3,6 +3,8 @@
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
+import ZoomLogo from "@/assets/zoom.webp";
+
 
 // Replace with the countries your graduates are really from (2-letter codes).
 const GRAD_FLAGS = [
@@ -151,11 +153,11 @@ export default function LearningJourney({ seals }: { seals: Seal[] }) {
   className="mt-6 grid grid-cols-3 gap-4 md:grid-cols-6 md:gap-3"
   onMouseLeave={() => setHover(null)}
 >
-  {seals.map((s, i) => (
+    {seals.map((s, i) => (
     <li
       key={s.alt}
       onMouseEnter={() => setHover(i)}
-      className={`aspect-square w-full overflow-hidden rounded-full shadow-lg transition-all duration-300 ${
+      className={`aspect-square w-full overflow-hidden rounded-full bg-white shadow-lg transition-all duration-300 ${
         hover === i ? "scale-110" : ""
       } ${hover !== null && hover !== i ? "opacity-50" : "opacity-100"}`}
     >
@@ -164,7 +166,9 @@ export default function LearningJourney({ seals }: { seals: Seal[] }) {
         alt={s.alt}
         width={160}
         height={160}
-        className="h-full w-full rounded-full object-cover"
+        className={`h-full w-full rounded-full ${
+          s.alt === "ABNLP seal" ? "object-contain" : "object-cover"
+        }`}
       />
     </li>
   ))}
@@ -223,29 +227,25 @@ export default function LearningJourney({ seals }: { seals: Seal[] }) {
   </div>
 </Tile>
 
-          {/* Live */}
+                    {/* Live */}
           <Tile seen={seen} delay={200} className="bg-white text-primary shadow-md lg:col-span-2">
-            <span className="inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-red-600">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-60" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
+            <div className="flex flex-col items-center text-center">
+              <span className="inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-red-600">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-60" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
+                </span>
+                Live
               </span>
-              Live
-            </span>
-                        <div className="mt-6 flex items-center gap-4">
-              <span
-                aria-hidden="true"
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary shadow-md ring-4 ring-primary/10"
-              >
-                <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none">
-                  <rect x="2" y="6" width="13" height="12" rx="3" fill="#fff" />
-                  <path d="M16.5 10.2l4.3-2.7c.5-.3 1.2 0 1.2.7v8.6c0 .7-.7 1-1.2.7l-4.3-2.7v-4.6z" fill="#fff" />
-                </svg>
-              </span>
-              <p className="text-xl font-semibold leading-snug">Live on Zoom, taught personally</p>
+              <Image
+                src={ZoomLogo}
+                alt="Zoom"
+                className="mt-5 h-24 w-auto object-contain"
+                sizes="120px"
+              />
+              <p className="mt-4 text-xl font-semibold leading-snug">Live on Zoom, taught personally</p>
             </div>
           </Tile>
-
           {/* Sessions: 24 hour bar */}
           {/* Sessions: evening to morning window */}
 <Tile seen={seen} delay={280} className="bg-white text-primary shadow-md lg:col-span-2">

@@ -4,26 +4,31 @@ import { useEffect, useRef, useState } from "react";
 import Button from "@/component/button";
 import type { LevelContentType } from "@/type/levelContent";
 
-function useSeen<T extends HTMLElement>(margin = "0px 0px -18% 0px") {
+function useSeen<T extends HTMLElement>(margin = "0px 0px -18% 0px", repeat = false) {
   const ref = useRef<T>(null);
   const [seen, setSeen] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } },
+      ([e]) => {
+        if (e.isIntersecting) {
+          setSeen(true);
+          if (!repeat) io.disconnect();
+        } else if (repeat) {
+          setSeen(false);
+        }
+      },
       { rootMargin: margin, threshold: 0.2 }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [margin]);
+  }, [margin, repeat]);
   return [ref, seen] as const;
 }
 
 function Topic({ n, text, left }: { n: number; text: string; left: boolean }) {
-  const [ref, seen] = useSeen<HTMLLIElement>();
-  const words = text.split(" ");
-  let letter = 0;
+    const [ref, seen] = useSeen<HTMLLIElement>("0px 0px -12% 0px", true);
   return (
     <li
       ref={ref}
@@ -40,14 +45,14 @@ function Topic({ n, text, left }: { n: number; text: string; left: boolean }) {
         {n}
       </span>
 
-      {/* the topic card, with a connector that grows out of the circle */}
+      {/* the topic card (box and text animate together), with a connector that grows out of the circle */}
       <div
         className={`relative col-start-2 row-start-1 transition-all duration-700 ease-out ${
-          left ? "md:col-start-1 md:justify-self-end md:text-right" : "md:col-start-3"
+          left ? "md:col-start-1 md:justify-self-end" : "md:col-start-3"
         } ${
           seen
-            ? "translate-x-0 opacity-100"
-            : `opacity-0 ${left ? "md:-translate-x-10" : "md:translate-x-10"} translate-x-8`
+            ? "translate-x-0 scale-100 opacity-100"
+            : `scale-90 opacity-0 ${left ? "md:-translate-x-16" : "md:translate-x-16"} translate-x-10`
         }`}
       >
         <span
@@ -56,29 +61,8 @@ function Topic({ n, text, left }: { n: number; text: string; left: boolean }) {
             left ? "md:right-auto md:left-full md:origin-right" : ""
           } ${seen ? "scale-x-100" : "scale-x-0"}`}
         />
-        <span
-          aria-label={text}
-          className="inline-block rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:text-[15px]"
-        >
-          {words.map((w, wi) => (
-            <span key={wi} aria-hidden="true" className="inline-block whitespace-nowrap">
-              {w.split("").map((c, ci) => {
-                const d = 450 + letter++ * 28;
-                return (
-                  <span
-                    key={ci}
-                    style={{ transitionDelay: `${d}ms` }}
-                      className={`inline-block transition-all duration-500 ease-out ${
-                      seen ? "translate-y-0 opacity-100 blur-0" : "translate-y-2 opacity-0 blur-[3px]"
-                    }`}
-                  >
-                    {c}
-                  </span>
-                );
-              })}
-              {wi < words.length - 1 ? "\u00a0" : ""}
-            </span>
-          ))}
+               <span className="inline-block rounded-xl bg-white px-4 py-2.5 text-sm font-normal text-primary shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:text-[15px]">
+          {text}
         </span>
       </div>
     </li>

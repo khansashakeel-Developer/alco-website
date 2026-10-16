@@ -69,9 +69,9 @@ export default async function ProgramDetail({
     ),
   };
 
-    // Fade-in on scroll. Level 1 only for now: change `level === 1` to `true` to use it on every level.
-  const Fade = ({ children }: { children: ReactNode }) =>
-    level === 1 ? <Reveal>{children}</Reveal> : <>{children}</>;
+     // Fade-in on scroll, on every level.
+    const Fade = ({ children }: { children: ReactNode }) =>
+    <>{children}</>;
 
   return (
     <div>

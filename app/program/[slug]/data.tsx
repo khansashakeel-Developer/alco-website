@@ -26,6 +26,7 @@ import WhereItLeadsStairs from "@/component/WhereItLeadsStairs";
 import SignOffCertificate from "@/component/SignOffCertificate";
 import SignOffPoints from "@/component/SignOffPoints";
 import SignOffQuote from "@/component/SignOffQuote";
+import TrainerDuo from "@/component/TrainerDuo";
 
 // Images
 import programLevel1 from "@/assets/background/program-level-1.webp";
@@ -62,6 +63,9 @@ import LevetContent2 from "@/assets/level-content/level-content-2.webp";
 import LevetContent3 from "@/assets/level-content/level-content-3.webp";
 import { ContentSectionType } from "@/type/contentSection";
 import Link from "next/link";
+import Image from "next/image";
+import ArslanPhoto from "@/assets/intro-arsalan-larik/arsalan-larik-clean.webp";
+import BismillahPhoto from "@/assets/about-us/bismillah-pervez-clean.webp";
 import BadgeCPD from "@/assets/level-certificate/badges/cpd.webp";
 import type { LevelFaq, LevelNavType } from "@/type/programType";
 
@@ -1342,28 +1346,7 @@ const LevelBenefitsTableDataLevel3: LevelBenefitsTableType = {
 const ContentSectionDataLevel3: ContentSectionType = {
   title: "Taught by a Master Trainer of Hypnosis",
   TagType: "h2",
-  description: (
-    <div className="max-w-7xl mx-auto">
-      <p className="my-4">
-        Level 3 is taught by{" "}
-        <strong>Arslan Larik, Founder and Master Trainer of AL&CO</strong>,
-        Pakistan's first Certified Master Trainer of NLP (ABNLP) and of Hypnosis
-        (ABH). He is an ANLP Accredited Master Trainer (UK), a Master Trainer
-        under Robert Dilts at NLP University, and the ANLP International
-        Ambassador for Pakistan.
-      </p>
-      <p className="mt-4">
-        He has trained and coached since 2010, with a lineage through The Tad
-        James Company, and is the architect of the AL&CO curriculum. Level 3 and
-        above are arranged directly with{" "}
-        <strong>
-          Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and
-          ANLP Accredited Master Trainer (UK)
-        </strong>
-        , and <strong>Arslan Larik</strong>.
-      </p>
-    </div>
-  ),
+  description: <TrainerDuo />,
   fullBg: "bg-slate-100 ",
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
 };

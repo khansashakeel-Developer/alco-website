@@ -424,16 +424,16 @@ export default function ProgrammesHubPage() {
       {/* The Learning Journey */}
       <LearningJourney seals={BOARD_SEALS} />
 
-      <section className="w-full bg-white py-10 md:py-16 px-4">
+      <section className="w-full bg-dark-primary bg-cover bg-top-left py-10 md:py-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-center text-2xl md:text-4xl font-bold italic uppercase tracking-wide text-[#2B527D]">
+          <h2 className="text-center text-2xl md:text-4xl font-bold italic uppercase tracking-wide text-white">
             Six Levels at a Glance
           </h2>
 
-          <LadderList className="relative mt-10 md:mt-14 before:absolute before:top-0 before:bottom-0 before:left-8 md:before:left-11 before:w-1.5 before:-translate-x-1/2 before:rounded-full before:bg-[#0C2565]">
+          <LadderList className="relative mt-10 md:mt-14 before:absolute before:top-0 before:bottom-0 before:left-8 md:before:left-11 before:w-1.5 before:-translate-x-1/2 before:rounded-full before:bg-white/30">
             {LEVELS.map((l) => {
               const base = l.name.replace(/^NLP\s+/, "");
-              const tag = /^Hypnosis/.test(l.name) ? "Hypnosis" : "NLP";
+              const tag = l.level === 3 || l.level === 5 ? "Hypnosis" : "NLP";
               const shown = /^Hypnosis\s/.test(l.name)
                 ? l.name.replace(/^Hypnosis\s+/, "")
                 : base;
@@ -443,7 +443,7 @@ export default function ProgrammesHubPage() {
                   className="relative grid grid-cols-[64px_1fr] md:grid-cols-[88px_1fr] gap-x-4 md:gap-x-6 pb-10 md:pb-14 last:pb-0"
                 >
                   {/* number circle */}
-                  <div className="relative z-10 flex h-16 w-16 scale-50 transition-transform duration-700 ease-out group-data-[shown=true]/li:scale-100 md:h-[88px] md:w-[88px] items-center justify-center rounded-full bg-[#0F2763] text-2xl md:text-4xl font-bold text-white ring-4 ring-white">
+                  <div className="relative z-10 flex h-16 w-16 scale-50 transition-transform duration-700 ease-out group-data-[shown=true]/li:scale-100 md:h-[88px] md:w-[88px] items-center justify-center rounded-full bg-secondary text-2xl md:text-4xl font-bold text-primary-darkest ring-4 ring-white/20">
                     {String(l.level).padStart(2, "0")}
                   </div>
 
@@ -462,7 +462,7 @@ export default function ProgrammesHubPage() {
                         >
                           <path
                             d="M128 50 L79.5 87.8 A48 48 0 1 1 79.5 12.2 Z"
-                            fill="#344887"
+                            fill="#F9B81E"
                           />
                           <circle cx="48" cy="50" r="42" fill="#FAF8EC" />
                         </svg>
@@ -484,12 +484,12 @@ export default function ProgrammesHubPage() {
                       </div>
 
                       {/* pill with the white ">" notch */}
-                      <div className="flex h-full flex-1 items-center rounded-r-full bg-[#152757] pr-6 shadow-lg transition-transform duration-300 group-hover:translate-x-1 [--n:32px] md:[--n:44px] ml-[calc(var(--n)*-0.77)] pl-[calc(var(--n)+14px)] [clip-path:polygon(0_0,100%_0,100%_100%,0_100%,var(--n)_50%)]">
+                      <div className="flex h-full flex-1 items-center rounded-r-full bg-[#FAF8EC] pr-6 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:translate-x-1 [--n:32px] md:[--n:44px] ml-[calc(var(--n)*-0.77)] pl-[calc(var(--n)+14px)] [clip-path:polygon(0_0,100%_0,100%_100%,0_100%,var(--n)_50%)]">
                         <div className="leading-tight">
-                          <p className="text-xs md:text-base font-bold uppercase tracking-wide text-secondary">
+                          <p className="text-xs md:text-base font-bold uppercase tracking-wide text-secondary-dark">
                             {tag}
                           </p>
-                          <p className="text-base md:text-2xl font-semibold text-white">
+                          <p className="text-base md:text-2xl font-semibold text-primary-darkest">
                             {shown}
                           </p>
                         </div>
@@ -497,17 +497,17 @@ export default function ProgrammesHubPage() {
                     </Link>
 
                     {/* text under the pill */}
-                    <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-gray-800">
+                    <p className="mt-3 md:mt-4 text-sm md:text-base font-semibold text-white">
                       {l.summary} {l.earn}. {l.days}
                     </p>
-                    <p className="mt-1 text-xs md:text-sm text-gray-600">
-                      <span className="font-semibold text-gray-800">
+                    <p className="mt-1 text-xs md:text-sm text-white/75">
+                      <span className="font-semibold text-white">
                         For whom:
                       </span>{" "}
                       {l.forWhom}
                     </p>
                     <p className="mt-0.5 text-xs md:text-sm text-gray-600">
-                      <span className="font-semibold text-gray-800">
+                      <span className="font-semibold text-white">
                         You leave able to:
                       </span>{" "}
                       {l.leaveAble}
@@ -546,7 +546,7 @@ export default function ProgrammesHubPage() {
 </section>
 
       {/* Who arranges your place */}
-      <section className={`${SECTION} bg-light-neutral bg-cover bg-top-left`}>
+      <section className={`${SECTION} bg-dark-primary bg-cover bg-top-left`}>
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
             {/* Left: message and buttons */}
@@ -554,12 +554,12 @@ export default function ProgrammesHubPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary-dark">
                 Your place
               </p>
-              <h2 className="h3 mt-2 text-primary">Who Arranges Your Place</h2>
+              <h2 className="h3 mt-2 text-white">Who Arranges Your Place</h2>
               <span
                 aria-hidden="true"
                 className="mx-auto mt-4 block h-1 w-16 rounded-full bg-secondary md:mx-0"
               />
-              <p className="custom-text1 mt-5 text-primary-light">
+              <p className="custom-text1 mt-5 text-white/80">
                 Our relationship managers walk beside you from your very first
                 question to the day you graduate and long after. Most of them
                 come from psychology themselves, so they understand your journey
@@ -571,7 +571,7 @@ export default function ProgrammesHubPage() {
               <p className="mt-4">
                 <Link
                   href="/about-us/why-train-with-alco"
-                  className="font-medium text-primary underline underline-offset-4 hover:text-secondary-dark"
+                  className="font-medium text-white underline underline-offset-4 hover:text-secondary"
                 >
                   Meet the team behind every promise
                 </Link>
@@ -581,14 +581,14 @@ export default function ProgrammesHubPage() {
                         {/* Right: two routes joined by a line */}
             <RouteList>
               <RouteStep className="group relative flex items-start gap-5 pb-8">
-                <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-700 group-data-[shown=true]/step:scale-100 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-white text-lg font-bold text-primary shadow-lg ring-4 ring-secondary/50 transition-all duration-700 group-data-[shown=true]/step:scale-100 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
                   1–2
                 </span>
                 <div className="pt-1">
-                  <h3 className="font-outfit text-lg font-semibold text-primary">
+                  <h3 className="font-outfit text-lg font-semibold text-white">
                     Levels 1 and 2
                   </h3>
-                  <p className="mt-1 text-primary-light">
+                  <p className="mt-1 text-white/80">
                     Arranged by your relationship manager.
                   </p>
                 </div>
@@ -598,14 +598,14 @@ export default function ProgrammesHubPage() {
                 delay={200}
                 className="group relative flex items-start gap-5 pb-8"
               >
-                <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-primary text-lg font-bold text-white shadow-lg ring-4 ring-secondary/50 transition-all duration-700 group-data-[shown=true]/step:scale-100 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-white text-lg font-bold text-primary shadow-lg ring-4 ring-secondary/50 transition-all duration-700 group-data-[shown=true]/step:scale-100 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
                   3+
                 </span>
                 <div className="pt-1">
-                  <h3 className="font-outfit text-lg font-semibold text-primary">
+                  <h3 className="font-outfit text-lg font-semibold text-white">
                     Levels 3 and above
                   </h3>
-                  <p className="mt-1 text-primary-light">
+                  <p className="mt-1 text-white/80">
                     Arranged directly with Bismillah Pervez and Arslan Larik.
                   </p>
                 </div>
@@ -615,7 +615,7 @@ export default function ProgrammesHubPage() {
                 <span className="relative z-10 flex h-14 w-14 shrink-0 scale-50 items-center justify-center rounded-full bg-secondary text-2xl text-primary-darkest shadow-lg transition-all duration-700 group-data-[shown=true]/step:scale-100 group-data-[shown=true]/step:animate-pulse">
                   ✓
                 </span>
-                <p className="pt-3 font-outfit text-lg font-semibold text-primary">
+                <p className="pt-3 font-outfit text-lg font-semibold text-white">
                   One conversation is all it takes to find the pathway that fits
                   you.
                 </p>
@@ -625,11 +625,11 @@ export default function ProgrammesHubPage() {
         </div>
       </section>
 
+            {/* How to enrol + training times (shared with /enroll) */}
+      <HowToEnrol />
+
       {/* Why you will not find a number here (approved wording, brochure long p37) */}
       <WhyNoNumber />
-
-      {/* How to enrol + training times (shared with /enroll) */}
-      <HowToEnrol />
 
      {/* Free weekly webinar (brochure long p36) */}
 <WebinarDoor

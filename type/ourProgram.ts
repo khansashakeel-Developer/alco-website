@@ -17,6 +17,11 @@ export type OurProgramSlideType = {
     src: StaticImageData | string
     alt: string
   }
+    // Optional artwork card (no video): a plain background picture with the programme name animated in the centre.
+  art?: {
+    src: StaticImageData
+    tone: "light" | "dark" // "light" = bright picture (dark text), "dark" = dark picture (white text)
+  }
   // Optional short video that plays muted on hover, e.g. "/videos/programs/level-1.mp4" (file in /public) or a full https URL.
   video?: string
 }
