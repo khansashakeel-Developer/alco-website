@@ -21,6 +21,7 @@ import LearningJourney from "@/component/LearningJourney";
 import WebinarDoor from "@/component/WebinarDoor";
 import { LadderList, LadderItem } from "@/component/LadderScroll";
 import { RouteList, RouteStep } from "@/component/RouteScroll";
+import RevealChildren from "@/component/RevealChildren";
 
 const PAGE_URL = `${SITE_URL}/programs`;
 const TITLE = "NLP and Hypnosis Certification Programmes Online | AL&CO";
@@ -379,6 +380,8 @@ export default function ProgrammesHubPage() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
+
+            <RevealChildren />
 
       <Banner
         data={{

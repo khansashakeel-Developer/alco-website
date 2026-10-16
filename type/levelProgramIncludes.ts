@@ -9,7 +9,7 @@ export type LevelProgramIncludesType = {
   }
   description?: React.ReactNode
   pointsClass?: string
-  layout?: "cards" | "rows" | "split"
+  layout?: "cards" | "rows" | "split" | "pillars"
   detailContent?: React.ReactNode
   textAlign?: string
   points: {

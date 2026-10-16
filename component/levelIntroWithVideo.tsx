@@ -5,9 +5,7 @@ import Button from "./button";
 import { LevelIntroWithVideoType } from "@/type/levelIntroWithVideo"
 import VideoPlayer from "./videoPlayer";
 
-type Props = {
-  data: LevelIntroWithVideoType
-}
+
 
 type Props = {
   data: LevelIntroWithVideoType

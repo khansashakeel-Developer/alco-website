@@ -1,6 +1,19 @@
 "use client";
-import React, { useState } from "react";
-import { Award, Users, ListChecks, PhoneCall, Gem, Sparkles, ChevronDown, type LucideIcon } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Award,
+  Users,
+  ListChecks,
+  PhoneCall,
+  Gem,
+  Sparkles,
+  ChevronDown,
+  Building2,
+  Lock,
+  LockOpen,
+  Check,
+  type LucideIcon,
+} from "lucide-react";
 
 type Card = { title: string; body: React.ReactNode };
 
@@ -25,14 +38,111 @@ const ACCENTS = [
   { color: "#FFE29D", ink: "#09263D" },
 ];
 
-// Dark band with pill tabs on the left and one white panel on the right (the home page "at a glance" pattern).
-// All panels stay in the page (hidden, not removed), so the text and links are always crawlable.
+const ROAD = [
+  { Icon: Award, title: "Certification", sub: "The first half of the journey" },
+  { Icon: Building2, title: "Board membership", sub: "As an organisation, and as an individual first-time trainer member" },
+  { Icon: Lock, title: "Train", sub: "You cannot train until it is in place" },
+] as const;
+
+// Three-step roadmap beside the intro. Loops while on screen (and stays still for reduced motion):
+// 0 = step 1 current, 1 = step 1 done, 2 = step 2 done (lock about to open), 3 = all done (lock open).
+function Roadmap() {
+  const ref = useRef<HTMLOListElement>(null);
+  const [s, setS] = useState(1);
+  const [run, setRun] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setRun(e.isIntersecting), { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!run || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setS((v) => (v + 1) % 4), 2200);
+    return () => clearInterval(id);
+  }, [run]);
+
+  return (
+    <ol ref={ref} className="space-y-6 self-center">
+      <style>{`
+        @keyframes nsc-pop { 0% { transform: scale(.6); opacity: .4 } 60% { transform: scale(1.18) } 100% { transform: scale(1); opacity: 1 } }
+        .nsc-pop { animation: nsc-pop .55s cubic-bezier(.2,.8,.2,1) both }
+        @media (prefers-reduced-motion: reduce) { .nsc-pop { animation: none } }
+      `}</style>
+      {ROAD.map(({ Icon, title, sub }, i) => {
+        const done = i < s;
+        const now = i === s;
+        const open = i === 2 && done;
+        return (
+          <li key={title} className="relative flex gap-4">
+            {i < ROAD.length - 1 && (
+              <>
+                <span aria-hidden="true" className="absolute -bottom-6 left-[19px] top-11 w-0.5 bg-primary/15" />
+                <span
+                  aria-hidden="true"
+                  className={`absolute -bottom-6 left-[19px] top-11 w-0.5 origin-top bg-secondary transition-transform duration-700 ${
+                    done ? "scale-y-100" : "scale-y-0"
+                  }`}
+                />
+              </>
+            )}
+            <span className="relative flex h-10 w-10 shrink-0 items-center justify-center">
+              {now && <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-full bg-secondary/50" />}
+              <span
+                key={`${i}-${done ? "d" : now ? "n" : "x"}`}
+                className={`nsc-pop relative flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-500 ${
+                  done
+                    ? "bg-secondary text-primary-darkest"
+                    : now
+                      ? "bg-primary-darkest text-secondary ring-4 ring-secondary"
+                      : "border-2 border-dashed border-primary/30 text-primary/40"
+                }`}
+              >
+                {open ? (
+                  <LockOpen size={18} aria-hidden="true" />
+                ) : done ? (
+                  <Check size={18} aria-hidden="true" />
+                ) : (
+                  <Icon size={18} aria-hidden="true" />
+                )}
+              </span>
+            </span>
+            <span>
+              <span
+                className={`block font-outfit text-base font-semibold transition-colors duration-500 ${
+                  done || now ? "text-primary-darkest" : "text-primary/50"
+                }`}
+              >
+                {i + 1}. {title}
+              </span>
+              <span className="block text-sm leading-snug text-gray-600">{sub}</span>
+            </span>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+// Intro card on top, then a dark band with pill tabs on the left and one white panel on the right
+// (the home page "at a glance" pattern). All panels stay in the page (hidden, not removed), so the text and
+// links are always crawlable.
 export default function NextStepCards({ intro, cards }: { intro?: React.ReactNode; cards: Card[] }) {
   const [active, setActive] = useState(0);
 
   return (
     <div className="text-start">
-      {intro && <div className="custom-text1 font-light text-gray-600 max-w-4xl my-4">{intro}</div>}
+      {intro && (
+        <div className="my-6 grid gap-8 rounded-3xl border border-primary/10 bg-white p-6 shadow-xl lg:grid-cols-[1fr_300px] lg:gap-12 lg:p-8">
+          <div className="border-l-4 border-secondary pl-5">
+            <div className="custom-text1 font-light leading-relaxed text-gray-700">{intro}</div>
+          </div>
+          <Roadmap />
+        </div>
+      )}
 
       <style>{`
         @keyframes nscPanel{from{opacity:0;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}

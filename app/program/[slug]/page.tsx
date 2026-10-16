@@ -19,6 +19,7 @@ import { waLine, type CtaRef } from "@/component/cta";
 import type { ReactNode } from "react";
 import Reveal from "@/component/Reveal";
 import LevelsExpandGallery from "@/component/LevelsExpandGallery";
+import CurriculumRoute from "@/component/CurriculumRoute";
 
 export default async function ProgramDetail({
   params,
@@ -69,9 +70,10 @@ export default async function ProgramDetail({
     ),
   };
 
-     // Fade-in on scroll, on every level.
-    const Fade = ({ children }: { children: ReactNode }) =>
-    <>{children}</>;
+       // Fade-in on scroll, on every level.
+  const Fade = ({ children }: { children: ReactNode }) => (
+    <Reveal>{children}</Reveal>
+  );
 
   return (
     <div>
@@ -91,6 +93,7 @@ export default async function ProgramDetail({
       <Fade><ContentSection data={program.ContentSectionContentListData} /></Fade>
       <Fade><LevelBenefitsTable data={program.LevelBenefitsTableData} /></Fade>
       <Fade><ContentSection data={program.ContentSectionImgContentListData} /></Fade>
+            {program.CurriculumData && <Fade><CurriculumRoute data={program.CurriculumData} /></Fade>}
       <Fade><LevelContent data={program.LevelContentData} /></Fade>
       {/* "Where It Leads" (Levels 1 to 3). ContentSection renders nothing when data is undefined (contentSection.tsx:16). */}
       <Fade><ContentSection data={program.WhereItLeadsData} /></Fade>

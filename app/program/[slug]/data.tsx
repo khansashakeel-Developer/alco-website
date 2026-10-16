@@ -27,6 +27,8 @@ import SignOffCertificate from "@/component/SignOffCertificate";
 import SignOffPoints from "@/component/SignOffPoints";
 import SignOffQuote from "@/component/SignOffQuote";
 import TrainerDuo from "@/component/TrainerDuo";
+import TwoWays from "@/component/TwoWays";
+import WhoMayApply from "@/component/WhoMayApply";
 
 // Images
 import programLevel1 from "@/assets/background/program-level-1.webp";
@@ -1945,30 +1947,40 @@ const LevelBenefitsTableDataLevel4: LevelBenefitsTableType = {
   ],
 };
 
-const CurriculumDataLevel4: ContentSectionType = {
-  title: "The full curriculum",
-  TagType: "h2",
-  textAlign: "text-start",
-  description: (
-    <ul className="mt-6 grid list-none gap-x-12 gap-y-5 md:grid-cols-2 [counter-reset:item] [&>li]:relative [&>li]:flex [&>li]:items-start [&>li]:gap-4 [&>li]:border-t [&>li]:border-primary/20 [&>li]:pt-4 [&>li]:text-base [&>li]:leading-relaxed [&>li]:text-gray-700 [&>li]:transition-colors [&>li]:[counter-increment:item] [&>li:hover]:border-secondary [&>li:hover]:text-primary-darkest [&>li]:before:w-12 [&>li]:before:shrink-0 [&>li]:before:text-3xl [&>li]:before:font-bold [&>li]:before:leading-none [&>li]:before:text-primary/20 [&>li]:before:transition-colors [&>li]:before:content-[counter(item,decimal-leading-zero)] [&>li:hover]:before:text-secondary">
-      <li>Platform mastery and the Trainer’s State (Uptime)</li>
-      <li>
-        Calibrating a whole room, and leading the unconscious room leaders
-      </li>
-      <li>Stage anchoring: spaces for content, metaphor, debrief and humour</li>
-      <li>The 4-MAT design system: Why, What, How, What-if</li>
-      <li>Designing exercises with overt and covert learning</li>
-      <li>Platform Milton Model and hypnotic cadence</li>
-      <li>Nested loops and multiple embedded metaphors</li>
-      <li>Live unscripted demonstration, and modelling the self</li>
-      <li>Group intervention and practicum supervision</li>
-      <li>Behavioural, sensory-grounded feedback</li>
-      <li>Building a board-compliant training business</li>
-      <li>Enrolment standards and the ABNLP Code of Ethics</li>
-    </ul>
-  ),
-  fullBg: "bg-slate-100 ",
-  padding: "py-6 md:py-8 lg:py-12 xl:py-16 px-4 ",
+const CurriculumRouteDataLevel4: LevelContentType = {
+  title: { line1: "The full curriculum", line2: "" },
+  points: [
+    {
+      title: "The platform and the room",
+      items: [
+        "Platform mastery and the Trainer’s State (Uptime)",
+        "Calibrating a whole room, and leading the unconscious room leaders",
+        "Stage anchoring: spaces for content, metaphor, debrief and humour",
+        "The 4-MAT design system: Why, What, How, What-if",
+      ],
+      image: { src: LevetContent1.src, alt: "" },
+    },
+    {
+      title: "Designing and delivering",
+      items: [
+        "Designing exercises with overt and covert learning",
+        "Platform Milton Model and hypnotic cadence",
+        "Nested loops and multiple embedded metaphors",
+        "Live unscripted demonstration, and modelling the self",
+      ],
+      image: { src: LevetContent2.src, alt: "" },
+    },
+    {
+      title: "Feedback and your training business",
+      items: [
+        "Group intervention and practicum supervision",
+        "Behavioural, sensory-grounded feedback",
+        "Building a board-compliant training business",
+        "Enrolment standards and the ABNLP Code of Ethics",
+      ],
+      image: { src: LevetContent3.src, alt: "" },
+    },
+  ],
 };
 
 const LevelContentDataLevel4: LevelContentType = {
@@ -2282,6 +2294,39 @@ const CurriculumDataLevel5: ContentSectionType = {
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
 };
 
+const CurriculumRouteDataLevel5: LevelContentType = {
+  title: { line1: "The full curriculum", line2: "" },
+  points: [
+    {
+      title: "Lineage and inductions",
+      items: [
+        "The lineage and pedagogy of hypnosis: Mesmer, Braid, Elman, Erickson, Krasner",
+        "Teaching the full spectrum, from direct-authoritarian to indirect-permissive",
+        "Teaching progressive, rapid and instant inductions",
+      ],
+      image: { src: LevetContent1.src, alt: "" },
+    },
+    {
+      title: "Trance and safety",
+      items: [
+        "Suggestibility tests and pattern interrupts",
+        "Deep-trance phenomena: catalepsy, analgesia, regression",
+        "Safety: abreaction management and dehypnotization",
+      ],
+      image: { src: LevetContent2.src, alt: "" },
+    },
+    {
+      title: "Delivery and ethics",
+      items: [
+        "Hypnotic voice and platform installation",
+        "The five turn-key trainings you can then deliver: an introductory demonstration, a self-hypnosis seminar, an Ericksonian weekend, a direct-authoritarian weekend, and a full hypnosis certification",
+        "Ethics, scope of practice and referral protocols",
+      ],
+      image: { src: LevetContent3.src, alt: "" },
+    },
+  ],
+};
+
 const LevelContentDataLevel5: LevelContentType = {
   title: { line1: "Five turn-key trainings you can then deliver", line2: "" },
   points: [
@@ -2348,6 +2393,7 @@ const FaqDataLevel5: LevelFaq[] = [
       "This is an investment in your future, and we treat it as one, so you will not see a figure in these pages. That is deliberate, and it is out of fairness to you. We would rather understand what you actually want first, and then build a proposition around your own journey, only what serves you, and nothing that does not. All it takes to find out where you stand is a conversation: please contact us for details, and your relationship manager will take you through it.",
   },
 ];
+
 
 const NavDataLevel5: LevelNavType = {
   prev: {
@@ -2422,84 +2468,32 @@ const LevelCertificationDataLevel6: LevelCertificationType = {
 const ContentSectionDataLevel6: ContentSectionType = {
   title: "Who may apply",
   TagType: "h2",
-  description: (
-    <div className="mx-auto max-w-6xl">
-      {/* Three steps joined by a line */}
-      <div className="relative mt-10 grid gap-10 md:grid-cols-3">
-        <span
-          aria-hidden="true"
-          className="absolute left-[16.66%] right-[16.66%] top-7 hidden h-0.5 bg-gradient-to-r from-secondary via-primary/40 to-secondary md:block"
-        />
-
-        <div className="group relative flex flex-col items-center text-center">
-          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
-            1
-          </span>
-          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">
-            Be a Certified Trainer
-          </h3>
-          <p className="mt-2 text-gray-600">
-            You must already be a Certified Trainer of NLP in good standing,
-            having completed the Trainer’s Training and holding current ABNLP
-            Trainer membership. Once you do, you may apply to enrol.
-          </p>
-        </div>
-
-        <div className="group relative flex flex-col items-center text-center">
-          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
-            2
-          </span>
-          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">
-            Interview and the Board
-          </h3>
-          <p className="mt-2 text-gray-600">
-            Entry is not automatic. Every candidate has an interview with
-            Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and
-            ANLP Accredited Master Trainer (UK), and a direct conversation with
-            the Board, and their standing is verified before admission.
-          </p>
-        </div>
-
-        <div className="group relative flex flex-col items-center text-center">
-          <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white shadow-lg ring-8 ring-slate-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-secondary group-hover:text-primary-darkest">
-            3
-          </span>
-          <h3 className="mt-5 font-outfit text-lg xl:text-xl font-semibold text-primary">
-            Your standing is checked
-          </h3>
-          <p className="mt-2 text-gray-600">
-            Even a trainer certified through the ABNLP is checked first, and a
-            trainer arriving from another board is scrutinised more closely
-            still.
-          </p>
-        </div>
-      </div>
-
-      {/* The gate statement */}
-      <div className="mt-12 flex items-center gap-4">
-        <span aria-hidden="true" className="h-px flex-1 bg-primary/20" />
-        <p className="max-w-2xl text-center font-outfit text-lg md:text-xl font-semibold text-primary">
-          This is the highest level we offer, and the gate is set accordingly.
-        </p>
-        <span aria-hidden="true" className="h-px flex-1 bg-primary/20" />
-      </div>
-
-      <p className="mx-auto mt-6 max-w-3xl text-center text-gray-600">
-        Throughout the programme you keep your Trainer membership current,
-        renewing it each year and remaining an accredited Trainer of good
-        standing. You apply for Master Trainer membership itself only once the
-        programme is complete.
-      </p>
-    </div>
+    description: (
+    <WhoMayApply
+      steps={[
+        {
+          title: "Be a Certified Trainer",
+          body: "You must already be a Certified Trainer of NLP in good standing, having completed the Trainer’s Training and holding current ABNLP Trainer membership. Once you do, you may apply to enrol.",
+        },
+        {
+          title: "Interview and the Board",
+          body: "Entry is not automatic. Every candidate has an interview with Bismillah Pervez, CEO, ICF Master Certified Coach (MCC), ACTC, and ANLP Accredited Master Trainer (UK), and a direct conversation with the Board, and their standing is verified before admission.",
+        },
+        {
+          title: "Your standing is checked",
+          body: "Even a trainer certified through the ABNLP is checked first, and a trainer arriving from another board is scrutinised more closely still.",
+        },
+      ]}
+      gate="This is the highest level we offer, and the gate is set accordingly."
+      footer="Throughout the programme you keep your Trainer membership current, renewing it each year and remaining an accredited Trainer of good standing. You apply for Master Trainer membership itself only once the programme is complete."
+    />
   ),
-  padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
-  textAlign: "text-center",
-  fullBg: "bg-slate-100 ",
+
 };
 
 const LevelProgramIncludesDataLevel6: LevelProgramIncludesType = {
   title: { line1: "The standard you meet: four pillars", line2: "" },
-  layout: "rows",
+  layout: "pillars",
   description: (
     <p>
       The ABNLP Master Trainer grade rests on four pillars, and at AL&amp;CO we
@@ -2583,34 +2577,22 @@ const LevelProgramIncludesDataLevel6: LevelProgramIncludesType = {
 const ContentSectionContentListData6: ContentSectionType = {
   title: "Two ways to complete it",
   TagType: "h2",
-  description: `Both meet the very same requirements and reach the same grade; you choose the pace. The count begins the year you enrol: that is Year One, the next is Year Two, and the third is your graduating year.`,
-  contentlist: [
-    {
-      title: "The three-year programme",
-      TagType: "h3",
-      description: (
-        <p className="text-gray-600 my-4">
-          Our standard AL&amp;CO Master Trainer Program, completed over three
-          years from the year you enrol.
-        </p>
-      ),
-      textAlign: "text-start px-4",
-    },
-    {
-      title: "The five-year programme",
-      TagType: "h3",
-      description: (
-        <p className="text-gray-600 my-4">
-          The very same requirements, nothing added and nothing removed, simply
-          spread over five years. It is the gentler route on your calendar, and
-          the more manageable one, because the commitment and its investment are
-          carried across five years rather than three.
-        </p>
-      ),
-      textAlign: "text-start px-4",
-    },
-  ],
-  contentlistColumn: "grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl",
+  description: (
+    <TwoWays
+      intro="Both meet the very same requirements and reach the same grade; you choose the pace. The count begins the year you enrol: that is Year One, the next is Year Two, and the third is your graduating year."
+      caption="The very same requirements"
+      options={[
+        {
+          title: "The three-year programme",
+          body: "Our standard AL&CO Master Trainer Program, completed over three years from the year you enrol.",
+        },
+        {
+          title: "The five-year programme",
+          body: "The very same requirements, nothing added and nothing removed, simply spread over five years. It is the gentler route on your calendar, and the more manageable one, because the commitment and its investment are carried across five years rather than three.",
+        },
+      ]}
+    />
+  ),
   fullBg: "bg-slate-100 ",
   padding: "py-6 md:py-8 lg:py-12 xl:py-16 ",
 };
@@ -2833,7 +2815,7 @@ export const programs: ProgramType[] = [
     ContentSectionData: ContentSectionDataLevel4,
     LevelProgramIncludesData: LevelProgramIncludesDataLevel4,
     LevelBenefitsTableData: LevelBenefitsTableDataLevel4,
-    ContentSectionImgContentListData: CurriculumDataLevel4,
+    CurriculumData: CurriculumRouteDataLevel4,
     LevelContentData: LevelContentDataLevel4,
     LevelGraduatesExperienceData: LevelGraduatesExperienceDataLevel4,
     FaqData: FaqDataLevel4,
@@ -2848,7 +2830,7 @@ export const programs: ProgramType[] = [
     ContentSectionData: ContentSectionDataLevel5,
     LevelProgramIncludesData: LevelProgramIncludesDataLevel5,
     LevelBenefitsTableData: LevelBenefitsTableDataLevel5,
-    ContentSectionImgContentListData: CurriculumDataLevel5,
+    CurriculumData: CurriculumRouteDataLevel5,
     LevelContentData: LevelContentDataLevel5,
     LevelGraduatesExperienceData: LevelGraduatesExperienceDataLevel5,
     FaqData: FaqDataLevel5,

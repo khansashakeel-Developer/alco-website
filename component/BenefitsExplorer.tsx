@@ -14,6 +14,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
+import GlanceBoard from "./GlanceBoard";
 
 type Props = {
   headers: string[];
@@ -38,7 +39,11 @@ const iconFor = (title: string): LucideIcon => {
 
 const STEP_MS = 7000; // how long each topic shows while it plays by itself
 
-export default function BenefitsExplorer({ headers, points, light = false }: Props) {
+export default function BenefitsExplorer({
+  headers,
+  points,
+  light = false,
+}: Props) {
   const [topic, setTopic] = useState(0);
   const [lens, setLens] = useState(0);
   const [anim, setAnim] = useState<"up" | "next" | "prev">("up");
@@ -50,7 +55,9 @@ export default function BenefitsExplorer({ headers, points, light = false }: Pro
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), {
+      threshold: 0.35,
+    });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -60,6 +67,7 @@ export default function BenefitsExplorer({ headers, points, light = false }: Pro
   const total = points.length;
   const cur = points[topic];
   if (!cur || n === 0) return null;
+    if (n === 1) return <GlanceBoard headers={headers} points={points} light={light} />;
 
   const go = (t: number, manual = true) => {
     if (t === topic || t < 0 || t >= total) return;
@@ -77,8 +85,14 @@ export default function BenefitsExplorer({ headers, points, light = false }: Pro
     setTopic((t) => (t + 1) % total);
   };
   const onKey = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); go(Math.min(topic + 1, total - 1)); }
-    if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); go(Math.max(topic - 1, 0)); }
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      e.preventDefault();
+      go(Math.min(topic + 1, total - 1));
+    }
+    if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      go(Math.max(topic - 1, 0));
+    }
   };
 
   const other = n > 1 ? (lens + 1) % n : null;
@@ -86,10 +100,10 @@ export default function BenefitsExplorer({ headers, points, light = false }: Pro
   const playing = auto && inView && !hovered;
 
   // colours switch with the section background
- const listOn = "border-secondary bg-secondary text-primary-darkest shadow-lg";
-const listOff = light
-  ? "border-primary/20 text-primary hover:bg-primary/5"
-  : "border-white/20 text-white/85 hover:bg-white/10";
+  const listOn = "border-secondary bg-secondary text-primary-darkest shadow-lg";
+  const listOff = light
+    ? "border-primary/20 text-primary hover:bg-primary/5"
+    : "border-white/20 text-white/85 hover:bg-white/10";
   const panel = light
     ? "bg-gradient-to-br from-[#0b2545] to-[#1B507C] text-white"
     : "bg-[#FAF8EC] text-primary-darkest";
@@ -113,13 +127,21 @@ const listOff = light
       {/* full table for screen readers and search engines */}
       <table className="sr-only">
         <thead>
-          <tr>{headers.map((h) => <th key={h} scope="col">{h}</th>)}</tr>
+          <tr>
+            {headers.map((h) => (
+              <th key={h} scope="col">
+                {h}
+              </th>
+            ))}
+          </tr>
         </thead>
         <tbody>
           {points.map((p) => (
             <tr key={p.content}>
               <th scope="row">{p.content}</th>
-              {p.values.map((v, i) => <td key={i}>{v}</td>)}
+              {p.values.map((v, i) => (
+                <td key={i}>{v}</td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -141,7 +163,10 @@ const listOff = light
       `}</style>
 
       {/* ---- topics ---- */}
-            <ul aria-hidden className="-mx-1 flex gap-3 overflow-x-auto px-1 pb-1 md:mx-0 md:block md:space-y-2 md:overflow-visible md:px-0">
+      <ul
+        aria-hidden
+        className="-mx-1 flex gap-3 overflow-x-auto px-1 pb-1 md:mx-0 md:block md:space-y-2 md:overflow-visible md:px-0"
+      >
         {points.map((p, i) => {
           const on = i === topic;
           return (
@@ -151,10 +176,14 @@ const listOff = light
                 onClick={() => go(i)}
                 className={`relative flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition-all duration-300 ${on ? listOn : listOff}`}
               >
-                <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${on ? "bg-primary-darkest text-secondary" : "bg-secondary/15 text-secondary"}`}>
+                <span
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${on ? "bg-primary-darkest text-secondary" : "bg-secondary/15 text-secondary"}`}
+                >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="flex-1 text-sm font-semibold md:text-[15px]">{p.content}</span>
+                <span className="flex-1 text-sm font-semibold md:text-[15px]">
+                  {p.content}
+                </span>
               </button>
             </li>
           );
@@ -162,7 +191,10 @@ const listOff = light
       </ul>
 
       {/* ---- the statement ---- */}
-            <div aria-hidden className={`relative flex min-h-[430px] flex-col overflow-hidden rounded-2xl border-t-4 border-secondary p-6 pb-24 shadow-xl md:p-10 md:pb-24 ${panel}`}>
+      <div
+        aria-hidden
+        className={`relative flex min-h-[430px] flex-col overflow-hidden rounded-2xl border-t-4 border-secondary p-6 pb-24 shadow-xl md:p-10 md:pb-24 ${panel}`}
+      >
         <span
           aria-hidden="true"
           className={`pointer-events-none absolute -top-4 right-4 select-none text-[150px] font-extrabold leading-none ${light ? "text-white/[0.06]" : "text-primary-darkest/[0.06]"}`}
@@ -180,14 +212,19 @@ const listOff = light
               onClick={() => go(i)}
               className="group flex h-4 flex-1 items-center"
             >
-              <span className={`relative h-[3px] w-full overflow-hidden rounded-full transition-all duration-300 group-hover:h-[5px] ${i < topic ? "bg-secondary" : railOff}`}>
+              <span
+                className={`relative h-[3px] w-full overflow-hidden rounded-full transition-all duration-300 group-hover:h-[5px] ${i < topic ? "bg-secondary" : railOff}`}
+              >
                 {i === topic && (
                   <span
                     key={`${topic}-${auto}`}
                     className={`bx-fill absolute inset-y-0 left-0 rounded-full bg-secondary ${auto ? "" : "w-full"}`}
                     style={
                       auto
-                        ? { animation: `bx-fill ${STEP_MS}ms linear forwards`, animationPlayState: playing ? "running" : "paused" }
+                        ? {
+                            animation: `bx-fill ${STEP_MS}ms linear forwards`,
+                            animationPlayState: playing ? "running" : "paused",
+                          }
                         : undefined
                     }
                     onAnimationEnd={() => auto && advance()}
@@ -200,14 +237,18 @@ const listOff = light
 
         {/* switch between the two views */}
         {n > 1 && (
-          <div className={`mt-5 inline-flex w-full rounded-full p-1 md:w-auto ${track}`}>
+          <div
+            className={`mt-5 inline-flex w-full rounded-full p-1 md:w-auto ${track}`}
+          >
             {lenses.map((h, i) => (
               <button
                 key={h}
                 type="button"
                 onClick={() => pickLens(i)}
                 className={`flex-1 rounded-full px-3 py-2 text-center text-xs font-semibold transition-all duration-300 md:text-sm ${
-                  i === lens ? "bg-secondary text-primary-darkest shadow-sm" : `${lensOff} hover:bg-white/10`
+                  i === lens
+                    ? "bg-secondary text-primary-darkest shadow-sm"
+                    : `${lensOff} hover:bg-white/10`
                 }`}
               >
                 {h}
@@ -217,18 +258,26 @@ const listOff = light
         )}
 
         {/* topic + statement: slides in from the direction you are moving */}
-        <div key={`${topic}-${lens}`} className={`${statementAnim} mt-8 flex-1`}>
+        <div
+          key={`${topic}-${lens}`}
+          className={`${statementAnim} mt-8 flex flex-1 flex-col justify-center`}
+        >
           <div className="flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary/15 text-secondary-dark">
               <Icon className="h-[18px] w-[18px]" />
             </span>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-secondary-dark">{cur.content}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-secondary-dark">
+              {cur.content}
+            </p>
           </div>
 
-                    <p className="mt-5 text-2xl font-semibold leading-snug md:text-[34px] md:leading-[1.25]">
+          <p className="mt-5 text-3xl font-semibold leading-snug md:text-[44px] md:leading-[1.2]">
             {cur.values[lens]}
           </p>
-          <span aria-hidden="true" className="mt-5 block h-[3px] w-14 rounded-full bg-secondary" />
+          <span
+            aria-hidden="true"
+            className="mt-5 block h-[3px] w-14 rounded-full bg-secondary"
+          />
         </div>
 
         {/* footer: other view + prev/next */}
@@ -241,11 +290,31 @@ const listOff = light
             >
               Also see: {lenses[other]} →
             </button>
-          ) : <span />}
+          ) : (
+            <span />
+          )}
           <div className="flex items-center gap-2">
-            <span className={`mr-2 text-xs font-medium ${muted}`}>{topic + 1} of {total}</span>
-            <button type="button" aria-label="Previous topic" disabled={topic === 0} onClick={() => go(topic - 1)} className="flex h-9 w-9 items-center justify-center rounded-full border border-current/20 transition hover:scale-110 hover:bg-secondary hover:text-primary-darkest disabled:opacity-30 disabled:hover:scale-100">←</button>
-            <button type="button" aria-label="Next topic" disabled={topic === total - 1} onClick={() => go(topic + 1)} className="flex h-9 w-9 items-center justify-center rounded-full border border-current/20 transition hover:scale-110 hover:bg-secondary hover:text-primary-darkest disabled:opacity-30 disabled:hover:scale-100">→</button>
+            <span className={`mr-2 text-xs font-medium ${muted}`}>
+              {topic + 1} of {total}
+            </span>
+            <button
+              type="button"
+              aria-label="Previous topic"
+              disabled={topic === 0}
+              onClick={() => go(topic - 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-current/20 transition hover:scale-110 hover:bg-secondary hover:text-primary-darkest disabled:opacity-30 disabled:hover:scale-100"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              aria-label="Next topic"
+              disabled={topic === total - 1}
+              onClick={() => go(topic + 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-current/20 transition hover:scale-110 hover:bg-secondary hover:text-primary-darkest disabled:opacity-30 disabled:hover:scale-100"
+            >
+              →
+            </button>
           </div>
         </div>
       </div>

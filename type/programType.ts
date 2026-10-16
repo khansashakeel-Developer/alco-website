@@ -34,6 +34,8 @@ export type ProgramType = {
   ContentSectionContentListData?: ContentSectionType
   LevelBenefitsTableData : LevelBenefitsTableType
   ContentSectionImgContentListData?: ContentSectionType
+    /** Curriculum shown as the scrolling module route (same as Levels 1 to 3). */
+  CurriculumData?: LevelContentType
   LevelContentData : LevelContentType
   LevelGraduatesExperienceData : LevelGraduatesExperienceType
   /** "Where It Leads" copy block (Levels 1 to 3). */
